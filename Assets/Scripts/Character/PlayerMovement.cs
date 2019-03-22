@@ -20,19 +20,23 @@ public class PlayerMovement : MonoBehaviour
     private int extraJumps;
     public int extraJumpsValue;
 
+    public GameObject kero;
+    private Animator keroAnimation;
+
     // Start is called before the first frame update
     void Start()
     {
         extraJumps = extraJumpsValue;
         rb2d = GetComponent<Rigidbody2D>();
         scale = transform.localScale.x;
+        keroAnimation = kero.GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
-        Debug.Log("isGrounded: "+isGrounded);
+        //Debug.Log("isGrounded: "+isGrounded);
 
         //Movement
         if (joystick.Horizontal >= 0.2f)
@@ -45,25 +49,31 @@ public class PlayerMovement : MonoBehaviour
             rb2d.transform.Translate(Vector2.left * speed * Time.deltaTime);
             if (facingRight) Flip();
         }
-        //Jump
 
         if (isGrounded)
         {
             extraJumps = extraJumpsValue;
+            keroAnimation.SetBool("isJumping", false);
         }
-
-        if (joystick.Vertical >= 0.5f && extraJumps > 0)
+        else
         {
-            rb2d.AddForce(Vector2.up * jump);
+            keroAnimation.SetBool("isJumping", true);
+        }
+    }
+
+    public void Jump()
+    {
+        if (extraJumps > 0)
+        {
+            keroAnimation.SetTrigger("TakeOff");
+            rb2d.AddForce(Vector2.up * jump * 100);
             extraJumps--;
             Debug.Log("Jump");
         }
-        else if (joystick.Vertical >= 0.5f && extraJumps == 0 && isGrounded)
+        else if (extraJumps == 0 && isGrounded)
         {
-            rb2d.AddForce(Vector2.up * jump);
-            Debug.Log("Last Jump");
-        }
-        
+            rb2d.AddForce(Vector2.up * jump);           
+        }   
     }
 
     private void Flip()
