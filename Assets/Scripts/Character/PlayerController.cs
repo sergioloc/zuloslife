@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     public Joystick joystick;
     private Rigidbody2D rb2d;
     public GameObject kero, panda;
-    private Animator charcterAnimation;
+    private Animator characterAnimation;
 
     public int speed = 0;
     public int jump = 0;
@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
         extraJumps = extraJumpsValue;
         rb2d = GetComponent<Rigidbody2D>();
         scale = transform.localScale.x;
-        charcterAnimation = kero.GetComponent<Animator>();
+        characterAnimation = panda.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -41,31 +41,31 @@ public class PlayerController : MonoBehaviour
         //Movement
         if (joystick.Horizontal >= 0.2f)
         {
-            charcterAnimation.SetBool("Run", true);
+            characterAnimation.SetBool("Run", true);
             rb2d.transform.Translate(Vector2.right * speed * Time.deltaTime);
             if (!facingRight) Flip();
         }
         else if (joystick.Horizontal <= -0.2f)
         {
-            charcterAnimation.SetBool("Run", true);
+            characterAnimation.SetBool("Run", true);
 
             rb2d.transform.Translate(Vector2.left * speed * Time.deltaTime);
             if (facingRight) Flip();
         }
         else
         {
-            charcterAnimation.SetBool("Run", false);
+            characterAnimation.SetBool("Run", false);
         }
 
         //Jump
         if (isGrounded)
         {
             extraJumps = extraJumpsValue;
-            charcterAnimation.SetBool("isJumping", false);
+            characterAnimation.SetBool("isJumping", false);
         }
         else
         {
-            charcterAnimation.SetBool("isJumping", true);
+            characterAnimation.SetBool("isJumping", true);
         }
     }
 
@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
     {
         if (extraJumps > 0)
         {
-            charcterAnimation.SetTrigger("TakeOff");
+            characterAnimation.SetTrigger("TakeOff");
             rb2d.AddForce(Vector2.up * jump * 100);
             extraJumps--;
         }
@@ -86,12 +86,12 @@ public class PlayerController : MonoBehaviour
     //Action
     public void startAction()
     {
-        charcterAnimation.SetBool("Action", true);
+        characterAnimation.SetBool("Action", true);
     }
 
     public void stopAction()
     {
-        charcterAnimation.SetBool("Action", false);
+        characterAnimation.SetBool("Action", false);
 
     }
 
@@ -100,12 +100,14 @@ public class PlayerController : MonoBehaviour
     {
         panda.SetActive(true);
         kero.SetActive(false);
+        characterAnimation = panda.GetComponent<Animator>();
     }
 
     public void switchToKero()
     {
         panda.SetActive(false);
         kero.SetActive(true);
+        characterAnimation = kero.GetComponent<Animator>();
     }
 
 
