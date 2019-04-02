@@ -6,8 +6,9 @@ public class PlayerController : MonoBehaviour
 {
     public Joystick joystick;
     private Rigidbody2D rb2d;
-    public GameObject kero, panda;
+    public GameObject kero, panda, cinamon;
     private Animator characterAnimation;
+    public string currentCharacter;
 
     public int speed = 0;
     public int jump = 0;
@@ -86,7 +87,12 @@ public class PlayerController : MonoBehaviour
     //Action
     public void startAction()
     {
+        Debug.Log(isGrounded);
         characterAnimation.SetBool("Action", true);
+        if (currentCharacter == "cinamon" && isGrounded)
+        {
+            rb2d.AddForce(Vector2.up * jump * 80);
+        }
     }
 
     public void stopAction()
@@ -100,14 +106,27 @@ public class PlayerController : MonoBehaviour
     {
         panda.SetActive(true);
         kero.SetActive(false);
+        cinamon.SetActive(false);
         characterAnimation = panda.GetComponent<Animator>();
+        currentCharacter = "panda";
     }
 
     public void switchToKero()
     {
         panda.SetActive(false);
         kero.SetActive(true);
+        cinamon.SetActive(false);
         characterAnimation = kero.GetComponent<Animator>();
+        currentCharacter = "kero";
+    }
+
+    public void switchToCinamon()
+    {
+        panda.SetActive(false);
+        kero.SetActive(false);
+        cinamon.SetActive(true);
+        characterAnimation = cinamon.GetComponent<Animator>();
+        currentCharacter = "cinamon";
     }
 
 
