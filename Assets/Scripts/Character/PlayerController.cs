@@ -6,9 +6,9 @@ public class PlayerController : MonoBehaviour
 {
     public Joystick joystick;
     private Rigidbody2D rb2d;
-    public GameObject kero, panda, cinamon;
+    public GameObject kero, panda, cinamon, kutter;
     private Animator characterAnimation;
-    public string currentCharacter;
+    public string currentCharacter; 
 
     public int speed = 0;
     public int jump = 0;
@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
     private int extraJumps;
     public int extraJumpsValue;
 
+   
+
 
 
     // Start is called before the first frame update
@@ -31,7 +33,7 @@ public class PlayerController : MonoBehaviour
         extraJumps = extraJumpsValue;
         rb2d = GetComponent<Rigidbody2D>();
         scale = transform.localScale.x;
-        characterAnimation = panda.GetComponent<Animator>();
+        characterAnimation = kutter.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -89,9 +91,15 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log(isGrounded);
         characterAnimation.SetBool("Action", true);
+
         if (currentCharacter == "cinamon" && isGrounded)
         {
             rb2d.AddForce(Vector2.up * jump * 80);
+        }
+
+        if (currentCharacter == "jutter")
+        {
+            
         }
     }
 
@@ -107,6 +115,7 @@ public class PlayerController : MonoBehaviour
         panda.SetActive(true);
         kero.SetActive(false);
         cinamon.SetActive(false);
+        kutter.SetActive(false);
         characterAnimation = panda.GetComponent<Animator>();
         currentCharacter = "panda";
     }
@@ -116,6 +125,7 @@ public class PlayerController : MonoBehaviour
         panda.SetActive(false);
         kero.SetActive(true);
         cinamon.SetActive(false);
+        kutter.SetActive(false);
         characterAnimation = kero.GetComponent<Animator>();
         currentCharacter = "kero";
     }
@@ -125,8 +135,19 @@ public class PlayerController : MonoBehaviour
         panda.SetActive(false);
         kero.SetActive(false);
         cinamon.SetActive(true);
+        kutter.SetActive(false);
         characterAnimation = cinamon.GetComponent<Animator>();
         currentCharacter = "cinamon";
+    }
+
+    public void switchToKutter()
+    {
+        panda.SetActive(false);
+        kero.SetActive(false);
+        cinamon.SetActive(false);
+        kutter.SetActive(true);
+        characterAnimation = kutter.GetComponent<Animator>();
+        currentCharacter = "kutter";
     }
 
 
