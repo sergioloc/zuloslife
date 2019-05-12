@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public Joystick joystick;
     private Rigidbody2D rb2d;
-    public GameObject kero, panda, cinamon, kutter;
+    public GameObject kero, panda, cinamon, kutter, triski;
     private Animator characterAnimation;
     public string currentCharacter; 
 
@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
         extraJumps = extraJumpsValue;
         rb2d = GetComponent<Rigidbody2D>();
         scale = transform.localScale.x;
-        characterAnimation = kutter.GetComponent<Animator>();
+        characterAnimation = panda.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -116,6 +116,7 @@ public class PlayerController : MonoBehaviour
         kero.SetActive(false);
         cinamon.SetActive(false);
         kutter.SetActive(false);
+        triski.SetActive(false);
         characterAnimation = panda.GetComponent<Animator>();
         currentCharacter = "panda";
     }
@@ -126,6 +127,7 @@ public class PlayerController : MonoBehaviour
         kero.SetActive(true);
         cinamon.SetActive(false);
         kutter.SetActive(false);
+        triski.SetActive(false);
         characterAnimation = kero.GetComponent<Animator>();
         currentCharacter = "kero";
     }
@@ -136,6 +138,7 @@ public class PlayerController : MonoBehaviour
         kero.SetActive(false);
         cinamon.SetActive(true);
         kutter.SetActive(false);
+        triski.SetActive(false);
         characterAnimation = cinamon.GetComponent<Animator>();
         currentCharacter = "cinamon";
     }
@@ -146,8 +149,20 @@ public class PlayerController : MonoBehaviour
         kero.SetActive(false);
         cinamon.SetActive(false);
         kutter.SetActive(true);
+        triski.SetActive(false);
         characterAnimation = kutter.GetComponent<Animator>();
         currentCharacter = "kutter";
+    }
+
+    public void switchToTriski()
+    {
+        panda.SetActive(false);
+        kero.SetActive(false);
+        cinamon.SetActive(false);
+        kutter.SetActive(false);
+        triski.SetActive(true);
+        characterAnimation = triski.GetComponent<Animator>();
+        currentCharacter = "triski";
     }
 
 

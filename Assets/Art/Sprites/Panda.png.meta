@@ -1,13 +1,24 @@
 fileFormatVersion: 2
-guid: cf824f38a49d95c428f117e11c69c84a
+guid: b5a03bcb59953234aba8c0fa3492f770
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Panda_Arm_R
+    21300000: Panda_Hat
     21300002: Panda_Head
-    21300004: Panda_Arm_L
-    21300006: Panda_Body
-    21300008: Panda_Body_Down
-    21300010: Panda_Leg
+    21300004: Panda_Face_Blink
+    21300006: Panda_Face_Die
+    21300008: Panda_Face_Action
+    21300010: Panda_Flash
+    21300012: Panda_Head_Full
+    21300014: Panda_Shoulder
+    21300016: Panda_Camera
+    21300018: Panda_Body
+    21300020: Panda_Arm_L
+    21300022: Panda_11
+    21300024: Panda_Arm
+    21300026: Panda_Leg
+    21300028: Panda_Foot
+    21300030: Panda_Body_Down
+    21300032: Panda_Hand
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -101,21 +112,21 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Panda_Arm_R
+      name: Panda_Hat
       rect:
         serializedVersion: 2
-        x: 52
-        y: 367
-        width: 400
-        height: 581
-      alignment: 9
-      pivot: {x: 0.8093657, y: 0.9378093}
+        x: 45
+        y: 922
+        width: 922
+        height: 1126
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c185a55975c3eb24bb3047353d28e5f7
+      spriteID: 898affa69d3f4284082fc5c75d08067e
       vertices: []
       indices: 
       edges: []
@@ -124,38 +135,158 @@ TextureImporter:
       name: Panda_Head
       rect:
         serializedVersion: 2
-        x: 524
-        y: 916
-        width: 920
-        height: 1097
+        x: 1160
+        y: 1336
+        width: 658
+        height: 561
       alignment: 9
-      pivot: {x: 0.5709897, y: 0.21172255}
+      pivot: {x: 0.510448, y: 0.06496426}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fbad545b1e412c742a2975506434f8c9
+      spriteID: ad169ae0da31cea4fa6094a178856326
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Panda_Arm_L
+      name: Panda_Face_Blink
       rect:
         serializedVersion: 2
-        x: 1761
-        y: 469
-        width: 222
-        height: 448
-      alignment: 9
-      pivot: {x: 0.19032466, y: 0.9603653}
+        x: 2517
+        y: 1866
+        width: 515
+        height: 156
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 39c61a9a198986d4e804e1f8d5263bb6
+      spriteID: a2c7d54cc8ca9a846a574686ecc49532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Panda_Face_Die
+      rect:
+        serializedVersion: 2
+        x: 2023
+        y: 1473
+        width: 517
+        height: 293
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6608ede31da2b654c98e2d1c90ba6533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Panda_Face_Action
+      rect:
+        serializedVersion: 2
+        x: 2645
+        y: 1529
+        width: 387
+        height: 285
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df8c235ec91ed9249a22d937dd8e5fa7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Panda_Flash
+      rect:
+        serializedVersion: 2
+        x: 2064
+        y: 1093
+        width: 334
+        height: 286
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e906c7b705b08c044951557360d98ac9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Panda_Head_Full
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 951
+        height: 909
+      alignment: 9
+      pivot: {x: 0.51807255, y: 0.046218485}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0aa8a39cd0064d44a83e22b50a196bc6
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Panda_Shoulder
+      rect:
+        serializedVersion: 2
+        x: 1035
+        y: 649
+        width: 262
+        height: 260
+      alignment: 9
+      pivot: {x: 0.7492769, y: 0.76441485}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1aa39cae1e6300e42884f1a2dae73d1b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Panda_Camera
+      rect:
+        serializedVersion: 2
+        x: 1379
+        y: 618
+        width: 348
+        height: 282
+      alignment: 9
+      pivot: {x: 0.25080222, y: 0.78291935}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba93929ea27c1cb4cb8a1f5917c994ff
       vertices: []
       indices: 
       edges: []
@@ -164,10 +295,10 @@ TextureImporter:
       name: Panda_Body
       rect:
         serializedVersion: 2
-        x: 832
-        y: 423
-        width: 460
-        height: 419
+        x: 2087
+        y: 566
+        width: 462
+        height: 423
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -175,19 +306,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 73267475852f5494ebff2b3f39ad85b3
+      spriteID: 6c0e92773d842414bb2db081c7d7a617
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Panda_Body_Down
+      name: Panda_Arm_L
       rect:
         serializedVersion: 2
-        x: 828
-        y: 151
-        width: 464
-        height: 173
+        x: 2773
+        y: 401
+        width: 225
+        height: 450
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,7 +326,47 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5750ad3a9a3cab54b9ca708f044226cc
+      spriteID: c3871a989abae7b4ca16c3356df5cd27
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Panda_11
+      rect:
+        serializedVersion: 2
+        x: 1167
+        y: 613
+        width: 12
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3299e7fc621a0ec4cbc98264ba4ea3cb
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Panda_Arm
+      rect:
+        serializedVersion: 2
+        x: 1002
+        y: 328
+        width: 254
+        height: 287
+      alignment: 9
+      pivot: {x: 0.7029957, y: 0.6916317}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54280cd9a7e25034e937e4ee676c5f80
       vertices: []
       indices: 
       edges: []
@@ -204,18 +375,78 @@ TextureImporter:
       name: Panda_Leg
       rect:
         serializedVersion: 2
-        x: 1748
-        y: 39
-        width: 249
-        height: 357
+        x: 1382
+        y: 203
+        width: 193
+        height: 304
       alignment: 9
-      pivot: {x: 0.49999952, y: 0.94696504}
+      pivot: {x: 0.5178102, y: 0.6809154}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0322c368b72ebe149acf0cd7dfefd5d6
+      spriteID: 4e36917de7de86d4b9aa6401388809b7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Panda_Foot
+      rect:
+        serializedVersion: 2
+        x: 1650
+        y: 200
+        width: 251
+        height: 276
+      alignment: 9
+      pivot: {x: 0.5000005, y: 0.7615407}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9604ae9f182f5aa4dbb2c5e78cb4097e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Panda_Body_Down
+      rect:
+        serializedVersion: 2
+        x: 2087
+        y: 220
+        width: 466
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75e4c44a5a071ea498f0d468984bf901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Panda_Hand
+      rect:
+        serializedVersion: 2
+        x: 1032
+        y: 9
+        width: 228
+        height: 298
+      alignment: 9
+      pivot: {x: 0.48492378, y: 0.5807439}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 623ea7821d1308c498bc3e3ae8239fd5
       vertices: []
       indices: 
       edges: []
@@ -223,7 +454,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 62fbdae3cc6db054f99d2bbd0711bcc9
+    spriteID: 73ce5b054d2b5534686eda7c377f847a
     vertices: []
     indices: 
     edges: []
