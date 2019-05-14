@@ -23,6 +23,9 @@ public class PlayerController : MonoBehaviour
     private int extraJumps;
     public int extraJumpsValue;
 
+    public GameObject flashCollider;
+    public ParticleSystem bloodParticle;
+
    
 
 
@@ -70,6 +73,16 @@ public class PlayerController : MonoBehaviour
         {
             characterAnimation.SetBool("isJumping", true);
         }
+
+        //Temp
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            startAction();
+        }
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            stopAction();
+        }
     }
 
     public void Jump()
@@ -91,23 +104,41 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log(isGrounded);
         characterAnimation.SetBool("Action", true);
+        
 
         if (currentCharacter == "cinamon" && isGrounded)
         {
             rb2d.AddForce(Vector2.up * jump * 80);
         }
-
-        if (currentCharacter == "jutter")
-        {
-            
-        }
+        
     }
 
     public void stopAction()
     {
         characterAnimation.SetBool("Action", false);
-
+        
     }
+
+    
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        float forceX = 750;
+        float forceY = 900;
+        if (collision.gameObject.tag == "WeaponEnemy")
+        {
+            bloodParticle.Play();
+            if (facingRight)
+            {
+                rb2d.AddForce(new Vector3(forceX, forceY));
+            }
+            else
+            {
+                rb2d.AddForce(new Vector3(forceX, forceY));
+            }
+        }
+    }
+    
+
 
     //Change character
     public void switchToPanda()
