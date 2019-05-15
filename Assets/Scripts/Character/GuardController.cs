@@ -10,6 +10,8 @@ public class GuardController : MonoBehaviour
     private bool lookRight = true;
     private bool freeze = false;
     private Animator guardAnimation;
+    public ParticleSystem bloodParticle;
+
 
     //private bool isAlive = true;
 
@@ -52,7 +54,8 @@ public class GuardController : MonoBehaviour
             guardAnimation.SetBool("Run", true);
             transform.position = Vector2.MoveTowards(transform.position, new Vector2(player.transform.position.x - limit, transform.position.y), speed * Time.deltaTime);
         }
-        if(distance < 3.2 && distance > 3.1)
+        //Debug.Log(distance);
+        if(distance < 3.2 && distance > 3.08)
         {
             guardAnimation.SetBool("Run", false);
             guardAnimation.SetBool("Action", true);
@@ -61,8 +64,13 @@ public class GuardController : MonoBehaviour
         {
             guardAnimation.SetBool("Action", false);
         }
+        if(distance > 5)
+        {
+            guardAnimation.SetBool("Run", false);
 
-        
+        }
+
+
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -72,6 +80,13 @@ public class GuardController : MonoBehaviour
             freeze = true;
             guardAnimation.SetBool("Freeze",true);
             StartCoroutine(Wait());
+        }
+        if (col.gameObject.tag == "Weapon")
+        {  
+            bloodParticle.Play();
+            //float forceX = 1500;
+            //float forceY = 500;
+            //GetComponent<Rigidbody2D>().AddForce(new Vector3(-forceX, forceY));
         }
     }
 
