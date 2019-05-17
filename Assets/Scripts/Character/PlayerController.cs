@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour
     [Space]
     public GameObject flashCollider;
     public ParticleSystem bloodParticle;
+    public GameObject weapon;
+    public GameObject impactFace;
 
     private Rigidbody2D rb2d;
     private Animator characterAnimation;
@@ -114,13 +116,20 @@ public class PlayerController : MonoBehaviour
         {
             rb2d.AddForce(Vector2.up * jump * 80);
         }
+        else if(currentCharacter == "kero")
+        {
+            weapon.SetActive(true);
+        }
         
     }
 
     public void stopAction()
     {
         characterAnimation.SetBool("Action", false);
-        
+        if (currentCharacter == "kero")
+        {
+            weapon.SetActive(false);
+        }
     }
     #endregion
 
@@ -131,8 +140,23 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "WeaponEnemy")
         {
             bloodParticle.Play();
-            rb2d.AddForce(new Vector3(forceX, forceY));
+            impactFace.SetActive(true);
+            //rb2d.AddForce(new Vector3(forceX, forceY));
         }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "WeaponEnemy")
+        {
+            Wait();
+        }
+    }
+
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(1);
+        impactFace.SetActive(false);
     }
 
 
