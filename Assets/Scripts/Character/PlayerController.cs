@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public GameObject cinamon;
     public GameObject kutter;
     public GameObject triski;
+    public GameObject myCamera;
     [Tooltip("Initial character")]
     public string currentCharacter;
 
@@ -35,15 +36,23 @@ public class PlayerController : MonoBehaviour
     public GameObject impactFace;
 
     private Rigidbody2D rb2d;
-    private Animator characterAnimation;
-    
+    private Animator characterAnimation, cameraAnimation;
+    public ParticleSystem soundWaves;
+    private GameObject cinamonActionFace, cinamonImpactFace;
+    Transform target;
+
+
     // Start is called before the first frame update
     void Start()
     {
         extraJumps = extraJumpsValue;
         rb2d = GetComponent<Rigidbody2D>();
         scale = transform.localScale.x;
-        characterAnimation = panda.GetComponent<Animator>();
+        characterAnimation = cinamon.GetComponent<Animator>();
+        cameraAnimation = myCamera.GetComponent<Animator>();
+        cinamonActionFace = GameObject.Find("Player/Cinamon/CinamonBody/bone_pants/bone_chest/bone_head/Cinamon_Face_Action");
+        cinamonImpactFace = GameObject.Find("Player/Cinamon/CinamonBody/bone_pants/bone_chest/bone_head/Cinamon_Face_Impact");
+        cinamonActionFace.SetActive(true);
     }
 
     // Update is called once per frame
@@ -89,10 +98,14 @@ public class PlayerController : MonoBehaviour
         {
             stopAction();
         }
+
+        Debug.Log(isGrounded);
+
     }
 
     public void Jump()
     {
+        GetComponent<Rigidbody2D>().gravityScale = 3f;
         if (extraJumps > 0)
         {
             characterAnimation.SetTrigger("TakeOff");
@@ -108,13 +121,14 @@ public class PlayerController : MonoBehaviour
     #region Action
     public void startAction()
     {
-        Debug.Log(isGrounded);
+
         characterAnimation.SetBool("Action", true);
         
-
         if (currentCharacter == "cinamon" && isGrounded)
         {
-            rb2d.AddForce(Vector2.up * jump * 80);
+            rb2d.AddForce(Vector2.up * jump * 40);
+            GetComponent<Rigidbody2D>().gravityScale = 0.4f;
+            cameraAnimation.SetTrigger("Shake");
         }
         else if(currentCharacter == "kero")
         {
@@ -126,6 +140,10 @@ public class PlayerController : MonoBehaviour
     public void stopAction()
     {
         characterAnimation.SetBool("Action", false);
+        if (currentCharacter == "cinamon")
+        {
+           
+        }
         if (currentCharacter == "kero")
         {
             weapon.SetActive(false);
@@ -149,14 +167,19 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "WeaponEnemy")
         {
-            Wait();
+            Wait(1);
         }
     }
 
-    IEnumerator Wait()
+    IEnumerator Wait(int i)
     {
         yield return new WaitForSeconds(1);
         impactFace.SetActive(false);
+        if(i == 2)
+        {
+          
+
+        }
     }
 
 
