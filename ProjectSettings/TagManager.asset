@@ -8,6 +8,8 @@ TagManager:
   - Flash
   - WeaponEnemy
   - Weapon
+  - Explosion
+  - Enemy
   layers:
   - Default
   - TransparentFX

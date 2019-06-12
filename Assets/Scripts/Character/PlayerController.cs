@@ -32,14 +32,15 @@ public class PlayerController : MonoBehaviour
     [Space]
     public GameObject flashCollider;
     public ParticleSystem bloodParticle;
-    public GameObject weapon;
-    public GameObject impactFace;
+    public GameObject weapon, projectile;
+    public Transform shotPoint;
 
     private Rigidbody2D rb2d;
     private Animator characterAnimation, cameraAnimation;
     public ParticleSystem soundWaves;
-    private GameObject cinamonActionFace, cinamonImpactFace;
-    Transform target;
+    private GameObject impactFace, keroImpactFace, cinamonImpactFace;
+
+    private bool shootActive = true;
 
 
     // Start is called before the first frame update
@@ -48,11 +49,11 @@ public class PlayerController : MonoBehaviour
         extraJumps = extraJumpsValue;
         rb2d = GetComponent<Rigidbody2D>();
         scale = transform.localScale.x;
-        characterAnimation = cinamon.GetComponent<Animator>();
         cameraAnimation = myCamera.GetComponent<Animator>();
-        cinamonActionFace = GameObject.Find("Player/Cinamon/CinamonBody/bone_pants/bone_chest/bone_head/Cinamon_Face_Action");
+        keroImpactFace = GameObject.Find("Player/Kero/KeroBody/bone_pants/bone_chest/bone_head/face_impact");
         cinamonImpactFace = GameObject.Find("Player/Cinamon/CinamonBody/bone_pants/bone_chest/bone_head/Cinamon_Face_Impact");
-        cinamonActionFace.SetActive(true);
+        characterAnimation = kutter.GetComponent<Animator>();
+        impactFace = cinamonImpactFace;
     }
 
     // Update is called once per frame
@@ -61,13 +62,13 @@ public class PlayerController : MonoBehaviour
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
 
         //Movement
-        if (joystick.Horizontal >= 0.2f)
+        if (joystick.Horizontal >= 0.1f)
         {
             characterAnimation.SetBool("Run", true);
             rb2d.transform.Translate(Vector2.right * speed * Time.deltaTime);
             if (!facingRight) Flip();
         }
-        else if (joystick.Horizontal <= -0.2f)
+        else if (joystick.Horizontal <= -0.1f)
         {
             characterAnimation.SetBool("Run", true);
             rb2d.transform.Translate(Vector2.left * speed * Time.deltaTime);
@@ -98,9 +99,6 @@ public class PlayerController : MonoBehaviour
         {
             stopAction();
         }
-
-        Debug.Log(isGrounded);
-
     }
 
     public void Jump()
@@ -121,7 +119,6 @@ public class PlayerController : MonoBehaviour
     #region Action
     public void startAction()
     {
-
         characterAnimation.SetBool("Action", true);
         
         if (currentCharacter == "cinamon" && isGrounded)
@@ -130,20 +127,23 @@ public class PlayerController : MonoBehaviour
             GetComponent<Rigidbody2D>().gravityScale = 0.4f;
             cameraAnimation.SetTrigger("Shake");
         }
-        else if(currentCharacter == "kero")
+        else if(currentCharacter == "kutter")
         {
-            weapon.SetActive(true);
+           
+            if(shootActive)
+            {
+                StartCoroutine(throwScissor());
+                shootActive = false;
+                StartCoroutine(activeShoot());
+            }
         }
-        
+
     }
 
     public void stopAction()
     {
         characterAnimation.SetBool("Action", false);
-        if (currentCharacter == "cinamon")
-        {
-           
-        }
+
         if (currentCharacter == "kero")
         {
             weapon.SetActive(false);
@@ -153,33 +153,47 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        float forceX = 750;
-        float forceY = 900;
-        if (collision.gameObject.tag == "WeaponEnemy")
+        if (collision.gameObject.CompareTag("WeaponEnemy"))
         {
             bloodParticle.Play();
             impactFace.SetActive(true);
-            //rb2d.AddForce(new Vector3(forceX, forceY));
+            push();
+            if (currentCharacter == "cinamon")
+            {
+                GetComponent<Rigidbody2D>().gravityScale = 3f;
+            }
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "WeaponEnemy")
+        if (collision.gameObject.CompareTag("WeaponEnemy"))
         {
-            Wait(1);
+            StartCoroutine(Wait());
         }
     }
 
-    IEnumerator Wait(int i)
+    IEnumerator Wait()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(3);
         impactFace.SetActive(false);
-        if(i == 2)
-        {
-          
+    }
 
-        }
+    IEnumerator throwScissor()
+    {
+        yield return new WaitForSeconds(0.35f);
+        Instantiate(projectile, shotPoint.position, shotPoint.rotation);
+    }
+
+    IEnumerator activeShoot()
+    {
+        yield return new WaitForSeconds(0.9f);
+        shootActive = true;
+    }
+
+    private void push()
+    {
+        rb2d.AddForce(new Vector3(750, 900));
     }
 
 
@@ -204,6 +218,7 @@ public class PlayerController : MonoBehaviour
         kutter.SetActive(false);
         triski.SetActive(false);
         characterAnimation = kero.GetComponent<Animator>();
+        impactFace = keroImpactFace;
         currentCharacter = "kero";
     }
 
@@ -215,6 +230,7 @@ public class PlayerController : MonoBehaviour
         kutter.SetActive(false);
         triski.SetActive(false);
         characterAnimation = cinamon.GetComponent<Animator>();
+        impactFace = cinamonImpactFace;
         currentCharacter = "cinamon";
     }
 
@@ -246,9 +262,14 @@ public class PlayerController : MonoBehaviour
     {
         // Switch the way the player is labelled as facing.
         if (facingRight)
+        {
             transform.localScale = new Vector3(-scale, scale, scale);
+        }
         else
-            transform.localScale = new Vector3(scale, scale, scale);
+        {
+            transform.localScale = new Vector3(scale, scale, scale);          
+        }
+        shotPoint.Rotate(0f, 180f, 0f);
         facingRight = !facingRight;
     }
 }

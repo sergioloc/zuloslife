@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class GuardController : MonoBehaviour
 {
-    public GameObject player;
+    public GameObject player, deathEffect;
     private float limit = 3f;
     public float speed;
     private bool lookRight = true;
     private bool freeze = false;
     private Animator guardAnimation;
     public ParticleSystem bloodParticle;
+    public int health = 100;
 
 
     //private bool isAlive = true;
@@ -79,23 +80,55 @@ public class GuardController : MonoBehaviour
         {
             freeze = true;
             guardAnimation.SetBool("Freeze",true);
-            StartCoroutine(Wait());
+            StartCoroutine(finishFreeze());
         }
         if (col.gameObject.tag == "Weapon")
         {  
             bloodParticle.Play();
-            //float forceX = 1500;
-            //float forceY = 500;
-            //GetComponent<Rigidbody2D>().AddForce(new Vector3(-forceX, forceY));
+            TakeDamage(20);
+            push();
+        }
+        if (col.gameObject.CompareTag("Explosion"))
+        {
+            guardAnimation.SetBool("Explosion", true);
+            StartCoroutine(finishExplosion());
         }
     }
 
+    private void push()
+    {
+        GetComponent<Rigidbody2D>().AddForce(new Vector3(-1500, 500));
+    }
 
-    IEnumerator Wait()
+
+    IEnumerator finishFreeze()
     {
         yield return new WaitForSeconds(5);
         freeze = false;
         guardAnimation.SetBool("Freeze", false);
+    }
+
+    IEnumerator finishExplosion()
+    {
+        yield return new WaitForSeconds(1);
+        guardAnimation.SetBool("Explosion", false);
+
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health = health - damage;
+
+        if(health <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        Instantiate(deathEffect, transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 
 }
