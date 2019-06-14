@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public GameObject panda;
     public GameObject cinamon;
     public GameObject kutter;
-    public GameObject triski;
+    public GameObject trisky;
     public GameObject myCamera;
     [Tooltip("Initial character")]
     public string currentCharacter;
@@ -37,8 +37,8 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D rb2d;
     private Animator characterAnimation, cameraAnimation;
-    public ParticleSystem soundWaves;
-    private GameObject impactFace, keroImpactFace, cinamonImpactFace;
+    private GameObject impactFace;
+    public GameObject keroImpactFace, cinamonImpactFace, kutterImpactFace, triskyImpactFace;
 
     private bool shootActive = true;
 
@@ -50,10 +50,12 @@ public class PlayerController : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         scale = transform.localScale.x;
         cameraAnimation = myCamera.GetComponent<Animator>();
-        keroImpactFace = GameObject.Find("Player/Kero/KeroBody/bone_pants/bone_chest/bone_head/face_impact");
-        cinamonImpactFace = GameObject.Find("Player/Cinamon/CinamonBody/bone_pants/bone_chest/bone_head/Cinamon_Face_Impact");
-        characterAnimation = kutter.GetComponent<Animator>();
-        impactFace = cinamonImpactFace;
+        //keroImpactFace = GameObject.Find("Player/Kero/KeroBody/bone_pants/bone_chest/bone_head/face_impact");
+        //cinamonImpactFace = GameObject.Find("Player/Cinamon/CinamonBody/bone_pants/bone_chest/bone_head/Cinamon_Face_Impact");
+        //kutterImpactFace = GameObject.Find("Player/Kutter/KutterBody/bone_pants/bone_chest/bone_head/Kutter_Face_Impact");
+        //triskyImpactFace = GameObject.Find("Player/Trisky/TriskyBody/bone_pants/bone_chest/bone_head/Trisky_Face_Impact");
+        //characterAnimation = trisky.GetComponent<Animator>();
+        impactFace = triskyImpactFace;
     }
 
     // Update is called once per frame
@@ -205,7 +207,7 @@ public class PlayerController : MonoBehaviour
         kero.SetActive(false);
         cinamon.SetActive(false);
         kutter.SetActive(false);
-        triski.SetActive(false);
+        trisky.SetActive(false);
         characterAnimation = panda.GetComponent<Animator>();
         currentCharacter = "panda";
     }
@@ -216,7 +218,7 @@ public class PlayerController : MonoBehaviour
         kero.SetActive(true);
         cinamon.SetActive(false);
         kutter.SetActive(false);
-        triski.SetActive(false);
+        trisky.SetActive(false);
         characterAnimation = kero.GetComponent<Animator>();
         impactFace = keroImpactFace;
         currentCharacter = "kero";
@@ -228,7 +230,7 @@ public class PlayerController : MonoBehaviour
         kero.SetActive(false);
         cinamon.SetActive(true);
         kutter.SetActive(false);
-        triski.SetActive(false);
+        trisky.SetActive(false);
         characterAnimation = cinamon.GetComponent<Animator>();
         impactFace = cinamonImpactFace;
         currentCharacter = "cinamon";
@@ -240,20 +242,22 @@ public class PlayerController : MonoBehaviour
         kero.SetActive(false);
         cinamon.SetActive(false);
         kutter.SetActive(true);
-        triski.SetActive(false);
+        trisky.SetActive(false);
         characterAnimation = kutter.GetComponent<Animator>();
+        impactFace = kutterImpactFace;
         currentCharacter = "kutter";
     }
 
-    public void switchToTriski()
+    public void switchToTrisky()
     {
         panda.SetActive(false);
         kero.SetActive(false);
         cinamon.SetActive(false);
         kutter.SetActive(false);
-        triski.SetActive(true);
-        characterAnimation = triski.GetComponent<Animator>();
-        currentCharacter = "triski";
+        trisky.SetActive(true);
+        characterAnimation = trisky.GetComponent<Animator>();
+        impactFace = triskyImpactFace;
+        currentCharacter = "trisky";
     }
     #endregion
 
