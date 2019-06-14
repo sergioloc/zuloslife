@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -41,6 +42,8 @@ public class PlayerController : MonoBehaviour
     public GameObject keroImpactFace, cinamonImpactFace, kutterImpactFace, triskyImpactFace;
 
     private bool shootActive = true;
+    private int health;
+    public Slider healthBar;
 
 
     // Start is called before the first frame update
@@ -56,13 +59,14 @@ public class PlayerController : MonoBehaviour
         //triskyImpactFace = GameObject.Find("Player/Trisky/TriskyBody/bone_pants/bone_chest/bone_head/Trisky_Face_Impact");
         //characterAnimation = trisky.GetComponent<Animator>();
         impactFace = triskyImpactFace;
+        health = 100;
     }
 
     // Update is called once per frame
     void Update()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
-
+        healthBar.value = health;
         //Movement
         if (joystick.Horizontal >= 0.1f)
         {
@@ -101,6 +105,11 @@ public class PlayerController : MonoBehaviour
         {
             stopAction();
         }
+
+        if(health == 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void Jump()
@@ -122,6 +131,11 @@ public class PlayerController : MonoBehaviour
     public void startAction()
     {
         characterAnimation.SetBool("Action", true);
+
+        if(currentCharacter == "trisky")
+        {
+            health = health + 30;
+        }
         
         if (currentCharacter == "cinamon" && isGrounded)
         {
@@ -159,6 +173,7 @@ public class PlayerController : MonoBehaviour
         {
             bloodParticle.Play();
             impactFace.SetActive(true);
+            health = health - 5;
             push();
             if (currentCharacter == "cinamon")
             {
