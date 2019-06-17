@@ -5,7 +5,7 @@ using UnityEngine;
 public class GuardController : MonoBehaviour
 {
     public GameObject player, deathEffect;
-    private float limit = 3f;
+    private float limit = 2.3f;
     public float speed;
     private bool lookRight = true;
     private bool freeze = false;
@@ -53,10 +53,10 @@ public class GuardController : MonoBehaviour
         if (distance < 5 && !freeze)
         {
             guardAnimation.SetBool("Run", true);
-            transform.position = Vector2.MoveTowards(transform.position, new Vector2(player.transform.position.x - limit, transform.position.y), speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x - limit, transform.position.y, transform.position.z), speed * Time.deltaTime);
         }
-        //Debug.Log(distance);
-        if(distance < 3.2 && distance > 3.08)
+        Debug.Log(distance);
+        if(distance < 2.45 && distance > 2.35)
         {
             guardAnimation.SetBool("Run", false);
             guardAnimation.SetBool("Action", true);
@@ -97,7 +97,10 @@ public class GuardController : MonoBehaviour
 
     private void push()
     {
-        GetComponent<Rigidbody2D>().AddForce(new Vector3(-1500, 500));
+        if (lookRight)
+            GetComponent<Rigidbody2D>().AddForce(new Vector3(-1500, 500));
+        else
+            GetComponent<Rigidbody2D>().AddForce(new Vector3(1500, 500));
     }
 
 

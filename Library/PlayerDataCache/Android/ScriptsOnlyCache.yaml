@@ -38,6 +38,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
+    - UnityEngine.UI.Slider
     - UnityEngine.UI.Text
     com.unity.multiplayer-hlapi.Runtime.dll:
     - UnityEngine.Networking.NetworkCallbacks
@@ -104,6 +105,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 9640}
     - Class: 114
       Script: {instanceID: 9648}
+    - Class: 114
+      Script: {instanceID: 9682}
     - Class: 114
       Script: {instanceID: 9684}
     - Class: 114
@@ -837,7 +840,7 @@ ScriptsOnlyBuild:
     className: NetworkStartPosition
   - hash:
       serializedVersion: 2
-      Hash: 030a7a7c905441c0e803dc3bbb69978d
+      Hash: 42575cf3588738e370980fd17fec963f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerController
@@ -1108,4 +1111,4 @@ ScriptsOnlyBuild:
   platform: 13
   scenePathNames:
   - Assets/Scenes/SampleScene.unity
-  playerPath: C:/Users/slc/Desktop/zuloslife0.0.6.apk
+  playerPath: C:/Users/slc/Desktop/zuloslife0.0.7.apk

@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
         //cinamonImpactFace = GameObject.Find("Player/Cinamon/CinamonBody/bone_pants/bone_chest/bone_head/Cinamon_Face_Impact");
         //kutterImpactFace = GameObject.Find("Player/Kutter/KutterBody/bone_pants/bone_chest/bone_head/Kutter_Face_Impact");
         //triskyImpactFace = GameObject.Find("Player/Trisky/TriskyBody/bone_pants/bone_chest/bone_head/Trisky_Face_Impact");
-        //characterAnimation = trisky.GetComponent<Animator>();
+        characterAnimation = trisky.GetComponent<Animator>();
         impactFace = triskyImpactFace;
         health = 100;
     }
@@ -210,7 +210,10 @@ public class PlayerController : MonoBehaviour
 
     private void push()
     {
-        rb2d.AddForce(new Vector3(750, 900));
+        if(facingRight)
+            rb2d.AddForce(new Vector3(-750, 900));
+        else
+            rb2d.AddForce(new Vector3(-750, 900));
     }
 
 
