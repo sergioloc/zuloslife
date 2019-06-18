@@ -3,28 +3,28 @@ guid: 5e5364cae5bba09458ee4efd6694de86
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6273620766312662880
+      213: 7227929249045740780
     second: Kutter_Face_Action
   - first:
       213: -3056860207948368685
     second: Kutter_Face_Blink
   - first:
-      213: -8057404630866087888
+      213: 3935604894418958345
     second: Kutter_Hand_R
   - first:
-      213: -3122106854271513520
-    second: Kutter_Scissors
+      213: -6296159403926280206
+    second: KutterParts_3
   - first:
-      213: 8162687894092401569
+      213: 6046625080345751717
     second: Kutter_Face_Impact
   - first:
-      213: 2470720569030109219
+      213: 5947408426523793176
     second: Kutter_Face_Dead
   - first:
-      213: 1535109204393000160
+      213: -3198353456399794642
     second: Kutter_Shoulder_R
   - first:
-      213: 3381670909791184349
+      213: 2092829956113960394
     second: Kutter_Arm_R
   externalObjects: {}
   serializedVersion: 10
@@ -122,7 +122,7 @@ TextureImporter:
       name: Kutter_Face_Action
       rect:
         serializedVersion: 2
-        x: 27
+        x: 29
         y: 643
         width: 522
         height: 103
@@ -133,8 +133,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e495086eceaf3a46b675dd7aed97782
-      internalID: 6273620766312662880
+      spriteID: ba930d45bf3f87e4eaea775a2ab3e861
+      internalID: 7227929249045740780
       vertices: []
       indices: 
       edges: []
@@ -154,7 +154,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 228264312e6564240818be5eb99da570
+      spriteID: 278e6b44455e4614e8f4f482895c2ae8
       internalID: -3056860207948368685
       vertices: []
       indices: 
@@ -175,29 +175,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a6cdedc3942762148857b190dce4124f
-      internalID: -8057404630866087888
+      spriteID: c9c99215275c5644a9253b4ea8401b59
+      internalID: 3935604894418958345
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Kutter_Scissors
+      name: KutterParts_3
       rect:
         serializedVersion: 2
-        x: 1592
+        x: 1591
         y: 463
         width: 250
         height: 284
-      alignment: 9
-      pivot: {x: 0.43666112, y: 0.49442452}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 57dfea2cf257fb5488b247432708cabd
-      internalID: -3122106854271513520
+      spriteID: 0591c84fb718b694f86b909e44084c4b
+      internalID: -6296159403926280206
       vertices: []
       indices: 
       edges: []
@@ -217,8 +217,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 13ad10af5dfbeb045a066c44245cb231
-      internalID: 8162687894092401569
+      spriteID: e88b1fb326cbbe3439286721dd17ad4a
+      internalID: 6046625080345751717
       vertices: []
       indices: 
       edges: []
@@ -238,8 +238,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 98fc89b017181d94089d5a715eec0ffb
-      internalID: 2470720569030109219
+      spriteID: 055fb4d5b97a31a41955865afa1634ae
+      internalID: 5947408426523793176
       vertices: []
       indices: 
       edges: []
@@ -249,9 +249,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1190
-        y: 144
+        y: 149
         width: 321
-        height: 228
+        height: 223
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -259,8 +259,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 260ce41d831bbf646bb22afda4220b84
-      internalID: 1535109204393000160
+      spriteID: 1b489d75641460747b59cc8cad9e1eba
+      internalID: -3198353456399794642
       vertices: []
       indices: 
       edges: []
@@ -280,8 +280,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 868d78651c58e43429bc9d014fd9d775
-      internalID: 3381670909791184349
+      spriteID: 705db1bdef77a6a4e8ff0f04cf8a4519
+      internalID: 2092829956113960394
       vertices: []
       indices: 
       edges: []
@@ -289,7 +289,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: ed5597e4780846945b3045a0967ca2e2
+    spriteID: 225f03f2d9127a9498dfa0cff8a96d71
     internalID: 0
     vertices: []
     indices: 
