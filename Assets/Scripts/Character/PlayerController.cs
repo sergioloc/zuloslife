@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb2d;
     private Animator characterAnimation, cameraAnimation;
     private GameObject impactFace;
-    public GameObject keroImpactFace, cinamonImpactFace, kutterImpactFace, triskyImpactFace;
+    public GameObject pandaImpactFace, keroImpactFace, cinamonImpactFace, kutterImpactFace, triskyImpactFace;
 
     private bool shootActive = true;
     private int health;
@@ -57,8 +57,8 @@ public class PlayerController : MonoBehaviour
         //cinamonImpactFace = GameObject.Find("Player/Cinamon/CinamonBody/bone_pants/bone_chest/bone_head/Cinamon_Face_Impact");
         //kutterImpactFace = GameObject.Find("Player/Kutter/KutterBody/bone_pants/bone_chest/bone_head/Kutter_Face_Impact");
         //triskyImpactFace = GameObject.Find("Player/Trisky/TriskyBody/bone_pants/bone_chest/bone_head/Trisky_Face_Impact");
-        characterAnimation = trisky.GetComponent<Animator>();
-        impactFace = triskyImpactFace;
+        characterAnimation = panda.GetComponent<Animator>();
+        impactFace = pandaImpactFace;
         health = 100;
     }
 
@@ -227,7 +227,9 @@ public class PlayerController : MonoBehaviour
         kutter.SetActive(false);
         trisky.SetActive(false);
         characterAnimation = panda.GetComponent<Animator>();
+        impactFace = pandaImpactFace;
         currentCharacter = "panda";
+        pandaImpactFace.SetActive(false);
     }
 
     public void switchToKero()

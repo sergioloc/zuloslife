@@ -55,7 +55,7 @@ public class GuardController : MonoBehaviour
             guardAnimation.SetBool("Run", true);
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x - limit, transform.position.y, transform.position.z), speed * Time.deltaTime);
         }
-        Debug.Log(distance);
+        //Debug.Log(distance);
         if(distance < 2.45 && distance > 2.35)
         {
             guardAnimation.SetBool("Run", false);
