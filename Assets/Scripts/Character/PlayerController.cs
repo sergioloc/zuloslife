@@ -240,6 +240,7 @@ public class PlayerController : MonoBehaviour
         characterAnimation = kero.GetComponent<Animator>();
         impactFace = keroImpactFace;
         currentCharacter = "kero";
+        keroImpactFace.SetActive(false);
     }
 
     public void switchToCinamon()
@@ -252,6 +253,7 @@ public class PlayerController : MonoBehaviour
         characterAnimation = cinamon.GetComponent<Animator>();
         impactFace = cinamonImpactFace;
         currentCharacter = "cinamon";
+        cinamonImpactFace.SetActive(false);
     }
 
     public void switchToKutter()
@@ -264,6 +266,7 @@ public class PlayerController : MonoBehaviour
         characterAnimation = kutter.GetComponent<Animator>();
         impactFace = kutterImpactFace;
         currentCharacter = "kutter";
+        kutterImpactFace.SetActive(false);
     }
 
     public void switchToTrisky()
@@ -276,6 +279,7 @@ public class PlayerController : MonoBehaviour
         characterAnimation = trisky.GetComponent<Animator>();
         impactFace = triskyImpactFace;
         currentCharacter = "trisky";
+        triskyImpactFace.SetActive(false);
     }
     #endregion
 
