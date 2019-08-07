@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Cinemachine;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,9 +12,16 @@ public class PlayerController : MonoBehaviour
     public GameObject cinamon;
     public GameObject kutter;
     public GameObject trisky;
-    public GameObject myCamera;
     [Tooltip("Initial character")]
     public string currentCharacter;
+
+    [Header("Camera")]
+    public CinemachineVirtualCamera virtualCamera;
+    private CinemachineBasicMultiChannelPerlin virtualCameraNoise;
+    public float shakeDuration = 0.3f;
+    public float shakeAmplitude = 1.2f;
+    public float shakeFrequency = 2.0f;
+    private float shakeElapsedTime = 0f;
 
     [Header("Move Controller")]
     public Joystick joystick;
@@ -32,7 +40,7 @@ public class PlayerController : MonoBehaviour
 
     [Space]
     public GameObject flashCollider;
-    public ParticleSystem bloodParticle;
+    public ParticleSystem bloodParticle, confuseParticle;
     public GameObject weapon, projectile;
     public Transform shotPoint;
 
@@ -41,9 +49,13 @@ public class PlayerController : MonoBehaviour
     private GameObject impactFace;
     public GameObject pandaImpactFace, keroImpactFace, cinamonImpactFace, kutterImpactFace, triskyImpactFace;
 
-    private bool shootActive = true;
+    private bool shootActive = true, reverseController = false;
     private int health;
+    private float sensitivity = 0.1f;
     public Slider healthBar;
+
+
+
 
 
     // Start is called before the first frame update
@@ -52,14 +64,15 @@ public class PlayerController : MonoBehaviour
         extraJumps = extraJumpsValue;
         rb2d = GetComponent<Rigidbody2D>();
         scale = transform.localScale.x;
-        cameraAnimation = myCamera.GetComponent<Animator>();
         //keroImpactFace = GameObject.Find("Player/Kero/KeroBody/bone_pants/bone_chest/bone_head/face_impact");
         //cinamonImpactFace = GameObject.Find("Player/Cinamon/CinamonBody/bone_pants/bone_chest/bone_head/Cinamon_Face_Impact");
         //kutterImpactFace = GameObject.Find("Player/Kutter/KutterBody/bone_pants/bone_chest/bone_head/Kutter_Face_Impact");
         //triskyImpactFace = GameObject.Find("Player/Trisky/TriskyBody/bone_pants/bone_chest/bone_head/Trisky_Face_Impact");
-        characterAnimation = panda.GetComponent<Animator>();
+        characterAnimation = cinamon.GetComponent<Animator>();
         impactFace = pandaImpactFace;
         health = 100;
+
+        virtualCameraNoise = virtualCamera.GetCinemachineComponent<Cinemachine.CinemachineBasicMultiChannelPerlin>();
     }
 
     // Update is called once per frame
@@ -67,23 +80,47 @@ public class PlayerController : MonoBehaviour
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
         healthBar.value = health;
-        //Movement
-        if (joystick.Horizontal >= 0.1f)
+  
+        if (confuseParticle.isPlaying)
         {
-            characterAnimation.SetBool("Run", true);
-            rb2d.transform.Translate(Vector2.right * speed * Time.deltaTime);
-            if (!facingRight) Flip();
-        }
-        else if (joystick.Horizontal <= -0.1f)
-        {
-            characterAnimation.SetBool("Run", true);
-            rb2d.transform.Translate(Vector2.left * speed * Time.deltaTime);
-            if (facingRight) Flip();
+            //Confuse Movement
+            if (joystick.Horizontal >= sensitivity)
+            {
+                characterAnimation.SetBool("Run", true);
+                rb2d.transform.Translate(Vector2.left * speed * Time.deltaTime);
+                if (facingRight) Flip();
+            }
+            else if (joystick.Horizontal <= -sensitivity)
+            {
+                characterAnimation.SetBool("Run", true);
+                rb2d.transform.Translate(Vector2.right * speed * Time.deltaTime);
+                if (!facingRight) Flip();
+            }
+            else if (characterAnimation.GetBool("Run"))
+            {
+                characterAnimation.SetBool("Run", false);
+            }
         }
         else
         {
-            characterAnimation.SetBool("Run", false);
-        }
+            //Movement
+            if (joystick.Horizontal >= sensitivity)
+            {
+                characterAnimation.SetBool("Run", true);
+                rb2d.transform.Translate(Vector2.right * speed * Time.deltaTime);
+                if (!facingRight) Flip();
+            }
+            else if (joystick.Horizontal <= -sensitivity)
+            {
+                characterAnimation.SetBool("Run", true);
+                rb2d.transform.Translate(Vector2.left * speed * Time.deltaTime);
+                if (facingRight) Flip();
+            }
+            else if(characterAnimation.GetBool("Run"))
+            {
+                characterAnimation.SetBool("Run", false);
+            }
+        }   
 
         //Jump
         if (isGrounded)
@@ -96,23 +133,15 @@ public class PlayerController : MonoBehaviour
             characterAnimation.SetBool("isJumping", true);
         }
 
-        //Temp
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            startAction();
-        }
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            stopAction();
-        }
-
+        //Die
         if(health == 0)
         {
             Destroy(gameObject);
         }
+
+        ShakeCamera();
     }
 
-    //csff
 
     public void Jump()
     {
@@ -143,7 +172,7 @@ public class PlayerController : MonoBehaviour
         {
             rb2d.AddForce(Vector2.up * jump * 40);
             GetComponent<Rigidbody2D>().gravityScale = 0.4f;
-            cameraAnimation.SetTrigger("Shake");
+            shakeElapsedTime = shakeDuration;
         }
         else if(currentCharacter == "kutter")
         {
@@ -156,6 +185,27 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+    }
+
+    private void ShakeCamera()
+    {
+        // If the Cinemachine componet is not set, avoid update
+        if (virtualCamera != null && virtualCameraNoise != null)
+        {
+            // If Camera Shake effect is still playing
+            if (shakeElapsedTime > 0)
+            {
+                StartCoroutine(WaitForShake(0.7f));
+                // Update Shake Timer
+                shakeElapsedTime -= Time.deltaTime;
+            }
+            else
+            {
+                // If Camera Shake effect is over, reset variables
+                virtualCameraNoise.m_AmplitudeGain = 0f;
+                shakeElapsedTime = 0f;
+            }
+        }
     }
 
     public void stopAction()
@@ -182,20 +232,38 @@ public class PlayerController : MonoBehaviour
                 GetComponent<Rigidbody2D>().gravityScale = 3f;
             }
         }
-    }
 
+        
+    }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("WeaponEnemy"))
         {
-            StartCoroutine(Wait());
+            StartCoroutine(Wait(3));
         }
     }
 
-    IEnumerator Wait()
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        yield return new WaitForSeconds(3);
+        if (collision.gameObject.CompareTag("Fox"))
+        {
+            confuseParticle.Play();
+        }
+    }
+
+    IEnumerator Wait(int sec)
+    {
+        yield return new WaitForSeconds(sec);
         impactFace.SetActive(false);
+    }
+
+    IEnumerator WaitForShake(float sec)
+    {
+        yield return new WaitForSeconds(sec);
+        // Set Cinemachine Camera Noise parameters
+        virtualCameraNoise.m_AmplitudeGain = shakeAmplitude;
+        virtualCameraNoise.m_FrequencyGain = shakeFrequency;
+
     }
 
     IEnumerator throwScissor()
@@ -218,6 +286,20 @@ public class PlayerController : MonoBehaviour
             rb2d.AddForce(new Vector3(-750, 900));
     }
 
+    private void Flip()
+    {
+        // Switch the way the player is labelled as facing.
+        if (facingRight)
+        {
+            transform.localScale = new Vector3(-scale, scale, scale);
+        }
+        else
+        {
+            transform.localScale = new Vector3(scale, scale, scale);
+        }
+        shotPoint.Rotate(0f, 180f, 0f);
+        facingRight = !facingRight;
+    }
 
 
     #region Switch Characters
@@ -287,20 +369,5 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
-
-    private void Flip()
-    {
-        // Switch the way the player is labelled as facing.
-        if (facingRight)
-        {
-            transform.localScale = new Vector3(-scale, scale, scale);
-        }
-        else
-        {
-            transform.localScale = new Vector3(scale, scale, scale);          
-        }
-        shotPoint.Rotate(0f, 180f, 0f);
-        facingRight = !facingRight;
-    }
 }
 
