@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GuardController : MonoBehaviour
 {
-    public GameObject player, deathEffect;
+    public GameObject player, deathEffect, bloodEffect1, bloodEffect2;
     private float limit = 2.3f;
     public float speed;
     private bool lookRight = true;
@@ -133,6 +133,17 @@ public class GuardController : MonoBehaviour
     {
         Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
+
+        if (Random.Range(1, 2) == 1)
+        {
+            Instantiate(bloodEffect1, transform.position, Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(bloodEffect2, transform.position, Quaternion.identity);
+        }
+
     }
 
 }
+

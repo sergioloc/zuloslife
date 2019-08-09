@@ -38,9 +38,14 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
     private int extraJumps;
 
+    [Header("Particles")]
+    public ParticleSystem bloodParticle;
+    public ParticleSystem confuseParticle;
+    public ParticleSystem healthParticle;
+
+
     [Space]
     public GameObject flashCollider, megaCombo;
-    public ParticleSystem bloodParticle, confuseParticle;
     public GameObject weapon, projectile;
     public Transform shotPoint;
 
@@ -177,6 +182,8 @@ public class PlayerController : MonoBehaviour
         if(currentCharacter == "trisky")
         {
             health = health + 30;
+            healthParticle.Play();
+            StartCoroutine(WaitForStopHealth());
         }
         
         if (currentCharacter == "cinamon" && isGrounded)
@@ -235,6 +242,7 @@ public class PlayerController : MonoBehaviour
         {
             weapon.SetActive(false);
         }
+
     }
     #endregion
 
@@ -278,6 +286,12 @@ public class PlayerController : MonoBehaviour
         // Set Cinemachine Camera Noise parameters
         virtualCameraNoise.m_AmplitudeGain = shakeAmplitude;
         virtualCameraNoise.m_FrequencyGain = shakeFrequency;
+    }
+
+    IEnumerator WaitForStopHealth()
+    {
+        yield return new WaitForSeconds(1.5f);
+        healthParticle.Stop();
     }
 
     IEnumerator WaitForGravity()
