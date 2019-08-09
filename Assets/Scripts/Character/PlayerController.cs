@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     private int extraJumps;
 
     [Space]
-    public GameObject flashCollider;
+    public GameObject flashCollider, megaCombo;
     public ParticleSystem bloodParticle, confuseParticle;
     public GameObject weapon, projectile;
     public Transform shotPoint;
@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
     private int health;
     private float sensitivity = 0.1f;
     public Slider healthBar;
+    private bool waitShake = true;
 
 
 
@@ -80,7 +81,17 @@ public class PlayerController : MonoBehaviour
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
         healthBar.value = health;
-  
+
+        //Combo
+        if (megaCombo.activeInHierarchy == true)
+        {
+            waitShake = false;
+            shakeElapsedTime = shakeDuration;
+            Debug.Log("MegaCombo");
+        }
+
+        ShakeCamera();
+
         if (confuseParticle.isPlaying)
         {
             //Confuse Movement
@@ -139,13 +150,13 @@ public class PlayerController : MonoBehaviour
             Destroy(gameObject);
         }
 
-        ShakeCamera();
+        
+
     }
 
 
     public void Jump()
     {
-        GetComponent<Rigidbody2D>().gravityScale = 3f;
         if (extraJumps > 0)
         {
             characterAnimation.SetTrigger("TakeOff");
@@ -172,6 +183,8 @@ public class PlayerController : MonoBehaviour
         {
             rb2d.AddForce(Vector2.up * jump * 40);
             GetComponent<Rigidbody2D>().gravityScale = 0.4f;
+            StartCoroutine(WaitForGravity());
+            waitShake = true;
             shakeElapsedTime = shakeDuration;
         }
         else if(currentCharacter == "kutter")
@@ -195,7 +208,13 @@ public class PlayerController : MonoBehaviour
             // If Camera Shake effect is still playing
             if (shakeElapsedTime > 0)
             {
-                StartCoroutine(WaitForShake(0.7f));
+                if(waitShake)
+                    StartCoroutine(WaitForShake(0.7f));
+                else
+                {
+                    virtualCameraNoise.m_AmplitudeGain = shakeAmplitude;
+                    virtualCameraNoise.m_FrequencyGain = shakeFrequency;
+                }
                 // Update Shake Timer
                 shakeElapsedTime -= Time.deltaTime;
             }
@@ -227,10 +246,6 @@ public class PlayerController : MonoBehaviour
             impactFace.SetActive(true);
             health = health - 5;
             push();
-            if (currentCharacter == "cinamon")
-            {
-                GetComponent<Rigidbody2D>().gravityScale = 3f;
-            }
         }
 
         
@@ -263,7 +278,12 @@ public class PlayerController : MonoBehaviour
         // Set Cinemachine Camera Noise parameters
         virtualCameraNoise.m_AmplitudeGain = shakeAmplitude;
         virtualCameraNoise.m_FrequencyGain = shakeFrequency;
+    }
 
+    IEnumerator WaitForGravity()
+    {
+        yield return new WaitForSeconds(2);
+        GetComponent<Rigidbody2D>().gravityScale = 3f;
     }
 
     IEnumerator throwScissor()

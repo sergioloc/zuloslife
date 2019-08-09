@@ -22,7 +22,10 @@ public class JumpPad : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        collision.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce));
-        electricPulse.Play();
+        if(collision.gameObject.GetComponent<Rigidbody2D>() != null)
+        {
+            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce));
+            electricPulse.Play();
+        } 
     }
 }
