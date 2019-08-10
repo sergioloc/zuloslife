@@ -32,45 +32,61 @@ public class GuardController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Move
-        float distance = Vector2.Distance(transform.position, player.transform.position);
-        float x1 = player.transform.position.x;
-        float x2 = transform.position.x;
-        float realDistance = x1 - x2;
+        if (player != null)
+        {
+            //Move
+            float distance = Vector2.Distance(transform.position, player.transform.position);
+            float x1 = player.transform.position.x;
+            float x2 = transform.position.x;
+            float realDistance = x1 - x2;
 
-        //Position
-        if (realDistance > 0 && !lookRight && !freeze)
-        {
-            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-            lookRight = true;
-            limit = -limit;
-        }
-        else if (realDistance < 0 && lookRight && !freeze)
-        {
-            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-            lookRight = false;
-            limit = -limit;
-        }
-        if (distance < 5 && !freeze)
-        {
-            guardAnimation.SetBool("Run", true);
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x - limit, transform.position.y, transform.position.z), speed * Time.deltaTime);
-        }
-        //Debug.Log(distance);
-        if(distance < 2.45 && distance > 2.35)
-        {
-            guardAnimation.SetBool("Run", false);
-            guardAnimation.SetBool("Action", true);
+            //Position
+            if (realDistance > 0 && !lookRight && !freeze)
+            {
+                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                lookRight = true;
+                limit = -limit;
+            }
+            else if (realDistance < 0 && lookRight && !freeze)
+            {
+                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                lookRight = false;
+                limit = -limit;
+            }
+            if (distance < 5 && !freeze)
+            {
+                guardAnimation.SetBool("Run", true);
+                transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x - limit, transform.position.y, transform.position.z), speed * Time.deltaTime);
+            }
+            //Debug.Log(gameObject.GetComponent<Rigidbody2D>().velocity.x);
+            if (distance < 2.45 && distance > 0 && gameObject.GetComponent<Rigidbody2D>().velocity.x < 0)
+            {
+
+                guardAnimation.SetBool("Run", true);
+                guardAnimation.SetBool("Action", true);
+            }
+            else if (distance < 2.45 && distance > 0)
+            {
+                guardAnimation.SetBool("Run", false);
+                guardAnimation.SetBool("Action", true);
+            }
+            else
+            {
+                guardAnimation.SetBool("Action", false);
+            }
+
+            if (distance > 5)
+            {
+                guardAnimation.SetBool("Run", false);
+
+            }
         }
         else
         {
+            guardAnimation.SetBool("Run", false);
             guardAnimation.SetBool("Action", false);
         }
-        if(distance > 5)
-        {
-            guardAnimation.SetBool("Run", false);
-
-        }
+        
 
 
     }

@@ -43,6 +43,12 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem confuseParticle;
     public ParticleSystem healthParticle;
 
+    [Header("Die")]
+    public GameObject deathEffect;
+    public GameObject bloodEffect1;
+    public GameObject bloodEffect2;
+
+
 
     [Space]
     public GameObject flashCollider, megaCombo;
@@ -54,7 +60,7 @@ public class PlayerController : MonoBehaviour
     private GameObject impactFace;
     public GameObject pandaImpactFace, keroImpactFace, cinamonImpactFace, kutterImpactFace, triskyImpactFace;
 
-    private bool shootActive = true, reverseController = false;
+    private bool shootActive = true;
     private int health;
     private float sensitivity = 0.1f;
     public Slider healthBar;
@@ -152,7 +158,7 @@ public class PlayerController : MonoBehaviour
         //Die
         if(health == 0)
         {
-            Destroy(gameObject);
+            Die();
         }
 
         
@@ -333,6 +339,22 @@ public class PlayerController : MonoBehaviour
         }
         shotPoint.Rotate(0f, 180f, 0f);
         facingRight = !facingRight;
+    }
+
+    private void Die()
+    {
+        Instantiate(deathEffect, transform.position, Quaternion.identity);
+        Destroy(gameObject);
+
+        if (Random.Range(1, 2) == 1)
+        {
+            Instantiate(bloodEffect1, transform.position, Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(bloodEffect2, transform.position, Quaternion.identity);
+        }
+
     }
 
 
