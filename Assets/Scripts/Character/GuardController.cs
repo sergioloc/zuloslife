@@ -61,7 +61,6 @@ public class GuardController : MonoBehaviour
             //Debug.Log(gameObject.GetComponent<Rigidbody2D>().velocity.x);
             if (distance < 2.45 && distance > 0 && gameObject.GetComponent<Rigidbody2D>().velocity.x < 0)
             {
-
                 guardAnimation.SetBool("Run", true);
                 guardAnimation.SetBool("Action", true);
             }

@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public GameObject trisky;
     [Tooltip("Initial character")]
     public string currentCharacter;
+    public GameObject characters;
 
     [Header("Camera")]
     public CinemachineVirtualCamera virtualCamera;
@@ -42,11 +43,15 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem bloodParticle;
     public ParticleSystem confuseParticle;
     public ParticleSystem healthParticle;
+    public ParticleSystem spawnParticle;
 
     [Header("Die")]
     public GameObject deathEffect;
     public GameObject bloodEffect1;
     public GameObject bloodEffect2;
+
+    public Transform spawnPoint;
+    private bool bloodShowed = false;
 
 
 
@@ -65,6 +70,9 @@ public class PlayerController : MonoBehaviour
     private float sensitivity = 0.1f;
     public Slider healthBar;
     private bool waitShake = true;
+
+    private bool canFade;
+    private Color alphaColor;
 
 
 
@@ -165,7 +173,6 @@ public class PlayerController : MonoBehaviour
 
     }
 
-
     public void Jump()
     {
         if (extraJumps > 0)
@@ -213,33 +220,6 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void ShakeCamera()
-    {
-        // If the Cinemachine componet is not set, avoid update
-        if (virtualCamera != null && virtualCameraNoise != null)
-        {
-            // If Camera Shake effect is still playing
-            if (shakeElapsedTime > 0)
-            {
-                if(waitShake)
-                    StartCoroutine(WaitForShake(0.7f));
-                else
-                {
-                    virtualCameraNoise.m_AmplitudeGain = shakeAmplitude;
-                    virtualCameraNoise.m_FrequencyGain = shakeFrequency;
-                }
-                // Update Shake Timer
-                shakeElapsedTime -= Time.deltaTime;
-            }
-            else
-            {
-                // If Camera Shake effect is over, reset variables
-                virtualCameraNoise.m_AmplitudeGain = 0f;
-                shakeElapsedTime = 0f;
-            }
-        }
-    }
-
     public void stopAction()
     {
         characterAnimation.SetBool("Action", false);
@@ -252,18 +232,21 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
+    #region Collisions
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("WeaponEnemy"))
+        if (collision.gameObject.CompareTag("WeaponEnemy") && !bloodShowed)
         {
             bloodParticle.Play();
             impactFace.SetActive(true);
-            health = health - 5;
+            health = health - 50;
             push();
         }
 
         
     }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("WeaponEnemy"))
@@ -280,6 +263,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Waits
+
     IEnumerator Wait(int sec)
     {
         yield return new WaitForSeconds(sec);
@@ -289,7 +276,6 @@ public class PlayerController : MonoBehaviour
     IEnumerator WaitForShake(float sec)
     {
         yield return new WaitForSeconds(sec);
-        // Set Cinemachine Camera Noise parameters
         virtualCameraNoise.m_AmplitudeGain = shakeAmplitude;
         virtualCameraNoise.m_FrequencyGain = shakeFrequency;
     }
@@ -306,6 +292,22 @@ public class PlayerController : MonoBehaviour
         GetComponent<Rigidbody2D>().gravityScale = 3f;
     }
 
+    IEnumerator WaitForRespawn()
+    {
+        yield return new WaitForSeconds(2);
+        gameObject.GetComponent<Transform>().position = spawnPoint.position;
+        spawnParticle.Play();
+        StartCoroutine(WaitForRespawn2());
+    }
+
+    IEnumerator WaitForRespawn2()
+    {
+        yield return new WaitForSeconds(2);
+        characters.SetActive(true);
+        health = 100;
+        bloodShowed = false;
+    }
+
     IEnumerator throwScissor()
     {
         yield return new WaitForSeconds(0.35f);
@@ -317,6 +319,10 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.9f);
         shootActive = true;
     }
+
+    #endregion
+
+    #region Other functions
 
     private void push()
     {
@@ -341,22 +347,55 @@ public class PlayerController : MonoBehaviour
         facingRight = !facingRight;
     }
 
-    private void Die()
+    private void ShakeCamera()
     {
-        Instantiate(deathEffect, transform.position, Quaternion.identity);
-        Destroy(gameObject);
-
-        if (Random.Range(1, 2) == 1)
+        // If the Cinemachine componet is not set, avoid update
+        if (virtualCamera != null && virtualCameraNoise != null)
         {
-            Instantiate(bloodEffect1, transform.position, Quaternion.identity);
+            // If Camera Shake effect is still playing
+            if (shakeElapsedTime > 0)
+            {
+                if (waitShake)
+                    StartCoroutine(WaitForShake(0.7f));
+                else
+                {
+                    virtualCameraNoise.m_AmplitudeGain = shakeAmplitude;
+                    virtualCameraNoise.m_FrequencyGain = shakeFrequency;
+                }
+                // Update Shake Timer
+                shakeElapsedTime -= Time.deltaTime;
+            }
+            else
+            {
+                // If Camera Shake effect is over, reset variables
+                virtualCameraNoise.m_AmplitudeGain = 0f;
+                shakeElapsedTime = 0f;
+            }
         }
-        else
-        {
-            Instantiate(bloodEffect2, transform.position, Quaternion.identity);
-        }
-
     }
 
+    private void Die()
+    {
+        if (!bloodShowed)
+        {
+            impactFace.SetActive(false);
+            characters.SetActive(false);
+            Instantiate(deathEffect, transform.position, Quaternion.identity);
+            gameObject.GetComponent<CapsuleCollider2D>().tag = "Ignore";
+
+            if (Random.Range(1, 2) == 1)
+            {
+                Instantiate(bloodEffect1, transform.position, Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(bloodEffect2, transform.position, Quaternion.identity);
+            }
+            bloodShowed = true;
+            StartCoroutine(WaitForRespawn());
+        } 
+    }
+    #endregion
 
     #region Switch Characters
     public void switchToPanda()

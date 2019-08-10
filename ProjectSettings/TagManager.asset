@@ -11,6 +11,7 @@ TagManager:
   - Explosion
   - Enemy
   - Fox
+  - Ignore
   layers:
   - Default
   - TransparentFX
