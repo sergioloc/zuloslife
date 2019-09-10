@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    #region Variables
     [Header("Characters")]
     public GameObject kero;
     public GameObject panda;
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour
     [Header("Camera")]
     public CinemachineVirtualCamera virtualCamera;
     private CinemachineBasicMultiChannelPerlin virtualCameraNoise;
+    private CinemachineComposer virtualComposer;
     public float shakeDuration = 0.3f;
     public float shakeAmplitude = 1.2f;
     public float shakeFrequency = 2.0f;
@@ -50,17 +52,12 @@ public class PlayerController : MonoBehaviour
     public GameObject bloodEffect1;
     public GameObject bloodEffect2;
 
-    public Transform spawnPoint;
-    private bool bloodShowed = false;
-
-
-<<<<<<< Updated upstream
-
-    [Space]
-    public GameObject flashCollider, megaCombo;
-    public GameObject weapon, projectile;
+    [Header("Attack")]
+    public GameObject flashCollider;
+    public GameObject megaCombo;
+    public GameObject projectile;
     public Transform shotPoint;
-=======
+
     [Header("Spawn Points")]
     private Transform spawnPoint;
     public Transform spawnPoint1;
@@ -77,29 +74,23 @@ public class PlayerController : MonoBehaviour
     public Slider healthBar;
     public int damageFromEnemy = 10;
     public GameObject deathCollider;
->>>>>>> Stashed changes
 
+    private bool bloodShowed = false;
     private Rigidbody2D rb2d;
     private Animator characterAnimation, cameraAnimation;
     private GameObject impactFace;
-    public GameObject pandaImpactFace, keroImpactFace, cinamonImpactFace, kutterImpactFace, triskyImpactFace;
-
     private bool shootActive = true;
     private int health;
     private float sensitivity = 0.1f;
-    public Slider healthBar;
     private bool waitShake = true;
+    private bool collisionWallRight = false, collisionWallLeft = false;
 
-    private bool canFade;
-    private Color alphaColor;
-
-
+    #endregion
 
 
-
-    // Start is called before the first frame update
     void Start()
     {
+        health = 100;
         extraJumps = extraJumpsValue;
         rb2d = GetComponent<Rigidbody2D>();
         scale = transform.localScale.x;
@@ -109,17 +100,11 @@ public class PlayerController : MonoBehaviour
         //triskyImpactFace = GameObject.Find("Player/Trisky/TriskyBody/bone_pants/bone_chest/bone_head/Trisky_Face_Impact");
         characterAnimation = panda.GetComponent<Animator>();
         impactFace = pandaImpactFace;
-        health = 100;
-
         virtualCameraNoise = virtualCamera.GetCinemachineComponent<Cinemachine.CinemachineBasicMultiChannelPerlin>();
-<<<<<<< Updated upstream
-=======
         virtualComposer = virtualCamera.GetCinemachineComponent<CinemachineComposer>();
         spawnPoint = spawnPoint1;
->>>>>>> Stashed changes
     }
 
-    // Update is called once per frame
     void Update()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
@@ -135,12 +120,23 @@ public class PlayerController : MonoBehaviour
 
         ShakeCamera();
 
-        if (confuseParticle.isPlaying)
+        //Move
+        if (collisionWallRight)
+            Movement(false, true);
+        else if (collisionWallLeft)
+            Movement(true, false);
+        else
+            Movement(true, true);
+
+
+        //Jump
+        if (isGrounded)
         {
-<<<<<<< Updated upstream
-            //Confuse Movement
-            if (joystick.Horizontal >= sensitivity)
-=======
+            extraJumps = extraJumpsValue;
+            characterAnimation.SetBool("isJumping", false);
+        }
+        else
+        {
             characterAnimation.SetBool("isJumping", true);
         }
 
@@ -157,17 +153,32 @@ public class PlayerController : MonoBehaviour
         if (!confuseParticle.isPlaying)
         {
             if ((joystick.Horizontal >= sensitivity || Input.GetKey(KeyCode.RightArrow)) && right)
->>>>>>> Stashed changes
+            {
+                characterAnimation.SetBool("Run", true);
+                rb2d.transform.Translate(Vector2.right * speed * Time.deltaTime);
+                if (!facingRight) Flip();
+            }
+            else if ((joystick.Horizontal <= -sensitivity || Input.GetKey(KeyCode.LeftArrow)) && left)
             {
                 characterAnimation.SetBool("Run", true);
                 rb2d.transform.Translate(Vector2.left * speed * Time.deltaTime);
                 if (facingRight) Flip();
             }
-<<<<<<< Updated upstream
-            else if (joystick.Horizontal <= -sensitivity)
-=======
-            else if ((joystick.Horizontal <= -sensitivity || Input.GetKey(KeyCode.LeftArrow)) && left)
->>>>>>> Stashed changes
+            else if (characterAnimation.GetBool("Run"))
+            {
+                characterAnimation.SetBool("Run", false);
+            }
+        }
+
+        else
+        {
+            if (joystick.Horizontal >= sensitivity && left)
+            {
+                characterAnimation.SetBool("Run", true);
+                rb2d.transform.Translate(Vector2.left * speed * Time.deltaTime);
+                if (facingRight) Flip();
+            }
+            else if (joystick.Horizontal <= -sensitivity && right)
             {
                 characterAnimation.SetBool("Run", true);
                 rb2d.transform.Translate(Vector2.right * speed * Time.deltaTime);
@@ -177,29 +188,6 @@ public class PlayerController : MonoBehaviour
             {
                 characterAnimation.SetBool("Run", false);
             }
-        }
-        else
-        {
-            //Movement
-            if (joystick.Horizontal >= sensitivity)
-            {
-                characterAnimation.SetBool("Run", true);
-                rb2d.transform.Translate(Vector2.right * speed * Time.deltaTime);
-                if (!facingRight) Flip();
-            }
-            else if (joystick.Horizontal <= -sensitivity)
-            {
-                characterAnimation.SetBool("Run", true);
-                rb2d.transform.Translate(Vector2.left * speed * Time.deltaTime);
-                if (facingRight) Flip();
-            }
-            else if(characterAnimation.GetBool("Run"))
-            {
-                characterAnimation.SetBool("Run", false);
-            }
-<<<<<<< Updated upstream
-        }   
-=======
         }
 
         //Keyboard jump
@@ -217,28 +205,9 @@ public class PlayerController : MonoBehaviour
         }
 
     }
->>>>>>> Stashed changes
 
-        //Jump
-        if (isGrounded)
-        {
-            extraJumps = extraJumpsValue;
-            characterAnimation.SetBool("isJumping", false);
-        }
-        else
-        {
-            characterAnimation.SetBool("isJumping", true);
-        }
 
-        //Die
-        if(health == 0)
-        {
-            Die();
-        }
 
-        
-
-    }
 
     public void Jump()
     {
@@ -259,35 +228,27 @@ public class PlayerController : MonoBehaviour
     {
         characterAnimation.SetBool("Action", true);
 
-        if(currentCharacter == "trisky")
+        if(currentCharacter == "trisky") //Restore health
         {
             health = health + 30;
             healthParticle.Play();
-            StartCoroutine(WaitForStopHealth());
-        }
-        
-        if (currentCharacter == "cinamon" && isGrounded)
+            StartCoroutine(Wait("StopHealthParticle", 1.5f));
+        }   
+        else if (currentCharacter == "cinamon" && isGrounded) //Sound explosion
         {
-<<<<<<< Updated upstream
-            rb2d.AddForce(Vector2.up * jump * 40);
-            GetComponent<Rigidbody2D>().gravityScale = 0.4f;
-            StartCoroutine(WaitForGravity());
-=======
             rb2d.AddForce(Vector2.up * jump * 20);
             rb2d.gravityScale = 0.4f;
             StartCoroutine(Wait("RestoreGravity", 2f));
->>>>>>> Stashed changes
             waitShake = true;
             shakeElapsedTime = shakeDuration;
         }
-        else if(currentCharacter == "kutter")
+        else if(currentCharacter == "kutter") //Throw scissor
         {
-           
             if(shootActive)
             {
-                StartCoroutine(throwScissor());
+                StartCoroutine(Wait("ThrowScissor", 0.35f));
                 shootActive = false;
-                StartCoroutine(activeShoot());
+                StartCoroutine(Wait("ActiveShoot", 0.9f));
             }
         }
 
@@ -296,12 +257,6 @@ public class PlayerController : MonoBehaviour
     public void stopAction()
     {
         characterAnimation.SetBool("Action", false);
-
-        if (currentCharacter == "kero")
-        {
-            weapon.SetActive(false);
-        }
-
     }
     #endregion
 
@@ -311,23 +266,10 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("WeaponEnemy") && !bloodShowed)
         {
-<<<<<<< Updated upstream
-            bloodParticle.Play();
-            impactFace.SetActive(true);
-            health = health - 50;
-            push();
-<<<<<<< Updated upstream
-        }
-
-        
-=======
-        }   
-=======
             TakeDamage(damageFromEnemy);
             Push(750, 900);
         }
-
-        if (collision.gameObject.CompareTag("BossScreen"))
+        else if (collision.gameObject.CompareTag("BossScreen"))
         {
             virtualCamera.m_Lens.OrthographicSize = 10;
             spawnPoint = spawnPoint2;
@@ -346,15 +288,13 @@ public class PlayerController : MonoBehaviour
         {
             spawnPoint = spawnPoint2;
         }
->>>>>>> Stashed changes
->>>>>>> Stashed changes
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("WeaponEnemy"))
         {
-            StartCoroutine(Wait(3));
+            StartCoroutine(Wait("ImpactFaceFalse", 3f));
         }
     }
 
@@ -366,63 +306,26 @@ public class PlayerController : MonoBehaviour
         {
             confuseParticle.Play();
         }
+        else if (collision.gameObject.CompareTag("WallRight"))
+        {
+            collisionWallRight = true;
+        }
+        else if (collision.gameObject.CompareTag("WallLeft"))
+        {
+            collisionWallLeft = true;
+        }
     }
 
-    #endregion
-
-    #region Waits
-
-    IEnumerator Wait(int sec)
+    private void OnCollisionExit2D(Collision2D collision)
     {
-        yield return new WaitForSeconds(sec);
-        impactFace.SetActive(false);
-    }
-
-    IEnumerator WaitForShake(float sec)
-    {
-        yield return new WaitForSeconds(sec);
-        virtualCameraNoise.m_AmplitudeGain = shakeAmplitude;
-        virtualCameraNoise.m_FrequencyGain = shakeFrequency;
-    }
-
-    IEnumerator WaitForStopHealth()
-    {
-        yield return new WaitForSeconds(1.5f);
-        healthParticle.Stop();
-    }
-
-    IEnumerator WaitForGravity()
-    {
-        yield return new WaitForSeconds(2);
-        GetComponent<Rigidbody2D>().gravityScale = 3f;
-    }
-
-    IEnumerator WaitForRespawn()
-    {
-        yield return new WaitForSeconds(2);
-        gameObject.GetComponent<Transform>().position = spawnPoint.position;
-        spawnParticle.Play();
-        StartCoroutine(WaitForRespawn2());
-    }
-
-    IEnumerator WaitForRespawn2()
-    {
-        yield return new WaitForSeconds(2);
-        characters.SetActive(true);
-        health = 100;
-        bloodShowed = false;
-    }
-
-    IEnumerator throwScissor()
-    {
-        yield return new WaitForSeconds(0.35f);
-        Instantiate(projectile, shotPoint.position, shotPoint.rotation);
-    }
-
-    IEnumerator activeShoot()
-    {
-        yield return new WaitForSeconds(0.9f);
-        shootActive = true;
+        if (collision.gameObject.CompareTag("WallRight"))
+        {
+            collisionWallRight = false;
+        }
+        else if (collision.gameObject.CompareTag("WallLeft"))
+        {
+            collisionWallLeft = false;
+        }
     }
 
     #endregion
@@ -468,7 +371,7 @@ public class PlayerController : MonoBehaviour
             if (shakeElapsedTime > 0)
             {
                 if (waitShake)
-                    StartCoroutine(WaitForShake(0.7f));
+                    StartCoroutine(Wait("ShakeScreen", 0.7f));
                 else
                 {
                     virtualCameraNoise.m_AmplitudeGain = shakeAmplitude;
@@ -486,8 +389,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-<<<<<<< Updated upstream
-=======
     IEnumerator Wait(string type, float sec)
     {
         yield return new WaitForSeconds(sec);
@@ -534,7 +435,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
->>>>>>> Stashed changes
     private void Die()
     {
         if (!bloodShowed)
@@ -554,7 +454,7 @@ public class PlayerController : MonoBehaviour
                 Instantiate(bloodEffect2, transform.position, Quaternion.identity);
             }
             bloodShowed = true;
-            StartCoroutine(WaitForRespawn());
+            StartCoroutine(Wait("MoveToSpawnPoint", 2f));
         } 
     }
     #endregion
