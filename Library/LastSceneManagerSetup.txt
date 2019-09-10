@@ -1,5 +1,0 @@
-sceneSetups:
-- path: Assets/Scenes/Prision.unity
-  isLoaded: 1
-  isActive: 1
-  isSubScene: 0
