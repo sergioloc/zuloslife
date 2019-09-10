@@ -12,6 +12,19 @@ TagManager:
   - Enemy
   - Fox
   - Ignore
+<<<<<<< Updated upstream
+=======
+  - BossScreen
+<<<<<<< Updated upstream
+=======
+  - WallRight
+  - WallLeft
+  - OgreFist
+  - OgreQuake
+  - PlayerDeath
+  - SpawnPoint2
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
@@ -25,8 +38,13 @@ TagManager:
   - Ground
   - Ghost
   - JumpPad
+<<<<<<< Updated upstream
   - 
   - 
+=======
+  - Wall
+  - Guard
+>>>>>>> Stashed changes
   - 
   - 
   - 

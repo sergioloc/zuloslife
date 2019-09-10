@@ -13,8 +13,6 @@ public class GuardController : MonoBehaviour
     public ParticleSystem bloodParticle;
     public int health = 100;
 
-
-
     //private bool isAlive = true;
 
 
@@ -53,7 +51,7 @@ public class GuardController : MonoBehaviour
                 lookRight = false;
                 limit = -limit;
             }
-            if (distance < 5 && !freeze)
+            if (distance < 7 && !freeze)
             {
                 guardAnimation.SetBool("Run", true);
                 transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x - limit, transform.position.y, transform.position.z), speed * Time.deltaTime);
@@ -74,7 +72,7 @@ public class GuardController : MonoBehaviour
                 guardAnimation.SetBool("Action", false);
             }
 
-            if (distance > 5)
+            if (distance > 7)
             {
                 guardAnimation.SetBool("Run", false);
 
@@ -104,12 +102,13 @@ public class GuardController : MonoBehaviour
             TakeDamage(20);
             push();
         }
-        if (col.gameObject.CompareTag("Explosion"))
+        if (col.gameObject.tag == "Explosion")
         {
             guardAnimation.SetBool("Explosion", true);
             StartCoroutine(finishExplosion());
         }
     }
+
 
     private void push()
     {

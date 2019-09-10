@@ -54,11 +54,30 @@ public class PlayerController : MonoBehaviour
     private bool bloodShowed = false;
 
 
+<<<<<<< Updated upstream
 
     [Space]
     public GameObject flashCollider, megaCombo;
     public GameObject weapon, projectile;
     public Transform shotPoint;
+=======
+    [Header("Spawn Points")]
+    private Transform spawnPoint;
+    public Transform spawnPoint1;
+    public Transform spawnPoint2;
+
+    [Header("Impact Faces")]
+    public GameObject pandaImpactFace;
+    public GameObject keroImpactFace;
+    public GameObject cinamonImpactFace;
+    public GameObject kutterImpactFace;
+    public GameObject triskyImpactFace;
+
+    [Space]
+    public Slider healthBar;
+    public int damageFromEnemy = 10;
+    public GameObject deathCollider;
+>>>>>>> Stashed changes
 
     private Rigidbody2D rb2d;
     private Animator characterAnimation, cameraAnimation;
@@ -88,11 +107,16 @@ public class PlayerController : MonoBehaviour
         //cinamonImpactFace = GameObject.Find("Player/Cinamon/CinamonBody/bone_pants/bone_chest/bone_head/Cinamon_Face_Impact");
         //kutterImpactFace = GameObject.Find("Player/Kutter/KutterBody/bone_pants/bone_chest/bone_head/Kutter_Face_Impact");
         //triskyImpactFace = GameObject.Find("Player/Trisky/TriskyBody/bone_pants/bone_chest/bone_head/Trisky_Face_Impact");
-        characterAnimation = cinamon.GetComponent<Animator>();
+        characterAnimation = panda.GetComponent<Animator>();
         impactFace = pandaImpactFace;
         health = 100;
 
         virtualCameraNoise = virtualCamera.GetCinemachineComponent<Cinemachine.CinemachineBasicMultiChannelPerlin>();
+<<<<<<< Updated upstream
+=======
+        virtualComposer = virtualCamera.GetCinemachineComponent<CinemachineComposer>();
+        spawnPoint = spawnPoint1;
+>>>>>>> Stashed changes
     }
 
     // Update is called once per frame
@@ -113,14 +137,37 @@ public class PlayerController : MonoBehaviour
 
         if (confuseParticle.isPlaying)
         {
+<<<<<<< Updated upstream
             //Confuse Movement
             if (joystick.Horizontal >= sensitivity)
+=======
+            characterAnimation.SetBool("isJumping", true);
+        }
+
+        //Die
+        if (health == 0)
+        {
+            Die();
+        }
+
+    }
+
+    private void Movement(bool right, bool left)
+    {
+        if (!confuseParticle.isPlaying)
+        {
+            if ((joystick.Horizontal >= sensitivity || Input.GetKey(KeyCode.RightArrow)) && right)
+>>>>>>> Stashed changes
             {
                 characterAnimation.SetBool("Run", true);
                 rb2d.transform.Translate(Vector2.left * speed * Time.deltaTime);
                 if (facingRight) Flip();
             }
+<<<<<<< Updated upstream
             else if (joystick.Horizontal <= -sensitivity)
+=======
+            else if ((joystick.Horizontal <= -sensitivity || Input.GetKey(KeyCode.LeftArrow)) && left)
+>>>>>>> Stashed changes
             {
                 characterAnimation.SetBool("Run", true);
                 rb2d.transform.Translate(Vector2.right * speed * Time.deltaTime);
@@ -150,7 +197,27 @@ public class PlayerController : MonoBehaviour
             {
                 characterAnimation.SetBool("Run", false);
             }
+<<<<<<< Updated upstream
         }   
+=======
+        }
+
+        //Keyboard jump
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Jump();
+        }
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            startAction();
+        }
+        if (Input.GetKeyUp(KeyCode.V))
+        {
+            stopAction();
+        }
+
+    }
+>>>>>>> Stashed changes
 
         //Jump
         if (isGrounded)
@@ -183,7 +250,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (extraJumps == 0 && isGrounded)
         {
-            rb2d.AddForce(Vector2.up * jump);
+            rb2d.AddForce(Vector2.up * jump * 100);
         }
     }
 
@@ -201,9 +268,15 @@ public class PlayerController : MonoBehaviour
         
         if (currentCharacter == "cinamon" && isGrounded)
         {
+<<<<<<< Updated upstream
             rb2d.AddForce(Vector2.up * jump * 40);
             GetComponent<Rigidbody2D>().gravityScale = 0.4f;
             StartCoroutine(WaitForGravity());
+=======
+            rb2d.AddForce(Vector2.up * jump * 20);
+            rb2d.gravityScale = 0.4f;
+            StartCoroutine(Wait("RestoreGravity", 2f));
+>>>>>>> Stashed changes
             waitShake = true;
             shakeElapsedTime = shakeDuration;
         }
@@ -238,13 +311,43 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("WeaponEnemy") && !bloodShowed)
         {
+<<<<<<< Updated upstream
             bloodParticle.Play();
             impactFace.SetActive(true);
             health = health - 50;
             push();
+<<<<<<< Updated upstream
         }
 
         
+=======
+        }   
+=======
+            TakeDamage(damageFromEnemy);
+            Push(750, 900);
+        }
+
+        if (collision.gameObject.CompareTag("BossScreen"))
+        {
+            virtualCamera.m_Lens.OrthographicSize = 10;
+            spawnPoint = spawnPoint2;
+        }
+        else if (collision.gameObject.tag == "OgreFist")
+        {
+            TakeDamage(10);
+            Push(6000, 2000);
+        }
+        else if (collision.gameObject.tag == "OgreQuake")
+        {
+            TakeDamage(20);
+            Push(750, 1300);
+        }
+        else if (collision.gameObject.tag == "SpawnPoint2")
+        {
+            spawnPoint = spawnPoint2;
+        }
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -257,6 +360,8 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log(collision.gameObject.tag);
+
         if (collision.gameObject.CompareTag("Fox"))
         {
             confuseParticle.Play();
@@ -324,12 +429,19 @@ public class PlayerController : MonoBehaviour
 
     #region Other functions
 
-    private void push()
+    private void TakeDamage(int damage)
+    {
+        bloodParticle.Play();
+        impactFace.SetActive(true);
+        health = health - damage;
+    }
+
+    private void Push(int strong, int high)
     {
         if(facingRight)
-            rb2d.AddForce(new Vector3(-750, 900));
+            rb2d.AddForce(new Vector3(-strong, high));
         else
-            rb2d.AddForce(new Vector3(-750, 900));
+            rb2d.AddForce(new Vector3(strong, high));
     }
 
     private void Flip()
@@ -374,14 +486,64 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+<<<<<<< Updated upstream
+=======
+    IEnumerator Wait(string type, float sec)
+    {
+        yield return new WaitForSeconds(sec);
+        switch (type)
+        {
+            case "ImpactFaceFalse":
+                impactFace.SetActive(false);
+                break;
+
+            case "ShakeScreen":
+                virtualCameraNoise.m_AmplitudeGain = shakeAmplitude;
+                virtualCameraNoise.m_FrequencyGain = shakeFrequency;
+                break;
+
+            case "StopHealthParticle":
+                healthParticle.Stop();
+                break;
+
+            case "RestoreGravity":
+                rb2d.gravityScale = 3f;
+                break;
+
+            case "MoveToSpawnPoint":
+                deathCollider.SetActive(false);
+                gameObject.GetComponent<Transform>().position = spawnPoint.position;
+                spawnParticle.Play();
+                StartCoroutine(Wait("Respawn", 2f));
+                break;
+
+            case "Respawn":
+                characters.SetActive(true);
+                //gameObject.GetComponent<CapsuleCollider2D>().tag = "Player";
+                health = 100;
+                bloodShowed = false;
+                break;
+
+            case "ThrowScissor":
+                Instantiate(projectile, shotPoint.position, shotPoint.rotation);
+                break;
+
+            case "ActiveShoot":
+                shootActive = true;
+                break;
+        }
+    }
+
+>>>>>>> Stashed changes
     private void Die()
     {
         if (!bloodShowed)
         {
+            deathCollider.SetActive(true);
             impactFace.SetActive(false);
             characters.SetActive(false);
             Instantiate(deathEffect, transform.position, Quaternion.identity);
-            gameObject.GetComponent<CapsuleCollider2D>().tag = "Ignore";
+            //gameObject.GetComponent<CapsuleCollider2D>().tag = "Ignore";
 
             if (Random.Range(1, 2) == 1)
             {
