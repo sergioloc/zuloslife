@@ -51,7 +51,7 @@ public class GuardController : MonoBehaviour
                 lookRight = false;
                 limit = -limit;
             }
-            if (distance < 7 && !freeze)
+            if (distance < 9 && !freeze)
             {
                 guardAnimation.SetBool("Run", true);
                 transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x - limit, transform.position.y, transform.position.z), speed * Time.deltaTime);
@@ -72,7 +72,7 @@ public class GuardController : MonoBehaviour
                 guardAnimation.SetBool("Action", false);
             }
 
-            if (distance > 7)
+            if (distance > 9)
             {
                 guardAnimation.SetBool("Run", false);
 
@@ -107,8 +107,20 @@ public class GuardController : MonoBehaviour
             guardAnimation.SetBool("Explosion", true);
             StartCoroutine(finishExplosion());
         }
+        if (col.gameObject.tag == "Enemy")
+        {
+            freeze = true;
+            guardAnimation.SetBool("Run", false);
+        }
     }
 
+    private void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Enemy")
+        {
+            freeze = false;
+        }
+    }
 
     private void push()
     {

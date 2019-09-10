@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5472840439216426443}
   - component: {fileID: 7571231334647452015}
   - component: {fileID: 3832346458928690359}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: BloodParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4762,7 +4762,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3067207830891115686}
   - component: {fileID: 3139488030570146589}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Weapon
   m_TagString: WeaponEnemy
   m_Icon: {fileID: 0}
@@ -4890,7 +4890,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 4681482526955847018}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: b8838da8ba7841241a904cd171aba8be, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -4907,7 +4907,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4681482527069079383}
   - component: {fileID: 4681482527069079382}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Guard_Face_Flash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4986,7 +4986,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4681482527215627179}
   - component: {fileID: 4681482527215627178}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Guard_Face_Dead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5065,7 +5065,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4681482527318465234}
   - component: {fileID: 4681482527318465233}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Guard_Shoulder_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5146,7 +5146,7 @@ GameObject:
   - component: {fileID: 4681482527448096688}
   - component: {fileID: 4681482527448096703}
   - component: {fileID: 4681482527448096702}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Guard_Body_Down
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -5241,7 +5241,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4681482527657838206}
   - component: {fileID: 4681482527657838205}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Guard_Shoulder_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5323,7 +5323,7 @@ GameObject:
   - component: {fileID: 4681482527946413910}
   - component: {fileID: 4681482527946413909}
   - component: {fileID: 4681482527946413908}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Guard
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -5421,7 +5421,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4681482528175000240}
   - component: {fileID: 4681482528175000255}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Guard_Arm_R
   m_TagString: WeaponEnemy
   m_Icon: {fileID: 0}
@@ -5501,7 +5501,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4681482528355143586}
   - component: {fileID: 4681482528355143585}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Guard_Arm_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5580,9 +5580,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4681482528494369755}
   - component: {fileID: 4681482528494369754}
-  m_Layer: 13
+  - component: {fileID: 4228400805422483313}
+  m_Layer: 0
   m_Name: Guard_Body
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5652,6 +5653,32 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &4228400805422483313
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4681482528494369756}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 8.61, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3.7602293, y: 3.59}
+    newSize: {x: 3.76, y: 3.59}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 8.22, y: 3.59}
+  m_EdgeRadius: 0
 --- !u!1 &4681482528825819483
 GameObject:
   m_ObjectHideFlags: 0
@@ -5662,7 +5689,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4681482528825819482}
   - component: {fileID: 4681482528825819481}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Guard_Leg_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5741,7 +5768,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4681482528960527540}
   - component: {fileID: 4681482528960527539}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Guard_Leg_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
