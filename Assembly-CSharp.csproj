@@ -70,6 +70,9 @@
     <Compile Include="Assets\Others\Joystick Pack\Scripts\Joysticks\FloatingJoystick.cs" />
     <Compile Include="Assets\Others\Joystick Pack\Scripts\Joysticks\VariableJoystick.cs" />
     <Compile Include="Assets\Scripts\Blood.cs" />
+    <Compile Include="Assets\Scripts\Camera\ParallaxBackground.cs" />
+    <Compile Include="Assets\Scripts\Camera\ParallaxCamera.cs" />
+    <Compile Include="Assets\Scripts\Camera\ParallaxLayer.cs" />
     <Compile Include="Assets\Scripts\Character\FoxController.cs" />
     <Compile Include="Assets\Scripts\Character\GuardController.cs" />
     <Compile Include="Assets\Scripts\Character\OgreController.cs" />
