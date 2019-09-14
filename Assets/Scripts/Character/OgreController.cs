@@ -14,7 +14,8 @@ public class OgreController : MonoBehaviour
     public float shakeFrequency = 2.0f;
     private float shakeElapsedTime = 0f;
 
-    public GameObject target, weapon, initialPosition, evolution;
+    public GameObject target, weapon, initialPosition, evolution, redLights, normalLights;
+    public ParticleSystem smoke;
     public Slider healthBar;
     public int speed = 10;
     public int health = 100;
@@ -22,7 +23,7 @@ public class OgreController : MonoBehaviour
     private Animator ogreAnimation;
     private bool lookRight = false, freeze = false;
     private float limit = 2.3f;
-    private bool loadAttack1 = false, loadAttack2 = false, attacking1 = false, attacking2 = false;
+    private bool loadHammer = false, loadQuake = false, attacking = false;
     private bool idleAnim = false;
 
     private int RESTORE_ATTACK1 = 5;
@@ -40,7 +41,7 @@ public class OgreController : MonoBehaviour
         healthBar.value = health;
         ShakeCamera();
 
-        if (target != null)
+        if (target != null && health > 0)
         {
             float distance = Vector2.Distance(transform.position, target.transform.position);
             float x1 = target.transform.position.x;
@@ -61,33 +62,30 @@ public class OgreController : MonoBehaviour
                 limit = -limit;
             }
 
-            //Debug.Log(distance);
+           Debug.Log(distance);
+
             if (!idleAnim)
             {
-                if (distance > range && distance < 22 && !loadAttack2)
+                if (distance > range && !loadQuake)
                 {
-                    StartCoroutine(Wait(0.8f));
+                    //StartCoroutine(ShakeScreen(0.8f));
                     ogreAnimation.SetBool("Action2", true);
-                    loadAttack2 = true;
-                    attacking2 = true;
-                    StartCoroutine(RestoreAttack2());
-                    StartCoroutine(FinishAttack2());
+                    loadQuake = true;
+                    attacking = true;
+                    StartCoroutine(RestoreQuake());
+                    StartCoroutine(FinishAttacking());
                 }
-
-                if (distance < range && distance > (range - 1) && !loadAttack1)
+                else if (distance < range && distance > 4 && !loadHammer)
                 {
-                    StartCoroutine(Wait(0.7f));
-                    ogreAnimation.SetBool("Run", false);
+                    //StartCoroutine(ShakeScreen(0.7f));
                     ogreAnimation.SetBool("Action", true);
-                    ogreAnimation.SetBool("Action2", false);
-                    ogreAnimation.SetBool("Action3", false);
-                    loadAttack1 = true;
-                    attacking1 = true;
-                    StartCoroutine(RestoreAttack1());
-                    StartCoroutine(FinishAttack1());
+                    loadHammer = true;
+                    attacking = true;
+                    StartCoroutine(RestoreHammer());
+                    StartCoroutine(FinishAttacking());
                 }
 
-                else if (distance >= 3.5 && !freeze && !attacking1 && !attacking2)
+                else if (distance >= 3.5 && !freeze && !attacking)
                 {
                     ogreAnimation.SetBool("Run", true);
                     ogreAnimation.SetBool("Action", false);
@@ -112,9 +110,8 @@ public class OgreController : MonoBehaviour
 
         if (health <= 0)
         {
-            evolution.transform.position = new Vector3(transform.position.x, transform.position.y, 0);
-            evolution.SetActive(true);
-            gameObject.SetActive(false);
+            ogreAnimation.SetBool("Die", true);
+            StartCoroutine(Die());
         }
     }
 
@@ -136,8 +133,15 @@ public class OgreController : MonoBehaviour
         }
         else if (collision.gameObject.tag == "PlayerDeath")
         {
-            idleAnim = true;
-            StartCoroutine(Restore());
+            loadQuake = false;
+            loadHammer = false;
+            attacking = false;
+            /*if (!idleAnim)
+            {
+                idleAnim = true;
+                Debug.Log("no idle");
+                StartCoroutine(Restore());
+            }*/
         }
 
     }
@@ -146,32 +150,27 @@ public class OgreController : MonoBehaviour
     {
         yield return new WaitForSeconds(4);
         idleAnim = false;
+        Debug.Log("Restore");
         gameObject.transform.position = initialPosition.transform.position;
         health = 100;
     }
 
-    IEnumerator RestoreAttack1()
+    IEnumerator RestoreHammer()
     {
         yield return new WaitForSeconds(RESTORE_ATTACK1);
-        loadAttack1 = false;
+        loadHammer = false;
     }
 
-    IEnumerator RestoreAttack2()
+    IEnumerator RestoreQuake()
     {
         yield return new WaitForSeconds(RESTORE_ATTACK1);
-        loadAttack2 = false;
+        loadQuake = false;
     }
 
-    IEnumerator FinishAttack1()
-    {
-        yield return new WaitForSeconds(2);
-        attacking1 = false;
-    }
-
-    IEnumerator FinishAttack2()
+    IEnumerator FinishAttacking()
     {
         yield return new WaitForSeconds(3);
-        attacking2 = false;
+        attacking = false;
     }
 
     private void TakeDamage(int damage)
@@ -186,7 +185,7 @@ public class OgreController : MonoBehaviour
         ogreAnimation.SetBool("Freeze", false);
     }
 
-    IEnumerator Wait(float sec)
+    IEnumerator ShakeScreen(float sec)
     {
         yield return new WaitForSeconds(sec);
         shakeElapsedTime = shakeDuration;
@@ -208,5 +207,29 @@ public class OgreController : MonoBehaviour
                 shakeElapsedTime = 0f;
             }
         }
+    }
+
+    IEnumerator Die()
+    {
+        yield return new WaitForSeconds(3);
+        smoke.transform.position = new Vector3(transform.position.x, smoke.transform.position.y, smoke.transform.position.z);
+        if (!smoke.isPlaying)
+        {
+            smoke.Play();
+            shakeAmplitude = 3;
+            shakeFrequency = 3;
+            shakeElapsedTime = 5;
+        }
+        StartCoroutine(InvokeEvolution());
+    }
+
+    IEnumerator InvokeEvolution()
+    {
+        yield return new WaitForSeconds(5);
+        normalLights.SetActive(false);
+        redLights.SetActive(true);
+        evolution.transform.position = new Vector3(transform.position.x, transform.position.y, -69);
+        evolution.SetActive(true);
+        gameObject.SetActive(false);
     }
 }
