@@ -10,7 +10,7 @@ public class OgreEvController : MonoBehaviour
     public float speed = 10;
     public GameObject lasers, hits, target;
     private Animator ogreEvAnimation;
-    private float limit = 6f;
+    private float limit = 5f;
     public ParticleSystem lava;
 
 
@@ -48,6 +48,11 @@ public class OgreEvController : MonoBehaviour
                 lava.Play();
         }
 
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            ogreEvAnimation.SetTrigger("Fist");
+        }
+
         if (moveLeft)
         {
             MoveLeft();
@@ -77,7 +82,7 @@ public class OgreEvController : MonoBehaviour
                 lookRight = false;
             }
 
-            if (distance > 8)
+            if (distance > 7)
             {
                 transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.transform.position.x - limit, transform.position.y, transform.position.z), speed * Time.deltaTime);
             }
