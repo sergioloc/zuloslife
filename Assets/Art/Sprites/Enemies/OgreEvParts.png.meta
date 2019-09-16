@@ -137,10 +137,10 @@ TextureImporter:
       name: OgreEv_Mouth_1
       rect:
         serializedVersion: 2
-        x: 1088
-        y: 959
-        width: 814
-        height: 609
+        x: 1061
+        y: 941
+        width: 849
+        height: 627
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,10 +158,10 @@ TextureImporter:
       name: OgreEv_Mouth_2
       rect:
         serializedVersion: 2
-        x: 1945
-        y: 956
-        width: 844
-        height: 615
+        x: 1916
+        y: 938
+        width: 873
+        height: 635
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,10 +179,10 @@ TextureImporter:
       name: OgreEv_Hand_1
       rect:
         serializedVersion: 2
-        x: 107
-        y: 146
-        width: 790
-        height: 713
+        x: 22
+        y: 10
+        width: 910
+        height: 1011
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,10 +200,10 @@ TextureImporter:
       name: OgreEv_Hand_2
       rect:
         serializedVersion: 2
-        x: 956
-        y: 87
-        width: 915
-        height: 795
+        x: 937
+        y: 0
+        width: 963
+        height: 937
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -221,10 +221,10 @@ TextureImporter:
       name: OgreEv_Hand_3
       rect:
         serializedVersion: 2
-        x: 1917
-        y: 32
-        width: 949
-        height: 878
+        x: 1903
+        y: 0
+        width: 973
+        height: 936
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
