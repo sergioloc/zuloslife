@@ -19,6 +19,7 @@ TagManager:
   - OgreQuake
   - PlayerDeath
   - SpawnPoint2
+  - Laser
   layers:
   - Default
   - TransparentFX

@@ -40,17 +40,15 @@ public class OgreEvController : MonoBehaviour
             StopLasserAttack();
         }
 
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            if (lava.isPlaying)
-                lava.Stop();
-            else
-                lava.Play();
-        }
-
         if (Input.GetKeyDown(KeyCode.F))
         {
             ogreEvAnimation.SetTrigger("Fist");
+        }
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            ogreEvAnimation.SetTrigger("Mouth");
+            StartCoroutine(ThrowLava());
         }
 
         if (moveLeft)
@@ -148,6 +146,12 @@ public class OgreEvController : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         StartLasserAttack();
+    }
+
+    IEnumerator ThrowLava()
+    {
+        yield return new WaitForSeconds(1.2f);
+        lava.Play();
     }
 
 }

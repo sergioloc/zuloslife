@@ -282,11 +282,24 @@ public class PlayerController : MonoBehaviour
         else if (collision.gameObject.tag == "OgreQuake")
         {
             TakeDamage(20);
-            Push(750, 1300);
+            Push(0, 1300);
         }
         else if (collision.gameObject.tag == "SpawnPoint2")
         {
             spawnPoint = spawnPoint2;
+        }
+        else if (collision.gameObject.tag == "Laser")
+        {
+            TakeDamage(30);
+            Push(0, 1500);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.tag == "OgreQuake")
+        {
+            TakeDamage(1);
         }
     }
 
