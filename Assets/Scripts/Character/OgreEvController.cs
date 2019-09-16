@@ -11,6 +11,7 @@ public class OgreEvController : MonoBehaviour
     public GameObject lasers, hits, target;
     private Animator ogreEvAnimation;
     private float limit = 6f;
+    public ParticleSystem lava;
 
 
     // Start is called before the first frame update
@@ -37,6 +38,14 @@ public class OgreEvController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.L))
         {
             StopLasserAttack();
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (lava.isPlaying)
+                lava.Stop();
+            else
+                lava.Play();
         }
 
         if (moveLeft)
@@ -73,9 +82,10 @@ public class OgreEvController : MonoBehaviour
                 transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.transform.position.x - limit, transform.position.y, transform.position.z), speed * Time.deltaTime);
             }
 
-            Debug.Log(distance);
+            //Debug.Log(distance);
         }
     }
+        
 
     private void StartLasserAttack()
     {
