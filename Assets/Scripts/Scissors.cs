@@ -22,7 +22,7 @@ public class Scissors : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy") || collision.CompareTag("WallRight") || collision.CompareTag("WallLeft"))
+        if (collision.CompareTag("Guard") || collision.CompareTag("WallRight") || collision.CompareTag("WallLeft"))
         {
             DestroyProjectile();
         }

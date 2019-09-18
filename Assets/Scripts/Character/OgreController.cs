@@ -21,7 +21,7 @@ public class OgreController : MonoBehaviour
     public int health = 100;
     public int range = 6;
     private Animator ogreAnimation;
-    private bool lookRight = false, freeze = false;
+    private bool lookRight = false, freeze;
     private float limit = 2.3f;
     private bool loadHammer = false, loadQuake = false, attacking = false;
     private bool idleAnim = false;
@@ -34,6 +34,8 @@ public class OgreController : MonoBehaviour
         ogreAnimation = GetComponent<Animator>();
         if (transform.localScale.x < 0)
             limit = -limit;
+        freeze = true;
+        StartCoroutine(InitAttack());
     }
 
     void Update()
@@ -61,8 +63,6 @@ public class OgreController : MonoBehaviour
                 lookRight = false;
                 limit = -limit;
             }
-
-           Debug.Log(distance);
 
             if (!idleAnim)
             {
@@ -231,5 +231,11 @@ public class OgreController : MonoBehaviour
         evolution.transform.position = new Vector3(transform.position.x, transform.position.y, -69);
         evolution.SetActive(true);
         gameObject.SetActive(false);
+    }
+
+    IEnumerator InitAttack()
+    {
+        yield return new WaitForSeconds(3);
+        freeze = false;
     }
 }

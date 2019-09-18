@@ -120,43 +120,41 @@ public class PlayerController : MonoBehaviour
 
         ShakeCamera();
 
-        //Move
-        if (collisionWallRight)
-            Movement(false, true);
-        else if (collisionWallLeft)
-            Movement(true, false);
-        else
-            Movement(true, true);
+        if (characters.gameObject.activeInHierarchy)
+        {
+            //Move
+            if (collisionWallRight)
+                Movement(false, true);
+            else if (collisionWallLeft)
+                Movement(true, false);
+            else
+                Movement(true, true);
 
 
-        //Jump
-        if (isGrounded)
-        {
-            extraJumps = extraJumpsValue;
-            characterAnimation.SetBool("isJumping", false);
-        }
-        else
-        {
-            characterAnimation.SetBool("isJumping", true);
-        }
+            //Jump
+            if (isGrounded)
+            {
+                extraJumps = extraJumpsValue;
+                characterAnimation.SetBool("isJumping", false);
+            }
+            else
+            {
+                characterAnimation.SetBool("isJumping", true);
+            }
 
-        //Throw scissor
-        if (shootActive && shotPoint.gameObject.activeSelf)
-        {
-            Instantiate(projectile, shotPoint.position, shotPoint.rotation);
-            shootActive = false;
-            StartCoroutine(Wait("ActiveShoot", 0.9f));
-        }
+            //Throw scissor
+            if (shootActive && shotPoint.gameObject.activeSelf)
+            {
+                Instantiate(projectile, shotPoint.position, shotPoint.rotation);
+                shootActive = false;
+                StartCoroutine(Wait("ActiveShoot", 0.9f));
+            }
 
-        //Die
-        if (health <= 0)
-        {
-            Die();
-        }
-
-        if (spawnPoint != spawnPoint2 && spawnPoint2.gameObject.activeSelf)
-        {
-            //spawnPoint = spawnPoint2;
+            //Die
+            if (health <= 0)
+            {
+                Die();
+            }
         }
 
     }
@@ -427,7 +425,7 @@ public class PlayerController : MonoBehaviour
                 deathCollider.SetActive(false);
                 gameObject.GetComponent<Transform>().position = spawnPoint.position;
                 spawnParticle.Play();
-                StartCoroutine(Wait("Respawn", 2f));
+                StartCoroutine(Wait("Respawn", 3f));
                 break;
 
             case "Respawn":

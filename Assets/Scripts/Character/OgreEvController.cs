@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 
 public class OgreEvController : MonoBehaviour
 {
     private Rigidbody2D rb2d;
-    private bool moveLeft, moveRight, followPlayer, lookRight, laserAttack, freeze;
+    private bool moveLeft, moveRight, followPlayer, lookRight, waiting, freeze;
     public float speed = 50;
-    public GameObject lasers, hits, target, level2, jumpPad;
+    public GameObject lasers, hits, target, level2, jumpPad, door, wallRight;
     private Animator ogreEvAnimation;
-    private float limit = 5f;
+    private float limit = 5f, realDistance;
     public ParticleSystem lava;
+    public int health = 100;
+    public Slider healthBar;
 
 
     // Start is called before the first frame update
@@ -23,42 +26,35 @@ public class OgreEvController : MonoBehaviour
         moveRight = false;
         followPlayer = false;
         lookRight = false;
-        laserAttack = false;
-        freeze = false;
-        StartMovement();
+        waiting = false;
+        freeze = true;
+        UpdateLook();
+        StartCoroutine(InitMovement());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
+        healthBar.value = health;
+
+        if (!waiting && !freeze)
         {
-            if (!laserAttack)
+            waiting = true;
+            System.Random rnd = new System.Random();
+            int i = rnd.Next(0, 3);
+            Debug.Log(i);
+            if (i == 0)
             {
-                ogreEvAnimation.SetBool("Eyes", true);
-                StopMovement();
-                StartCoroutine(LoadLaserAttack());
+                LaserAttack();
             }
-        }
-
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            if (laserAttack)
-                StopLasserAttack();
-        }
-        
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            StopMovement();
-            followPlayer = true;
-            ogreEvAnimation.SetTrigger("Fist");
-            StartCoroutine(StopFist());
-        }
-
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            ogreEvAnimation.SetTrigger("Mouth");
-            StartCoroutine(ThrowLava());
+            else if (i == 1)
+            {
+                FistAttack();
+            }
+            else if (i == 2)
+            {
+                LavaAttack();
+            }
         }
 
         if (moveLeft && !freeze)
@@ -73,22 +69,7 @@ public class OgreEvController : MonoBehaviour
         
         if (followPlayer)
         {
-            float distance = Vector2.Distance(transform.position, target.transform.position);
-            float x1 = target.transform.position.x;
-            float x2 = transform.position.x;
-            float realDistance = x1 - x2;
-
-            //Look
-            if (realDistance > 0 && !lookRight)
-            {
-                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-                lookRight = true;
-            }
-            else if (realDistance < 0 && lookRight)
-            {
-                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-                lookRight = false;
-            }
+            UpdateLook();
 
             if (realDistance > 7 || realDistance < -7)
             {
@@ -97,14 +78,33 @@ public class OgreEvController : MonoBehaviour
                 else
                     transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.transform.position.x + limit, transform.position.y, transform.position.z), 30 * Time.deltaTime);
             }
+        }
 
+        if (health <= 0)
+        {
+            Die();
+            OpenLevel2();
+        }
+    }
+
+    private void UpdateLook()
+    {
+        realDistance = target.transform.position.x - transform.position.x;
+        if (realDistance > 0 && !lookRight)
+        {
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+            lookRight = true;
+        }
+        else if (realDistance < 0 && lookRight)
+        {
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+            lookRight = false;
         }
     }
         
 
     private void StartLasserAttack()
     {
-        laserAttack = true;
         lasers.SetActive(true);
         hits.SetActive(true);
         transform.position = new Vector3(transform.position.x, transform.position.y + 5, transform.position.z);
@@ -123,14 +123,7 @@ public class OgreEvController : MonoBehaviour
         moveRight = false;
     }
 
-    private void StopLasserAttack()
-    {
-        laserAttack = false;
-        ogreEvAnimation.SetBool("Eyes", false);
-        lasers.SetActive(false);
-        hits.SetActive(false);
-        transform.position = new Vector3(transform.position.x, transform.position.y - 5, transform.position.z);
-    }
+    
 
     private void MoveLeft()
     {
@@ -161,19 +154,51 @@ public class OgreEvController : MonoBehaviour
             }
         }
         
-
         if (collision.gameObject.tag == "Sparks")
         {
+            health = health - 20;
             freeze = true;
             StartCoroutine(UnFreeze());
         }
 
-        if (collision.gameObject.tag == "Melee")
+        if (collision.gameObject.tag == "Projectile")
         {
-            level2.SetActive(true);
-            jumpPad.SetActive(false);
-            Destroy(gameObject);
+            health = health - 10;
         }
+    }
+
+    
+
+    IEnumerator InitMovement()
+    {
+        yield return new WaitForSeconds(3.5f);
+        StartMovement();
+        freeze = false;
+    }
+
+    //Attacks
+
+    private void LaserAttack()
+    {
+        ogreEvAnimation.SetBool("Eyes", true);
+        StopMovement();
+        StartCoroutine(LoadLaserAttack());
+    }
+
+    private void FistAttack()
+    {
+        StopMovement();
+        followPlayer = true;
+        ogreEvAnimation.SetTrigger("Fist");
+        StartCoroutine(StopFist());
+    }
+
+    private void LavaAttack()
+    {
+        StopMovement();
+        followPlayer = true;
+        ogreEvAnimation.SetTrigger("Mouth");
+        StartCoroutine(ThrowLava());
     }
 
     IEnumerator LoadLaserAttack()
@@ -181,12 +206,14 @@ public class OgreEvController : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         StartMovement();
         StartLasserAttack();
+        StartCoroutine(StopLasserAttack());
     }
 
     IEnumerator ThrowLava()
     {
         yield return new WaitForSeconds(1.2f);
         lava.Play();
+        StartCoroutine(StopFist());
     }
 
     IEnumerator StopFist()
@@ -195,7 +222,28 @@ public class OgreEvController : MonoBehaviour
         if (!freeze)
             StartMovement();
         followPlayer = false;
+        StartCoroutine(Wait());
     }
+
+    IEnumerator StopLasserAttack()
+    {
+        yield return new WaitForSeconds(6f);
+        ogreEvAnimation.SetBool("Eyes", false);
+        lasers.SetActive(false);
+        hits.SetActive(false);
+        transform.position = new Vector3(transform.position.x, transform.position.y - 5, transform.position.z);
+        StartCoroutine(Wait());
+    }
+
+    IEnumerator Wait()
+    {
+        System.Random rnd = new System.Random();
+        int i = rnd.Next(3, 6);
+        Debug.Log("Wait "+i);
+        yield return new WaitForSeconds(i);
+        waiting = false;
+    }
+
 
     IEnumerator UnFreeze()
     {
@@ -204,4 +252,16 @@ public class OgreEvController : MonoBehaviour
         StartCoroutine(StopFist());
     }
 
+    private void Die()
+    {
+        Destroy(gameObject);
+    }
+
+    private void OpenLevel2()
+    {
+        level2.SetActive(true);
+        jumpPad.SetActive(false);
+        door.SetActive(false);
+        wallRight.SetActive(false);
+    }
 }
