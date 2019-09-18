@@ -140,10 +140,23 @@ public class PlayerController : MonoBehaviour
             characterAnimation.SetBool("isJumping", true);
         }
 
+        //Throw scissor
+        if (shootActive && shotPoint.gameObject.activeSelf)
+        {
+            Instantiate(projectile, shotPoint.position, shotPoint.rotation);
+            shootActive = false;
+            StartCoroutine(Wait("ActiveShoot", 0.9f));
+        }
+
         //Die
-        if (health == 0)
+        if (health <= 0)
         {
             Die();
+        }
+
+        if (spawnPoint != spawnPoint2 && spawnPoint2.gameObject.activeSelf)
+        {
+            //spawnPoint = spawnPoint2;
         }
 
     }
@@ -242,16 +255,6 @@ public class PlayerController : MonoBehaviour
             waitShake = true;
             shakeElapsedTime = shakeDuration;
         }
-        else if(currentCharacter == "kutter") //Throw scissor
-        {
-            if(shootActive)
-            {
-                StartCoroutine(Wait("ThrowScissor", 0.35f));
-                shootActive = false;
-                StartCoroutine(Wait("ActiveShoot", 0.9f));
-            }
-        }
-
     }
 
     public void stopAction()
@@ -264,10 +267,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("WeaponEnemy") && !bloodShowed)
+        if (collision.gameObject.CompareTag("MeleeEnemy") && !bloodShowed)
         {
             TakeDamage(damageFromEnemy);
-            Push(750, 900);
+            //Push(750, 900);
         }
         else if (collision.gameObject.CompareTag("BossScreen"))
         {
@@ -277,21 +280,21 @@ public class PlayerController : MonoBehaviour
         else if (collision.gameObject.tag == "OgreFist")
         {
             TakeDamage(10);
-            Push(6000, 2000);
+            //Push(6000, 2000);
         }
         else if (collision.gameObject.tag == "OgreQuake")
         {
             TakeDamage(20);
-            Push(0, 1300);
-        }
-        else if (collision.gameObject.tag == "SpawnPoint2")
-        {
-            spawnPoint = spawnPoint2;
+            //Push(0, 1300);
         }
         else if (collision.gameObject.tag == "Laser")
         {
             TakeDamage(30);
-            Push(0, 1500);
+            //Push(0, 1500);
+        }
+        else if (collision.gameObject.tag == "Respawn")
+        {
+            spawnPoint = collision.gameObject.transform;
         }
     }
 
@@ -300,14 +303,6 @@ public class PlayerController : MonoBehaviour
         if (collision.tag == "OgreQuake")
         {
             TakeDamage(1);
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("WeaponEnemy"))
-        {
-            StartCoroutine(Wait("ImpactFaceFalse", 3f));
         }
     }
 
@@ -347,9 +342,13 @@ public class PlayerController : MonoBehaviour
 
     private void TakeDamage(int damage)
     {
-        bloodParticle.Play();
-        impactFace.SetActive(true);
         health = health - damage;
+        bloodParticle.Play();
+        if (!impactFace.gameObject.activeSelf)
+        {
+            impactFace.SetActive(true);
+            StartCoroutine(Wait("ImpactFaceFalse", 2f));
+        }
     }
 
     private void Push(int strong, int high)

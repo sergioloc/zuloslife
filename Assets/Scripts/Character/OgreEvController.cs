@@ -6,9 +6,9 @@ using System;
 public class OgreEvController : MonoBehaviour
 {
     private Rigidbody2D rb2d;
-    private bool moveLeft, moveRight, followPlayer, lookRight;
-    public float speed = 10;
-    public GameObject lasers, hits, target;
+    private bool moveLeft, moveRight, followPlayer, lookRight, laserAttack, freeze;
+    public float speed = 50;
+    public GameObject lasers, hits, target, level2, jumpPad;
     private Animator ogreEvAnimation;
     private float limit = 5f;
     public ParticleSystem lava;
@@ -21,8 +21,11 @@ public class OgreEvController : MonoBehaviour
         ogreEvAnimation = GetComponent<Animator>();
         moveLeft = false;
         moveRight = false;
-        followPlayer = true;
+        followPlayer = false;
         lookRight = false;
+        laserAttack = false;
+        freeze = false;
+        StartMovement();
     }
 
     // Update is called once per frame
@@ -30,19 +33,26 @@ public class OgreEvController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
-            ogreEvAnimation.SetBool("Eyes", true);
-            followPlayer = false;
-            StartCoroutine(LoadLaserAttack());
+            if (!laserAttack)
+            {
+                ogreEvAnimation.SetBool("Eyes", true);
+                StopMovement();
+                StartCoroutine(LoadLaserAttack());
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.L))
         {
-            StopLasserAttack();
+            if (laserAttack)
+                StopLasserAttack();
         }
-
+        
         if (Input.GetKeyDown(KeyCode.F))
         {
+            StopMovement();
+            followPlayer = true;
             ogreEvAnimation.SetTrigger("Fist");
+            StartCoroutine(StopFist());
         }
 
         if (Input.GetKeyDown(KeyCode.M))
@@ -51,16 +61,16 @@ public class OgreEvController : MonoBehaviour
             StartCoroutine(ThrowLava());
         }
 
-        if (moveLeft)
+        if (moveLeft && !freeze)
         {
             MoveLeft();
         }
 
-        if (moveRight)
+        if (moveRight && !freeze)
         {
             MoveRight();
         }
-
+        
         if (followPlayer)
         {
             float distance = Vector2.Distance(transform.position, target.transform.position);
@@ -80,39 +90,46 @@ public class OgreEvController : MonoBehaviour
                 lookRight = false;
             }
 
-            if (distance > 7)
+            if (realDistance > 7 || realDistance < -7)
             {
-                transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.transform.position.x - limit, transform.position.y, transform.position.z), speed * Time.deltaTime);
+                if (lookRight)
+                    transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.transform.position.x - limit, transform.position.y, transform.position.z), 30 * Time.deltaTime);
+                else
+                    transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.transform.position.x + limit, transform.position.y, transform.position.z), 30 * Time.deltaTime);
             }
 
-            //Debug.Log(distance);
         }
     }
         
 
     private void StartLasserAttack()
     {
-        transform.localScale = new Vector3(Math.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-        moveLeft = true;
-        moveRight = false;
-        transform.position = new Vector3(transform.position.x, transform.position.y + 5, transform.position.z);
+        laserAttack = true;
         lasers.SetActive(true);
         hits.SetActive(true);
+        transform.position = new Vector3(transform.position.x, transform.position.y + 5, transform.position.z);
+    }
+
+    private void StartMovement()
+    {
+        transform.localScale = new Vector3(Math.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        moveLeft = true;
+        moveRight = false; 
+    }
+
+    private void StopMovement()
+    {
+        moveLeft = false;
+        moveRight = false;
     }
 
     private void StopLasserAttack()
     {
-        lookRight = false;
-        //transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-
-        moveLeft = false;
-        moveRight = false;
-        followPlayer = true;
+        laserAttack = false;
         ogreEvAnimation.SetBool("Eyes", false);
         lasers.SetActive(false);
         hits.SetActive(false);
         transform.position = new Vector3(transform.position.x, transform.position.y - 5, transform.position.z);
-        //transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, 0, transform.position.z), 5);
     }
 
     private void MoveLeft()
@@ -127,24 +144,42 @@ public class OgreEvController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "WallLeft")
+        if (!followPlayer)
         {
-            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-            moveLeft = false;
-            moveRight = true;
+            if (collision.gameObject.tag == "WallLeft")
+            {
+                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                moveLeft = false;
+                moveRight = true;
+            }
+
+            if (collision.gameObject.tag == "WallRight")
+            {
+                transform.localScale = new Vector3(Math.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                moveLeft = true;
+                moveRight = false;
+            }
+        }
+        
+
+        if (collision.gameObject.tag == "Sparks")
+        {
+            freeze = true;
+            StartCoroutine(UnFreeze());
         }
 
-        if (collision.gameObject.tag == "WallRight")
+        if (collision.gameObject.tag == "Melee")
         {
-            transform.localScale = new Vector3(Math.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-            moveLeft = true;
-            moveRight = false;
+            level2.SetActive(true);
+            jumpPad.SetActive(false);
+            Destroy(gameObject);
         }
     }
 
     IEnumerator LoadLaserAttack()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1.5f);
+        StartMovement();
         StartLasserAttack();
     }
 
@@ -152,6 +187,21 @@ public class OgreEvController : MonoBehaviour
     {
         yield return new WaitForSeconds(1.2f);
         lava.Play();
+    }
+
+    IEnumerator StopFist()
+    {
+        yield return new WaitForSeconds(2f);
+        if (!freeze)
+            StartMovement();
+        followPlayer = false;
+    }
+
+    IEnumerator UnFreeze()
+    {
+        yield return new WaitForSeconds(2f);
+        freeze = false;
+        StartCoroutine(StopFist());
     }
 
 }

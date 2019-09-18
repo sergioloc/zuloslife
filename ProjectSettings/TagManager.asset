@@ -6,20 +6,21 @@ TagManager:
   tags:
   - Ground
   - Flash
-  - WeaponEnemy
-  - Weapon
+  - Melee
+  - Projectile
+  - MeleeEnemy
   - Explosion
-  - Enemy
+  - Guard
   - Fox
   - Ignore
-  - BossScreen
   - WallRight
   - WallLeft
   - OgreFist
   - OgreQuake
   - PlayerDeath
-  - SpawnPoint2
   - Laser
+  - Sparks
+  - BossScreen
   layers:
   - Default
   - TransparentFX

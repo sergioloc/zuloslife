@@ -78,11 +78,13 @@
     <Compile Include="Assets\Scripts\Character\OgreController.cs" />
     <Compile Include="Assets\Scripts\Character\OgreEvController.cs" />
     <Compile Include="Assets\Scripts\Character\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\ElectricPulse.cs" />
     <Compile Include="Assets\Scripts\EnemyGenerator.cs" />
     <Compile Include="Assets\Scripts\JumpPad.cs" />
     <Compile Include="Assets\Scripts\Laser.cs" />
     <Compile Include="Assets\Scripts\Scissors.cs" />
     <Compile Include="Assets\Scripts\ScreenBox.cs" />
+    <Compile Include="Assets\Scripts\SpawnPoint.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/Projects/Unity/zuloslife/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

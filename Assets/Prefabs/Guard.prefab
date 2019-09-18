@@ -4764,7 +4764,7 @@ GameObject:
   - component: {fileID: 3139488030570146589}
   m_Layer: 0
   m_Name: Weapon
-  m_TagString: WeaponEnemy
+  m_TagString: MeleeEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4812,7 +4812,7 @@ GameObject:
   - component: {fileID: 4681482526955846999}
   m_Layer: 13
   m_Name: Guard_Head
-  m_TagString: Enemy
+  m_TagString: Guard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5148,7 +5148,7 @@ GameObject:
   - component: {fileID: 4681482527448096702}
   m_Layer: 0
   m_Name: Guard_Body_Down
-  m_TagString: Enemy
+  m_TagString: Guard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5325,7 +5325,7 @@ GameObject:
   - component: {fileID: 4681482527946413908}
   m_Layer: 0
   m_Name: Guard
-  m_TagString: Enemy
+  m_TagString: Guard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5423,7 +5423,7 @@ GameObject:
   - component: {fileID: 4681482528175000255}
   m_Layer: 0
   m_Name: Guard_Arm_R
-  m_TagString: WeaponEnemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5583,7 +5583,7 @@ GameObject:
   - component: {fileID: 4228400805422483313}
   m_Layer: 0
   m_Name: Guard_Body
-  m_TagString: Untagged
+  m_TagString: Guard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
