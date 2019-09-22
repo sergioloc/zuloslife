@@ -136,12 +136,6 @@ public class OgreController : MonoBehaviour
             loadQuake = false;
             loadHammer = false;
             attacking = false;
-            /*if (!idleAnim)
-            {
-                idleAnim = true;
-                Debug.Log("no idle");
-                StartCoroutine(Restore());
-            }*/
         }
 
     }

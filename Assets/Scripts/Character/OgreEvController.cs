@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class OgreEvController : MonoBehaviour
 {
@@ -12,9 +13,17 @@ public class OgreEvController : MonoBehaviour
     public GameObject lasers, hits, target, level2, jumpPad, door, wallRight;
     private Animator ogreEvAnimation;
     private float limit = 5f, realDistance;
-    public ParticleSystem lava;
+    public ParticleSystem lava, implosion, death;
     public int health = 100;
     public Slider healthBar;
+
+    [Header("Camera")]
+    public CinemachineVirtualCamera virtualCamera;
+    private CinemachineBasicMultiChannelPerlin virtualCameraNoise;
+    public float shakeDuration = 0.3f;
+    public float shakeAmplitude = 1.2f;
+    public float shakeFrequency = 2.0f;
+    private float shakeElapsedTime = 0f;
 
 
     // Start is called before the first frame update
@@ -42,7 +51,7 @@ public class OgreEvController : MonoBehaviour
             waiting = true;
             System.Random rnd = new System.Random();
             int i = rnd.Next(0, 3);
-            Debug.Log(i);
+            //Debug.Log(i);
             if (i == 0)
             {
                 LaserAttack();
@@ -123,8 +132,6 @@ public class OgreEvController : MonoBehaviour
         moveRight = false;
     }
 
-    
-
     private void MoveLeft()
     {
         rb2d.transform.Translate(Vector2.left * speed * Time.deltaTime);
@@ -166,8 +173,6 @@ public class OgreEvController : MonoBehaviour
             health = health - 10;
         }
     }
-
-    
 
     IEnumerator InitMovement()
     {
@@ -231,15 +236,18 @@ public class OgreEvController : MonoBehaviour
         ogreEvAnimation.SetBool("Eyes", false);
         lasers.SetActive(false);
         hits.SetActive(false);
-        transform.position = new Vector3(transform.position.x, transform.position.y - 5, transform.position.z);
-        StartCoroutine(Wait());
+        if (!freeze)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y - 5, transform.position.z);
+            StartCoroutine(Wait());
+        }
     }
 
     IEnumerator Wait()
     {
         System.Random rnd = new System.Random();
         int i = rnd.Next(3, 6);
-        Debug.Log("Wait "+i);
+        //Debug.Log("Wait "+i);
         yield return new WaitForSeconds(i);
         waiting = false;
     }
@@ -254,8 +262,20 @@ public class OgreEvController : MonoBehaviour
 
     private void Die()
     {
-        Destroy(gameObject);
-    }
+        freeze = true;
+        if (implosion.isStopped)
+        {
+            implosion.transform.position = new Vector3(transform.position.x, transform.position.y, implosion.transform.position.z);
+            implosion.Play();
+            if (death.isStopped)
+            {
+                death.transform.position = new Vector3(transform.position.x, transform.position.y, death.transform.position.z);
+                death.Play();
+            } 
+        }
+        Destroy(gameObject, 2f);
+        
+    } 
 
     private void OpenLevel2()
     {
