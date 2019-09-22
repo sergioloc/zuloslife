@@ -85,6 +85,7 @@
     <Compile Include="Assets\Scripts\Scissors.cs" />
     <Compile Include="Assets\Scripts\ScreenBox.cs" />
     <Compile Include="Assets\Scripts\SpawnPoint.cs" />
+    <Compile Include="Assets\Scripts\Stamina.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/Projects/Unity/zuloslife/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

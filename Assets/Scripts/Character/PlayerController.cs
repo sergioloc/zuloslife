@@ -58,10 +58,11 @@ public class PlayerController : MonoBehaviour
     public GameObject projectile;
     public Transform shotPoint;
 
-    [Header("Spawn Points")]
-    private Transform spawnPoint;
-    public Transform spawnPoint1;
-    public Transform spawnPoint2;
+    [Header("Stamina")]
+    public Image staminaPanda;
+    public Image staminaCinamon;
+    public Image staminaKutter;
+    public Image staminaTrisky;
 
     [Header("Impact Faces")]
     public GameObject pandaImpactFace;
@@ -75,6 +76,7 @@ public class PlayerController : MonoBehaviour
     public int damageFromEnemy = 10;
     public GameObject deathCollider;
 
+    private Transform spawnPoint;
     private bool bloodShowed = false;
     private Rigidbody2D rb2d;
     private Animator characterAnimation, cameraAnimation;
@@ -102,7 +104,6 @@ public class PlayerController : MonoBehaviour
         impactFace = pandaImpactFace;
         virtualCameraNoise = virtualCamera.GetCinemachineComponent<Cinemachine.CinemachineBasicMultiChannelPerlin>();
         virtualComposer = virtualCamera.GetCinemachineComponent<CinemachineComposer>();
-        spawnPoint = spawnPoint1;
     }
 
     void Update()
@@ -237,22 +238,36 @@ public class PlayerController : MonoBehaviour
     #region Action
     public void startAction()
     {
-        characterAnimation.SetBool("Action", true);
+        bool cancelAction = false;
 
-        if(currentCharacter == "trisky") //Restore health
+        if ((staminaPanda.fillAmount < 1 && currentCharacter == "panda") ||
+            (staminaCinamon.fillAmount < 1 && currentCharacter == "cinamon") ||
+            (staminaKutter.fillAmount < 1 && currentCharacter == "kutter") ||
+            (staminaTrisky.fillAmount < 1 && currentCharacter == "trisky"))
         {
-            health = health + 30;
-            healthParticle.Play();
-            StartCoroutine(Wait("StopHealthParticle", 1.5f));
-        }   
-        else if (currentCharacter == "cinamon" && isGrounded) //Sound explosion
-        {
-            rb2d.AddForce(Vector2.up * jump * 20);
-            rb2d.gravityScale = 0.4f;
-            StartCoroutine(Wait("RestoreGravity", 2f));
-            waitShake = true;
-            shakeElapsedTime = shakeDuration;
+            cancelAction = true;
         }
+        
+        if (!cancelAction)
+        {
+            characterAnimation.SetBool("Action", true);
+
+            if (currentCharacter == "trisky") //Restore health
+            {
+                health = health + 30;
+                healthParticle.Play();
+                StartCoroutine(Wait("StopHealthParticle", 1.5f));
+            }
+            else if (currentCharacter == "cinamon" && isGrounded) //Sound explosion
+            {
+                rb2d.AddForce(Vector2.up * jump * 20);
+                rb2d.gravityScale = 0.4f;
+                StartCoroutine(Wait("RestoreGravity", 2f));
+                waitShake = true;
+                shakeElapsedTime = shakeDuration;
+            }
+        }
+        
     }
 
     public void stopAction()
@@ -273,7 +288,6 @@ public class PlayerController : MonoBehaviour
         else if (collision.gameObject.CompareTag("BossScreen"))
         {
             virtualCamera.m_Lens.OrthographicSize = 10;
-            spawnPoint = spawnPoint2;
         }
         else if (collision.gameObject.tag == "OgreFist")
         {
