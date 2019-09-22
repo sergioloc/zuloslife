@@ -156,6 +156,36 @@ public class PlayerController : MonoBehaviour
             {
                 Die();
             }
+
+            //Change Character in Keyboard
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+             {
+
+                if (currentCharacter == "panda")
+                    switchToKero();
+                else if (currentCharacter == "kero")
+                    switchToCinamon();
+                else if (currentCharacter == "cinamon")
+                    switchToKutter();
+                else if (currentCharacter == "kutter")
+                    switchToTrisky();
+                else if (currentCharacter == "trisky")
+                    switchToPanda();
+            }
+            else if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+
+                if (currentCharacter == "panda")
+                    switchToTrisky();
+                else if (currentCharacter == "kero")
+                    switchToPanda();
+                else if (currentCharacter == "cinamon")
+                    switchToKero();
+                else if (currentCharacter == "kutter")
+                    switchToCinamon();
+                else if (currentCharacter == "trisky")
+                    switchToKutter();
+            }
         }
 
     }
@@ -184,13 +214,13 @@ public class PlayerController : MonoBehaviour
 
         else
         {
-            if (joystick.Horizontal >= sensitivity && left)
+            if ((joystick.Horizontal >= sensitivity || Input.GetKey(KeyCode.RightArrow)) && left)
             {
                 characterAnimation.SetBool("Run", true);
                 rb2d.transform.Translate(Vector2.left * speed * Time.deltaTime);
                 if (facingRight) Flip();
             }
-            else if (joystick.Horizontal <= -sensitivity && right)
+            else if ((joystick.Horizontal <= -sensitivity || Input.GetKey(KeyCode.LeftArrow)) && right)
             {
                 characterAnimation.SetBool("Run", true);
                 rb2d.transform.Translate(Vector2.right * speed * Time.deltaTime);
@@ -207,11 +237,11 @@ public class PlayerController : MonoBehaviour
         {
             Jump();
         }
-        if (Input.GetKeyDown(KeyCode.V))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             startAction();
         }
-        if (Input.GetKeyUp(KeyCode.V))
+        if (Input.GetKeyUp(KeyCode.E))
         {
             stopAction();
         }
