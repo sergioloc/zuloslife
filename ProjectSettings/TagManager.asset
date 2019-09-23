@@ -21,6 +21,10 @@ TagManager:
   - Laser
   - Sparks
   - BossScreen
+  - Weapon
+  - Enemy
+  - WeaponEnemy
+  - Water
   layers:
   - Default
   - TransparentFX
@@ -36,7 +40,7 @@ TagManager:
   - JumpPad
   - Wall
   - Guard
-  - 
+  - Liquid
   - 
   - 
   - 

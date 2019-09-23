@@ -71,6 +71,7 @@
     <Compile Include="Assets\Others\Joystick Pack\Scripts\Joysticks\VariableJoystick.cs" />
     <Compile Include="Assets\Scripts\AlarmLights.cs" />
     <Compile Include="Assets\Scripts\Blood.cs" />
+    <Compile Include="Assets\Scripts\BlurController.cs" />
     <Compile Include="Assets\Scripts\Camera\ParallaxBackground.cs" />
     <Compile Include="Assets\Scripts\Camera\ParallaxCamera.cs" />
     <Compile Include="Assets\Scripts\Camera\ParallaxLayer.cs" />

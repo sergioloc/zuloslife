@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
     private int health;
     private float sensitivity = 0.1f;
     private bool waitShake = true;
-    private bool collisionWallRight = false, collisionWallLeft = false;
+    private bool collisionWallRight = false, collisionWallLeft = false, isInWater = false;
 
     #endregion
 
@@ -158,6 +158,7 @@ public class PlayerController : MonoBehaviour
             }
 
             //Change Character in Keyboard
+            /*
             if (Input.GetKeyDown(KeyCode.UpArrow))
              {
 
@@ -174,7 +175,7 @@ public class PlayerController : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-
+                
                 if (currentCharacter == "panda")
                     switchToTrisky();
                 else if (currentCharacter == "kero")
@@ -185,7 +186,9 @@ public class PlayerController : MonoBehaviour
                     switchToCinamon();
                 else if (currentCharacter == "trisky")
                     switchToKutter();
+                    
             }
+            */
         }
 
     }
@@ -232,16 +235,37 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        if (isInWater)
+        {
+            if (joystick.Vertical >= sensitivity)
+            {
+                rb2d.transform.Translate(Vector2.up * speed * 0.5f * Time.deltaTime);
+            }
+            else if (joystick.Vertical <= -sensitivity)
+            {
+                rb2d.transform.Translate(Vector2.down * speed * 0.5f * Time.deltaTime);
+            }
+        }
+        
+
         //Keyboard jump
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
         }
-        if (Input.GetKeyDown(KeyCode.E))
+        else if (Input.GetKey(KeyCode.UpArrow))
+        {
+            rb2d.transform.Translate(Vector2.up * speed * 0.5f * Time.deltaTime);
+        }
+        else if (Input.GetKey(KeyCode.DownArrow))
+        {
+            rb2d.transform.Translate(Vector2.down * speed * 0.5f * Time.deltaTime);
+        }
+        else if (Input.GetKeyDown(KeyCode.E))
         {
             startAction();
         }
-        if (Input.GetKeyUp(KeyCode.E))
+        else if (Input.GetKeyUp(KeyCode.E))
         {
             stopAction();
         }
@@ -253,15 +277,18 @@ public class PlayerController : MonoBehaviour
 
     public void Jump()
     {
-        if (extraJumps > 0)
+        if (!isInWater)
         {
-            characterAnimation.SetTrigger("TakeOff");
-            rb2d.AddForce(Vector2.up * jump * 100);
-            extraJumps--;
-        }
-        else if (extraJumps == 0 && isGrounded)
-        {
-            rb2d.AddForce(Vector2.up * jump * 100);
+            if (extraJumps > 0)
+            {
+                characterAnimation.SetTrigger("TakeOff");
+                rb2d.AddForce(Vector2.up * jump * 100);
+                extraJumps--;
+            }
+            else if (extraJumps == 0 && isGrounded)
+            {
+                rb2d.AddForce(Vector2.up * jump * 100);
+            }
         }
     }
 
@@ -338,6 +365,12 @@ public class PlayerController : MonoBehaviour
         {
             spawnPoint = collision.gameObject.transform;
         }
+        else if (collision.gameObject.tag == "Water")
+        {
+            virtualCamera.m_Lens.OrthographicSize = 10;
+            rb2d.gravityScale = -0.002f;
+            isInWater = true;
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -348,9 +381,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Water")
+        {
+            rb2d.gravityScale = 4;
+            isInWater = false;
+        }
+    }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(collision.gameObject.tag);
 
         if (collision.gameObject.CompareTag("Fox"))
         {
