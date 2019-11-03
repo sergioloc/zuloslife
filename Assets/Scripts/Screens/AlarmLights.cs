@@ -5,7 +5,7 @@ using Cinemachine;
 
 public class AlarmLights : MonoBehaviour
 {
-    public GameObject door2, level1, light1, light2, light3, light4, light5, light6, water, launchers, bubblesParticle;
+    public GameObject door2, light1, light2, light3, light4, light5, light6, water, launchers, bubblesParticle;
     private bool check = false, activated = false;
     private Animator waterAnimator;
     public CinemachineVirtualCamera virtualCamera;
@@ -66,7 +66,6 @@ public class AlarmLights : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player") && !activated)
         {
-            level1.SetActive(false);
             door2.SetActive(true);
             StartCoroutine(StartLevel());
         }

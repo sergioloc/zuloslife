@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CorridorCollision : MonoBehaviour
 {
-    public GameObject contraDoor;
+    public GameObject contraDoor, level1;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +23,7 @@ public class CorridorCollision : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             contraDoor.SetActive(true);
+            level1.SetActive(false);
         }
     }
 }
