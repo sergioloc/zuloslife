@@ -23,7 +23,7 @@ public class OgreEvController : MonoBehaviour
     public float shakeDuration = 0.3f;
     public float shakeAmplitude = 1.2f;
     public float shakeFrequency = 2.0f;
-    private float shakeElapsedTime = 0f;
+    //private float shakeElapsedTime = 0f;
 
 
     // Start is called before the first frame update
