@@ -82,16 +82,19 @@ public class PlayerController : MonoBehaviour
     private Animator characterAnimation, cameraAnimation;
     private GameObject impactFace;
     private bool shootActive = true;
-    private int health;
+    public int health;
     private float sensitivity = 0.1f;
     private bool waitShake = true;
     private bool collisionWallRight = false, collisionWallLeft = false, isInWater = false;
+
+    public static PlayerController instance;
 
     #endregion
 
 
     void Start()
     {
+        instance = this;
         health = 100;
         extraJumps = extraJumpsValue;
         rb2d = GetComponent<Rigidbody2D>();
@@ -365,12 +368,6 @@ public class PlayerController : MonoBehaviour
         {
             spawnPoint = collision.gameObject.transform;
         }
-        else if (collision.gameObject.tag == "Water")
-        {
-            virtualCamera.m_Lens.OrthographicSize = 10;
-            rb2d.gravityScale = -0.002f;
-            isInWater = true;
-        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -378,6 +375,12 @@ public class PlayerController : MonoBehaviour
         if (collision.tag == "OgreQuake")
         {
             TakeDamage(1);
+        }
+        else if (collision.gameObject.tag == "Water")
+        {
+            virtualCamera.m_Lens.OrthographicSize = 10;
+            rb2d.gravityScale = -0.002f;
+            isInWater = true;
         }
     }
 
