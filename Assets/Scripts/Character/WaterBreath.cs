@@ -5,19 +5,21 @@ using UnityEngine.UI;
 
 public class WaterBreath : MonoBehaviour
 {
-    public Slider waterBar;
+    private Slider waterSlider;
+    public GameObject waterBar;
     public int Oxygen = 100;
     private bool checkOxy = true, checkHealth = true;
 
     // Start is called before the first frame update
     void Start()
     {
+        waterSlider = waterBar.GetComponent<Slider>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        waterBar.value = Oxygen;
+        waterSlider.value = Oxygen;
         if (Oxygen <= 0 && checkHealth)
         {
             checkHealth = false;
@@ -29,6 +31,7 @@ public class WaterBreath : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Water"))
         {
+            waterBar.SetActive(true);
             if (checkOxy)
             {
                 checkOxy = false;

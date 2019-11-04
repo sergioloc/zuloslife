@@ -6,6 +6,7 @@ public class ScreenBox : MonoBehaviour
 {
     public GameObject floor;
     public GameObject extra;
+    public bool bossScreen;
 
     // Start is called before the first frame update
     void Start()
@@ -33,9 +34,12 @@ public class ScreenBox : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            floor.SetActive(false);
-            if (extra != null)
-                extra.SetActive(false);
+            if (!bossScreen)
+            {
+                floor.SetActive(false);
+                if (extra != null)
+                    extra.SetActive(false);
+            }      
         }
     }
 }

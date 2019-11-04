@@ -10,12 +10,12 @@ public class OgreEvController : MonoBehaviour
     private Rigidbody2D rb2d;
     private bool moveLeft, moveRight, followPlayer, lookRight, waiting, freeze;
     public float speed = 50;
-    public GameObject lasers, hits, target, level2, jumpPad, door, wallRight;
+    public GameObject lasers, hits, target, level2, jumpPad, door, wallRight, floor6, healthBar;
     private Animator ogreEvAnimation;
     private float limit = 5f, realDistance;
     public ParticleSystem lava, implosion, death;
     public int health = 100;
-    public Slider healthBar;
+    private Slider healthSlider;
 
     [Header("Camera")]
     public CinemachineVirtualCamera virtualCamera;
@@ -29,6 +29,7 @@ public class OgreEvController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        healthSlider = healthBar.GetComponent<Slider>();
         rb2d = GetComponent<Rigidbody2D>();
         ogreEvAnimation = GetComponent<Animator>();
         moveLeft = false;
@@ -44,7 +45,7 @@ public class OgreEvController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        healthBar.value = health;
+        healthSlider.value = health;
 
         if (!waiting && !freeze)
         {
@@ -75,11 +76,11 @@ public class OgreEvController : MonoBehaviour
         {
             MoveRight();
         }
-        
+
         if (followPlayer)
         {
             UpdateLook();
-
+            
             if (realDistance > 7 || realDistance < -7)
             {
                 if (lookRight)
@@ -87,6 +88,7 @@ public class OgreEvController : MonoBehaviour
                 else
                     transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.transform.position.x + limit, transform.position.y, transform.position.z), 30 * Time.deltaTime);
             }
+            
         }
 
         if (health <= 0)
@@ -172,6 +174,13 @@ public class OgreEvController : MonoBehaviour
         {
             health = health - 10;
         }
+
+        if (collision.gameObject.tag == "PlayerDeath")
+        {
+            health = 1;
+            
+
+        }
     }
 
     IEnumerator InitMovement()
@@ -247,7 +256,6 @@ public class OgreEvController : MonoBehaviour
     {
         System.Random rnd = new System.Random();
         int i = rnd.Next(3, 6);
-        //Debug.Log("Wait "+i);
         yield return new WaitForSeconds(i);
         waiting = false;
     }
@@ -274,7 +282,9 @@ public class OgreEvController : MonoBehaviour
             } 
         }
         Destroy(gameObject, 2f);
-        
+        healthBar.SetActive(false);
+
+
     } 
 
     private void OpenLevel2()
@@ -283,5 +293,6 @@ public class OgreEvController : MonoBehaviour
         jumpPad.SetActive(false);
         door.SetActive(false);
         wallRight.SetActive(false);
+        floor6.SetActive(true);
     }
 }
