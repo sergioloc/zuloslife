@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     #region Variables
+
     [Header("Characters")]
     public GameObject kero;
     public GameObject panda;
@@ -17,23 +18,14 @@ public class PlayerController : MonoBehaviour
     public string currentCharacter;
     public GameObject characters;
 
-    [Header("Camera")]
-    public CinemachineVirtualCamera virtualCamera;
-    private CinemachineBasicMultiChannelPerlin virtualCameraNoise;
-    private CinemachineComposer virtualComposer;
-    public float shakeDuration = 0.3f;
-    public float shakeAmplitude = 1.2f;
-    public float shakeFrequency = 2.0f;
-    private float shakeElapsedTime = 0f;
-
-    [Header("Move Controller")]
+    [Header("Movement")]
     public Joystick joystick;
     public int speed = 0;
-    private bool facingRight = true;
+    public bool facingRight = true;
     private float scale;
 
-    [Header("Jump Controller")]
-    public int jump = 0;
+    [Header("Jump")]
+    public int jumpForce = 0;
     public Transform groundCheck;
     public float checkRadius;
     public LayerMask whatIsGround;
@@ -65,27 +57,28 @@ public class PlayerController : MonoBehaviour
     public Image staminaTrisky;
 
     [Header("Impact Faces")]
+    private GameObject impactFace;
     public GameObject pandaImpactFace;
     public GameObject keroImpactFace;
     public GameObject cinamonImpactFace;
     public GameObject kutterImpactFace;
     public GameObject triskyImpactFace;
 
-    [Space]
+    [Header("Health")]
     public Slider healthBar;
     public int damageFromEnemy = 10;
+    public int initialHealth = 100;
+    public int health;
     public GameObject deathCollider;
 
+    [Header("Camera")]
+    public CinemachineVirtualCamera virtualCamera;
+
     private Transform spawnPoint;
-    private bool bloodShowed = false;
     private Rigidbody2D rb2d;
     private Animator characterAnimation, cameraAnimation;
-    private GameObject impactFace;
-    private bool shootActive = true;
-    public int health;
     private float sensitivity = 0.1f;
-    private bool waitShake = true;
-    private bool collisionWallRight = false, collisionWallLeft = false, isInWater = false;
+    private bool bloodShowed = false, shootActive = true, collisionWallRight = false, collisionWallLeft = false, isInWater = false;
 
     public static PlayerController instance;
 
@@ -95,34 +88,18 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         instance = this;
-        health = 100;
+        health = initialHealth;
         extraJumps = extraJumpsValue;
         rb2d = GetComponent<Rigidbody2D>();
         scale = transform.localScale.x;
-        //keroImpactFace = GameObject.Find("Player/Kero/KeroBody/bone_pants/bone_chest/bone_head/face_impact");
-        //cinamonImpactFace = GameObject.Find("Player/Cinamon/CinamonBody/bone_pants/bone_chest/bone_head/Cinamon_Face_Impact");
-        //kutterImpactFace = GameObject.Find("Player/Kutter/KutterBody/bone_pants/bone_chest/bone_head/Kutter_Face_Impact");
-        //triskyImpactFace = GameObject.Find("Player/Trisky/TriskyBody/bone_pants/bone_chest/bone_head/Trisky_Face_Impact");
         characterAnimation = panda.GetComponent<Animator>();
         impactFace = pandaImpactFace;
-        virtualCameraNoise = virtualCamera.GetCinemachineComponent<Cinemachine.CinemachineBasicMultiChannelPerlin>();
-        virtualComposer = virtualCamera.GetCinemachineComponent<CinemachineComposer>();
     }
 
     void Update()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
         healthBar.value = health;
-
-        //Combo
-        if (megaCombo.activeInHierarchy == true)
-        {
-            waitShake = false;
-            shakeElapsedTime = shakeDuration;
-            Debug.Log("MegaCombo");
-        }
-
-        ShakeCamera();
 
         if (characters.gameObject.activeInHierarchy)
         {
@@ -160,41 +137,21 @@ public class PlayerController : MonoBehaviour
                 Die();
             }
 
-            //Change Character in Keyboard
-            /*
-            if (Input.GetKeyDown(KeyCode.UpArrow))
-             {
+            //Keyboard controllers
+            KeyboardSwitch();
+            KeyboardJump();
+            KeyboardAction();
 
-                if (currentCharacter == "panda")
-                    switchToKero();
-                else if (currentCharacter == "kero")
-                    switchToCinamon();
-                else if (currentCharacter == "cinamon")
-                    switchToKutter();
-                else if (currentCharacter == "kutter")
-                    switchToTrisky();
-                else if (currentCharacter == "trisky")
-                    switchToPanda();
-            }
-            else if (Input.GetKeyDown(KeyCode.DownArrow))
+            //Combo
+            if (megaCombo.activeInHierarchy == true)
             {
-                
-                if (currentCharacter == "panda")
-                    switchToTrisky();
-                else if (currentCharacter == "kero")
-                    switchToPanda();
-                else if (currentCharacter == "cinamon")
-                    switchToKero();
-                else if (currentCharacter == "kutter")
-                    switchToCinamon();
-                else if (currentCharacter == "trisky")
-                    switchToKutter();
-                    
+                CameraController.instance.Shake(0);
             }
-            */
         }
 
     }
+
+    #region Movement
 
     private void Movement(bool right, bool left)
     {
@@ -202,15 +159,11 @@ public class PlayerController : MonoBehaviour
         {
             if ((joystick.Horizontal >= sensitivity || Input.GetKey(KeyCode.RightArrow)) && right)
             {
-                characterAnimation.SetBool("Run", true);
-                rb2d.transform.Translate(Vector2.right * speed * Time.deltaTime);
-                if (!facingRight) Flip();
+                MoveRight();
             }
             else if ((joystick.Horizontal <= -sensitivity || Input.GetKey(KeyCode.LeftArrow)) && left)
             {
-                characterAnimation.SetBool("Run", true);
-                rb2d.transform.Translate(Vector2.left * speed * Time.deltaTime);
-                if (facingRight) Flip();
+                MoveLeft();
             }
             else if (characterAnimation.GetBool("Run"))
             {
@@ -218,19 +171,15 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        else
+        else //If is confuse
         {
             if ((joystick.Horizontal >= sensitivity || Input.GetKey(KeyCode.RightArrow)) && left)
             {
-                characterAnimation.SetBool("Run", true);
-                rb2d.transform.Translate(Vector2.left * speed * Time.deltaTime);
-                if (facingRight) Flip();
+                MoveLeft();
             }
             else if ((joystick.Horizontal <= -sensitivity || Input.GetKey(KeyCode.LeftArrow)) && right)
             {
-                characterAnimation.SetBool("Run", true);
-                rb2d.transform.Translate(Vector2.right * speed * Time.deltaTime);
-                if (!facingRight) Flip();
+                MoveRight();
             }
             else if (characterAnimation.GetBool("Run"))
             {
@@ -240,6 +189,7 @@ public class PlayerController : MonoBehaviour
 
         if (isInWater)
         {
+            //Joystick
             if (joystick.Vertical >= sensitivity)
             {
                 rb2d.transform.Translate(Vector2.up * speed * 0.5f * Time.deltaTime);
@@ -248,35 +198,32 @@ public class PlayerController : MonoBehaviour
             {
                 rb2d.transform.Translate(Vector2.down * speed * 0.5f * Time.deltaTime);
             }
-        }
-        
-
-        //Keyboard jump
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Jump();
-        }
-        else if (Input.GetKey(KeyCode.UpArrow))
-        {
-            rb2d.transform.Translate(Vector2.up * speed * 0.5f * Time.deltaTime);
-        }
-        else if (Input.GetKey(KeyCode.DownArrow))
-        {
-            rb2d.transform.Translate(Vector2.down * speed * 0.5f * Time.deltaTime);
-        }
-        else if (Input.GetKeyDown(KeyCode.E))
-        {
-            startAction();
-        }
-        else if (Input.GetKeyUp(KeyCode.E))
-        {
-            stopAction();
+            //Keyboard
+            else if (Input.GetKey(KeyCode.UpArrow))
+            {
+                rb2d.transform.Translate(Vector2.up * speed * 0.5f * Time.deltaTime);
+            }
+            else if (Input.GetKey(KeyCode.DownArrow))
+            {
+                rb2d.transform.Translate(Vector2.down * speed * 0.5f * Time.deltaTime);
+            }
         }
 
     }
 
+    private void MoveRight()
+    {
+        characterAnimation.SetBool("Run", true);
+        rb2d.transform.Translate(Vector2.right * speed * Time.deltaTime);
+        if (!facingRight) Flip();
+    }
 
-
+    private void MoveLeft()
+    {
+        characterAnimation.SetBool("Run", true);
+        rb2d.transform.Translate(Vector2.left * speed * Time.deltaTime);
+        if (facingRight) Flip();
+    }
 
     public void Jump()
     {
@@ -284,18 +231,20 @@ public class PlayerController : MonoBehaviour
         {
             if (extraJumps > 0)
             {
-                characterAnimation.SetTrigger("TakeOff");
-                rb2d.AddForce(Vector2.up * jump * 100);
+                rb2d.AddForce(Vector2.up * jumpForce * 100);
                 extraJumps--;
             }
             else if (extraJumps == 0 && isGrounded)
             {
-                rb2d.AddForce(Vector2.up * jump * 100);
+                rb2d.AddForce(Vector2.up * jumpForce * 100);
             }
         }
     }
 
+    #endregion
+
     #region Action
+
     public void startAction()
     {
         bool cancelAction = false;
@@ -312,19 +261,20 @@ public class PlayerController : MonoBehaviour
         {
             characterAnimation.SetBool("Action", true);
 
-            if (currentCharacter == "trisky") //Restore health
+            //Restore health
+            if (currentCharacter == "trisky")
             {
                 health = health + 30;
                 healthParticle.Play();
                 StartCoroutine(Wait("StopHealthParticle", 1.5f));
             }
-            else if (currentCharacter == "cinamon" && isGrounded) //Sound explosion
+            //Sound explosion
+            else if (currentCharacter == "cinamon" && isGrounded)
             {
-                rb2d.AddForce(Vector2.up * jump * 20);
+                rb2d.AddForce(Vector2.up * jumpForce * 20);
                 rb2d.gravityScale = 0.4f;
                 StartCoroutine(Wait("RestoreGravity", 2f));
-                waitShake = true;
-                shakeElapsedTime = shakeDuration;
+                CameraController.instance.Shake(0.7f);
             }
         }
         
@@ -343,40 +293,32 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("MeleeEnemy") && !bloodShowed)
         {
             TakeDamage(damageFromEnemy);
-            //Push(750, 900);
-        }
-        else if (collision.gameObject.CompareTag("BossScreen"))
-        {
-            virtualCamera.m_Lens.OrthographicSize = 10;
         }
         else if (collision.gameObject.tag == "OgreFist")
         {
             TakeDamage(10);
-            //Push(6000, 2000);
         }
         else if (collision.gameObject.tag == "OgreQuake")
         {
             TakeDamage(20);
-            //Push(0, 1300);
         }
         else if (collision.gameObject.tag == "Laser")
         {
             TakeDamage(30);
-            //Push(0, 1500);
         }
         else if (collision.gameObject.tag == "Respawn")
         {
             spawnPoint = collision.gameObject.transform;
         }
+        else if (collision.gameObject.CompareTag("BossScreen"))
+        {
+            CameraController.instance.ModifyZoom(10f);
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.tag == "OgreQuake")
-        {
-            TakeDamage(1);
-        }
-        else if (collision.gameObject.tag == "Water")
+        if (collision.gameObject.tag == "Water")
         {
             virtualCamera.m_Lens.OrthographicSize = 10;
             rb2d.gravityScale = -0.002f;
@@ -393,9 +335,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-
         if (collision.gameObject.CompareTag("Fox"))
         {
             confuseParticle.Play();
@@ -437,17 +378,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Push(int strong, int high)
-    {
-        if(facingRight)
-            rb2d.AddForce(new Vector3(-strong, high));
-        else
-            rb2d.AddForce(new Vector3(strong, high));
-    }
-
     private void Flip()
     {
-        // Switch the way the player is labelled as facing.
         if (facingRight)
         {
             transform.localScale = new Vector3(-scale, scale, scale);
@@ -460,33 +392,6 @@ public class PlayerController : MonoBehaviour
         facingRight = !facingRight;
     }
 
-    private void ShakeCamera()
-    {
-        // If the Cinemachine componet is not set, avoid update
-        if (virtualCamera != null && virtualCameraNoise != null)
-        {
-            // If Camera Shake effect is still playing
-            if (shakeElapsedTime > 0)
-            {
-                if (waitShake)
-                    StartCoroutine(Wait("ShakeScreen", 0.7f));
-                else
-                {
-                    virtualCameraNoise.m_AmplitudeGain = shakeAmplitude;
-                    virtualCameraNoise.m_FrequencyGain = shakeFrequency;
-                }
-                // Update Shake Timer
-                shakeElapsedTime -= Time.deltaTime;
-            }
-            else
-            {
-                // If Camera Shake effect is over, reset variables
-                virtualCameraNoise.m_AmplitudeGain = 0f;
-                shakeElapsedTime = 0f;
-            }
-        }
-    }
-
     IEnumerator Wait(string type, float sec)
     {
         yield return new WaitForSeconds(sec);
@@ -494,11 +399,6 @@ public class PlayerController : MonoBehaviour
         {
             case "ImpactFaceFalse":
                 impactFace.SetActive(false);
-                break;
-
-            case "ShakeScreen":
-                virtualCameraNoise.m_AmplitudeGain = shakeAmplitude;
-                virtualCameraNoise.m_FrequencyGain = shakeFrequency;
                 break;
 
             case "StopHealthParticle":
@@ -518,8 +418,7 @@ public class PlayerController : MonoBehaviour
 
             case "Respawn":
                 characters.SetActive(true);
-                //gameObject.GetComponent<CapsuleCollider2D>().tag = "Player";
-                health = 100;
+                health = initialHealth;
                 bloodShowed = false;
                 break;
 
@@ -541,7 +440,6 @@ public class PlayerController : MonoBehaviour
             impactFace.SetActive(false);
             characters.SetActive(false);
             Instantiate(deathEffect, transform.position, Quaternion.identity);
-            //gameObject.GetComponent<CapsuleCollider2D>().tag = "Ignore";
 
             if (Random.Range(1, 2) == 1)
             {
@@ -555,6 +453,56 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(Wait("MoveToSpawnPoint", 2f));
         } 
     }
+    #endregion
+
+    #region Keyboard controllers
+
+    private void KeyboardSwitch()
+    {
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+
+            if (currentCharacter == "panda")
+                switchToKero();
+            else if (currentCharacter == "kero")
+                switchToCinamon();
+            else if (currentCharacter == "cinamon")
+                switchToKutter();
+            else if (currentCharacter == "kutter")
+                switchToTrisky();
+            else if (currentCharacter == "trisky")
+                switchToPanda();
+        }
+        else if (Input.GetKeyDown(KeyCode.C))
+        {
+
+            if (currentCharacter == "panda")
+                switchToTrisky();
+            else if (currentCharacter == "kero")
+                switchToPanda();
+            else if (currentCharacter == "cinamon")
+                switchToKero();
+            else if (currentCharacter == "kutter")
+                switchToCinamon();
+            else if (currentCharacter == "trisky")
+                switchToKutter();
+
+        }
+    }
+
+    private void KeyboardJump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Jump();
+        }
+    }
+
+    private void KeyboardAction()
+    {
+
+    }
+
     #endregion
 
     #region Switch Characters

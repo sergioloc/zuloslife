@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class GuardController : MonoBehaviour
 {
-    public GameObject player, deathEffect, bloodEffect1, bloodEffect2;
-    private float limit = 2.3f;
+    public int health = 100;
     public float speed;
+    public GameObject player, deathEffect, bloodEffect1, bloodEffect2;
+    public ParticleSystem bloodParticle;
+    private Animator guardAnimation;
     private bool lookRight = true;
     private bool freeze = false;
-    private Animator guardAnimation;
-    public ParticleSystem bloodParticle;
-    public int health = 100;
+    private float limit = 2.3f, distance, realDistance;
 
     //private bool isAlive = true;
 
@@ -32,13 +32,10 @@ public class GuardController : MonoBehaviour
     {
         if (player != null)
         {
-            //Move
-            float distance = Vector2.Distance(transform.position, player.transform.position);
-            float x1 = player.transform.position.x;
-            float x2 = transform.position.x;
-            float realDistance = x1 - x2;
+            distance = Vector2.Distance(transform.position, player.transform.position);
+            realDistance = player.transform.position.x - transform.position.x;
 
-            //Position
+            //Look
             if (realDistance > 0 && !lookRight && !freeze)
             {
                 transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
@@ -51,12 +48,13 @@ public class GuardController : MonoBehaviour
                 lookRight = false;
                 limit = -limit;
             }
+
+            //Move
             if (distance < 9 && !freeze)
             {
                 guardAnimation.SetBool("Run", true);
                 transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x - limit, transform.position.y, transform.position.z), speed * Time.deltaTime);
             }
-            //Debug.Log(gameObject.GetComponent<Rigidbody2D>().velocity.x);
             if (distance < 2.45 && distance > 0 && gameObject.GetComponent<Rigidbody2D>().velocity.x < 0)
             {
                 guardAnimation.SetBool("Run", true);
@@ -94,35 +92,28 @@ public class GuardController : MonoBehaviour
         {
             freeze = true;
             guardAnimation.SetBool("Freeze",true);
-            StartCoroutine(finishFreeze());
+            StartCoroutine(FinishFreeze());
         }
-        if (col.gameObject.tag == "Weapon")
+        else if (col.gameObject.tag == "Melee")
         {  
             bloodParticle.Play();
             TakeDamage(20);
-            push();
+            Push();
         }
-        if (col.gameObject.tag == "Explosion")
+        else if (col.gameObject.tag == "Projectile")
+        {
+            bloodParticle.Play();
+            TakeDamage(10);
+            Push();
+        }
+        else if (col.gameObject.tag == "Explosion")
         {
             guardAnimation.SetBool("Explosion", true);
-            StartCoroutine(finishExplosion());
-        }
-        if (col.gameObject.tag == "Enemy")
-        {
-            freeze = true;
-            guardAnimation.SetBool("Run", false);
+            StartCoroutine(FinishExplosion());
         }
     }
 
-    private void OnTriggerExit2D(Collider2D col)
-    {
-        if (col.gameObject.tag == "Enemy")
-        {
-            freeze = false;
-        }
-    }
-
-    private void push()
+    private void Push()
     {
         if (lookRight)
             GetComponent<Rigidbody2D>().AddForce(new Vector3(-1500, 500));
@@ -131,21 +122,20 @@ public class GuardController : MonoBehaviour
     }
 
 
-    IEnumerator finishFreeze()
+    private IEnumerator FinishFreeze()
     {
         yield return new WaitForSeconds(5);
         freeze = false;
         guardAnimation.SetBool("Freeze", false);
     }
 
-    IEnumerator finishExplosion()
+    private IEnumerator FinishExplosion()
     {
         yield return new WaitForSeconds(1);
         guardAnimation.SetBool("Explosion", false);
-
     }
 
-    public void TakeDamage(int damage)
+    private void TakeDamage(int damage)
     {
         health = health - damage;
 

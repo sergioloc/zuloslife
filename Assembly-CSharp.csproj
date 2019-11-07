@@ -64,6 +64,7 @@
      <Compile Include="Assets\Others\Joystick Pack\Scripts\Joysticks\VariableJoystick.cs" />
      <Compile Include="Assets\Scripts\Blood.cs" />
      <Compile Include="Assets\Scripts\BlurController.cs" />
+     <Compile Include="Assets\Scripts\Camera\CameraController.cs" />
      <Compile Include="Assets\Scripts\Camera\ParallaxBackground.cs" />
      <Compile Include="Assets\Scripts\Camera\ParallaxCamera.cs" />
      <Compile Include="Assets\Scripts\Camera\ParallaxLayer.cs" />
@@ -72,6 +73,8 @@
      <Compile Include="Assets\Scripts\Character\OgreController.cs" />
      <Compile Include="Assets\Scripts\Character\OgreEvController.cs" />
      <Compile Include="Assets\Scripts\Character\PlayerController.cs" />
+     <Compile Include="Assets\Scripts\Character\PlayerSwitch.cs" />
+     <Compile Include="Assets\Scripts\Character\PushController.cs" />
      <Compile Include="Assets\Scripts\Character\WaterBreath.cs" />
      <Compile Include="Assets\Scripts\ElectricPulse.cs" />
      <Compile Include="Assets\Scripts\JumpPad.cs" />
@@ -81,11 +84,10 @@
      <Compile Include="Assets\Scripts\Launcher\MissileLaser.cs" />
      <Compile Include="Assets\Scripts\Launcher\RotateLauncher.cs" />
      <Compile Include="Assets\Scripts\Scissors.cs" />
-     <Compile Include="Assets\Scripts\Screens\AlarmLights.cs" />
      <Compile Include="Assets\Scripts\Screens\CorridorCollision.cs" />
-     <Compile Include="Assets\Scripts\Screens\HighLevel.cs" />
+     <Compile Include="Assets\Scripts\Screens\FinishLevel2.cs" />
      <Compile Include="Assets\Scripts\Screens\ScreenBox.cs" />
-     <Compile Include="Assets\Scripts\Screens\SpawnPoint.cs" />
+     <Compile Include="Assets\Scripts\Screens\StartLevel2.cs" />
      <Compile Include="Assets\Scripts\Stamina.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>D:/Projects/Unity/zuloslife/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
