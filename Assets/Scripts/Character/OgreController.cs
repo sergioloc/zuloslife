@@ -6,14 +6,6 @@ using UnityEngine.UI;
 
 public class OgreController : MonoBehaviour
 {
-    [Header("Camera")]
-    public CinemachineVirtualCamera virtualCamera;
-    private CinemachineBasicMultiChannelPerlin virtualCameraNoise;
-    public float shakeDuration = 0.3f;
-    public float shakeAmplitude = 1.2f;
-    public float shakeFrequency = 2.0f;
-    private float shakeElapsedTime = 0f;
-
     public GameObject target, weapon, initialPosition, evolution, redLights, normalLights;
     public ParticleSystem smoke;
     public Slider healthBar;
@@ -30,7 +22,6 @@ public class OgreController : MonoBehaviour
 
     void Start()
     {
-        virtualCameraNoise = virtualCamera.GetCinemachineComponent<Cinemachine.CinemachineBasicMultiChannelPerlin>();
         ogreAnimation = GetComponent<Animator>();
         if (transform.localScale.x < 0)
             limit = -limit;
@@ -41,7 +32,6 @@ public class OgreController : MonoBehaviour
     void Update()
     {
         healthBar.value = health;
-        ShakeCamera();
 
         if (target != null && health > 0)
         {
@@ -68,7 +58,7 @@ public class OgreController : MonoBehaviour
             {
                 if (distance > range && !loadQuake)
                 {
-                    //StartCoroutine(ShakeScreen(0.8f));
+                    //CameraController.instance.Shake(0.8f);
                     ogreAnimation.SetBool("Action2", true);
                     loadQuake = true;
                     attacking = true;
@@ -77,7 +67,7 @@ public class OgreController : MonoBehaviour
                 }
                 else if (distance < range && distance > 4 && !loadHammer)
                 {
-                    //StartCoroutine(ShakeScreen(0.7f));
+                    //CameraController.instance.Shake(0.7f);
                     ogreAnimation.SetBool("Action", true);
                     loadHammer = true;
                     attacking = true;
@@ -179,30 +169,6 @@ public class OgreController : MonoBehaviour
         ogreAnimation.SetBool("Freeze", false);
     }
 
-    IEnumerator ShakeScreen(float sec)
-    {
-        yield return new WaitForSeconds(sec);
-        shakeElapsedTime = shakeDuration;
-    }
-
-    private void ShakeCamera()
-    {
-        if (virtualCamera != null && virtualCameraNoise != null)
-        {
-            if (shakeElapsedTime > 0)
-            {
-                virtualCameraNoise.m_AmplitudeGain = shakeAmplitude;
-                virtualCameraNoise.m_FrequencyGain = shakeFrequency;
-                shakeElapsedTime -= Time.deltaTime;
-            }
-            else
-            {
-                virtualCameraNoise.m_AmplitudeGain = 0f;
-                shakeElapsedTime = 0f;
-            }
-        }
-    }
-
     IEnumerator Die()
     {
         yield return new WaitForSeconds(3);
@@ -210,9 +176,10 @@ public class OgreController : MonoBehaviour
         if (!smoke.isPlaying)
         {
             smoke.Play();
-            shakeAmplitude = 3;
-            shakeFrequency = 3;
-            shakeElapsedTime = 5;
+        }
+        else
+        {
+            CameraController.instance.Shake(0f);
         }
         StartCoroutine(InvokeEvolution());
     }

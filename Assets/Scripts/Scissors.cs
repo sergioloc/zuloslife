@@ -20,9 +20,9 @@ public class Scissors : MonoBehaviour
         transform.Translate(Vector2.right * speed * Time.deltaTime);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.CompareTag("Guard") || collision.CompareTag("WallRight") || collision.CompareTag("WallLeft") || collision.CompareTag("Enemy"))
+        if (collision.gameObject.tag == "Guard"  || collision.gameObject.tag == "WallRight" || collision.gameObject.tag == "WallLeft" || collision.gameObject.tag == "Enemy")
         {
             DestroyProjectile();
         }
@@ -30,7 +30,7 @@ public class Scissors : MonoBehaviour
 
     void DestroyProjectile()
     {
-        //Instantiate(destroyEffect, transform.position, Quaternion.identity);
+        Instantiate(destroyEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }

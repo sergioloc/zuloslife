@@ -17,15 +17,6 @@ public class OgreEvController : MonoBehaviour
     public int health = 100;
     private Slider healthSlider;
 
-    [Header("Camera")]
-    public CinemachineVirtualCamera virtualCamera;
-    private CinemachineBasicMultiChannelPerlin virtualCameraNoise;
-    public float shakeDuration = 0.3f;
-    public float shakeAmplitude = 1.2f;
-    public float shakeFrequency = 2.0f;
-    //private float shakeElapsedTime = 0f;
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -52,7 +43,6 @@ public class OgreEvController : MonoBehaviour
             waiting = true;
             System.Random rnd = new System.Random();
             int i = rnd.Next(0, 3);
-            //Debug.Log(i);
             if (i == 0)
             {
                 LaserAttack();
@@ -101,7 +91,16 @@ public class OgreEvController : MonoBehaviour
     private void UpdateLook()
     {
         realDistance = target.transform.position.x - transform.position.x;
-        if (realDistance > 0 && !lookRight)
+
+        if (realDistance > 0 && lookRight)
+        {
+            transform.localScale = new Vector3(-Math.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        }
+        else if (realDistance < 0 && !lookRight)
+        {
+            transform.localScale = new Vector3(Math.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        }
+        else if (realDistance > 0 && !lookRight)
         {
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
             lookRight = true;
@@ -137,11 +136,13 @@ public class OgreEvController : MonoBehaviour
     private void MoveLeft()
     {
         rb2d.transform.Translate(Vector2.left * speed * Time.deltaTime);
+        lookRight = false;
     }
 
     private void MoveRight()
     {
         rb2d.transform.Translate(Vector2.right * speed * Time.deltaTime);
+        lookRight = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -178,8 +179,6 @@ public class OgreEvController : MonoBehaviour
         if (collision.gameObject.tag == "PlayerDeath")
         {
             health = 1;
-            
-
         }
     }
 

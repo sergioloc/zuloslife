@@ -71,9 +71,6 @@ public class PlayerController : MonoBehaviour
     public int health;
     public GameObject deathCollider;
 
-    [Header("Camera")]
-    public CinemachineVirtualCamera virtualCamera;
-
     private Transform spawnPoint;
     private Rigidbody2D rb2d;
     private Animator characterAnimation, cameraAnimation;
@@ -83,7 +80,6 @@ public class PlayerController : MonoBehaviour
     public static PlayerController instance;
 
     #endregion
-
 
     void Start()
     {
@@ -189,6 +185,7 @@ public class PlayerController : MonoBehaviour
 
         if (isInWater)
         {
+            Debug.Log("In water");
             //Joystick
             if (joystick.Vertical >= sensitivity)
             {
@@ -288,7 +285,7 @@ public class PlayerController : MonoBehaviour
 
     #region Collisions
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("MeleeEnemy") && !bloodShowed)
         {
@@ -304,7 +301,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Laser")
         {
-            TakeDamage(30);
+            TakeDamage(3);
         }
         else if (collision.gameObject.tag == "Respawn")
         {
@@ -316,17 +313,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Water")
         {
-            virtualCamera.m_Lens.OrthographicSize = 10;
+            CameraController.instance.ModifyZoom(10f);
             rb2d.gravityScale = -0.002f;
             isInWater = true;
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Water")
         {
@@ -335,7 +332,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Fox"))
         {
@@ -351,7 +348,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("WallRight"))
         {
@@ -500,7 +497,14 @@ public class PlayerController : MonoBehaviour
 
     private void KeyboardAction()
     {
-
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            startAction();
+        }
+        else if (Input.GetKeyUp(KeyCode.E))
+        {
+            stopAction();
+        }
     }
 
     #endregion

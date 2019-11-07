@@ -86,6 +86,19 @@ public class GuardController : MonoBehaviour
 
     }
 
+    private void Push()
+    {
+        if (lookRight)
+            GetComponent<Rigidbody2D>().AddForce(new Vector3(-1500, 500));
+        else
+            GetComponent<Rigidbody2D>().AddForce(new Vector3(1500, 500));
+    }
+
+    private void FollowPlayer()
+    {
+
+    }
+
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.tag == "Flash")
@@ -100,29 +113,38 @@ public class GuardController : MonoBehaviour
             TakeDamage(20);
             Push();
         }
-        else if (col.gameObject.tag == "Projectile")
-        {
-            bloodParticle.Play();
-            TakeDamage(10);
-            Push();
-        }
         else if (col.gameObject.tag == "Explosion")
         {
             guardAnimation.SetBool("Explosion", true);
             StartCoroutine(FinishExplosion());
         }
+        else if (col.gameObject.tag == "Guard")
+        {
+            freeze = true;
+            guardAnimation.SetBool("Run", false);
+        }
     }
 
-    private void Push()
+    private void OnTriggerExit2D(Collider2D col)
     {
-        if (lookRight)
-            GetComponent<Rigidbody2D>().AddForce(new Vector3(-1500, 500));
-        else
-            GetComponent<Rigidbody2D>().AddForce(new Vector3(1500, 500));
+        if (col.gameObject.tag == "Guard")
+        {
+            freeze = false;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "Projectile")
+        {
+            bloodParticle.Play();
+            TakeDamage(10);
+            Push();
+        }
     }
 
 
-    private IEnumerator FinishFreeze()
+private IEnumerator FinishFreeze()
     {
         yield return new WaitForSeconds(5);
         freeze = false;

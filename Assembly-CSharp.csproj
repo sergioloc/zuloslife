@@ -72,6 +72,7 @@
      <Compile Include="Assets\Scripts\Character\GuardController.cs" />
      <Compile Include="Assets\Scripts\Character\OgreController.cs" />
      <Compile Include="Assets\Scripts\Character\OgreEvController.cs" />
+     <Compile Include="Assets\Scripts\Character\OgrePreController.cs" />
      <Compile Include="Assets\Scripts\Character\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Character\PlayerSwitch.cs" />
      <Compile Include="Assets\Scripts\Character\PushController.cs" />
