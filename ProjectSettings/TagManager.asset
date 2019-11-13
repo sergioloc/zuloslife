@@ -21,10 +21,9 @@ TagManager:
   - Laser
   - Sparks
   - BossScreen
-  - Weapon
   - Enemy
-  - WeaponEnemy
   - Water
+  - Missile
   layers:
   - Default
   - TransparentFX

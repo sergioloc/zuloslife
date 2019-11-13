@@ -25,7 +25,6 @@ public class FireMissile : MonoBehaviour
             laser.SetActive(false);
         }
 
-        Debug.Log(isInArea);
         if (check && isInArea)
         {
             check = false;

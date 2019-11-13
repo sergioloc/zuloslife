@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
     public Slider healthBar;
     public int damageFromEnemy = 10;
     public int initialHealth = 100;
-    public int health;
+    public float health;
     public GameObject deathCollider;
 
     private Transform spawnPoint;
@@ -94,6 +94,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        //Debug.Log(rb2d.gravityScale);
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
         healthBar.value = health;
 
@@ -185,7 +186,6 @@ public class PlayerController : MonoBehaviour
 
         if (isInWater)
         {
-            Debug.Log("In water");
             //Joystick
             if (joystick.Vertical >= sensitivity)
             {
@@ -291,6 +291,10 @@ public class PlayerController : MonoBehaviour
         {
             TakeDamage(damageFromEnemy);
         }
+        else if (collision.gameObject.CompareTag("Missile"))
+        {
+            TakeDamage(damageFromEnemy);
+        }
         else if (collision.gameObject.tag == "OgreFist")
         {
             TakeDamage(10);
@@ -298,10 +302,6 @@ public class PlayerController : MonoBehaviour
         else if (collision.gameObject.tag == "OgreQuake")
         {
             TakeDamage(20);
-        }
-        else if (collision.gameObject.tag == "Laser")
-        {
-            TakeDamage(3);
         }
         else if (collision.gameObject.tag == "Respawn")
         {
@@ -320,6 +320,10 @@ public class PlayerController : MonoBehaviour
             CameraController.instance.ModifyZoom(10f);
             rb2d.gravityScale = -0.002f;
             isInWater = true;
+        }
+        else if (collision.gameObject.tag == "Laser")
+        {
+            TakeDamage(0.1f);
         }
     }
 
@@ -364,14 +368,17 @@ public class PlayerController : MonoBehaviour
 
     #region Other functions
 
-    private void TakeDamage(int damage)
+    private void TakeDamage(float damage)
     {
-        health = health - damage;
-        bloodParticle.Play();
-        if (!impactFace.gameObject.activeSelf)
+        if (health > 0)
         {
-            impactFace.SetActive(true);
-            StartCoroutine(Wait("ImpactFaceFalse", 2f));
+            health = health - damage;
+            bloodParticle.Play();
+            if (!impactFace.gameObject.activeSelf)
+            {
+                impactFace.SetActive(true);
+                StartCoroutine(Wait("ImpactFaceFalse", 2f));
+            }
         }
     }
 
@@ -410,6 +417,7 @@ public class PlayerController : MonoBehaviour
                 deathCollider.SetActive(false);
                 gameObject.GetComponent<Transform>().position = spawnPoint.position;
                 spawnParticle.Play();
+                gameObject.layer = 8;
                 StartCoroutine(Wait("Respawn", 3f));
                 break;
 
@@ -433,10 +441,13 @@ public class PlayerController : MonoBehaviour
     {
         if (!bloodShowed)
         {
+            Debug.Log("dead");
             deathCollider.SetActive(true);
             impactFace.SetActive(false);
             characters.SetActive(false);
             Instantiate(deathEffect, transform.position, Quaternion.identity);
+            //gameObject.GetComponent<CapsuleCollider2D>().tag = "Ignore";
+            gameObject.layer = 10;
 
             if (Random.Range(1, 2) == 1)
             {

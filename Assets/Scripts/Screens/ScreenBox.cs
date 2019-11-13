@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ScreenBox : MonoBehaviour
 {
-    public GameObject floor;
+    public GameObject tiles, content, stars;
     public GameObject extra;
     public bool bossScreen;
 
@@ -22,9 +22,12 @@ public class ScreenBox : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && !content.activeSelf)
         {
-            floor.SetActive(true);
+            tiles.SetActive(true);
+            content.SetActive(true);
+            if (stars != null)
+                stars.SetActive(true);
             if (extra != null)
                 extra.SetActive(true);
         }
@@ -36,7 +39,10 @@ public class ScreenBox : MonoBehaviour
         {
             if (!bossScreen)
             {
-                floor.SetActive(false);
+                tiles.SetActive(false);
+                content.SetActive(false);
+                if (stars != null)
+                    stars.SetActive(false);
                 if (extra != null)
                     extra.SetActive(false);
             }      
