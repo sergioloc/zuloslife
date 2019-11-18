@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FinishLevel2 : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class FinishLevel2 : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             door3.SetActive(true);
+            SceneManager.LoadScene("Cinematic2");
         }
     }
 }
