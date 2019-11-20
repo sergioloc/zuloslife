@@ -318,7 +318,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Water")
         {
             CameraController.instance.ModifyZoom(10f);
-            rb2d.gravityScale = -0.002f;
+            rb2d.gravityScale = -0.004f;
             isInWater = true;
         }
         else if (collision.gameObject.tag == "Laser")

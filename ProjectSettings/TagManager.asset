@@ -24,6 +24,9 @@ TagManager:
   - Enemy
   - Water
   - Missile
+  - Weapon
+  - WeaponEnemy
+  - Air
   layers:
   - Default
   - TransparentFX

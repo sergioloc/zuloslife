@@ -40,6 +40,14 @@ public class WaterBreath : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Air"))
+        {
+            Oxygen = 100;
+        }
+    }
+
     IEnumerator DecrementOxygen()
     {
         yield return new WaitForSeconds(0.1f);
@@ -53,13 +61,4 @@ public class WaterBreath : MonoBehaviour
         PlayerController.instance.health--;
         checkHealth = true;
     }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Water"))
-        {
-            Oxygen =  100;
-        }
-    }
-
 }
