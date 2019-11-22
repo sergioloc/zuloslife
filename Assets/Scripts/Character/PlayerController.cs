@@ -56,6 +56,13 @@ public class PlayerController : MonoBehaviour
     public Image staminaKutter;
     public Image staminaTrisky;
 
+    [Header("Health")]
+    public Slider healthBar;
+    public int damageFromEnemy = 10;
+    public int initialHealth = 100;
+    public float health;
+    public GameObject deathCollider;
+
     [Header("Impact Faces")]
     private GameObject impactFace;
     public GameObject pandaImpactFace;
@@ -64,12 +71,12 @@ public class PlayerController : MonoBehaviour
     public GameObject kutterImpactFace;
     public GameObject triskyImpactFace;
 
-    [Header("Health")]
-    public Slider healthBar;
-    public int damageFromEnemy = 10;
-    public int initialHealth = 100;
-    public float health;
-    public GameObject deathCollider;
+    [Header("Icons")]
+    public Image fillPanda;
+    public Image fillKero;
+    public Image fillCinamon;
+    public Image fillKutter;
+    public Image fillTrisky;
 
     private Transform spawnPoint;
     private Rigidbody2D rb2d;
@@ -88,6 +95,7 @@ public class PlayerController : MonoBehaviour
         extraJumps = extraJumpsValue;
         rb2d = GetComponent<Rigidbody2D>();
         scale = transform.localScale.x;
+        fillPanda.color = new Color32(76, 255, 249, 255);
         characterAnimation = panda.GetComponent<Animator>();
         impactFace = pandaImpactFace;
     }
@@ -261,7 +269,14 @@ public class PlayerController : MonoBehaviour
             //Restore health
             if (currentCharacter == "trisky")
             {
-                health = health + 30;
+                if (health >= (initialHealth - 30))
+                {
+                    health = initialHealth;
+                }
+                else
+                {
+                    health = health + 30;
+                }
                 healthParticle.Play();
                 StartCoroutine(Wait("StopHealthParticle", 1.5f));
             }
@@ -532,6 +547,11 @@ public class PlayerController : MonoBehaviour
         impactFace = pandaImpactFace;
         currentCharacter = "panda";
         pandaImpactFace.SetActive(false);
+        fillPanda.color = new Color32(76, 255, 249, 255);
+        fillKero.color = new Color32(255, 255, 255, 255);
+        fillCinamon.color = new Color32(255, 255, 255, 255);
+        fillKutter.color = new Color32(255, 255, 255, 255);
+        fillTrisky.color = new Color32(255, 255, 255, 255);
     }
 
     public void switchToKero()
@@ -545,6 +565,11 @@ public class PlayerController : MonoBehaviour
         impactFace = keroImpactFace;
         currentCharacter = "kero";
         keroImpactFace.SetActive(false);
+        fillPanda.color = new Color32(255, 255, 255, 255);
+        fillKero.color = new Color32(76, 255, 249, 255);
+        fillCinamon.color = new Color32(255, 255, 255, 255);
+        fillKutter.color = new Color32(255, 255, 255, 255);
+        fillTrisky.color = new Color32(255, 255, 255, 255);
     }
 
     public void switchToCinamon()
@@ -558,6 +583,11 @@ public class PlayerController : MonoBehaviour
         impactFace = cinamonImpactFace;
         currentCharacter = "cinamon";
         cinamonImpactFace.SetActive(false);
+        fillPanda.color = new Color32(255, 255, 255, 255);
+        fillKero.color = new Color32(255, 255, 255, 255);
+        fillCinamon.color = new Color32(76, 255, 249, 255);
+        fillKutter.color = new Color32(255, 255, 255, 255);
+        fillTrisky.color = new Color32(255, 255, 255, 255);
     }
 
     public void switchToKutter()
@@ -571,6 +601,11 @@ public class PlayerController : MonoBehaviour
         impactFace = kutterImpactFace;
         currentCharacter = "kutter";
         kutterImpactFace.SetActive(false);
+        fillPanda.color = new Color32(255, 255, 255, 255);
+        fillKero.color = new Color32(255, 255, 255, 255);
+        fillCinamon.color = new Color32(255, 255, 255, 255);
+        fillKutter.color = new Color32(76, 255, 249, 255);
+        fillTrisky.color = new Color32(255, 255, 255, 255);
     }
 
     public void switchToTrisky()
@@ -584,6 +619,11 @@ public class PlayerController : MonoBehaviour
         impactFace = triskyImpactFace;
         currentCharacter = "trisky";
         triskyImpactFace.SetActive(false);
+        fillPanda.color = new Color32(255, 255, 255, 255);
+        fillKero.color = new Color32(255, 255, 255, 255);
+        fillCinamon.color = new Color32(255, 255, 255, 255);
+        fillKutter.color = new Color32(255, 255, 255, 255);
+        fillTrisky.color = new Color32(76, 255, 249, 255);
     }
     #endregion
 
