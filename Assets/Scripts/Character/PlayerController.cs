@@ -39,10 +39,11 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem healthParticle;
     public ParticleSystem spawnParticle;
 
-    [Header("Die")]
+    [Header("Damage")]
     public GameObject deathEffect;
     public GameObject bloodEffect1;
     public GameObject bloodEffect2;
+    public GameObject frame;
 
     [Header("Attack")]
     public GameObject flashCollider;
@@ -385,6 +386,8 @@ public class PlayerController : MonoBehaviour
 
     private void TakeDamage(float damage)
     {
+        frame.SetActive(true);
+        StartCoroutine(Wait("HideFrame", 0.5f));
         if (health > 0)
         {
             health = health - damage;
@@ -448,6 +451,10 @@ public class PlayerController : MonoBehaviour
 
             case "ActiveShoot":
                 shootActive = true;
+                break;
+
+            case "HideFrame":
+                frame.SetActive(false);
                 break;
         }
     }

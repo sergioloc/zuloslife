@@ -48,7 +48,7 @@ public class FireMissile : MonoBehaviour
         Vector2 direction1 = target.position - transform.position;
         float angle1 = Mathf.Atan2(direction1.y, direction1.x) * Mathf.Rad2Deg;
         Quaternion rotation1 = Quaternion.AngleAxis(angle1, Vector3.forward);
-        Instantiate(projectile, new Vector3(pos.position.x, pos.position.y, 5f), rotation1);
+        Instantiate(projectile, new Vector3(pos.position.x, pos.position.y, 0f), rotation1);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
