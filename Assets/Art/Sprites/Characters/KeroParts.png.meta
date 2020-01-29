@@ -1,16 +1,16 @@
 fileFormatVersion: 2
-guid: 07b420d77574a7741a890b3418292bc3
+guid: 1bc4e164670b6504f8b02b1040cd67f6
 TextureImporter:
   internalIDToNameTable:
   - first:
       213: -549153230999738567
-    second: Kero_Face_Action
+    second: Kero_Head
   - first:
       213: -676360962308796513
-    second: Kero_Face_Blink
+    second: Kero_Face_Action
   - first:
       213: -8336739307414443986
-    second: Kero_Shoulder_R
+    second: Kero_Face_Blink
   - first:
       213: 37074295329586408
     second: Kero_Face_Dead
@@ -22,7 +22,28 @@ TextureImporter:
     second: Kero_Arm_R
   - first:
       213: 1992181439757149158
+    second: Kero_Shoulder_R
+  - first:
+      213: -4662918550098155411
+    second: Kero_Pants
+  - first:
+      213: -576003700036197513
     second: Kero_Hand_R
+  - first:
+      213: 5892641007962774781
+    second: Kero_Arm_L
+  - first:
+      213: -6480156619443688395
+    second: Kero_Chest
+  - first:
+      213: -1527778880461945913
+    second: Kero_Leg
+  - first:
+      213: 6972785461575514242
+    second: Kero_Shoulder_L
+  - first:
+      213: 420303690419642494
+    second: Kero_Foot
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -116,13 +137,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Kero_Face_Action
+      name: Kero_Head
       rect:
         serializedVersion: 2
-        x: 13
-        y: 1198
-        width: 561
-        height: 122
+        x: 30
+        y: 774
+        width: 1062
+        height: 905
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,8 +151,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4dfb2631bd6c896428ea8609ca671dfb
+      spriteID: d7c342767a59fe242a1f84830a9856a4
       internalID: -549153230999738567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kero_Face_Action
+      rect:
+        serializedVersion: 2
+        x: 1168
+        y: 1534
+        width: 564
+        height: 125
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4585bb33555f7e44821b422f484eb39
+      internalID: -676360962308796513
       vertices: []
       indices: 
       edges: []
@@ -140,10 +182,10 @@ TextureImporter:
       name: Kero_Face_Blink
       rect:
         serializedVersion: 2
-        x: 595
-        y: 1153
-        width: 549
-        height: 167
+        x: 1750
+        y: 1490
+        width: 551
+        height: 169
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,28 +193,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d409e4ffbb0f0e5439a8f79a6da82f4a
-      internalID: -676360962308796513
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Kero_Shoulder_R
-      rect:
-        serializedVersion: 2
-        x: 1229
-        y: 1073
-        width: 223
-        height: 239
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: eb7a58b3eb2add146857bff4e84de103
+      spriteID: 03c96b12418d20043beacd2792a2f9aa
       internalID: -8336739307414443986
       vertices: []
       indices: 
@@ -182,10 +203,10 @@ TextureImporter:
       name: Kero_Face_Dead
       rect:
         serializedVersion: 2
-        x: 13
-        y: 813
-        width: 557
-        height: 366
+        x: 1168
+        y: 1152
+        width: 559
+        height: 369
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,7 +214,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4b15561c260746442ad462b2b16c58bc
+      spriteID: c840f28bd55faa3478045f6422535e21
       internalID: 37074295329586408
       vertices: []
       indices: 
@@ -203,10 +224,10 @@ TextureImporter:
       name: Kero_Face_Impact
       rect:
         serializedVersion: 2
-        x: 595
-        y: 717
-        width: 560
-        height: 419
+        x: 1750
+        y: 1056
+        width: 550
+        height: 422
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -214,7 +235,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9cb974eba4c19364fac513809242eedb
+      spriteID: 188a8116c3617aa4c96a6258e6844135
       internalID: 1963529096732298978
       vertices: []
       indices: 
@@ -224,10 +245,10 @@ TextureImporter:
       name: Kero_Arm_R
       rect:
         serializedVersion: 2
-        x: 1201
-        y: 820
-        width: 222
-        height: 227
+        x: 1151
+        y: 719
+        width: 223
+        height: 229
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -235,8 +256,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a1ae505026830e84587ea7d7d7dfda1f
+      spriteID: bf7e13932f0512a4587767d32e426a97
       internalID: 2160882453170875789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kero_Shoulder_R
+      rect:
+        serializedVersion: 2
+        x: 1426
+        y: 758
+        width: 224
+        height: 220
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da776963ff65d9a4fa7d663ac49091ce
+      internalID: 1992181439757149158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kero_Pants
+      rect:
+        serializedVersion: 2
+        x: 1693
+        y: 719
+        width: 559
+        height: 284
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02e1f0d053469e94ca3a0582f79166e8
+      internalID: -4662918550098155411
       vertices: []
       indices: 
       edges: []
@@ -245,10 +308,10 @@ TextureImporter:
       name: Kero_Hand_R
       rect:
         serializedVersion: 2
-        x: 123
-        y: 10
-        width: 980
-        height: 631
+        x: 21
+        y: 15
+        width: 982
+        height: 634
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -256,8 +319,113 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 05a19ea3e2a591241a65a5629cea64f8
-      internalID: 1992181439757149158
+      spriteID: 3539cd63e1e4d7d49932ba429f986af2
+      internalID: -576003700036197513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kero_Arm_L
+      rect:
+        serializedVersion: 2
+        x: 1157
+        y: 356
+        width: 206
+        height: 282
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a3db69d24caeed499cc169e01ccace0
+      internalID: 5892641007962774781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kero_Chest
+      rect:
+        serializedVersion: 2
+        x: 1467
+        y: 142
+        width: 432
+        height: 491
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4ac5ffa56a718945841c4af9f4461bf
+      internalID: -6480156619443688395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kero_Leg
+      rect:
+        serializedVersion: 2
+        x: 1981
+        y: 359
+        width: 165
+        height: 195
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3fc6857b7645f3446b566e469c4b3a5e
+      internalID: -1527778880461945913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kero_Shoulder_L
+      rect:
+        serializedVersion: 2
+        x: 1196
+        y: 105
+        width: 156
+        height: 142
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8fe9fbcafa4f2674c8db385688dc5516
+      internalID: 6972785461575514242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kero_Foot
+      rect:
+        serializedVersion: 2
+        x: 1971
+        y: 67
+        width: 205
+        height: 219
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b71d6fe6de8ac754b8745c11c7b7efa5
+      internalID: 420303690419642494
       vertices: []
       indices: 
       edges: []
@@ -265,7 +433,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: c3727c73dd9afa249bf020bf7eace75d
+    spriteID: dde06f98afe2fd84685ee585db8a3fb1
     internalID: 0
     vertices: []
     indices: 

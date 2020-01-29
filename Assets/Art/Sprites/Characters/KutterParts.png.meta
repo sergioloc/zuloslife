@@ -3,29 +3,50 @@ guid: 5e5364cae5bba09458ee4efd6694de86
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7227929249045740780
+      213: 6273620766312662880
     second: Kutter_Face_Action
   - first:
       213: -3056860207948368685
     second: Kutter_Face_Blink
   - first:
-      213: 3935604894418958345
+      213: -8057404630866087888
     second: Kutter_Hand_R
   - first:
-      213: -6296159403926280206
-    second: KutterParts_3
+      213: 3381670909791184349
+    second: Kutter_Arm_R
   - first:
-      213: 6046625080345751717
+      213: 8162687894092401569
     second: Kutter_Face_Impact
   - first:
-      213: 5947408426523793176
+      213: 2470720569030109219
     second: Kutter_Face_Dead
   - first:
-      213: -3198353456399794642
+      213: 1535109204393000160
     second: Kutter_Shoulder_R
   - first:
-      213: 2092829956113960394
-    second: Kutter_Arm_R
+      213: -2533759234343846069
+    second: Kutter_Shoulder_L
+  - first:
+      213: -3826391803216962363
+    second: Kutter_Head
+  - first:
+      213: 4932764495708500299
+    second: Kutter_Leg
+  - first:
+      213: 3707880889148222983
+    second: Kutter_Arm_L
+  - first:
+      213: 7980385323383783454
+    second: Kutter_Foot
+  - first:
+      213: 2553998929766623193
+    second: Kutter_Pants
+  - first:
+      213: -3122106854271513520
+    second: Kutter_Scissors
+  - first:
+      213: 4255972072381801402
+    second: Kutter_Chest
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -122,19 +143,19 @@ TextureImporter:
       name: Kutter_Face_Action
       rect:
         serializedVersion: 2
-        x: 29
-        y: 643
+        x: 3
+        y: 1656
         width: 522
         height: 103
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ba930d45bf3f87e4eaea775a2ab3e861
-      internalID: 7227929249045740780
+      spriteID: 6a72e5c4c38fef14a9ce63a95522b038
+      internalID: 6273620766312662880
       vertices: []
       indices: 
       edges: []
@@ -143,18 +164,18 @@ TextureImporter:
       name: Kutter_Face_Blink
       rect:
         serializedVersion: 2
-        x: 616
-        y: 605
+        x: 562
+        y: 1575
         width: 492
         height: 184
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 278e6b44455e4614e8f4f482895c2ae8
+      spriteID: 80f213ac568f6ef49bd55aa63e2823d9
       internalID: -3056860207948368685
       vertices: []
       indices: 
@@ -164,103 +185,19 @@ TextureImporter:
       name: Kutter_Hand_R
       rect:
         serializedVersion: 2
-        x: 1268
-        y: 491
+        x: 1076
+        y: 1511
         width: 228
         height: 240
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c9c99215275c5644a9253b4ea8401b59
-      internalID: 3935604894418958345
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: KutterParts_3
-      rect:
-        serializedVersion: 2
-        x: 1591
-        y: 463
-        width: 250
-        height: 284
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0591c84fb718b694f86b909e44084c4b
-      internalID: -6296159403926280206
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Kutter_Face_Impact
-      rect:
-        serializedVersion: 2
-        x: 42
-        y: 188
-        width: 520
-        height: 381
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e88b1fb326cbbe3439286721dd17ad4a
-      internalID: 6046625080345751717
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Kutter_Face_Dead
-      rect:
-        serializedVersion: 2
-        x: 616
-        y: 188
-        width: 491
-        height: 368
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 055fb4d5b97a31a41955865afa1634ae
-      internalID: 5947408426523793176
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Kutter_Shoulder_R
-      rect:
-        serializedVersion: 2
-        x: 1190
-        y: 149
-        width: 321
-        height: 223
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1b489d75641460747b59cc8cad9e1eba
-      internalID: -3198353456399794642
+      spriteID: d5d5d42f50d3b7746b6e73526642b0d0
+      internalID: -8057404630866087888
       vertices: []
       indices: 
       edges: []
@@ -269,19 +206,250 @@ TextureImporter:
       name: Kutter_Arm_R
       rect:
         serializedVersion: 2
-        x: 1589
-        y: 38
+        x: 1451
+        y: 1417
         width: 288
         height: 334
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 705db1bdef77a6a4e8ff0f04cf8a4519
-      internalID: 2092829956113960394
+      spriteID: 82f570e254d144645bafcb86ccfbf4c0
+      internalID: 3381670909791184349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kutter_Face_Impact
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1250
+        width: 520
+        height: 381
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 824522bcfffa6814aa27276e36878760
+      internalID: 8162687894092401569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kutter_Face_Dead
+      rect:
+        serializedVersion: 2
+        x: 562
+        y: 1192
+        width: 491
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e8fc38c26d1e3d4dab2a371c85ea124
+      internalID: 2470720569030109219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kutter_Shoulder_R
+      rect:
+        serializedVersion: 2
+        x: 1078
+        y: 1250
+        width: 321
+        height: 223
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab23769ad1a695f409c9f601fb14828c
+      internalID: 1535109204393000160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kutter_Shoulder_L
+      rect:
+        serializedVersion: 2
+        x: 1477
+        y: 1183
+        width: 316
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71338ab9e60a05a43911c08777d3764a
+      internalID: -2533759234343846069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kutter_Head
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 206
+        width: 1121
+        height: 961
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f62bf60823b55f4d9a00aa6e507b6e5
+      internalID: -3826391803216962363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kutter_Leg
+      rect:
+        serializedVersion: 2
+        x: 1190
+        y: 869
+        width: 166
+        height: 298
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29b73664333cb0f49ae746df9cb9979b
+      internalID: 4932764495708500299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kutter_Arm_L
+      rect:
+        serializedVersion: 2
+        x: 1513
+        y: 746
+        width: 242
+        height: 391
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da5ce977a6d314944b04577431cf1fee
+      internalID: 3707880889148222983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kutter_Foot
+      rect:
+        serializedVersion: 2
+        x: 1177
+        y: 598
+        width: 222
+        height: 215
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ed52a0e4efde9741a06249378b4f687
+      internalID: 7980385323383783454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kutter_Pants
+      rect:
+        serializedVersion: 2
+        x: 1451
+        y: 488
+        width: 426
+        height: 198
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8e164e1d1ef59147ba20ea72bb0557a
+      internalID: 2553998929766623193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kutter_Scissors
+      rect:
+        serializedVersion: 2
+        x: 1177
+        y: 90
+        width: 250
+        height: 284
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 557ae4af232517046b43ab00a286a414
+      internalID: -3122106854271513520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kutter_Chest
+      rect:
+        serializedVersion: 2
+        x: 1451
+        y: 27
+        width: 417
+        height: 422
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9538858241c50c44a9b21c4b952f251b
+      internalID: 4255972072381801402
       vertices: []
       indices: 
       edges: []
@@ -289,7 +457,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 225f03f2d9127a9498dfa0cff8a96d71
+    spriteID: e48182845d26dde439dec51944cd46ac
     internalID: 0
     vertices: []
     indices: 

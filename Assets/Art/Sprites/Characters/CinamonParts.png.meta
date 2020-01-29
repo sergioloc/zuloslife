@@ -3,80 +3,80 @@ guid: e3a2ecdc476103b468bf09fe81c10919
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8345664773121888040
-    second: Cinamon_Face_Action
-  - first:
-      213: 3592124266767904099
-    second: Cinamon_Face_Impact
-  - first:
       213: 6683675504731718977
     second: Note_1
   - first:
-      213: -8683125226957576862
-    second: Cinamon_Face_Dead
+      213: -1936443669100625727
+    second: Cinamon_Face_Action
+  - first:
+      213: -5981942174899808273
+    second: Cinamon_Face_Impact
+  - first:
+      213: -5153174080886513283
+    second: Cinamon_Head
   - first:
       213: -4874594423237484875
     second: Note_2
   - first:
-      213: -5869961417975559538
-    second: Cinamon_Blink
+      213: -6748908729046869441
+    second: Cinamon_Face_Dead
+  - first:
+      213: -1040997820286547567
+    second: Cinamon_Chest_4
   - first:
       213: 9117813352126950645
     second: Note_3
   - first:
-      213: -4266970578159756988
-    second: Cinamon_Hand_R
-  - first:
-      213: 6964368627646906884
-    second: Cinamon_Shoulder_R
+      213: 7413255356249430221
+    second: Cinamon_Face_Blink
   - first:
       213: -4385045024777389444
     second: Note_4
   - first:
+      213: -2464115471224390304
+    second: Cinamon_Hand_R
+  - first:
+      213: -8608105682152402182
+    second: Cinamon_Shoulder_R
+  - first:
       213: -9139475501157568043
     second: Note_5
   - first:
-      213: 9088797559324058760
+      213: 3084333975611124608
     second: Cinamon_Arm_R
   - first:
       213: -7684430423504012075
     second: Note_6
   - first:
+      213: -8097702011551777129
+    second: Cinamon_Chest_1
+  - first:
+      213: 6453821216623110970
+    second: Cinamon_Chest_2
+  - first:
+      213: 3211638158608244350
+    second: Cinamon_Chest_3
+  - first:
       213: 3351499396762034095
     second: Note_7
   - first:
-      213: -3900986027165477943
-    second: CinamonParts_14
-  - first:
-      213: -8097702011551777129
-    second: CinamonParts_15
-  - first:
-      213: 6453821216623110970
-    second: CinamonParts_16
-  - first:
-      213: 3211638158608244350
-    second: CinamonParts_17
-  - first:
-      213: 8991570400036239235
-    second: CinamonParts_18
-  - first:
       213: 7599806629296998410
-    second: CinamonParts_19
+    second: Cinamon_Pants
   - first:
       213: -1399744283323902120
-    second: CinamonParts_20
+    second: Cinamon_Leg
   - first:
       213: -5967966076859756026
-    second: CinamonParts_21
+    second: Cinamon_Shoulder_L
+  - first:
+      213: -9082544770487310408
+    second: Cinamon_Arm_L
   - first:
       213: -7864915946989469951
     second: Note_8
   - first:
-      213: -6652073088832172649
-    second: CinamonParts_7
-  - first:
-      213: 3081118382266962541
-    second: Cinamon_Waves
+      213: -413573716493581613
+    second: Cinamon_Foot
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -170,12 +170,33 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
+      name: Note_1
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 1493
+        width: 121
+        height: 165
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 416a4ab887377b243bdf10159d39be82
+      internalID: 6683675504731718977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
       name: Cinamon_Face_Action
       rect:
         serializedVersion: 2
-        x: 9
-        y: 1413
-        width: 565
+        x: 221
+        y: 1391
+        width: 569
         height: 268
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -184,8 +205,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7bc01233ea6b81541927f39c0480b296
-      internalID: 8345664773121888040
+      spriteID: 7ad58a8540eb669458d1756f53d2ac23
+      internalID: -1936443669100625727
       vertices: []
       indices: 
       edges: []
@@ -194,10 +215,10 @@ TextureImporter:
       name: Cinamon_Face_Impact
       rect:
         serializedVersion: 2
-        x: 597
-        y: 1308
-        width: 503
-        height: 373
+        x: 792
+        y: 1279
+        width: 501
+        height: 380
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -205,20 +226,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a5e9add7a7f093d438889b4bf84ce275
-      internalID: 3592124266767904099
+      spriteID: 1f0dfaeb392997a4bbf6b3f9c52da8ce
+      internalID: -5981942174899808273
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Note_1
+      name: Cinamon_Head
       rect:
         serializedVersion: 2
-        x: 1155
-        y: 1519
-        width: 120
-        height: 162
+        x: 1334
+        y: 787
+        width: 1113
+        height: 867
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -226,29 +247,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: badce008c26c4524d83c2ba733200114
-      internalID: 6683675504731718977
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Cinamon_Face_Dead
-      rect:
-        serializedVersion: 2
-        x: 9
-        y: 977
-        width: 539
-        height: 410
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 802f13f8cbf812a4bbb4c8ccd2ccbcb4
-      internalID: -8683125226957576862
+      spriteID: 27342c851e69251438cd62ba169d76e2
+      internalID: -5153174080886513283
       vertices: []
       indices: 
       edges: []
@@ -257,9 +257,9 @@ TextureImporter:
       name: Note_2
       rect:
         serializedVersion: 2
-        x: 1155
-        y: 1328
-        width: 107
+        x: 53
+        y: 1301
+        width: 108
         height: 170
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -268,20 +268,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 145f6bd7162e2034b9dab217d3a17497
+      spriteID: 36e16b2f9860943429f4ffc4daaeb1c0
       internalID: -4874594423237484875
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cinamon_Blink
+      name: Cinamon_Face_Dead
       rect:
         serializedVersion: 2
-        x: 597
-        y: 1114
-        width: 522
-        height: 181
+        x: 225
+        y: 1044
+        width: 513
+        height: 344
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -289,8 +289,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e352e36019b5a6c448fed75387f42a1e
-      internalID: -5869961417975559538
+      spriteID: bd425e5442f1a30438217f6405a6a3a8
+      internalID: -6748908729046869441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cinamon_Chest_4
+      rect:
+        serializedVersion: 2
+        x: 2488
+        y: 923
+        width: 470
+        height: 516
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99be7d52f3da8cb4888fc792cd92eb9e
+      internalID: -1040997820286547567
       vertices: []
       indices: 
       edges: []
@@ -299,10 +320,10 @@ TextureImporter:
       name: Note_3
       rect:
         serializedVersion: 2
-        x: 1146
-        y: 1131
-        width: 126
-        height: 154
+        x: 43
+        y: 1103
+        width: 129
+        height: 157
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -310,20 +331,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d400f34de6d8d8c4d9adb91f037fe1cc
+      spriteID: e7bec1dc694f80641aab8b0eb5259b51
       internalID: 9117813352126950645
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cinamon_Hand_R
+      name: Cinamon_Face_Blink
       rect:
         serializedVersion: 2
-        x: 9
-        y: 368
-        width: 752
-        height: 553
+        x: 793
+        y: 1091
+        width: 519
+        height: 180
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -331,29 +352,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e56191919f0778443898506bc2b3694d
-      internalID: -4266970578159756988
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Cinamon_Shoulder_R
-      rect:
-        serializedVersion: 2
-        x: 814
-        y: 743
-        width: 287
-        height: 300
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8d97efa8f10f4034b8ef951ce19e79f7
-      internalID: 6964368627646906884
+      spriteID: 45cff53962c38a547a3fcb25f017bdfd
+      internalID: 7413255356249430221
       vertices: []
       indices: 
       edges: []
@@ -362,10 +362,10 @@ TextureImporter:
       name: Note_4
       rect:
         serializedVersion: 2
-        x: 1160
-        y: 893
-        width: 115
-        height: 207
+        x: 58
+        y: 867
+        width: 116
+        height: 210
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -373,8 +373,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8b6418e5c5c526044a4e0ab38635123e
+      spriteID: a54cf7d2f3244514f92d325aea35c1ff
       internalID: -4385045024777389444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cinamon_Hand_R
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 414
+        width: 756
+        height: 555
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f66a2f57c02d17240a1ec71e9fd88d99
+      internalID: -2464115471224390304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cinamon_Shoulder_R
+      rect:
+        serializedVersion: 2
+        x: 1003
+        y: 799
+        width: 290
+        height: 276
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87a90505ff1257e4389288f789b160d3
+      internalID: -8608105682152402182
       vertices: []
       indices: 
       edges: []
@@ -383,10 +425,10 @@ TextureImporter:
       name: Note_5
       rect:
         serializedVersion: 2
-        x: 1135
-        y: 686
-        width: 148
-        height: 179
+        x: 33
+        y: 660
+        width: 150
+        height: 182
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -394,7 +436,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ea486809aa9787740832ee3d365bfabf
+      spriteID: 386ad370aa1f5c744a039f8e6d1141c2
       internalID: -9139475501157568043
       vertices: []
       indices: 
@@ -404,10 +446,10 @@ TextureImporter:
       name: Cinamon_Arm_R
       rect:
         serializedVersion: 2
-        x: 848
-        y: 339
-        width: 232
-        height: 281
+        x: 1034
+        y: 494
+        width: 234
+        height: 283
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -415,8 +457,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c164826c0d0adc24baf0288df0adc4cd
-      internalID: 9088797559324058760
+      spriteID: aa9443223cd931c4f860a7fc82ca8d12
+      internalID: 3084333975611124608
       vertices: []
       indices: 
       edges: []
@@ -425,10 +467,10 @@ TextureImporter:
       name: Note_6
       rect:
         serializedVersion: 2
-        x: 1121
-        y: 480
-        width: 163
-        height: 193
+        x: 45
+        y: 455
+        width: 138
+        height: 195
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -436,8 +478,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dbc2545369755e24eb7be56dffc33c88
+      spriteID: b787d6800f6e88a4b98ecd1a80bca289
       internalID: -7684430423504012075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cinamon_Chest_1
+      rect:
+        serializedVersion: 2
+        x: 1410
+        y: 142
+        width: 470
+        height: 516
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d31c028e631296c42b5bf758a8ff662a
+      internalID: -8097702011551777129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cinamon_Chest_2
+      rect:
+        serializedVersion: 2
+        x: 1921
+        y: 131
+        width: 470
+        height: 516
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ebc6a8a9720e0a4bba79eed216ab7e6
+      internalID: 6453821216623110970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cinamon_Chest_3
+      rect:
+        serializedVersion: 2
+        x: 2446
+        y: 131
+        width: 469
+        height: 516
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2572fa737b4652f4d8775630459b1cd7
+      internalID: 3211638158608244350
       vertices: []
       indices: 
       edges: []
@@ -446,10 +551,10 @@ TextureImporter:
       name: Note_7
       rect:
         serializedVersion: 2
-        x: 1126
-        y: 276
-        width: 136
-        height: 183
+        x: 23
+        y: 250
+        width: 138
+        height: 187
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -457,20 +562,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c15008b7c1ebf82409aad2c21a87ab3a
+      spriteID: c8dcdd8bf8bd990429633f1f7d93594f
       internalID: 3351499396762034095
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CinamonParts_14
+      name: Cinamon_Pants
       rect:
         serializedVersion: 2
-        x: 20
-        y: 54
-        width: 36
-        height: 118
+        x: 202
+        y: 141
+        width: 458
+        height: 195
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -478,125 +583,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aeac08c4b2a55954fb9e8b443da29679
-      internalID: -3900986027165477943
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CinamonParts_15
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 41
-        width: 50
-        height: 157
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 45d072a5d10c3d04fad0d75dd1bafe0b
-      internalID: -8097702011551777129
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CinamonParts_16
-      rect:
-        serializedVersion: 2
-        x: 203
-        y: 56
-        width: 53
-        height: 158
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1b1012ff6aea29543ad2f6c03bb80d78
-      internalID: 6453821216623110970
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CinamonParts_17
-      rect:
-        serializedVersion: 2
-        x: 245
-        y: 84
-        width: 39
-        height: 118
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9b07a9ae7a7b43740897550fc7c233d5
-      internalID: 3211638158608244350
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CinamonParts_18
-      rect:
-        serializedVersion: 2
-        x: 503
-        y: 114
-        width: 36
-        height: 118
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 05711e35938d1794da2f8a82859183dd
-      internalID: 8991570400036239235
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CinamonParts_19
-      rect:
-        serializedVersion: 2
-        x: 531
-        y: 101
-        width: 50
-        height: 157
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ddea41e50f4644a4aa29f523a1329969
+      spriteID: d0fe5525d47f0394e99d1e691ec34d09
       internalID: 7599806629296998410
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CinamonParts_20
+      name: Cinamon_Leg
       rect:
         serializedVersion: 2
-        x: 680
-        y: 118
-        width: 53
-        height: 158
+        x: 682
+        y: 15
+        width: 163
+        height: 375
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -604,20 +604,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d785b1ed0760e941b079bcb0bc979ae
+      spriteID: af54ee49d34b92844988a67518c0cea0
       internalID: -1399744283323902120
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CinamonParts_21
+      name: Cinamon_Shoulder_L
       rect:
         serializedVersion: 2
-        x: 722
-        y: 146
-        width: 39
-        height: 118
+        x: 894
+        y: 237
+        width: 189
+        height: 153
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -625,8 +625,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7879e786200ece044ab8d0c195b71359
+      spriteID: 81ed2788c95a7a6469ef06e905db73b9
       internalID: -5967966076859756026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cinamon_Arm_L
+      rect:
+        serializedVersion: 2
+        x: 1147
+        y: 84
+        width: 224
+        height: 290
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d09ace9dcbe3e748b6bf0cea7742b2a
+      internalID: -9082544770487310408
       vertices: []
       indices: 
       edges: []
@@ -635,10 +656,10 @@ TextureImporter:
       name: Note_8
       rect:
         serializedVersion: 2
-        x: 1101
-        y: 41
-        width: 146
-        height: 178
+        x: 0
+        y: 15
+        width: 147
+        height: 181
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -646,20 +667,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: deeaf1c68a835cc41ac91895cb773a99
+      spriteID: 6d90c9383532a0d439cec0a152ca4900
       internalID: -7864915946989469951
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cinamon_Waves
+      name: Cinamon_Foot
       rect:
         serializedVersion: 2
-        x: 13
-        y: 29
-        width: 786
-        height: 273
+        x: 894
+        y: 15
+        width: 223
+        height: 165
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -667,8 +688,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3054fb5e2d3215940bcc6e535bb5e9f7
-      internalID: 3081118382266962541
+      spriteID: a03d4fa7e1eb58048ae769b9b1a571b0
+      internalID: -413573716493581613
       vertices: []
       indices: 
       edges: []
@@ -676,7 +697,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 32605d899d5eb0f42b5edcd4e9344ccc
+    spriteID: 698f0c56cd6b88d41b3f9394e2a42cb5
     internalID: 0
     vertices: []
     indices: 
