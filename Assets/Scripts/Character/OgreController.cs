@@ -56,25 +56,26 @@ public class OgreController : MonoBehaviour
 
             if (!idleAnim)
             {
+
                 if (distance > range && !loadQuake)
                 {
                     //CameraController.instance.Shake(0.8f);
-                    ogreAnimation.SetBool("Action2", true);
+                    Debug.Log("Quake");
                     loadQuake = true;
                     attacking = true;
+                    ogreAnimation.SetTrigger("Action2");
                     StartCoroutine(RestoreQuake());
                     StartCoroutine(FinishAttacking());
                 }
-                else if (distance < range && distance > 4 && !loadHammer)
+                else if (distance > 4 && distance < range && !loadHammer)
                 {
                     //CameraController.instance.Shake(0.7f);
-                    ogreAnimation.SetBool("Action", true);
                     loadHammer = true;
                     attacking = true;
+                    ogreAnimation.SetTrigger("Action");
                     StartCoroutine(RestoreHammer());
                     StartCoroutine(FinishAttacking());
                 }
-
                 else if (distance >= 3.5 && !freeze && !attacking)
                 {
                     ogreAnimation.SetBool("Run", true);
@@ -83,11 +84,11 @@ public class OgreController : MonoBehaviour
                     ogreAnimation.SetBool("Action3", false);
                     transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.transform.position.x - limit, transform.position.y, transform.position.z), speed * Time.deltaTime);
                 }
-
                 if (distance < 3.5)
                 {
-                    ogreAnimation.SetBool("Action3", true);
+                    ogreAnimation.SetTrigger("Action3");
                 }
+                
             }
             else
             {
@@ -100,7 +101,7 @@ public class OgreController : MonoBehaviour
 
         if (health <= 0)
         {
-            ogreAnimation.SetBool("Die", true);
+            ogreAnimation.SetTrigger("Die");
             StartCoroutine(Die());
         }
     }
@@ -113,13 +114,12 @@ public class OgreController : MonoBehaviour
             ogreAnimation.SetBool("Freeze", true);
             StartCoroutine(finishFreeze());
         }
-        else if (collision.gameObject.tag == "Melee" && !freeze)
+        else if (collision.gameObject.tag == "Melee")
         {
-            TakeDamage(1);
-        }
-        else if (collision.gameObject.tag == "Melee" && freeze)
-        {
-            TakeDamage(10);
+            if (freeze)
+                TakeDamage(10);
+            else
+                TakeDamage(1);
         }
         else if (collision.gameObject.tag == "PlayerDeath")
         {
@@ -153,7 +153,7 @@ public class OgreController : MonoBehaviour
 
     IEnumerator FinishAttacking()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1f);
         attacking = false;
     }
 
@@ -189,7 +189,7 @@ public class OgreController : MonoBehaviour
         yield return new WaitForSeconds(5);
         normalLights.SetActive(false);
         redLights.SetActive(true);
-        evolution.transform.position = new Vector3(transform.position.x, transform.position.y, -69);
+        evolution.transform.position = new Vector3(transform.position.x, transform.position.y, 0.63f);
         evolution.SetActive(true);
         gameObject.SetActive(false);
     }

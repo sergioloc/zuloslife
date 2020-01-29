@@ -82,8 +82,6 @@ public class GuardController : MonoBehaviour
             guardAnimation.SetBool("Action", false);
         }
         
-
-
     }
 
     private void Push()
@@ -94,18 +92,13 @@ public class GuardController : MonoBehaviour
             GetComponent<Rigidbody2D>().AddForce(new Vector3(1500, 500));
     }
 
-    private void FollowPlayer()
-    {
-
-    }
-
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.tag == "Flash")
         {
             freeze = true;
             guardAnimation.SetBool("Freeze",true);
-            StartCoroutine(FinishFreeze());
+            StartCoroutine(FinishFreeze(5f));
         }
         else if (col.gameObject.tag == "Melee")
         {  
@@ -122,6 +115,11 @@ public class GuardController : MonoBehaviour
         {
             freeze = true;
             guardAnimation.SetBool("Run", false);
+        }
+        else if (col.gameObject.tag == "PlayerDeath")
+        {
+            freeze = true;
+            StartCoroutine(FinishFreeze(7f));
         }
     }
 
@@ -144,9 +142,9 @@ public class GuardController : MonoBehaviour
     }
 
 
-private IEnumerator FinishFreeze()
+private IEnumerator FinishFreeze(float sec)
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(sec);
         freeze = false;
         guardAnimation.SetBool("Freeze", false);
     }
@@ -166,19 +164,20 @@ private IEnumerator FinishFreeze()
             Die();
         }
     }
-
+    //-0.9
     private void Die()
     {
         Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
+        
 
         if (Random.Range(1, 2) == 1)
         {
-            Instantiate(bloodEffect1, transform.position, Quaternion.identity);
+            Instantiate(bloodEffect1, new Vector3(transform.position.x, transform.position.y, -0.9f), Quaternion.identity);
         }
         else
         {
-            Instantiate(bloodEffect2, transform.position, Quaternion.identity);
+            Instantiate(bloodEffect2, new Vector3(transform.position.x, transform.position.y, -0.9f), Quaternion.identity);
         }
 
     }

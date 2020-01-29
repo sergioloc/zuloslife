@@ -3,23 +3,29 @@ guid: f34a7e184bfd56840ba3ae6d507bfc9d
 TextureImporter:
   internalIDToNameTable:
   - first:
+      213: 8154428207141887376
+    second: OgreEv_Arm_R
+  - first:
+      213: 1855000514947907477
+    second: OgreEv_Chest
+  - first:
+      213: -5925075932947948675
+    second: OgreEv_Mouth
+  - first:
+      213: -8378638844864942505
+    second: OgreEv_Arm_L
+  - first:
       213: 8051054473199355284
     second: OgreEv_Eyes
   - first:
-      213: -727221660472735710
-    second: OgreEv_Mouth_1
+      213: 2900327789230481351
+    second: OgreEv_Fist_1
   - first:
-      213: 7421529111961931183
-    second: OgreEv_Mouth_2
+      213: 4284288636409374679
+    second: OgreEv_Fist_2
   - first:
-      213: 1531089215460758174
-    second: OgreEv_Hand_1
-  - first:
-      213: 608889782831007948
-    second: OgreEv_Hand_2
-  - first:
-      213: -2743950243787326741
-    second: OgreEv_Hand_3
+      213: 7695581525921242987
+    second: OgreEv_Fist_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -113,127 +119,169 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: OgreEv_Eyes
+      name: OgreEv_Arm_R
       rect:
         serializedVersion: 2
-        x: 256
-        y: 1124
-        width: 740
-        height: 313
+        x: 860
+        y: 1380
+        width: 485
+        height: 899
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0842d50bc61fa4845a863fe4346ab0f8
+      spriteID: fab537b98e46b664fa091e4199dd6a9d
+      internalID: 8154428207141887376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OgreEv_Chest
+      rect:
+        serializedVersion: 2
+        x: 1570
+        y: 1331
+        width: 863
+        height: 948
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d46a52e471002948b7e934e8d0071d5
+      internalID: 1855000514947907477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OgreEv_Mouth
+      rect:
+        serializedVersion: 2
+        x: 2674
+        y: 1501
+        width: 746
+        height: 551
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85eac09aaa8c3a64d82997c05d7c1e00
+      internalID: -5925075932947948675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OgreEv_Arm_L
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1275
+        width: 706
+        height: 737
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23c5ec28402ad6b428c5b9aed5d7cf1f
+      internalID: -8378638844864942505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OgreEv_Eyes
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2059
+        width: 676
+        height: 282
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f3a289ea0947414786dbbb6c35b88e5
       internalID: 8051054473199355284
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OgreEv_Mouth_1
+      name: OgreEv_Fist_1
       rect:
         serializedVersion: 2
-        x: 1061
-        y: 941
-        width: 849
-        height: 627
+        x: 47
+        y: 220
+        width: 833
+        height: 820
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 36c5a00037ddc264a8c5f2840bea96dd
-      internalID: -727221660472735710
+      spriteID: adbe86d36d07b1a42962838faf7f264f
+      internalID: 2900327789230481351
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OgreEv_Mouth_2
+      name: OgreEv_Fist_2
       rect:
         serializedVersion: 2
-        x: 1916
-        y: 938
-        width: 873
-        height: 635
+        x: 892
+        y: 103
+        width: 1065
+        height: 1045
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 85615dc1c99be60488656f461e8c6fd1
-      internalID: 7421529111961931183
+      spriteID: 896f7dbc1f5ff174597d73a7337e5fea
+      internalID: 4284288636409374679
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OgreEv_Hand_1
+      name: OgreEv_Fist_3
       rect:
         serializedVersion: 2
-        x: 22
-        y: 10
-        width: 910
-        height: 1011
+        x: 1997
+        y: 55
+        width: 1218
+        height: 1214
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3c04e78b5e2f3f14db9a1800e18efdd5
-      internalID: 1531089215460758174
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: OgreEv_Hand_2
-      rect:
-        serializedVersion: 2
-        x: 937
-        y: 0
-        width: 963
-        height: 937
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5eb736659472cb748a61e41d596c3cb8
-      internalID: 608889782831007948
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: OgreEv_Hand_3
-      rect:
-        serializedVersion: 2
-        x: 1903
-        y: 0
-        width: 973
-        height: 936
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7ae49c154fcb3f44cbe780d51fd017be
-      internalID: -2743950243787326741
+      spriteID: 3a1f7e394398cbb4292c9ef4baf8950b
+      internalID: 7695581525921242987
       vertices: []
       indices: 
       edges: []
@@ -241,7 +289,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 9ff243335f0527e4cb5ea0888c7431f6
+    spriteID: 1803bc855d2fc614ebaf546f80e68ef6
     internalID: 0
     vertices: []
     indices: 

@@ -20,13 +20,14 @@ public class Scissors : MonoBehaviour
         transform.Translate(Vector2.right * speed * Time.deltaTime);
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Guard"  || collision.gameObject.tag == "WallRight" || collision.gameObject.tag == "WallLeft" || collision.gameObject.tag == "Enemy")
         {
             DestroyProjectile();
         }
     }
+    
 
     void DestroyProjectile()
     {

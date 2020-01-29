@@ -3,14 +3,32 @@ guid: 8acdc07222890bc488a2cdf8b465d5a2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2544764597443344468
+      213: 1924782124160431517
+    second: Ogre_Head
+  - first:
+      213: -5998309836815667636
+    second: Ogre_Face_Smile
+  - first:
+      213: 3959549808541154373
     second: Ogre_Face_Flash
   - first:
-      213: 4019126858845742346
+      213: 525851409400332714
     second: Ogre_Face_Angry
   - first:
-      213: -5161802842708192442
-    second: Ogre_Face_Smile
+      213: -247125142224262336
+    second: Ogre_Arm_R
+  - first:
+      213: -9076148204986669850
+    second: Ogre_Chest
+  - first:
+      213: 8926764638092740155
+    second: Ogre_Arm_L
+  - first:
+      213: 4067985670220223429
+    second: Ogre_Leg
+  - first:
+      213: -8467155977555019856
+    second: Ogre_Pants
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -104,43 +122,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Ogre_Face_Flash
+      name: Ogre_Head
       rect:
         serializedVersion: 2
-        x: 24
-        y: 869
-        width: 1057
+        x: 0
+        y: 2044
+        width: 1028
         height: 825
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8cdb61167c5022f498831325381c3984
-      internalID: 2544764597443344468
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ogre_Face_Angry
-      rect:
-        serializedVersion: 2
-        x: 1081
-        y: 869
-        width: 1024
-        height: 825
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c205c0d56d015f84980ec1b2529b2996
-      internalID: 4019126858845742346
+      spriteID: 97d1441967102c5448ecdd70af11771f
+      internalID: 1924782124160431517
       vertices: []
       indices: 
       edges: []
@@ -149,19 +146,166 @@ TextureImporter:
       name: Ogre_Face_Smile
       rect:
         serializedVersion: 2
-        x: 24
-        y: 16
-        width: 1027
+        x: 1079
+        y: 2044
+        width: 1029
         height: 825
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2e613e518407f074a933bbcb850287cc
-      internalID: -5161802842708192442
+      spriteID: 5b468c636bad5824fa590fbdc2017b25
+      internalID: -5998309836815667636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ogre_Face_Flash
+      rect:
+        serializedVersion: 2
+        x: 2179
+        y: 2044
+        width: 1051
+        height: 825
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a18e7aa6ec959bc43b091a7d7eb55b12
+      internalID: 3959549808541154373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ogre_Face_Angry
+      rect:
+        serializedVersion: 2
+        x: 3308
+        y: 2044
+        width: 1078
+        height: 825
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab61e899791cd3c418e72f25f2d21250
+      internalID: 525851409400332714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ogre_Arm_R
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 733
+        width: 671
+        height: 1249
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29097695e89a5854ea80fff6c96b768e
+      internalID: -247125142224262336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ogre_Chest
+      rect:
+        serializedVersion: 2
+        x: 838
+        y: 719
+        width: 1120
+        height: 1268
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d7ff5363ada7e043804378e6fd388e5
+      internalID: -9076148204986669850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ogre_Arm_L
+      rect:
+        serializedVersion: 2
+        x: 2179
+        y: 0
+        width: 2207
+        height: 1945
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93eda3b2daac96d44a34db576d8032ca
+      internalID: 8926764638092740155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ogre_Leg
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 0
+        width: 599
+        height: 603
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0b846a1ddd17214ca8d17b5a5b17727
+      internalID: 4067985670220223429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ogre_Pants
+      rect:
+        serializedVersion: 2
+        x: 1078
+        y: 0
+        width: 764
+        height: 468
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b088d9297233ba74f8533f5dfb15ba99
+      internalID: -8467155977555019856
       vertices: []
       indices: 
       edges: []
@@ -169,7 +313,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 6f60ffa5dcd9f294c96905afe2262cd5
+    spriteID: 5d114292caa1a6f4290cdc5f200b3488
     internalID: 0
     vertices: []
     indices: 

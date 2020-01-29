@@ -327,6 +327,14 @@ public class PlayerController : MonoBehaviour
         {
             CameraController.instance.ModifyZoom(10f);
         }
+        else if (collision.gameObject.CompareTag("WallLeft"))
+        {
+            collisionWallLeft = true;
+        }
+        else if (collision.gameObject.CompareTag("WallRight"))
+        {
+            collisionWallRight = true;
+        }
     }
 
     void OnTriggerStay2D(Collider2D collision)
@@ -350,6 +358,14 @@ public class PlayerController : MonoBehaviour
             rb2d.gravityScale = 4;
             isInWater = false;
         }
+        else if (collision.gameObject.CompareTag("WallLeft"))
+        {
+            collisionWallLeft = false;
+        }
+        if (collision.gameObject.CompareTag("WallRight"))
+        {
+            collisionWallRight = false;
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -358,26 +374,14 @@ public class PlayerController : MonoBehaviour
         {
             confuseParticle.Play();
         }
-        else if (collision.gameObject.CompareTag("WallRight"))
-        {
-            collisionWallRight = true;
-        }
-        else if (collision.gameObject.CompareTag("WallLeft"))
-        {
-            collisionWallLeft = true;
-        }
+        
+        
     }
 
     void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("WallRight"))
-        {
-            collisionWallRight = false;
-        }
-        else if (collision.gameObject.CompareTag("WallLeft"))
-        {
-            collisionWallLeft = false;
-        }
+        
+        
     }
 
     #endregion
@@ -469,7 +473,7 @@ public class PlayerController : MonoBehaviour
             characters.SetActive(false);
             Instantiate(deathEffect, transform.position, Quaternion.identity);
             //gameObject.GetComponent<CapsuleCollider2D>().tag = "Ignore";
-            gameObject.layer = 10;
+            //gameObject.layer = 10;
 
             if (Random.Range(1, 2) == 1)
             {
