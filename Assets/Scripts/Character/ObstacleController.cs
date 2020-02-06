@@ -8,11 +8,6 @@ public class ObstacleController : MonoBehaviour
     public float speed;
     public GameObject particle;
 
-    void Start()
-    {
-        Destroy(gameObject, 4f);
-    }
-
     void Update()
     {
         transform.Translate(Vector2.left * speed * Time.deltaTime);
@@ -22,9 +17,8 @@ public class ObstacleController : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            collision.GetComponent<TricycleController>().health -= damage;
-            Debug.Log(collision.GetComponent<TricycleController>().health);
             Instantiate(particle, transform.position, Quaternion.identity);
+            collision.GetComponent<TricycleController>().health -= damage;
             Destroy(gameObject);
         }
     }

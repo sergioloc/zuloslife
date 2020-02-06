@@ -5,44 +5,60 @@ using UnityEngine.SceneManagement;
 
 public class TricycleController : MonoBehaviour
 {
-    private Vector2 targetPos;
-    public float incrementor;
+    public float range;
     public float speed;
-    private float maxHeight;
-    private float minHeight;
     public int health = 3;
     public GameObject particle;
     public Animator camAnim;
     public bool shake = true;
+    private Vector2 target;
+    private float maxHeight;
+    private float minHeight;
 
-    // Start is called before the first frame update
+
     void Start()
     {
-        maxHeight = incrementor;
-        minHeight = -incrementor;
+        maxHeight = range;
+        minHeight = -range;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (health <= 0)
         {
+            //Restart
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
-        transform.position = Vector2.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
 
-        if (Input.GetKeyDown(KeyCode.UpArrow) && transform.position.y < maxHeight)
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            Instantiate(particle, transform.position, Quaternion.identity);
-            if (shake) camAnim.SetTrigger("Shake2");
-            targetPos = new Vector2(transform.position.x, transform.position.y + incrementor);
+            MoveUp();
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow) && transform.position.y > minHeight) 
+        else if (Input.GetKeyDown(KeyCode.DownArrow)) 
         {
-            Instantiate(particle, transform.position, Quaternion.identity);
+            MoveDown();
+        }
+    }
+
+    public void MoveUp()
+    {
+        if (transform.position.y < maxHeight)
+        {
             if (shake) camAnim.SetTrigger("Shake2");
-            targetPos = new Vector2(transform.position.x, transform.position.y - incrementor);
+            Instantiate(particle, transform.position, Quaternion.identity);
+            target = new Vector2(transform.position.x, transform.position.y + range);
+        }   
+    }
+
+    public void MoveDown()
+    {
+        if (transform.position.y > minHeight)
+        {
+            if (shake) camAnim.SetTrigger("Shake2");
+            Instantiate(particle, transform.position, Quaternion.identity);
+            target = new Vector2(transform.position.x, transform.position.y - range);
         }
     }
 }
