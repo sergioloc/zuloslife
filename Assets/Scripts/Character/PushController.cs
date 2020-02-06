@@ -22,7 +22,7 @@ public class PushController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("MeleeEnemy"))
+        if (collision.gameObject.CompareTag("MeleeEnemy") || collision.gameObject.CompareTag("OgreFist") || collision.gameObject.CompareTag("OgreQuake"))
         {
             Push();
         }

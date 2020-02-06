@@ -63,6 +63,10 @@ public class FoxController : MonoBehaviour
         {
             Exploit();
         }
+        else if (collision.gameObject.CompareTag("Player"))
+        {
+            Exploit();
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)

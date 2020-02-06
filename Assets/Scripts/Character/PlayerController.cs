@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Movement")]
     public Joystick joystick;
-    public int speed = 0;
+    public float speed = 0;
     public bool facingRight = true;
     private float scale;
 
@@ -29,9 +29,7 @@ public class PlayerController : MonoBehaviour
     public Transform groundCheck;
     public float checkRadius;
     public LayerMask whatIsGround;
-    public int extraJumpsValue;
     private bool isGrounded;
-    private int extraJumps;
 
     [Header("Particles")]
     public ParticleSystem bloodParticle;
@@ -46,7 +44,6 @@ public class PlayerController : MonoBehaviour
     public GameObject frame;
 
     [Header("Attack")]
-    public GameObject flashCollider;
     public GameObject megaCombo;
     public GameObject projectile;
     public Transform shotPoint;
@@ -83,9 +80,10 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb2d;
     private Animator characterAnimation, cameraAnimation;
     private float sensitivity = 0.1f;
-    private bool bloodShowed = false, shootActive = true, collisionWallRight = false, collisionWallLeft = false, isInWater = false;
+    private bool bloodShowed = false, wallAtRight, wallAtLeft, isInWater = false;
 
     public static PlayerController instance;
+    public bool confuse = false, keyboard = false;
 
     #endregion
 
@@ -93,48 +91,40 @@ public class PlayerController : MonoBehaviour
     {
         instance = this;
         health = initialHealth;
-        extraJumps = extraJumpsValue;
         rb2d = GetComponent<Rigidbody2D>();
         scale = transform.localScale.x;
-        fillPanda.color = new Color32(76, 255, 249, 255);
+        fillPanda.color = new Color32(0, 80, 255, 255);
         characterAnimation = panda.GetComponent<Animator>();
         impactFace = pandaImpactFace;
+        wallAtRight = false;
+        wallAtLeft = false;
     }
 
     void Update()
     {
-        //Debug.Log(rb2d.gravityScale);
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
         healthBar.value = health;
 
         if (characters.gameObject.activeInHierarchy)
         {
-            //Move
-            if (collisionWallRight)
-                Movement(false, true);
-            else if (collisionWallLeft)
-                Movement(true, false);
+            if (keyboard)
+            {
+                MovementKeyboard();
+                KeyboardSwitch();
+                KeyboardJump();
+                KeyboardAction();
+            } 
             else
-                Movement(true, true);
-
+                MovementJoystick();
 
             //Jump
             if (isGrounded)
             {
-                extraJumps = extraJumpsValue;
                 characterAnimation.SetBool("isJumping", false);
             }
             else
             {
                 characterAnimation.SetBool("isJumping", true);
-            }
-
-            //Throw scissor
-            if (shootActive && shotPoint.gameObject.activeSelf)
-            {
-                Instantiate(projectile, shotPoint.position, shotPoint.rotation);
-                shootActive = false;
-                StartCoroutine(Wait("ActiveShoot", 0.9f));
             }
 
             //Die
@@ -143,107 +133,183 @@ public class PlayerController : MonoBehaviour
                 Die();
             }
 
-            //Keyboard controllers
-            KeyboardSwitch();
-            KeyboardJump();
-            KeyboardAction();
-
             //Combo
             if (megaCombo.activeInHierarchy == true)
             {
                 CameraController.instance.Shake(0);
             }
+
+            //testing
+            if (confuse)
+            {
+                confuse = false;
+                confuseParticle.Play();
+            }
+
+
         }
 
     }
 
     #region Movement
 
-    private void Movement(bool right, bool left)
+    private void MovementJoystick()
     {
-        if (!confuseParticle.isPlaying)
-        {
-            if ((joystick.Horizontal >= sensitivity || Input.GetKey(KeyCode.RightArrow)) && right)
-            {
-                MoveRight();
-            }
-            else if ((joystick.Horizontal <= -sensitivity || Input.GetKey(KeyCode.LeftArrow)) && left)
-            {
-                MoveLeft();
-            }
-            else if (characterAnimation.GetBool("Run"))
-            {
-                characterAnimation.SetBool("Run", false);
-            }
-        }
-
-        else //If is confuse
-        {
-            if ((joystick.Horizontal >= sensitivity || Input.GetKey(KeyCode.RightArrow)) && left)
-            {
-                MoveLeft();
-            }
-            else if ((joystick.Horizontal <= -sensitivity || Input.GetKey(KeyCode.LeftArrow)) && right)
-            {
-                MoveRight();
-            }
-            else if (characterAnimation.GetBool("Run"))
-            {
-                characterAnimation.SetBool("Run", false);
-            }
-        }
-
         if (isInWater)
         {
-            //Joystick
-            if (joystick.Vertical >= sensitivity)
+            if (joystick.Horizontal >= (sensitivity * 5) && !wallAtRight)
             {
+                //Move Right
+                rb2d.transform.Translate(Vector2.right * speed * 0.75f * Time.deltaTime);
+                if (!facingRight) Flip();
+            }
+            else if (joystick.Horizontal <= -(sensitivity * 5) && !wallAtLeft)
+            {
+                //Move Left
+                rb2d.transform.Translate(Vector2.left * speed * 0.75f * Time.deltaTime);
+                if (facingRight) Flip();
+            }
+            else if (joystick.Vertical >= sensitivity)
+            {
+                //Move Up
                 rb2d.transform.Translate(Vector2.up * speed * 0.5f * Time.deltaTime);
             }
             else if (joystick.Vertical <= -sensitivity)
             {
+                //Move Down
                 rb2d.transform.Translate(Vector2.down * speed * 0.5f * Time.deltaTime);
             }
-            //Keyboard
-            else if (Input.GetKey(KeyCode.UpArrow))
+            
+        }
+        else   //Normal
+        {
+            if (!confuseParticle.isPlaying)
             {
+                if (joystick.Horizontal >= sensitivity && !wallAtRight)
+                {
+                    //Move Right
+                    characterAnimation.SetBool("Run", true);
+                    rb2d.transform.Translate(Vector2.right * speed * Time.deltaTime);
+                    if (!facingRight) Flip();
+                }
+                else if (joystick.Horizontal <= -sensitivity && !wallAtLeft)
+                {
+                    //Move Left
+                    characterAnimation.SetBool("Run", true);
+                    rb2d.transform.Translate(Vector2.left * speed * Time.deltaTime);
+                    if (facingRight) Flip();
+                }
+                else if (characterAnimation.GetBool("Run"))
+                {
+                    characterAnimation.SetBool("Run", false);
+                }
+            }
+
+            else //Confuse
+            {
+                if ((joystick.Horizontal >= sensitivity) && !wallAtLeft)
+                {
+                    //Move Left
+                    characterAnimation.SetBool("Run", true);
+                    rb2d.transform.Translate(Vector2.left * speed * Time.deltaTime);
+                    if (facingRight) Flip();
+                }
+                else if ((joystick.Horizontal <= -sensitivity) && !wallAtRight)
+                {
+                    //Move Right
+                    characterAnimation.SetBool("Run", true);
+                    rb2d.transform.Translate(Vector2.right * speed * Time.deltaTime);
+                    if (!facingRight) Flip();
+                }
+                else if (characterAnimation.GetBool("Run"))
+                {
+                    characterAnimation.SetBool("Run", false);
+                }
+            }
+        }
+        
+    }
+
+    private void MovementKeyboard()
+    {
+        if (isInWater)
+        {
+            if (Input.GetKey(KeyCode.RightArrow) && !wallAtRight)
+            {
+                //Move Right
+                rb2d.transform.Translate(Vector2.right * speed * 0.75f * Time.deltaTime);
+                if (!facingRight) Flip();
+            }
+            else if (Input.GetKey(KeyCode.LeftArrow) && !wallAtLeft)
+            {
+                //Move Left
+                rb2d.transform.Translate(Vector2.left * speed * 0.75f * Time.deltaTime);
+                if (facingRight) Flip();
+            }
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                //Move Up
                 rb2d.transform.Translate(Vector2.up * speed * 0.5f * Time.deltaTime);
             }
             else if (Input.GetKey(KeyCode.DownArrow))
             {
+                //Move Down
                 rb2d.transform.Translate(Vector2.down * speed * 0.5f * Time.deltaTime);
             }
         }
+        else   //Normal
+        {
+            if (!confuseParticle.isPlaying)
+            {
+                if (Input.GetKey(KeyCode.RightArrow) && !wallAtRight)
+                {
+                    //Move Right
+                    characterAnimation.SetBool("Run", true);
+                    rb2d.transform.Translate(Vector2.right * speed * Time.deltaTime);
+                    if (!facingRight) Flip();
+                }
+                else if (Input.GetKey(KeyCode.LeftArrow) && !wallAtLeft)
+                {
+                    //Move Left
+                    characterAnimation.SetBool("Run", true);
+                    rb2d.transform.Translate(Vector2.left * speed * Time.deltaTime);
+                    if (facingRight) Flip();
+                }
+                else if (characterAnimation.GetBool("Run"))
+                {
+                    characterAnimation.SetBool("Run", false);
+                }
+            }
 
-    }
-
-    private void MoveRight()
-    {
-        characterAnimation.SetBool("Run", true);
-        rb2d.transform.Translate(Vector2.right * speed * Time.deltaTime);
-        if (!facingRight) Flip();
-    }
-
-    private void MoveLeft()
-    {
-        characterAnimation.SetBool("Run", true);
-        rb2d.transform.Translate(Vector2.left * speed * Time.deltaTime);
-        if (facingRight) Flip();
+            else //Confuse
+            {
+                if (Input.GetKey(KeyCode.RightArrow) && !wallAtLeft)
+                {
+                    //Move Left
+                    characterAnimation.SetBool("Run", true);
+                    rb2d.transform.Translate(Vector2.left * speed * Time.deltaTime);
+                    if (facingRight) Flip();
+                }
+                else if (Input.GetKey(KeyCode.LeftArrow) && !wallAtRight)
+                {
+                    //Move Right
+                    characterAnimation.SetBool("Run", true);
+                    rb2d.transform.Translate(Vector2.right * speed * Time.deltaTime);
+                    if (!facingRight) Flip();
+                }
+                else if (characterAnimation.GetBool("Run"))
+                {
+                    characterAnimation.SetBool("Run", false);
+                }
+            }
+        }
     }
 
     public void Jump()
     {
-        if (!isInWater)
+        if (!isInWater && isGrounded)
         {
-            if (extraJumps > 0)
-            {
-                rb2d.AddForce(Vector2.up * jumpForce * 100);
-                extraJumps--;
-            }
-            else if (extraJumps == 0 && isGrounded)
-            {
-                rb2d.AddForce(Vector2.up * jumpForce * 100);
-            }
+            rb2d.AddForce(Vector2.up * jumpForce * 100);
         }
     }
 
@@ -279,7 +345,6 @@ public class PlayerController : MonoBehaviour
                     health = health + 30;
                 }
                 healthParticle.Play();
-                StartCoroutine(Wait("StopHealthParticle", 1.5f));
             }
             //Sound explosion
             else if (currentCharacter == "cinamon" && isGrounded)
@@ -288,6 +353,11 @@ public class PlayerController : MonoBehaviour
                 rb2d.gravityScale = 0.4f;
                 StartCoroutine(Wait("RestoreGravity", 2f));
                 CameraController.instance.Shake(0.7f);
+            }
+            //Throw scissor
+            else if (currentCharacter == "kutter")
+            {
+                StartCoroutine(Wait("ThrowScissor", 0.3f));
             }
         }
         
@@ -329,11 +399,15 @@ public class PlayerController : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("WallLeft"))
         {
-            collisionWallLeft = true;
+            wallAtLeft = true;
         }
         else if (collision.gameObject.CompareTag("WallRight"))
         {
-            collisionWallRight = true;
+            wallAtRight = true;
+        }
+        else if (collision.gameObject.CompareTag("Fox"))
+        {
+            confuseParticle.Play();
         }
     }
 
@@ -360,29 +434,14 @@ public class PlayerController : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("WallLeft"))
         {
-            collisionWallLeft = false;
+            wallAtLeft = false;
         }
         if (collision.gameObject.CompareTag("WallRight"))
         {
-            collisionWallRight = false;
+            wallAtRight = false;
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Fox"))
-        {
-            confuseParticle.Play();
-        }
-        
-        
-    }
-
-    void OnCollisionExit2D(Collision2D collision)
-    {
-        
-        
-    }
 
     #endregion
 
@@ -427,10 +486,6 @@ public class PlayerController : MonoBehaviour
                 impactFace.SetActive(false);
                 break;
 
-            case "StopHealthParticle":
-                healthParticle.Stop();
-                break;
-
             case "RestoreGravity":
                 rb2d.gravityScale = 3f;
                 break;
@@ -453,10 +508,6 @@ public class PlayerController : MonoBehaviour
                 Instantiate(projectile, shotPoint.position, shotPoint.rotation);
                 break;
 
-            case "ActiveShoot":
-                shootActive = true;
-                break;
-
             case "HideFrame":
                 frame.SetActive(false);
                 break;
@@ -467,13 +518,10 @@ public class PlayerController : MonoBehaviour
     {
         if (!bloodShowed)
         {
-            Debug.Log("dead");
             deathCollider.SetActive(true);
             impactFace.SetActive(false);
             characters.SetActive(false);
             Instantiate(deathEffect, transform.position, Quaternion.identity);
-            //gameObject.GetComponent<CapsuleCollider2D>().tag = "Ignore";
-            //gameObject.layer = 10;
 
             if (Random.Range(1, 2) == 1)
             {
@@ -558,7 +606,7 @@ public class PlayerController : MonoBehaviour
         impactFace = pandaImpactFace;
         currentCharacter = "panda";
         pandaImpactFace.SetActive(false);
-        fillPanda.color = new Color32(76, 255, 249, 255);
+        fillPanda.color = new Color32(0, 80, 255, 255);
         fillKero.color = new Color32(255, 255, 255, 255);
         fillCinamon.color = new Color32(255, 255, 255, 255);
         fillKutter.color = new Color32(255, 255, 255, 255);
@@ -577,7 +625,7 @@ public class PlayerController : MonoBehaviour
         currentCharacter = "kero";
         keroImpactFace.SetActive(false);
         fillPanda.color = new Color32(255, 255, 255, 255);
-        fillKero.color = new Color32(76, 255, 249, 255);
+        fillKero.color = new Color32(0, 80, 255, 255);
         fillCinamon.color = new Color32(255, 255, 255, 255);
         fillKutter.color = new Color32(255, 255, 255, 255);
         fillTrisky.color = new Color32(255, 255, 255, 255);
@@ -596,7 +644,7 @@ public class PlayerController : MonoBehaviour
         cinamonImpactFace.SetActive(false);
         fillPanda.color = new Color32(255, 255, 255, 255);
         fillKero.color = new Color32(255, 255, 255, 255);
-        fillCinamon.color = new Color32(76, 255, 249, 255);
+        fillCinamon.color = new Color32(0, 80, 255, 255);
         fillKutter.color = new Color32(255, 255, 255, 255);
         fillTrisky.color = new Color32(255, 255, 255, 255);
     }
@@ -615,7 +663,7 @@ public class PlayerController : MonoBehaviour
         fillPanda.color = new Color32(255, 255, 255, 255);
         fillKero.color = new Color32(255, 255, 255, 255);
         fillCinamon.color = new Color32(255, 255, 255, 255);
-        fillKutter.color = new Color32(76, 255, 249, 255);
+        fillKutter.color = new Color32(0, 80, 255, 255);
         fillTrisky.color = new Color32(255, 255, 255, 255);
     }
 
@@ -634,7 +682,7 @@ public class PlayerController : MonoBehaviour
         fillKero.color = new Color32(255, 255, 255, 255);
         fillCinamon.color = new Color32(255, 255, 255, 255);
         fillKutter.color = new Color32(255, 255, 255, 255);
-        fillTrisky.color = new Color32(76, 255, 249, 255);
+        fillTrisky.color = new Color32(0, 80, 255, 255);
     }
     #endregion
 
