@@ -1,0 +1,352 @@
+fileFormatVersion: 2
+guid: 13919273d500cbd42ab9f94ebaaea2dc
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2090601673938052466
+    second: KekeoArmor_Head
+  - first:
+      213: -2708454038453952249
+    second: KekeoArmor_Shoulder_R
+  - first:
+      213: 916316603426276246
+    second: KekeoArmor_Chest
+  - first:
+      213: -2909717435765831533
+    second: KekeoArmor_Shoulder_L
+  - first:
+      213: -7531281528915674647
+    second: KekeoArmor_Arm
+  - first:
+      213: 3829049903644767912
+    second: KekeoArmor_Hand_L
+  - first:
+      213: -6930586029811267053
+    second: KekeoArmor_Hand_R
+  - first:
+      213: 5122174349606904672
+    second: KekeoArmor_Pants
+  - first:
+      213: -4695278914850474100
+    second: KekeoArmor_Leg
+  - first:
+      213: 8508950635464036759
+    second: KekeoArmor_Foot
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: KekeoArmor_Head
+      rect:
+        serializedVersion: 2
+        x: 287
+        y: 1297
+        width: 864
+        height: 838
+      alignment: 9
+      pivot: {x: 0.5300671, y: 0.048285365}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e56323c8c41b95b488d262ddbab9e236
+      internalID: -2090601673938052466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KekeoArmor_Shoulder_R
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 1015
+        width: 318
+        height: 280
+      alignment: 9
+      pivot: {x: 0.7100651, y: 0.57952446}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0fa292c98cc3d284ebf90d1c8b2934ff
+      internalID: -2708454038453952249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KekeoArmor_Chest
+      rect:
+        serializedVersion: 2
+        x: 534
+        y: 784
+        width: 398
+        height: 415
+      alignment: 9
+      pivot: {x: 0.53729814, y: 0.14229913}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cabd5870d263ea246a98fb7b0ff7d4ba
+      internalID: 916316603426276246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KekeoArmor_Shoulder_L
+      rect:
+        serializedVersion: 2
+        x: 1118
+        y: 1039
+        width: 205
+        height: 165
+      alignment: 9
+      pivot: {x: 0.13793707, y: 0.6799346}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8471739644e98542887c0e262b65180
+      internalID: -2909717435765831533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KekeoArmor_Arm
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 652
+        width: 254
+        height: 276
+      alignment: 9
+      pivot: {x: 0.7045517, y: 0.8764929}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35a05a00eb89b684e9bb67ba0ea7ab6d
+      internalID: -7531281528915674647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KekeoArmor_Hand_L
+      rect:
+        serializedVersion: 2
+        x: 1082
+        y: 686
+        width: 243
+        height: 217
+      alignment: 9
+      pivot: {x: 0.25564438, y: 0.65391886}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e97f5472643215c409d4f64ab98f35bb
+      internalID: 3829049903644767912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KekeoArmor_Hand_R
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 293
+        width: 230
+        height: 282
+      alignment: 9
+      pivot: {x: 0.38705206, y: 0.657921}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1a71ef8de9cce04e93147349a1c3b33
+      internalID: -6930586029811267053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KekeoArmor_Pants
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 403
+        width: 496
+        height: 281
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73fd044df9cfa444c8fc5259096a1057
+      internalID: 5122174349606904672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KekeoArmor_Leg
+      rect:
+        serializedVersion: 2
+        x: 531
+        y: 52
+        width: 178
+        height: 231
+      alignment: 9
+      pivot: {x: 0.49999964, y: 0.96590185}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62a21613b8aabea418cc3eaa2934cdfc
+      internalID: -4695278914850474100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KekeoArmor_Foot
+      rect:
+        serializedVersion: 2
+        x: 799
+        y: 24
+        width: 259
+        height: 290
+      alignment: 9
+      pivot: {x: 0.4713427, y: 0.85831773}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c6b48924fb250a4481d4cce3c95de8b
+      internalID: 8508950635464036759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: c4c19b81a19ef964fbd6077ca473c165
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -11,7 +11,6 @@ public class TricycleController : MonoBehaviour
     public GameObject particle;
     public Animator camAnim;
     public bool shake = true;
-    private Vector2 target;
     private float maxHeight;
     private float minHeight;
 
@@ -30,8 +29,6 @@ public class TricycleController : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
-        transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
-
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             MoveUp();
@@ -46,9 +43,9 @@ public class TricycleController : MonoBehaviour
     {
         if (transform.position.y < maxHeight)
         {
+            transform.position = new Vector2(transform.position.x, transform.position.y + range);
             if (shake) camAnim.SetTrigger("Shake2");
             Instantiate(particle, transform.position, Quaternion.identity);
-            target = new Vector2(transform.position.x, transform.position.y + range);
         }   
     }
 
@@ -56,9 +53,10 @@ public class TricycleController : MonoBehaviour
     {
         if (transform.position.y > minHeight)
         {
+            transform.position = new Vector2(transform.position.x, transform.position.y - range);
+            //transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x, transform.position.y - range), speed * Time.deltaTime);
             if (shake) camAnim.SetTrigger("Shake2");
             Instantiate(particle, transform.position, Quaternion.identity);
-            target = new Vector2(transform.position.x, transform.position.y - range);
         }
     }
 }
