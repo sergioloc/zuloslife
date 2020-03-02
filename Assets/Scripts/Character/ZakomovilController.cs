@@ -1,0 +1,48 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ZakomovilController : MonoBehaviour
+{
+    public float range;
+    private float maxHeight;
+    private float minHeight;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        maxHeight = range;
+        minHeight = -range;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            MoveUp();
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            MoveDown();
+        }
+    }
+
+    public void MoveUp()
+    {
+        if (transform.position.y < maxHeight)
+        {
+            transform.position = new Vector2(transform.position.x, transform.position.y + range);
+            //Instantiate(particle, transform.position, Quaternion.identity);
+        }
+    }
+
+    public void MoveDown()
+    {
+        if (transform.position.y > minHeight)
+        {
+            transform.position = new Vector2(transform.position.x, transform.position.y - range);
+            //Instantiate(particle, transform.position, Quaternion.identity);
+        }
+    }
+}

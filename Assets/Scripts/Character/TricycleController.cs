@@ -1,14 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class TricycleController : MonoBehaviour
 {
     public float range;
     public float speed;
-    public int health = 3;
+    public float health = 10;
     public GameObject particle;
+    public Image healthBar;
     public Animator camAnim;
     private Animator kekeoAnim;
     public bool shake = true;
@@ -31,6 +33,7 @@ public class TricycleController : MonoBehaviour
             //Restart
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+        healthBar.fillAmount = health / 10;
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
