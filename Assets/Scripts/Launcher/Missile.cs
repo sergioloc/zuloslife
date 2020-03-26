@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Missile : MonoBehaviour
 {
-    private float MoveSpeed = 10f;
+    public float speed = 10f;
     public GameObject explosion;
     private Rigidbody2D rb;
 
@@ -17,7 +17,7 @@ public class Missile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rb.velocity = transform.right * MoveSpeed * 100 * Time.deltaTime;
+        rb.velocity = transform.right * speed * 100 * Time.deltaTime;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
