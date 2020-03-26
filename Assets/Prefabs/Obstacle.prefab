@@ -111,10 +111,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
+  speed: 20
   particle: {fileID: 593478439584057630, guid: 59c7d96128555a44487b5ee35ce2d475, type: 3}
-  phase2: 5
-  phase3: 10
-  phase4: 15
 --- !u!114 &353030417734233081
 MonoBehaviour:
   m_ObjectHideFlags: 0

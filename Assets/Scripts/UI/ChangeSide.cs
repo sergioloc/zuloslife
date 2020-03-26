@@ -14,19 +14,54 @@ public class ChangeSide : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            animCam.SetTrigger("MoveRight");
-            side2.SetActive(true);
-            StartCoroutine(HideSide(side1));
-        }
-        else if (Input.GetKeyDown(KeyCode.N))
-        {
-            animCam.SetTrigger("MoveLeft");
-            side1.SetActive(true);
-            StartCoroutine(HideSide(side2));
+        CheckPhase();
+    }
 
+    private void CheckPhase(){
+        if (TrycicleLevelValues.phase == 2 && !side2.activeSelf){
+            side2.SetActive(true);
+            StartCoroutine(MoveRight());
         }
+        else if (TrycicleLevelValues.phase == 3 && !side1.activeSelf){
+            side1.SetActive(true);
+            StartCoroutine(MoveLeft());
+        }
+        else if (TrycicleLevelValues.phase == 4 && !side2.activeSelf){
+            side2.SetActive(true);
+            StartCoroutine(MoveRight());
+        }
+        else if (TrycicleLevelValues.phase == 5 && !side1.activeSelf){
+            side1.SetActive(true);
+            StartCoroutine(MoveLeft());
+        }
+        else if (TrycicleLevelValues.phase == 6 && !side2.activeSelf){
+            side2.SetActive(true);
+            StartCoroutine(MoveRight());
+        }
+        else if (TrycicleLevelValues.phase == 7 && !side1.activeSelf){
+            side1.SetActive(true);
+            StartCoroutine(MoveLeft());
+        }
+        else if (TrycicleLevelValues.phase == 8 && !side2.activeSelf){
+            side2.SetActive(true);
+            StartCoroutine(MoveRight());
+        }
+        else if (TrycicleLevelValues.phase == 9 && !side1.activeSelf){
+            side1.SetActive(true);
+            StartCoroutine(MoveLeft());
+        }
+    }
+
+    IEnumerator MoveRight(){
+        yield return new WaitForSeconds(1f);
+        animCam.SetBool("isRight", true);
+        StartCoroutine(HideSide(side1));
+    }
+
+    IEnumerator MoveLeft(){
+        yield return new WaitForSeconds(1f);
+        animCam.SetBool("isRight", false);
+        StartCoroutine(HideSide(side2));
     }
 
 
