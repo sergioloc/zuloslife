@@ -27,6 +27,7 @@ TagManager:
   - Weapon
   - WeaponEnemy
   - Air
+  - Shield
   layers:
   - Default
   - TransparentFX
