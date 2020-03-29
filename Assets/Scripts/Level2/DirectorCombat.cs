@@ -9,156 +9,149 @@ public class DirectorCombat : MonoBehaviour
 
     public Transform zakoPosition;
 
-    private bool isLaser, isFinger;
+    private bool isLaser, isSpikes, isFeeded, feeding, attacking;
     private int lastAttack;
+    public float timeBtwAttack = 2f;
+    public static bool wait;
     
     void Start()
     {
-        isLaser = isFinger = false;
-        Attack();
+        isLaser = isSpikes = isFeeded = feeding = wait = attacking = false;
     }
 
     void Update()
     {
+        UpdatePhase();
+
+        if (!feeding && !attacking){
+            Attack();
+        }
+
+        // Fire defense
         if (zakoPosition.position.y == 0 && isLaser){
-            CagatioStartFire();
+            animCagatio.SetBool("Fire", true);
         }
         else {
-            CagatioStopFire();
+            animCagatio.SetBool("Fire", false);
         }
 
-        if (zakoPosition.position.y == -3 && isFinger){
+        // Shield defense
+        if (zakoPosition.position.y == -3 && isSpikes){
             animEngine.SetBool("SpikesFail", true);
-            CagatioStartShield();
-            StartCoroutine(EngineStopSpikesFail());
+            animCagatio.SetBool("Shield", true);
         }
-
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            animEngine.SetTrigger("Feed");
-            animFeeder.SetTrigger("Feed");
+        else {
+            animCagatio.SetBool("Shield", false);
         }
-
     }
 
     // General -----------------------------------
 
     private void Attack(){
+        attacking = true;
         int rand = Random.Range(1, 3);
 
         if (rand == 1){
             if (rand != lastAttack){
-                EngineStartLaserAttack();
+                EngineStartLaser();
                 lastAttack = 1;
             }
             else{
-                EngineStartFingerAttack();
+                EngineStartSpikes();
                 lastAttack = 2;
             }
         }
         else if (rand == 2){
             if (lastAttack != 2){
-                EngineStartFingerAttack();
+                EngineStartSpikes();
                 lastAttack = 2;
             }
             else {
-                EngineStartGunAttack();
+                EngineStartGun();
                 lastAttack = 3;
             }
         }
         else if (rand == 3){
             if (lastAttack != 3){
-                EngineStartGunAttack();
+                EngineStartGun();
                 lastAttack = 3;
             }
             else{
-                EngineStartLaserAttack();
+                EngineStartLaser();
                 lastAttack = 1;
             }
         }
-        StartCoroutine(NextAttack());
     }
 
-    IEnumerator NextAttack()
+    IEnumerator Feed()
     {
-        yield return new WaitForSeconds(4f);
-        Attack();
+        yield return new WaitForSeconds(2f);
+        animEngine.SetTrigger("Feed");
+        animFeeder.SetTrigger("Feed");
+    }
+
+    private void UpdatePhase(){
+        if (TrycicleLevelValues.phase >= 6)
+        {
+            if (!isFeeded){
+                StartCoroutine(Feed());
+                isFeeded = true;
+            }
+            feeding = true;
+        }
+        else{
+            feeding = false;
+        }
     }
 
 
     // Engine ------------------------------------
 
-    private void EngineStartLaserAttack(){
+    // Laser
+    private void EngineStartLaser(){
         isLaser = true;
-        eyeParticle1.SetActive(true);
-        eyeParticle2.SetActive(true);
-        StartCoroutine(EngineActiveLaser());
-        StartCoroutine(EngineFinishLaserAttack());
+        animEngine.SetBool("Laser", true);
+        StartCoroutine(EngineStopLaser());
     }
 
-    private void EngineStartFingerAttack(){
-        isFinger = true;
-        animEngine.SetBool("Spikes", true);
-        StartCoroutine(EngineFinishFingerAttack());
-    }
-
-    private void EngineStartGunAttack(){
-        animEngine.SetBool("Gun", true);
-        StartCoroutine(EngineFinishGunAttack());
-    }
-
-    IEnumerator EngineActiveLaser()
+    IEnumerator EngineStopLaser()
     {
-        yield return new WaitForSeconds(0.5f);
-        laser.SetActive(true);
-    }
-
-    IEnumerator EngineFinishLaserAttack()
-    {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1.1f);
         isLaser = false;
-        eyeParticle1.SetActive(false);
-        eyeParticle2.SetActive(false);
-        laser.SetActive(false);
+        attacking = false;
+        animEngine.SetBool("Laser", false);
+        //animCagatio.SetBool("Fire", false);
     }
 
-    IEnumerator EngineFinishFingerAttack()
+    // Spikes
+    private void EngineStartSpikes(){
+        isSpikes = true;
+        animEngine.SetBool("Spikes", true);
+        StartCoroutine(EngineStopSpikes());
+    }
+
+    IEnumerator EngineStopSpikes()
     {
-        yield return new WaitForSeconds(0.5f);
-        isFinger = false;
+        yield return new WaitForSeconds(1.5f);
+        Debug.Log("stop");
+        isSpikes = false;
+        attacking = false;
         animEngine.SetBool("Spikes", false);
-    }
-
-    IEnumerator EngineFinishGunAttack()
-    {
-        yield return new WaitForSeconds(0.5f);
-        animEngine.SetBool("Gun", false);
-    }
-
-    IEnumerator EngineStopSpikesFail()
-    {
-        yield return new WaitForSeconds(2f);
         animEngine.SetBool("SpikesFail", false);
-    }
-
-    // Cagatio ----------------------------------
-
-    private void CagatioStartShield(){
-        animCagatio.SetBool("Shield", true);
-        StartCoroutine(CagatioStopShield());
-    }
-
-    private void CagatioStartFire(){
-        animCagatio.SetBool("Fire", true);
-    }
-
-    private void CagatioStopFire(){
-        animCagatio.SetBool("Fire", false);
-    }
-
-    IEnumerator CagatioStopShield()
-    {
-        yield return new WaitForSeconds(0.5f);
         animCagatio.SetBool("Shield", false);
     }
+
+    // Gun
+    private void EngineStartGun(){
+        animEngine.SetBool("Gun", true);
+        StartCoroutine(EngineStopGun());
+    }
+
+    IEnumerator EngineStopGun()
+    {
+        yield return new WaitForSeconds(1f);
+        animEngine.SetBool("Gun", false);
+        attacking = false;
+    }
+
 }

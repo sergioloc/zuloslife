@@ -6,14 +6,20 @@ public class Spawner : MonoBehaviour
 {
     public GameObject[] obstaclePatterns;
     public float timeBtwSpawn;
+    public static bool wait;
 
     private void Start(){
+        wait = false;
         int rand = Random.Range(0, obstaclePatterns.Length);
-        Instantiate(obstaclePatterns[rand], transform.position, Quaternion.identity);
-        StartCoroutine(Spawn());
+        Instantiate(obstaclePatterns[rand], transform.position, Quaternion.identity); 
     }
+
     private void FixedUpdate()
     {
+        if (!wait){
+            StartCoroutine(Spawn());
+            wait = true;
+        }
         if (TrycicleLevelValues.phase == 1){
             timeBtwSpawn = 1.8f;
         }
@@ -39,6 +45,6 @@ public class Spawner : MonoBehaviour
         yield return new WaitForSeconds(timeBtwSpawn);
         int rand = Random.Range(0, obstaclePatterns.Length);
         Instantiate(obstaclePatterns[rand], transform.position, Quaternion.identity);
-        StartCoroutine(Spawn());
+        wait = false;
     }
 }

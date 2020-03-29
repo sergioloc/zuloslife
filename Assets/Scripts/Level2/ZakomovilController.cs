@@ -7,6 +7,9 @@ public class ZakomovilController : MonoBehaviour
     public float range;
     private float maxHeight;
     private float minHeight;
+    public Animator animCamera;
+    public bool shake = true;
+    public GameObject particle;
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +36,8 @@ public class ZakomovilController : MonoBehaviour
         if (transform.position.y < maxHeight)
         {
             transform.position = new Vector2(transform.position.x, transform.position.y + range);
-            //Instantiate(particle, transform.position, Quaternion.identity);
+            if (shake) animCamera.SetTrigger("Shake2");
+            Instantiate(particle, transform.position, Quaternion.identity);
         }
     }
 
@@ -42,7 +46,8 @@ public class ZakomovilController : MonoBehaviour
         if (transform.position.y > minHeight)
         {
             transform.position = new Vector2(transform.position.x, transform.position.y - range);
-            //Instantiate(particle, transform.position, Quaternion.identity);
+            if (shake) animCamera   .SetTrigger("Shake2");
+            Instantiate(particle, transform.position, Quaternion.identity);
         }
     }
 }

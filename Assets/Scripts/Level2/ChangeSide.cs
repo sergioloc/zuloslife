@@ -5,7 +5,7 @@ using UnityEngine;
 public class ChangeSide : MonoBehaviour
 {
     private Animator animCam;
-    public GameObject side1, side2;
+    public GameObject side1, side2, spawner;
 
     void Start()
     {
@@ -21,6 +21,7 @@ public class ChangeSide : MonoBehaviour
         if (TrycicleLevelValues.phase == 2 && !side2.activeSelf){
             side2.SetActive(true);
             StartCoroutine(MoveRight());
+            DirectorCombat.wait = true;
         }
         else if (TrycicleLevelValues.phase == 3 && !side1.activeSelf){
             side1.SetActive(true);
@@ -29,6 +30,7 @@ public class ChangeSide : MonoBehaviour
         else if (TrycicleLevelValues.phase == 4 && !side2.activeSelf){
             side2.SetActive(true);
             StartCoroutine(MoveRight());
+            DirectorCombat.wait = true;
         }
         else if (TrycicleLevelValues.phase == 5 && !side1.activeSelf){
             side1.SetActive(true);
@@ -37,6 +39,7 @@ public class ChangeSide : MonoBehaviour
         else if (TrycicleLevelValues.phase == 6 && !side2.activeSelf){
             side2.SetActive(true);
             StartCoroutine(MoveRight());
+            DirectorCombat.wait = true;
         }
         else if (TrycicleLevelValues.phase == 7 && !side1.activeSelf){
             side1.SetActive(true);
@@ -45,23 +48,32 @@ public class ChangeSide : MonoBehaviour
         else if (TrycicleLevelValues.phase == 8 && !side2.activeSelf){
             side2.SetActive(true);
             StartCoroutine(MoveRight());
+            DirectorCombat.wait = true;
         }
         else if (TrycicleLevelValues.phase == 9 && !side1.activeSelf){
             side1.SetActive(true);
-            StartCoroutine(MoveLeft());
+            MoveCenter();
         }
     }
 
     IEnumerator MoveRight(){
         yield return new WaitForSeconds(1f);
+        spawner.SetActive(false);
         animCam.SetBool("isRight", true);
         StartCoroutine(HideSide(side1));
+        StartCoroutine(AllowAttack());
     }
 
     IEnumerator MoveLeft(){
         yield return new WaitForSeconds(1f);
+        spawner.SetActive(true);
         animCam.SetBool("isRight", false);
         StartCoroutine(HideSide(side2));
+        Spawner.wait = false;
+    }
+
+    private void MoveCenter(){
+        animCam.SetTrigger("Center");
     }
 
 
@@ -69,6 +81,12 @@ public class ChangeSide : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         side.SetActive(false);
+    }
+
+    IEnumerator AllowAttack()
+    {
+        yield return new WaitForSeconds(1f);
+        DirectorCombat.wait = false;
     }
 
 

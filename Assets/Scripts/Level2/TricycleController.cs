@@ -48,6 +48,7 @@ public class TricycleController : MonoBehaviour
         wheelF.transform.Rotate(0, 0, -180 * Time.deltaTime);
         wheelB1.transform.Rotate(0, 0, -180 * Time.deltaTime);
         wheelB2.transform.Rotate(0, 0, -180 * Time.deltaTime);
+
     }
 
     public void MoveUp()
