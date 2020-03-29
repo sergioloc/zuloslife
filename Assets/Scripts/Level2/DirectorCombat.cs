@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DirectorCombat : MonoBehaviour
 {
-    public Animator animEngine, animCagatio;
+    public Animator animEngine, animCagatio, animFeeder;
     public GameObject laser, eyeParticle1, eyeParticle2;
 
     public Transform zakoPosition;
@@ -32,6 +32,13 @@ public class DirectorCombat : MonoBehaviour
             CagatioStartShield();
             StartCoroutine(EngineStopSpikesFail());
         }
+
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            animEngine.SetTrigger("Feed");
+            animFeeder.SetTrigger("Feed");
+        }
+
     }
 
     // General -----------------------------------
