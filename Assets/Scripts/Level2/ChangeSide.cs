@@ -18,54 +18,52 @@ public class ChangeSide : MonoBehaviour
     }
 
     private void CheckPhase(){
-        if (TrycicleLevelValues.phase == 2 && !side2.activeSelf){
+        if (TrycicleLevelValues.phase == 2 && !side2.activeSelf){ //right
             side2.SetActive(true);
-            StartCoroutine(MoveRight());
+            MoveRight();
             DirectorCombat.wait = true;
         }
-        else if (TrycicleLevelValues.phase == 3 && !side1.activeSelf){
+        else if (TrycicleLevelValues.phase == 3 && !side1.activeSelf){ // left
             side1.SetActive(true);
-            StartCoroutine(MoveLeft());
+            MoveLeft();
         }
-        else if (TrycicleLevelValues.phase == 4 && !side2.activeSelf){
+        else if (TrycicleLevelValues.phase == 4 && !side2.activeSelf){ // right
             side2.SetActive(true);
-            StartCoroutine(MoveRight());
+            MoveRight();
             DirectorCombat.wait = true;
         }
-        else if (TrycicleLevelValues.phase == 5 && !side1.activeSelf){
+        else if (TrycicleLevelValues.phase == 5 && !side1.activeSelf){ //left
             side1.SetActive(true);
-            StartCoroutine(MoveLeft());
+            MoveLeft();
         }
-        else if (TrycicleLevelValues.phase == 6 && !side2.activeSelf){
+        else if (TrycicleLevelValues.phase == 6 && !side2.activeSelf){ //right
             side2.SetActive(true);
-            StartCoroutine(MoveRight());
+            MoveRight();
             DirectorCombat.wait = true;
         }
-        else if (TrycicleLevelValues.phase == 7 && !side1.activeSelf){
+        else if (TrycicleLevelValues.phase == 7 && !side1.activeSelf){ //left
             side1.SetActive(true);
-            StartCoroutine(MoveLeft());
+            MoveLeft();
         }
-        else if (TrycicleLevelValues.phase == 8 && !side2.activeSelf){
+        else if (TrycicleLevelValues.phase == 9 && !side2.activeSelf){ //right
             side2.SetActive(true);
-            StartCoroutine(MoveRight());
+            MoveRight();
             DirectorCombat.wait = true;
         }
-        else if (TrycicleLevelValues.phase == 9 && !side1.activeSelf){
+        else if (TrycicleLevelValues.phase == 10){ //center
             side1.SetActive(true);
             MoveCenter();
         }
     }
 
-    IEnumerator MoveRight(){
-        yield return new WaitForSeconds(1f);
+    private void MoveRight(){
         spawner.SetActive(false);
         animCam.SetBool("isRight", true);
         StartCoroutine(HideSide(side1));
         StartCoroutine(AllowAttack());
     }
 
-    IEnumerator MoveLeft(){
-        yield return new WaitForSeconds(1f);
+    private void MoveLeft(){
         spawner.SetActive(true);
         animCam.SetBool("isRight", false);
         StartCoroutine(HideSide(side2));

@@ -21,7 +21,7 @@ public class Spawner : MonoBehaviour
             wait = true;
         }
         if (TrycicleLevelValues.phase == 1){
-            timeBtwSpawn = 1.8f;
+            timeBtwSpawn = 1.6f;
         }
         else if (TrycicleLevelValues.phase == 2){
             timeBtwSpawn = 1.4f;

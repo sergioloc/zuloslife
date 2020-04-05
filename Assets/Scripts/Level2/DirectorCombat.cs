@@ -24,10 +24,10 @@ public class DirectorCombat : MonoBehaviour
         UpdatePhase();
 
         if (!feeding && !attacking){
-            Attack();
+            StartCoroutine(Attack());
         }
 
-        // Fire defense
+        /* Fire defense
         if (zakoPosition.position.y == 0 && isLaser){
             animCagatio.SetBool("Fire", true);
         }
@@ -42,12 +42,13 @@ public class DirectorCombat : MonoBehaviour
         }
         else {
             animCagatio.SetBool("Shield", false);
-        }
+        }*/
     }
 
     // General -----------------------------------
 
-    private void Attack(){
+    IEnumerator Attack(){
+        yield return new WaitForSeconds(1f);
         attacking = true;
         int rand = Random.Range(1, 3);
 
@@ -91,7 +92,7 @@ public class DirectorCombat : MonoBehaviour
     }
 
     private void UpdatePhase(){
-        if (TrycicleLevelValues.phase >= 6)
+        if (TrycicleLevelValues.phase == 4)
         {
             if (!isFeeded){
                 StartCoroutine(Feed());

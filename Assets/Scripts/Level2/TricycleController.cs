@@ -17,10 +17,11 @@ public class TricycleController : MonoBehaviour
     private float maxHeight;
     private float minHeight;
     public GameObject wheelF, wheelB1, wheelB2;
-
+    private bool freeze, mech;
 
     void Start()
     {
+        freeze = mech = false;
         maxHeight = range;
         minHeight = -range;
         kekeoAnim = gameObject.GetComponent<Animator>();
@@ -30,7 +31,6 @@ public class TricycleController : MonoBehaviour
     {
         if (health <= 0)
         {
-            //Restart
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
         healthBar.fillAmount = health / 10;
@@ -43,7 +43,7 @@ public class TricycleController : MonoBehaviour
         {
             MoveDown();
         }
-        else if (Input.GetKeyDown(KeyCode.M)){
+        else if (TrycicleLevelValues.phase == 7 && !mech){
             SuitUp();
         }
 
@@ -56,28 +56,32 @@ public class TricycleController : MonoBehaviour
 
     public void MoveUp()
     {
-        if (transform.position.y < maxHeight)
+        if (transform.position.y < maxHeight && !freeze)
         {
             kekeoAnim.SetTrigger("Jump");
             transform.position = new Vector2(transform.position.x, transform.position.y + range);
             if (shake) camAnim.SetTrigger("Shake2");
-            Instantiate(particle, transform.position, Quaternion.identity);
+            if (!mech) Instantiate(particle, transform.position, Quaternion.identity);
+            else Instantiate(particle, new Vector2(0f, transform.position.y), Quaternion.identity);
         }
     }
 
     public void MoveDown()
     {
-        if (transform.position.y > minHeight)
+        if (transform.position.y > minHeight && !freeze)
         {
             kekeoAnim.SetTrigger("Jump");
             transform.position = new Vector2(transform.position.x, transform.position.y - range);
-            //transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x, transform.position.y - range), speed * Time.deltaTime);
             if (shake) camAnim.SetTrigger("Shake2");
-            Instantiate(particle, transform.position, Quaternion.identity);
+            if (!mech) Instantiate(particle, transform.position, Quaternion.identity);
+            else Instantiate(particle, new Vector2(0f, transform.position.y), Quaternion.identity);
         }
     }
 
     private void SuitUp(){
+        transform.position = new Vector2(transform.position.x, 0f);
+        freeze = true;
+        mech = true;
         kekeoAnim.SetTrigger("Mech");
         StartCoroutine(ShakeCamera());
     }
@@ -86,5 +90,6 @@ public class TricycleController : MonoBehaviour
     {
         yield return new WaitForSeconds(7f);
         camAnim.SetTrigger("Shake2");
+        freeze = false;
     }
 }
