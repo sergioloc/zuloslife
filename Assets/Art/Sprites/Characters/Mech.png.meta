@@ -1,0 +1,520 @@
+fileFormatVersion: 2
+guid: 6377c3dc5c324054e9307d75ea544010
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2369267100593453203
+    second: Mech_Head_Top
+  - first:
+      213: 5498461114086363217
+    second: Mech_Foot
+  - first:
+      213: 5838340381663262084
+    second: Mech_Leg_2
+  - first:
+      213: 8903239106278735837
+    second: Mech_Arm_2
+  - first:
+      213: -6036410921736837634
+    second: Mech_Head_Down
+  - first:
+      213: -1233656320561106164
+    second: Mech_Chest_Front
+  - first:
+      213: 2171870732751731041
+    second: Mech_Shoulder
+  - first:
+      213: 8767661439506572286
+    second: Mech_Chest_Back
+  - first:
+      213: -3361133050846483210
+    second: Mech_Crystal_Alpha
+  - first:
+      213: -4029085364623255251
+    second: Mech_Crystal
+  - first:
+      213: 4536325977810390078
+    second: Mech_Leg_1
+  - first:
+      213: -341146239167279115
+    second: Mech_Interior
+  - first:
+      213: 6882619302003912232
+    second: Mech_Head_Back
+  - first:
+      213: -4100703928288847694
+    second: Mech_Hand_R
+  - first:
+      213: -3563886653621476315
+    second: Mech_Arm_1
+  - first:
+      213: -3508745553168618803
+    second: Mech_Hand_L
+  - first:
+      213: 8970144207815414676
+    second: Mech_Head_Bottle
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Mech_Head_Top
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1040
+        width: 502
+        height: 285
+      alignment: 9
+      pivot: {x: 0.078450665, y: 0.7075855}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58e0b1e6444b04b4e868e09086fd259d
+      internalID: -2369267100593453203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mech_Foot
+      rect:
+        serializedVersion: 2
+        x: 533
+        y: 1139
+        width: 307
+        height: 87
+      alignment: 9
+      pivot: {x: 0.18869923, y: 0.7877015}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e13b29a3f3aaa104bab349c41f0fb5e5
+      internalID: 5498461114086363217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mech_Leg_2
+      rect:
+        serializedVersion: 2
+        x: 852
+        y: 1040
+        width: 278
+        height: 253
+      alignment: 9
+      pivot: {x: 0.6145913, y: 0.9676832}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8c3c564d2233854d9a8fa55bb51f03e
+      internalID: 5838340381663262084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mech_Arm_2
+      rect:
+        serializedVersion: 2
+        x: 1151
+        y: 1053
+        width: 307
+        height: 260
+      alignment: 9
+      pivot: {x: 0.17387544, y: 0.9550917}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59fe034b194137a4fbe33d4e29d7e6f4
+      internalID: 8903239106278735837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mech_Head_Down
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 681
+        width: 524
+        height: 332
+      alignment: 9
+      pivot: {x: 0.15694414, y: 0.7398827}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a331d61de5d2f3419584f475a3f0fa7
+      internalID: -6036410921736837634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mech_Chest_Front
+      rect:
+        serializedVersion: 2
+        x: 573
+        y: 546
+        width: 494
+        height: 458
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6f814944454e7f41b7c1151772763bd
+      internalID: -1233656320561106164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mech_Shoulder
+      rect:
+        serializedVersion: 2
+        x: 1207
+        y: 807
+        width: 195
+        height: 197
+      alignment: 9
+      pivot: {x: 0.35997158, y: 0.6963591}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b800b179cb3bb945be7ef4483bf3687
+      internalID: 2171870732751731041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mech_Chest_Back
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 298
+        width: 244
+        height: 330
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87a19bbf44487b7438fea71362d7a9ea
+      internalID: 8767661439506572286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mech_Crystal_Alpha
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 294
+        width: 276
+        height: 184
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a29234d15e539b9449884a8648950819
+      internalID: -3361133050846483210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mech_Crystal
+      rect:
+        serializedVersion: 2
+        x: 791
+        y: 294
+        width: 276
+        height: 184
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12209e0ffdc9bc44588f75ea2c1cba07
+      internalID: -4029085364623255251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mech_Leg_1
+      rect:
+        serializedVersion: 2
+        x: 1185
+        y: 463
+        width: 171
+        height: 297
+      alignment: 9
+      pivot: {x: 0.8459758, y: 0.9213812}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbe8ac6c4c9b5124c8dcdc108002f026
+      internalID: 4536325977810390078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mech_Interior
+      rect:
+        serializedVersion: 2
+        x: 1131
+        y: 245
+        width: 280
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63dafdce52cd2c045aea5aca660cf143
+      internalID: -341146239167279115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mech_Head_Back
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 24
+        width: 511
+        height: 221
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 026279fe3236e44479e19c3fc494c6cd
+      internalID: 6882619302003912232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mech_Hand_R
+      rect:
+        serializedVersion: 2
+        x: 604
+        y: 24
+        width: 216
+        height: 196
+      alignment: 9
+      pivot: {x: 0.13129142, y: 0.81345594}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf3034b9a8837f24fa8c0cb935d281d7
+      internalID: -4100703928288847694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mech_Arm_1
+      rect:
+        serializedVersion: 2
+        x: 854
+        y: 24
+        width: 149
+        height: 193
+      alignment: 9
+      pivot: {x: 0.7748872, y: 0.9008583}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f61404a6168794f48a4b82e080fd16ae
+      internalID: -3563886653621476315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mech_Hand_L
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 33
+        width: 179
+        height: 184
+      alignment: 9
+      pivot: {x: 0.09321398, y: 0.52473307}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4df61d185a09dd46bcb1d0c5781003d
+      internalID: -3508745553168618803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mech_Head_Bottle
+      rect:
+        serializedVersion: 2
+        x: 1271
+        y: 43
+        width: 112
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5, y: 0.11150674}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e367eea0c970eb84ca571571f84cfaff
+      internalID: 8970144207815414676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: f041feb6357b6ac4ca4854ec0d0fd5aa
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

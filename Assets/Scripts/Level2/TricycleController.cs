@@ -43,6 +43,9 @@ public class TricycleController : MonoBehaviour
         {
             MoveDown();
         }
+        else if (Input.GetKeyDown(KeyCode.M)){
+            SuitUp();
+        }
 
         //Rotate wheels
         wheelF.transform.Rotate(0, 0, -180 * Time.deltaTime);
@@ -72,5 +75,16 @@ public class TricycleController : MonoBehaviour
             if (shake) camAnim.SetTrigger("Shake2");
             Instantiate(particle, transform.position, Quaternion.identity);
         }
+    }
+
+    private void SuitUp(){
+        kekeoAnim.SetTrigger("Mech");
+        StartCoroutine(ShakeCamera());
+    }
+
+    IEnumerator ShakeCamera()
+    {
+        yield return new WaitForSeconds(7f);
+        camAnim.SetTrigger("Shake2");
     }
 }
