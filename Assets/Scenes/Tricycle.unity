@@ -21427,6 +21427,7 @@ MonoBehaviour:
   plus: 0
   startPos: 0
   endPos: 0
+  wind: {fileID: 0}
 --- !u!212 &311744143
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -36563,6 +36564,7 @@ MonoBehaviour:
   plus: 1
   startPos: 48.65
   endPos: -28.09
+  wind: {fileID: 0}
 --- !u!212 &442150076
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -41923,6 +41925,7 @@ MonoBehaviour:
   plus: 0
   startPos: 48.65
   endPos: -28.09
+  wind: {fileID: 0}
 --- !u!212 &620898663
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -48781,6 +48784,7 @@ MonoBehaviour:
   plus: 1
   startPos: 48.65
   endPos: -28.09
+  wind: {fileID: 1763398725}
 --- !u!212 &923390057
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -122524,6 +122528,7 @@ MonoBehaviour:
   plus: 0
   startPos: 48.65
   endPos: -28.09
+  wind: {fileID: 0}
 --- !u!212 &2106041171
 SpriteRenderer:
   m_ObjectHideFlags: 0

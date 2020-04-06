@@ -7,6 +7,7 @@ public class Spawner : MonoBehaviour
     public GameObject[] obstaclePatterns;
     public float timeBtwSpawn;
     public static bool wait;
+    private int phase;
 
     private void Start(){
         wait = false;
@@ -16,28 +17,30 @@ public class Spawner : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!wait){
+        phase = TrycicleLevelValues.phase;
+
+        if (!wait && phase != 7){
             StartCoroutine(Spawn());
             wait = true;
         }
-        if (TrycicleLevelValues.phase == 1){
+        if (phase == 1){
             timeBtwSpawn = 1.6f;
         }
-        else if (TrycicleLevelValues.phase == 2){
+        else if (phase == 2){
             timeBtwSpawn = 1.4f;
         }
-        else if (TrycicleLevelValues.phase == 3){
+        else if (phase == 3){
             timeBtwSpawn = 1f;
         }
-        else if (TrycicleLevelValues.phase == 4){
+        else if (phase == 4){
             timeBtwSpawn = 0.8f;
         }
-        else if (TrycicleLevelValues.phase == 5){
+        else if (phase == 5){
             timeBtwSpawn = 0.6f;
         }
-        else if (TrycicleLevelValues.phase == 6){
+        else if (phase == 6){
             timeBtwSpawn = 2f;
-        } 
+        }
     }
 
     private IEnumerator Spawn()

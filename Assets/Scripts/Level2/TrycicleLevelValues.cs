@@ -23,10 +23,12 @@ public class TrycicleLevelValues : MonoBehaviour
         }else if (time >= 98.05f){
             phase = 8;
             Debug.Log("Phase: 8");
-        }else if (time >= 90.55f){
+        }else /*if (time >= 90.55f)*/{
             phase = 7;
             Debug.Log("Phase: 7");
-        }else if (time >= 78.55f){
+        }
+        /*
+        else if (time >= 78.55f){
             phase = 6;
             Debug.Log("Phase: 6");
         }else if (time >= 66.55f){
@@ -44,5 +46,6 @@ public class TrycicleLevelValues : MonoBehaviour
         }else {
             Debug.Log("Phase: 1");
         }
+        */
     }
 }
