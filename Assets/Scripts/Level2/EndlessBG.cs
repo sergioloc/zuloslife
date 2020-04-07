@@ -8,7 +8,7 @@ public class EndlessBG : MonoBehaviour
     public float plus = 0f;
     public float startPos;
     public float endPos;
-    public ParticleSystem wind;
+    //public ParticleSystem wind;
     private bool slowMotion = false;
 
     void FixedUpdate()
@@ -57,10 +57,7 @@ public class EndlessBG : MonoBehaviour
     {
         yield return new WaitForSeconds(5f);
         speed = 1f;
-        if (wind != null){
-            wind.Pause();
-        }
-        
+        //wind.Pause();
         StartCoroutine(StopSlowMotion());
     }
 
@@ -68,6 +65,6 @@ public class EndlessBG : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         speed = 14f + plus;
-        wind.Play();
+        //wind.Play();
     }
 }

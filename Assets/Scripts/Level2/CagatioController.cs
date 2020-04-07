@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class CagatioController : MonoBehaviour
 {
-    private Animator animCagatio;
+    public Animator animCagatio;
     private int phase;
     public GameObject buttonAttack;
 
     void Start()
     {
-        animCagatio = GetComponent<Animator>();
+        
     }
 
     void OnEnable(){
@@ -27,9 +27,6 @@ public class CagatioController : MonoBehaviour
         else if (phase == 9){
             animCagatio.SetBool("Claw", true);
         }
-        else if (phase == 10){
-            animCagatio.SetBool("Claw", false);
-        }
     }
 
     void OnDisable(){
@@ -38,7 +35,11 @@ public class CagatioController : MonoBehaviour
 
     void Update()
     {
-
+        phase = TrycicleLevelValues.phase;
+        if (phase == 10){
+            Debug.Log("eee");
+            animCagatio.SetTrigger("Ulti");
+        }
     }
 
     IEnumerator EnableAttackButton(float sec)

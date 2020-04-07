@@ -45,6 +45,7 @@ public class TricycleController : MonoBehaviour
         }
         else if (phase == 10){
             transform.position = new Vector2(1f, 0f);
+            kekeoAnim.SetTrigger("Ulti");
         }
     }
 
@@ -54,6 +55,9 @@ public class TricycleController : MonoBehaviour
 
     void Update()
     {
+        if (phase == 7 && !mech){
+            SuitUp();
+        }
         if (TrycicleLevelValues.health <= 0)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

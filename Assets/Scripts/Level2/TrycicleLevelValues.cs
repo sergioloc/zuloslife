@@ -13,7 +13,7 @@ public class TrycicleLevelValues : MonoBehaviour
 
     void FixedUpdate(){
         time = Time.timeSinceLevelLoad - delay;
-        CheckPhase();
+        CheckLastPhase();
     }
 
     private void CheckPhase(){

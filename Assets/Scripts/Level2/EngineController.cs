@@ -6,6 +6,7 @@ public class EngineController : MonoBehaviour
 {
     private Animator animEngine;
     public Animator animFeeder;
+    public GameObject implosion;
 
     private bool isFeeded, feeding, attacking;
     private int lastAttack;
@@ -24,6 +25,11 @@ public class EngineController : MonoBehaviour
 
         if (!feeding && !attacking){
             StartCoroutine(Attack());
+        }
+
+        if (TrycicleLevelValues.phase == 10){
+            implosion.SetActive(true);
+            StartCoroutine(Die());
         }
     }
 
@@ -69,6 +75,12 @@ public class EngineController : MonoBehaviour
         yield return new WaitForSeconds(2f);
         animEngine.SetTrigger("Feed");
         animFeeder.SetTrigger("Feed");
+    }
+
+    IEnumerator Die()
+    {
+        yield return new WaitForSeconds(9.5f);
+        gameObject.SetActive(false);
     }
 
     private void UpdatePhase(){
