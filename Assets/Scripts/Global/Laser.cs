@@ -6,6 +6,7 @@ using UnityEngine;
 public class Laser : MonoBehaviour
 {
     private LineRenderer lineRenderer;
+    public LayerMask mask;
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +17,7 @@ public class Laser : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RaycastHit2D mHit = Physics2D.Raycast(transform.position, transform.up);
+        RaycastHit2D mHit = Physics2D.Raycast(transform.position, transform.up, 15f, 1 << mask);
         lineRenderer.SetPosition(0, transform.position);
         lineRenderer.SetPosition(1, mHit.point);
     }

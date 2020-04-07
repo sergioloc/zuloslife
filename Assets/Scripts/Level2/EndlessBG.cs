@@ -55,7 +55,7 @@ public class EndlessBG : MonoBehaviour
 
     IEnumerator StartSlowMotion()
     {
-        yield return new WaitForSeconds(8f);
+        yield return new WaitForSeconds(5f);
         speed = 1f;
         if (wind != null){
             wind.Pause();

@@ -27,7 +27,11 @@ public class ObstacleController : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             Instantiate(particle, transform.position, Quaternion.identity);
-            collision.GetComponent<TricycleController>().health -= damage;
+            TrycicleLevelValues.health -= damage;
+            Destroy(gameObject);
+        }
+        else if (collision.CompareTag("Shield")){
+            Instantiate(particle, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

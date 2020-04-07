@@ -2,21 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DirectorCombat : MonoBehaviour
+public class EngineController : MonoBehaviour
 {
-    public Animator animEngine, animCagatio, animFeeder;
-    public GameObject laser, eyeParticle1, eyeParticle2;
+    private Animator animEngine;
+    public Animator animFeeder;
 
-    public Transform zakoPosition;
-
-    private bool isLaser, isSpikes, isFeeded, feeding, attacking;
+    private bool isFeeded, feeding, attacking;
     private int lastAttack;
     public float timeBtwAttack = 2f;
     public static bool wait;
     
     void Start()
     {
-        isLaser = isSpikes = isFeeded = feeding = wait = attacking = false;
+        animEngine = GetComponent<Animator>();
+        feeding = wait = attacking = false;
     }
 
     void Update()
@@ -26,26 +25,7 @@ public class DirectorCombat : MonoBehaviour
         if (!feeding && !attacking){
             StartCoroutine(Attack());
         }
-
-        /* Fire defense
-        if (zakoPosition.position.y == 0 && isLaser){
-            animCagatio.SetBool("Fire", true);
-        }
-        else {
-            animCagatio.SetBool("Fire", false);
-        }
-
-        // Shield defense
-        if (zakoPosition.position.y == -3 && isSpikes){
-            animEngine.SetBool("SpikesFail", true);
-            animCagatio.SetBool("Shield", true);
-        }
-        else {
-            animCagatio.SetBool("Shield", false);
-        }*/
     }
-
-    // General -----------------------------------
 
     IEnumerator Attack(){
         yield return new WaitForSeconds(1f);
@@ -53,7 +33,7 @@ public class DirectorCombat : MonoBehaviour
         int rand = Random.Range(1, 3);
 
         if (rand == 1){
-            if (rand != lastAttack){
+            if (lastAttack != 1){
                 EngineStartLaser();
                 lastAttack = 1;
             }
@@ -94,23 +74,18 @@ public class DirectorCombat : MonoBehaviour
     private void UpdatePhase(){
         if (TrycicleLevelValues.phase == 4)
         {
-            if (!isFeeded){
+            if (!feeding){
                 StartCoroutine(Feed());
-                isFeeded = true;
+                feeding = true;
             }
-            feeding = true;
         }
         else{
             feeding = false;
         }
     }
 
-
-    // Engine ------------------------------------
-
     // Laser
     private void EngineStartLaser(){
-        isLaser = true;
         animEngine.SetBool("Laser", true);
         StartCoroutine(EngineStopLaser());
     }
@@ -118,15 +93,12 @@ public class DirectorCombat : MonoBehaviour
     IEnumerator EngineStopLaser()
     {
         yield return new WaitForSeconds(1.1f);
-        isLaser = false;
         attacking = false;
         animEngine.SetBool("Laser", false);
-        //animCagatio.SetBool("Fire", false);
     }
 
     // Spikes
     private void EngineStartSpikes(){
-        isSpikes = true;
         animEngine.SetBool("Spikes", true);
         StartCoroutine(EngineStopSpikes());
     }
@@ -134,12 +106,9 @@ public class DirectorCombat : MonoBehaviour
     IEnumerator EngineStopSpikes()
     {
         yield return new WaitForSeconds(1.5f);
-        Debug.Log("stop");
-        isSpikes = false;
         attacking = false;
         animEngine.SetBool("Spikes", false);
         animEngine.SetBool("SpikesFail", false);
-        animCagatio.SetBool("Shield", false);
     }
 
     // Gun

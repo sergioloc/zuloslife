@@ -19,15 +19,20 @@ public class ZakomovilController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            MoveUp();
+        if (TrycicleLevelValues.phase < 10){
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                MoveUp();
+            }
+            else if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                MoveDown();
+            }
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            MoveDown();
+        else {
+            transform.position = new Vector2(transform.position.x, 0);
         }
     }
 

@@ -21,7 +21,7 @@ public class ChangeSide : MonoBehaviour
         if (TrycicleLevelValues.phase == 2 && !side2.activeSelf){ //right
             side2.SetActive(true);
             MoveRight();
-            DirectorCombat.wait = true;
+            EngineController.wait = true;
         }
         else if (TrycicleLevelValues.phase == 3 && !side1.activeSelf){ // left
             side1.SetActive(true);
@@ -30,7 +30,7 @@ public class ChangeSide : MonoBehaviour
         else if (TrycicleLevelValues.phase == 4 && !side2.activeSelf){ // right
             side2.SetActive(true);
             MoveRight();
-            DirectorCombat.wait = true;
+            EngineController.wait = true;
         }
         else if (TrycicleLevelValues.phase == 5 && !side1.activeSelf){ //left
             side1.SetActive(true);
@@ -39,7 +39,7 @@ public class ChangeSide : MonoBehaviour
         else if (TrycicleLevelValues.phase == 6 && !side2.activeSelf){ //right
             side2.SetActive(true);
             MoveRight();
-            DirectorCombat.wait = true;
+            EngineController.wait = true;
         }
         else if (TrycicleLevelValues.phase == 7 && !side1.activeSelf){ //left
             side1.SetActive(true);
@@ -48,7 +48,7 @@ public class ChangeSide : MonoBehaviour
         else if (TrycicleLevelValues.phase == 9 && !side2.activeSelf){ //right
             side2.SetActive(true);
             MoveRight();
-            DirectorCombat.wait = true;
+            EngineController.wait = true;
         }
         else if (TrycicleLevelValues.phase == 10){ //center
             side1.SetActive(true);
@@ -84,7 +84,7 @@ public class ChangeSide : MonoBehaviour
     IEnumerator AllowAttack()
     {
         yield return new WaitForSeconds(1f);
-        DirectorCombat.wait = false;
+        EngineController.wait = false;
     }
 
 

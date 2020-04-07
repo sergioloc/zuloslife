@@ -8,7 +8,6 @@ public class TricycleController : MonoBehaviour
 {
     public float range;
     public float speed;
-    public float health = 10;
     public GameObject particle;
     public Image healthBar;
     public Animator camAnim;
@@ -18,6 +17,7 @@ public class TricycleController : MonoBehaviour
     private float minHeight;
     public GameObject wheelF, wheelB1, wheelB2;
     private bool freeze, mech;
+    public GameObject mechParticle;
 
     void Start()
     {
@@ -29,11 +29,11 @@ public class TricycleController : MonoBehaviour
 
     void Update()
     {
-        if (health <= 0)
+        if (TrycicleLevelValues.health <= 0)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
-        healthBar.fillAmount = health / 10;
+        healthBar.fillAmount = TrycicleLevelValues.health / 10;
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
@@ -43,8 +43,15 @@ public class TricycleController : MonoBehaviour
         {
             MoveDown();
         }
+        else if (Input.GetKeyDown(KeyCode.A)) 
+        {
+            kekeoAnim.SetBool("Attack", true);
+        }
         else if (TrycicleLevelValues.phase == 7 && !mech){
             SuitUp();
+        }
+        else if (TrycicleLevelValues.phase == 10){
+            transform.position = new Vector2(1f, 0f);
         }
 
         //Rotate wheels
@@ -91,5 +98,6 @@ public class TricycleController : MonoBehaviour
         yield return new WaitForSeconds(7f);
         camAnim.SetTrigger("Shake2");
         freeze = false;
+        Instantiate(mechParticle, new Vector2(0f, 0f), Quaternion.identity);
     }
 }
