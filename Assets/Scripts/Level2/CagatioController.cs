@@ -6,26 +6,56 @@ public class CagatioController : MonoBehaviour
 {
     private Animator animCagatio;
     private int phase;
+    public GameObject buttonAttack;
 
     void Start()
     {
-        animCagatio = GetComponent<Animator>();   
+        animCagatio = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    void OnEnable(){
         phase = TrycicleLevelValues.phase;
-
-        if (phase == 9){
+        if (phase == 2){
+            StartCoroutine(EnableAttackButton(9f));
+        }
+        else if (phase == 4){
+            StartCoroutine(EnableAttackButton(9f));
+        }
+        else if (phase == 6){
+            StartCoroutine(EnableAttackButton(8f));
+        }
+        else if (phase == 9){
             animCagatio.SetBool("Claw", true);
         }
         else if (phase == 10){
             animCagatio.SetBool("Claw", false);
         }
-        else if (Input.GetKeyDown(KeyCode.A)) 
-        {
-            animCagatio.SetBool("Fire", true);
-        }
+    }
+
+    void OnDisable(){
+        animCagatio.SetBool("Fire", false); 
+    }
+
+    void Update()
+    {
+
+    }
+
+    IEnumerator EnableAttackButton(float sec)
+    {
+        yield return new WaitForSeconds(sec);
+        buttonAttack.SetActive(true);
+        StartCoroutine(DisableAttackButton());
+    }
+
+    public void Attack(){
+        animCagatio.SetBool("Fire", true);
+        buttonAttack.SetActive(false);
+    }
+
+    IEnumerator DisableAttackButton()
+    {
+        yield return new WaitForSeconds(3f);
+        buttonAttack.SetActive(false);
     }
 }

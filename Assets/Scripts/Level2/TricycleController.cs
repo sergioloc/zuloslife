@@ -18,13 +18,38 @@ public class TricycleController : MonoBehaviour
     public GameObject wheelF, wheelB1, wheelB2;
     private bool freeze, mech;
     public GameObject mechParticle;
+    private int phase;
+    public GameObject buttonAttack;
 
     void Start()
     {
+        kekeoAnim = gameObject.GetComponent<Animator>();
         freeze = mech = false;
         maxHeight = range;
         minHeight = -range;
-        kekeoAnim = gameObject.GetComponent<Animator>();
+    }
+
+    void OnEnable(){
+        phase = TrycicleLevelValues.phase;
+        if (phase == 1){
+            StartCoroutine(EnableAttackButton(15f));
+        }
+        else if (phase == 3){
+            StartCoroutine(EnableAttackButton(15f));
+        }
+        else if (phase == 5){
+            StartCoroutine(EnableAttackButton(8f));
+        }
+        else if (phase == 7 && !mech){
+            SuitUp();
+        }
+        else if (phase == 10){
+            transform.position = new Vector2(1f, 0f);
+        }
+    }
+
+    void OnDisable(){
+        kekeoAnim.SetBool("Attack", false);
     }
 
     void Update()
@@ -42,16 +67,6 @@ public class TricycleController : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.DownArrow)) 
         {
             MoveDown();
-        }
-        else if (Input.GetKeyDown(KeyCode.A)) 
-        {
-            kekeoAnim.SetBool("Attack", true);
-        }
-        else if (TrycicleLevelValues.phase == 7 && !mech){
-            SuitUp();
-        }
-        else if (TrycicleLevelValues.phase == 10){
-            transform.position = new Vector2(1f, 0f);
         }
 
         //Rotate wheels
@@ -99,5 +114,23 @@ public class TricycleController : MonoBehaviour
         camAnim.SetTrigger("Shake2");
         freeze = false;
         Instantiate(mechParticle, new Vector2(0f, 0f), Quaternion.identity);
+    }
+
+    IEnumerator EnableAttackButton(float sec)
+    {
+        yield return new WaitForSeconds(sec);
+        buttonAttack.SetActive(true);
+        StartCoroutine(DisableAttackButton());
+    }
+
+    public void Attack(){
+        kekeoAnim.SetBool("Attack", true);
+        buttonAttack.SetActive(false);
+    }
+
+    IEnumerator DisableAttackButton()
+    {
+        yield return new WaitForSeconds(3f);
+        buttonAttack.SetActive(false);
     }
 }
