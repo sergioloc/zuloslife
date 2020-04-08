@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Character : MonoBehaviour
+public class Character
 {
-    private string name;
+    private string alias;
     private GameObject character, impactFace;
     private Image icon, stamina;
     private Animator animator;
 
-    public Character(string name, GameObject character, GameObject impactFace, Image icon, Image stamina){
-        this.name = name;
+    public Character(string alias, GameObject character, GameObject impactFace, Image icon, Image stamina){
+        this.alias = alias;
         this.character = character;
         this.impactFace = impactFace;
         this.icon = icon;
@@ -19,17 +19,8 @@ public class Character : MonoBehaviour
         this.animator = character.GetComponent<Animator>();
     }
 
-    public Character(){
-        this.name = "";
-        this.character = null;
-        this.impactFace = null;
-        this.icon = null;
-        this.stamina = null;
-        this.animator = null;
-    }
-
     public bool CompareNameTo(string n){
-        if (name == n)
+        if (alias == n)
             return true;
         else 
             return false;
@@ -51,8 +42,8 @@ public class Character : MonoBehaviour
         return animator;
     }
 
-    public void SetIconColor(Color32 newColor){
-        icon.color = newColor;
+    public void SetIconColor(Color32 blue){
+        icon.color = blue;
     }
 
     public void Hide(){
@@ -81,5 +72,16 @@ public class Character : MonoBehaviour
 
     public bool GetBool(string name){
         return animator.GetBool(name);
+    }
+
+    public bool IsImpactFaceActive(){
+        if (impactFace.activeSelf)
+            return true;
+        else
+            return false;   
+    }
+
+    public void SetImpactFaceActive(bool state){
+        impactFace.SetActive(state);
     }
 }

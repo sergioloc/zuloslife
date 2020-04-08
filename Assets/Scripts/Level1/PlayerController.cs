@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Stamina")]
     public Image staminaPanda;
+    public Image staminaKero;
     public Image staminaCinamon;
     public Image staminaKutter;
     public Image staminaTrisky;
@@ -52,7 +53,6 @@ public class PlayerController : MonoBehaviour
     public GameObject deathCollider;
 
     [Header("Impact Faces")]
-    private GameObject impactFace;
     public GameObject pandaImpactFace;
     public GameObject keroImpactFace;
     public GameObject cinamonImpactFace;
@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
 
     private Transform spawnPoint;
     private Rigidbody2D rb2d;
-    private Animator animPlayer, cameraAnimation;
+    private Animator cameraAnimation;
     private float sensitivity = 0.1f;
     private bool bloodShowed = false, wallAtRight, wallAtLeft, isInWater = false;
 
@@ -91,13 +91,25 @@ public class PlayerController : MonoBehaviour
         wallAtRight = false;
         wallAtLeft = false;
         panda = new Character("Panda", pandaGameObject, pandaImpactFace, fillPanda, staminaPanda);
-        kero = new Character("Kero", keroGameObject, keroImpactFace, fillKero, null);
+        kero = new Character("Kero", keroGameObject, keroImpactFace, fillKero, staminaKero);
         cinamon = new Character("Cinamon", cinamonGameObject, cinamonImpactFace, fillCinamon, staminaCinamon);
         kutter = new Character("Kutter", kutterGameObject, kutterImpactFace, fillKutter, staminaKutter);
         trisky = new Character("Trisky", triskyGameObject, triskyImpactFace, fillTrisky, staminaTrisky);
-        current = new Character();
-        current = panda;
+        SetInitialCharacter();
         current.SetIconColor(new Color32(0, 80, 255, 255));
+    }
+
+    private void SetInitialCharacter(){
+        if (pandaGameObject.activeInHierarchy)
+            current = panda;
+        else if (keroGameObject.activeInHierarchy)
+            current = kero;
+        else if (cinamonGameObject.activeInHierarchy)
+            current = cinamon;
+        else if (kutterGameObject.activeInHierarchy)
+            current = kutter;
+        else
+            current = trisky;
     }
 
     void FixedUpdate()
@@ -118,15 +130,9 @@ public class PlayerController : MonoBehaviour
 
         //Jump
         if (isGrounded)
-            animPlayer.SetBool("isJumping", false);
+            current.SetBool("isJumping", false);
         else
-            animPlayer.SetBool("isJumping", true);
-
-        //Combo
-        if (megaCombo.activeInHierarchy == true)
-        {
-            CameraController.instance.Shake(0);
-        }
+            current.SetBool("isJumping", true);
     
     }
 
@@ -217,8 +223,14 @@ public class PlayerController : MonoBehaviour
         {
             current.SetBool("Action", true);
 
+            //Combo
+            if (megaCombo.activeInHierarchy == true)
+            {
+                CameraController.instance.Shake(0);
+            }
+
             //Restore health
-            if (current.CompareNameTo("Trisky"))
+            else if (current.CompareNameTo("Trisky"))
             {
                 if (health >= (initialHealth - 30))
                 {
@@ -335,9 +347,9 @@ public class PlayerController : MonoBehaviour
         {
             health = health - damage;
             bloodParticle.Play();
-            if (!impactFace.gameObject.activeSelf)
+            if (!current.IsImpactFaceActive())
             {
-                impactFace.SetActive(true);
+                current.SetImpactFaceActive(true);
                 StartCoroutine(Wait("ImpactFaceFalse", 2f));
             }
             if (health <= 0)
@@ -366,7 +378,7 @@ public class PlayerController : MonoBehaviour
             current.GetCharacter().SetActive(false);
             confuseParticle.Stop();
             deathCollider.SetActive(true);
-            impactFace.SetActive(false);
+            current.SetImpactFaceActive(false);
             Instantiate(deathEffect, transform.position, Quaternion.identity);
 
             if (Random.Range(1, 2) == 1)
@@ -388,7 +400,7 @@ public class PlayerController : MonoBehaviour
         switch (type)
         {
             case "ImpactFaceFalse":
-                impactFace.SetActive(false);
+                current.SetImpactFaceActive(false);
                 break;
 
             case "RestoreGravity":
@@ -503,20 +515,20 @@ public class PlayerController : MonoBehaviour
                 if (Input.GetKey(KeyCode.RightArrow) && !wallAtRight)
                 {
                     //Move Right
-                    animPlayer.SetBool("Run", true);
+                    current.SetBool("Run", true);
                     rb2d.transform.Translate(Vector2.right * speed * Time.deltaTime);
                     if (!facingRight) Flip();
                 }
                 else if (Input.GetKey(KeyCode.LeftArrow) && !wallAtLeft)
                 {
                     //Move Left
-                    animPlayer.SetBool("Run", true);
+                    current.SetBool("Run", true);
                     rb2d.transform.Translate(Vector2.left * speed * Time.deltaTime);
                     if (facingRight) Flip();
                 }
-                else if (animPlayer.GetBool("Run"))
+                else if (current.GetBool("Run"))
                 {
-                    animPlayer.SetBool("Run", false);
+                    current.SetBool("Run", false);
                 }
             }
 
@@ -525,20 +537,20 @@ public class PlayerController : MonoBehaviour
                 if (Input.GetKey(KeyCode.RightArrow) && !wallAtLeft)
                 {
                     //Move Left
-                    animPlayer.SetBool("Run", true);
+                    current.SetBool("Run", true);
                     rb2d.transform.Translate(Vector2.left * speed * Time.deltaTime);
                     if (facingRight) Flip();
                 }
                 else if (Input.GetKey(KeyCode.LeftArrow) && !wallAtRight)
                 {
                     //Move Right
-                    animPlayer.SetBool("Run", true);
+                    current.SetBool("Run", true);
                     rb2d.transform.Translate(Vector2.right * speed * Time.deltaTime);
                     if (!facingRight) Flip();
                 }
-                else if (animPlayer.GetBool("Run"))
+                else if (current.GetBool("Run"))
                 {
-                    animPlayer.SetBool("Run", false);
+                    current.SetBool("Run", false);
                 }
             }
         }
