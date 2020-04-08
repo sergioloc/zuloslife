@@ -234,10 +234,7 @@ public class PlayerController : MonoBehaviour
             //Sound explosion
             else if (current.CompareNameTo("Cinamon") && isGrounded)
             {
-                rb2d.AddForce(Vector2.up * jumpForce * 20);
-                rb2d.gravityScale = 0.4f;
-                StartCoroutine(Wait("RestoreGravity", 2f));
-                CameraController.instance.Shake(0.7f);
+                CameraController.instance.Shake(1f);
             }
 
             //Throw scissor
