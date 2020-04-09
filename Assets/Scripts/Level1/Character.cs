@@ -74,6 +74,13 @@ public class Character
         return animator.GetBool(name);
     }
 
+    public bool IsPlayingAnimation(string anim){
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName(anim)){
+            return true;
+        }
+        return false;
+    }
+
     public bool IsImpactFaceActive(){
         if (impactFace.activeSelf)
             return true;

@@ -6,20 +6,21 @@ public class GuardController : MonoBehaviour
 {
     public int health = 100;
     public float speed;
-    public GameObject player, deathEffect, bloodEffect1, bloodEffect2;
+    public GameObject target, deathEffect, bloodEffect1, bloodEffect2;
     public ParticleSystem bloodParticle;
     private Animator guardAnimation;
     private bool lookRight = true;
     private bool freeze = false;
-    private float limit = 2.3f, distance, realDistance;
+    private float limit = 2.3f, distance, velocity;
+    private Rigidbody2D rb2d;
+    Vector3 lastPosition = Vector3.zero;
 
-    //private bool isAlive = true;
 
 
-    // Start is called before the first frame update
     void Start()
     {
         guardAnimation = GetComponent<Animator>();
+        rb2d = GetComponent<Rigidbody2D>();
 
         if (transform.localScale.x < 0)
         {
@@ -27,87 +28,63 @@ public class GuardController : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        if (player != null)
+        distance = target.transform.position.x - transform.position.x;
+
+        //Look
+        if (distance > 0 && !lookRight && !freeze)
         {
-            distance = Vector2.Distance(transform.position, player.transform.position);
-            realDistance = player.transform.position.x - transform.position.x;
-
-            //Look
-            if (realDistance > 0 && !lookRight && !freeze)
-            {
-                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-                lookRight = true;
-                limit = -limit;
-            }
-            else if (realDistance < 0 && lookRight && !freeze)
-            {
-                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-                lookRight = false;
-                limit = -limit;
-            }
-
-            //Move
-            if (distance < 9 && !freeze)
-            {
-                guardAnimation.SetBool("Run", true);
-                transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x - limit, transform.position.y, transform.position.z), speed * Time.deltaTime);
-            }
-            if (distance < 2.45 && distance > 0 && gameObject.GetComponent<Rigidbody2D>().velocity.x < 0)
-            {
-                guardAnimation.SetBool("Run", true);
-                guardAnimation.SetBool("Action", true);
-            }
-            else if (distance < 2.45 && distance > 0)
-            {
-                guardAnimation.SetBool("Run", false);
-                guardAnimation.SetBool("Action", true);
-            }
-            else
-            {
-                guardAnimation.SetBool("Action", false);
-            }
-
-            if (distance > 9)
-            {
-                guardAnimation.SetBool("Run", false);
-
-            }
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+            lookRight = true;
+            limit = -limit;
         }
-        else
+        else if (distance < 0 && lookRight && !freeze)
         {
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+            lookRight = false;
+            limit = -limit;
+        }
+
+        //Follow
+        if (Mathf.Abs(distance) < 9 && !freeze)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.transform.position.x - limit, transform.position.y, transform.position.z), speed * Time.deltaTime);
+            velocity = (transform.position - lastPosition).magnitude;
+            lastPosition = transform.position;
+        }
+
+        //Run
+        if (velocity != 0)
+            guardAnimation.SetBool("Run", true);
+        else
             guardAnimation.SetBool("Run", false);
-            guardAnimation.SetBool("Action", false);
-        }
-        
-    }
 
-    private void Push()
-    {
-        if (lookRight)
-            GetComponent<Rigidbody2D>().AddForce(new Vector3(-1500, 500));
+        //Action
+        if (Mathf.Abs(distance) < 2.45 && Mathf.Abs(distance) > 0 && !freeze)
+            guardAnimation.SetBool("Action", true);
         else
-            GetComponent<Rigidbody2D>().AddForce(new Vector3(1500, 500));
+            guardAnimation.SetBool("Action", false);
+        
     }
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag == "Flash")
-        {
-            freeze = true;
-            guardAnimation.SetBool("Freeze",true);
-            StartCoroutine(FinishFreeze(5f));
-        }
-        else if (col.gameObject.tag == "Melee")
+        if (col.gameObject.tag == "Melee")
         {  
             bloodParticle.Play();
             TakeDamage(20);
             Push();
         }
+        else if (col.gameObject.tag == "Flash")
+        {
+            freeze = true;
+            guardAnimation.SetBool("Freeze",true);
+            StartCoroutine(FinishFreeze(5f));
+        }
         else if (col.gameObject.tag == "Explosion")
         {
+            TakeDamage(20);
             guardAnimation.SetBool("Explosion", true);
             StartCoroutine(FinishExplosion());
         }
@@ -141,8 +118,16 @@ public class GuardController : MonoBehaviour
         }
     }
 
+    private void Push()
+    {
+        if (lookRight)
+            GetComponent<Rigidbody2D>().AddForce(new Vector3(-1500, 500));
+        else
+            GetComponent<Rigidbody2D>().AddForce(new Vector3(1500, 500));
+    }
 
-private IEnumerator FinishFreeze(float sec)
+
+    private IEnumerator FinishFreeze(float sec)
     {
         yield return new WaitForSeconds(sec);
         freeze = false;
@@ -164,12 +149,11 @@ private IEnumerator FinishFreeze(float sec)
             Die();
         }
     }
-    //-0.9
+
     private void Die()
     {
         Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
-        
 
         if (Random.Range(1, 2) == 1)
         {

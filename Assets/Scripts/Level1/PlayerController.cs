@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour
     public Joystick joystick;
     public float speed = 0;
     public bool facingRight = true;
-    private float scale;
 
     [Header("Jump")]
     public int jumpForce = 0;
@@ -71,7 +70,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb2d;
     private Animator cameraAnimation;
     private float sensitivity = 0.1f;
-    private bool bloodShowed = false, wallAtRight, wallAtLeft, isInWater = false;
+    private bool wallAtRight, wallAtLeft, isInWater = false;
 
     public static PlayerController instance;
     public bool confuse = false, keyboard = false;
@@ -87,7 +86,6 @@ public class PlayerController : MonoBehaviour
         instance = this;
         health = initialHealth;
         rb2d = GetComponent<Rigidbody2D>();
-        scale = transform.localScale.x;
         wallAtRight = false;
         wallAtLeft = false;
         panda = new Character("Panda", pandaGameObject, pandaImpactFace, fillPanda, staminaPanda);
@@ -127,7 +125,6 @@ public class PlayerController : MonoBehaviour
             Movement();
         }
         
-
         //Jump
         if (isGrounded)
             current.SetBool("isJumping", false);
@@ -223,10 +220,10 @@ public class PlayerController : MonoBehaviour
         {
             current.SetBool("Action", true);
 
-            //Combo
-            if (megaCombo.activeInHierarchy == true)
-            {
-                CameraController.instance.Shake(0);
+            if (current.CompareNameTo("Kero")){
+                current.SetBool("Action2", true);
+                current.SetBool("Action3", true);
+                /// FIXME: Shake
             }
 
             //Restore health
@@ -262,13 +259,17 @@ public class PlayerController : MonoBehaviour
     public void stopAction()
     {
         current.SetBool("Action", false);
+        if (current.CompareNameTo("Kero")){
+            current.SetBool("Action2", false);
+            current.SetBool("Action3", false);
+        }
     }
 
 
     // Collisions
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("MeleeEnemy") && !bloodShowed)
+        if (collision.gameObject.CompareTag("MeleeEnemy"))
         {
             TakeDamage(damageFromEnemy);
         }
@@ -361,11 +362,11 @@ public class PlayerController : MonoBehaviour
     {
         if (facingRight)
         {
-            transform.localScale = new Vector3(-scale, scale, scale);
+            transform.localScale = new Vector3(-0.75f, 0.75f, 0.75f);
         }
         else
         {
-            transform.localScale = new Vector3(scale, scale, scale);
+            transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
         }
         shotPoint.Rotate(0f, 180f, 0f);
         facingRight = !facingRight;
@@ -373,25 +374,22 @@ public class PlayerController : MonoBehaviour
 
     private void Die()
     {
-        if (!bloodShowed)
-        {
-            current.GetCharacter().SetActive(false);
-            confuseParticle.Stop();
-            deathCollider.SetActive(true);
-            current.SetImpactFaceActive(false);
-            Instantiate(deathEffect, transform.position, Quaternion.identity);
+        confuseParticle.Stop();
+        healthParticle.Stop();
+        current.GetCharacter().SetActive(false);
+        deathCollider.SetActive(true);
+        current.SetImpactFaceActive(false);
+        Instantiate(deathEffect, transform.position, Quaternion.identity);
 
-            if (Random.Range(1, 2) == 1)
-            {
-                Instantiate(bloodEffect1, transform.position, Quaternion.identity);
-            }
-            else
-            {
-                Instantiate(bloodEffect2, transform.position, Quaternion.identity);
-            }
-            bloodShowed = true;
-            StartCoroutine(Wait("MoveToSpawnPoint", 2f));
-        } 
+        if (Random.Range(1, 2) == 1)
+        {
+            Instantiate(bloodEffect1, transform.position, Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(bloodEffect2, transform.position, Quaternion.identity);
+        }
+        StartCoroutine(Wait("MoveToSpawnPoint", 2f));
     }
 
     IEnumerator Wait(string type, float sec)
@@ -403,22 +401,16 @@ public class PlayerController : MonoBehaviour
                 current.SetImpactFaceActive(false);
                 break;
 
-            case "RestoreGravity":
-                rb2d.gravityScale = 3f;
-                break;
-
             case "MoveToSpawnPoint":
                 deathCollider.SetActive(false);
                 gameObject.GetComponent<Transform>().position = spawnPoint.position;
                 spawnParticle.Play();
-                gameObject.layer = 8;
                 StartCoroutine(Wait("Respawn", 3f));
                 break;
 
             case "Respawn":
                 current.GetCharacter().SetActive(true);
                 health = initialHealth;
-                bloodShowed = false;
                 break;
 
             case "ThrowScissor":
