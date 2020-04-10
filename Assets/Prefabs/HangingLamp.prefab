@@ -200,7 +200,7 @@ Light:
   m_Cookie: {fileID: 8900000, guid: da12d2848f03ad84fbda5139b176f18a, type: 3}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295

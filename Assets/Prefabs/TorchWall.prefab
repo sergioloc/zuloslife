@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3220116550284428998}
   - component: {fileID: 3220116550284428999}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3220116550284428993}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3220116552126668402}
@@ -76,7 +76,7 @@ Light:
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 3220116550581547454}
   - component: {fileID: 3220116550581547452}
   - component: {fileID: 3220116550581547455}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4853,7 +4853,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3220116552126668402}
   - component: {fileID: 3220116552126668403}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: TorchWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
