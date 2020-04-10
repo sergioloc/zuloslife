@@ -11,8 +11,6 @@ public class Stamina : MonoBehaviour
     public Image maskPanda, maskKero, maskCinamon, maskKutter, maskTrisky;
     public GameObject panda, kero, cinamon, kutter, trisky;
 
-
-    // Start is called before the first frame update
     void Start()
     {
         currentPanda = maxPanda;
@@ -22,8 +20,7 @@ public class Stamina : MonoBehaviour
         currentTrisky = maxTrisky;
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         currentPanda = currentPanda + speed;
         maskPanda.fillAmount = currentPanda / maxPanda;
@@ -47,9 +44,9 @@ public class Stamina : MonoBehaviour
         {
             StartCoroutine(RestartPanda());
         }
-        else if (kero.activeInHierarchy)
+        else if (kero.activeInHierarchy && maskKero.fillAmount == 1)
         {
-            currentKero = 0;
+            StartCoroutine(RestartKero());
         }
         else if (cinamon.activeInHierarchy && maskCinamon.fillAmount == 1)
         {
@@ -70,6 +67,12 @@ public class Stamina : MonoBehaviour
     {
         yield return new WaitForSeconds(0.8f);
         currentPanda = 0;
+    }
+
+    IEnumerator RestartKero()
+    {
+        yield return new WaitForSeconds(0.2f);
+        currentKero = 0;
     }
 
     IEnumerator RestartCinamon()

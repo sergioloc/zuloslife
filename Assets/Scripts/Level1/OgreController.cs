@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class OgreController : MonoBehaviour
 {
-    public GameObject target, weapon, initialPosition, evolution, redLights, normalLights;
+    public GameObject target, weapon, evolution, redLights, normalLights;
     public ParticleSystem smoke;
     public Slider healthBar;
     public int speed = 10;
@@ -17,11 +17,13 @@ public class OgreController : MonoBehaviour
     private float limit = 2.3f;
     private bool loadHammer = false, loadQuake = false, attacking = false;
     private bool idleAnim = false;
+    private Vector3 initialPosition;
 
     private int RESTORE_ATTACK1 = 5;
 
     void Start()
     {
+        initialPosition = transform.position;
         ogreAnimation = GetComponent<Animator>();
         if (transform.localScale.x < 0)
             limit = -limit;
@@ -33,76 +35,66 @@ public class OgreController : MonoBehaviour
     {
         healthBar.value = health;
 
-        if (target != null && health > 0)
-        {
-            float distance = Vector2.Distance(transform.position, target.transform.position);
-            float x1 = target.transform.position.x;
-            float x2 = transform.position.x;
-            float realDistance = x1 - x2;
-
-            //Look
-            if (realDistance > 0 && !lookRight && !freeze)
-            {
-                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-                lookRight = true;
-                limit = -limit;
-            }
-            else if (realDistance < 0 && lookRight && !freeze)
-            {
-                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-                lookRight = false;
-                limit = -limit;
-            }
-
-            if (!idleAnim)
-            {
-
-                if (distance > range && !loadQuake)
-                {
-                    //CameraController.instance.Shake(0.8f);
-                    Debug.Log("Quake");
-                    loadQuake = true;
-                    attacking = true;
-                    ogreAnimation.SetTrigger("Action2");
-                    StartCoroutine(RestoreQuake());
-                    StartCoroutine(FinishAttacking());
-                }
-                else if (distance > 4 && distance < range && !loadHammer)
-                {
-                    //CameraController.instance.Shake(0.7f);
-                    loadHammer = true;
-                    attacking = true;
-                    ogreAnimation.SetTrigger("Action");
-                    StartCoroutine(RestoreHammer());
-                    StartCoroutine(FinishAttacking());
-                }
-                else if (distance >= 3.5 && !freeze && !attacking)
-                {
-                    ogreAnimation.SetBool("Run", true);
-                    ogreAnimation.SetBool("Action", false);
-                    ogreAnimation.SetBool("Action2", false);
-                    ogreAnimation.SetBool("Action3", false);
-                    transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.transform.position.x - limit, transform.position.y, transform.position.z), speed * Time.deltaTime);
-                }
-                if (distance < 3.5)
-                {
-                    ogreAnimation.SetTrigger("Action3");
-                }
-                
-            }
-            else
-            {
-                ogreAnimation.SetBool("Run", false);
-                ogreAnimation.SetBool("Action", false);
-                ogreAnimation.SetBool("Action2", false);
-                ogreAnimation.SetBool("Action3", false);
-            }
-        }
-
         if (health <= 0)
         {
             ogreAnimation.SetTrigger("Die");
             StartCoroutine(Die());
+        }
+
+        float distance = target.transform.position.x - transform.position.x;
+
+        //Look
+        if (distance > 0 && !lookRight && !freeze)
+        {
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+            lookRight = true;
+            limit = -limit;
+        }
+        else if (distance < 0 && lookRight && !freeze)
+        {
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+            lookRight = false;
+            limit = -limit;
+        }
+
+        if (!idleAnim)
+        {
+            ogreAnimation.SetBool("Idle", false);
+            
+            if (Mathf.Abs(distance) > range && !loadQuake)
+            {
+                //CameraController.instance.Shake(0.8f);
+                loadQuake = true;
+                attacking = true;
+                ogreAnimation.SetTrigger("Quake");
+                StartCoroutine(RestoreQuake());
+                StartCoroutine(FinishAttacking());
+            }
+            else if (Mathf.Abs(distance) > 4 && distance < range && !loadHammer)
+            {
+                //CameraController.instance.Shake(0.7f);
+                loadHammer = true;
+                attacking = true;
+                ogreAnimation.SetTrigger("Hammer");
+                StartCoroutine(RestoreHammer());
+                StartCoroutine(FinishAttacking());
+            }
+            else if (Mathf.Abs(distance) >= 2.3 && !freeze && !attacking)
+            {
+                ogreAnimation.SetBool("Run", true);
+                ogreAnimation.SetTrigger("Quake");
+                ogreAnimation.SetTrigger("Hammer");
+                ogreAnimation.SetTrigger("Punch");
+                transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.transform.position.x - limit, transform.position.y, transform.position.z), speed * Time.deltaTime);
+            }
+            if (Mathf.Abs(distance) < 2.5)
+            {
+                ogreAnimation.SetTrigger("Punch");
+            }   
+        }
+        else
+        {
+            ogreAnimation.SetBool("Idle", true);
         }
     }
 
@@ -123,19 +115,17 @@ public class OgreController : MonoBehaviour
         }
         else if (collision.gameObject.tag == "PlayerDeath")
         {
-            loadQuake = false;
-            loadHammer = false;
-            attacking = false;
+            idleAnim = true;
+            StartCoroutine(Restore());
         }
 
     }
 
     IEnumerator Restore()
     {
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(3);
         idleAnim = false;
-        Debug.Log("Restore");
-        gameObject.transform.position = initialPosition.transform.position;
+        gameObject.transform.position = initialPosition;
         health = 100;
     }
 
@@ -179,7 +169,7 @@ public class OgreController : MonoBehaviour
         }
         else
         {
-            CameraController.instance.Shake(0f);
+            //CameraController.instance.Shake(0f);
         }
         StartCoroutine(InvokeEvolution());
     }
