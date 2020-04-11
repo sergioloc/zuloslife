@@ -115,15 +115,23 @@ public class PlayerController : MonoBehaviour
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
         healthBar.value = health;
 
-        if (isInWater){
+        if (!keyboard){
+            if (isInWater){
             Swimming();
+            }
+            else if (confuseParticle.isPlaying){
+                ConfuseMovement();
+            }
+            else {
+                Movement();
+            }
         }
-        else if (confuseParticle.isPlaying){
-            ConfuseMovement();
+        else{
+            MovementKeyboard();
+            KeyboardAction();
+            KeyboardJump();
         }
-        else {
-            Movement();
-        }
+        
         
         //Jump
         if (isGrounded)
