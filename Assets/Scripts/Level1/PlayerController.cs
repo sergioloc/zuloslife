@@ -117,7 +117,7 @@ public class PlayerController : MonoBehaviour
 
         if (!keyboard){
             if (isInWater){
-            Swimming();
+                Swimming();
             }
             else if (confuseParticle.isPlaying){
                 ConfuseMovement();
@@ -131,7 +131,6 @@ public class PlayerController : MonoBehaviour
             KeyboardAction();
             KeyboardJump();
         }
-        
         
         //Jump
         if (isGrounded)

@@ -17,7 +17,7 @@ public class Laser : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RaycastHit2D mHit = Physics2D.Raycast(transform.position, transform.up, 15f, 1 << mask);
+        RaycastHit2D mHit = Physics2D.Raycast(transform.position, transform.up, 60f, 1 << LayerMask.NameToLayer("Wall"));
         lineRenderer.SetPosition(0, transform.position);
         lineRenderer.SetPosition(1, mHit.point);
     }
