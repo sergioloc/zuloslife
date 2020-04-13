@@ -10,7 +10,7 @@ public class RotateCannon : MonoBehaviour
         public bool reverse;
     private float angle;
 
-    void Update()
+    void FixedUpdate()
     {
         Vector2 direction = target.position - transform.position;
         angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;

@@ -13,7 +13,7 @@ public class Missile : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         rb2d.velocity = transform.right * speed * 100 * Time.deltaTime;
     }

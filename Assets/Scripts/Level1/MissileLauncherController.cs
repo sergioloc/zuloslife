@@ -13,7 +13,7 @@ public class MissileLauncherController : MonoBehaviour
     {
     }
 
-    void Update()
+    void FixedUpdate()
     {
 
         if (isInArea)
