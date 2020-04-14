@@ -8,10 +8,21 @@ public class PlayerController : MonoBehaviour
 {
     #region Variables
 
+    [Header("Characters")]
+    public GameObject kero;
+    public GameObject panda;
+    public GameObject cinamon;
+    public GameObject kutter;
+    public GameObject trisky;
+    [Tooltip("Initial character")]
+    public string currentCharacter;
+    public GameObject characters;
+
     [Header("Movement")]
     public Joystick joystick;
     public float speed = 0;
     public bool facingRight = true;
+    private float scale;
 
     [Header("Jump")]
     public int jumpForce = 0;
@@ -39,7 +50,6 @@ public class PlayerController : MonoBehaviour
 
     [Header("Stamina")]
     public Image staminaPanda;
-    public Image staminaKero;
     public Image staminaCinamon;
     public Image staminaKutter;
     public Image staminaTrisky;
@@ -52,6 +62,7 @@ public class PlayerController : MonoBehaviour
     public GameObject deathCollider;
 
     [Header("Impact Faces")]
+    private GameObject impactFace;
     public GameObject pandaImpactFace;
     public GameObject keroImpactFace;
     public GameObject cinamonImpactFace;
@@ -64,20 +75,15 @@ public class PlayerController : MonoBehaviour
     public Image fillCinamon;
     public Image fillKutter;
     public Image fillTrisky;
-    public Image fillCurrent;
 
     private Transform spawnPoint;
     private Rigidbody2D rb2d;
-    private Animator cameraAnimation;
+    private Animator characterAnimation, cameraAnimation;
     private float sensitivity = 0.1f;
-    private bool wallAtRight, wallAtLeft, isInWater = false;
+    private bool bloodShowed = false, wallAtRight, wallAtLeft, isInWater = false;
 
     public static PlayerController instance;
     public bool confuse = false, keyboard = false;
-
-    public GameObject pandaGameObject, keroGameObject, cinamonGameObject, kutterGameObject,triskyGameObject;
-
-    private Character panda, kero, cinamon, kutter, trisky, current;
 
     #endregion
 
@@ -86,108 +92,72 @@ public class PlayerController : MonoBehaviour
         instance = this;
         health = initialHealth;
         rb2d = GetComponent<Rigidbody2D>();
+        scale = transform.localScale.x;
+        fillPanda.color = new Color32(0, 80, 255, 255);
+        characterAnimation = panda.GetComponent<Animator>();
+        impactFace = pandaImpactFace;
         wallAtRight = false;
         wallAtLeft = false;
-        panda = new Character("Panda", pandaGameObject, pandaImpactFace, fillPanda, staminaPanda);
-        kero = new Character("Kero", keroGameObject, keroImpactFace, fillKero, staminaKero);
-        cinamon = new Character("Cinamon", cinamonGameObject, cinamonImpactFace, fillCinamon, staminaCinamon);
-        kutter = new Character("Kutter", kutterGameObject, kutterImpactFace, fillKutter, staminaKutter);
-        trisky = new Character("Trisky", triskyGameObject, triskyImpactFace, fillTrisky, staminaTrisky);
-        SetInitialCharacter();
-        current.SetIconColor(new Color32(0, 80, 255, 255));
     }
 
-    private void SetInitialCharacter(){
-        if (pandaGameObject.activeInHierarchy)
-            current = panda;
-        else if (keroGameObject.activeInHierarchy)
-            current = kero;
-        else if (cinamonGameObject.activeInHierarchy)
-            current = cinamon;
-        else if (kutterGameObject.activeInHierarchy)
-            current = kutter;
-        else
-            current = trisky;
-    }
-
-    void FixedUpdate()
+    void Update()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
         healthBar.value = health;
 
-        if (!keyboard){
-            if (isInWater){
-                Swimming();
+        if (characters.gameObject.activeInHierarchy)
+        {
+            if (keyboard)
+            {
+                MovementKeyboard();
+                KeyboardSwitch();
+                KeyboardJump();
+                KeyboardAction();
+            } 
+            else
+                MovementJoystick();
+
+            //Jump
+            if (isGrounded)
+            {
+                characterAnimation.SetBool("isJumping", false);
             }
-            else if (confuseParticle.isPlaying){
-                ConfuseMovement();
+            else
+            {
+                characterAnimation.SetBool("isJumping", true);
             }
-            else {
-                Movement();
+
+            //Die
+            if (health <= 0)
+            {
+                Die();
             }
+
+            //Combo
+            if (megaCombo.activeInHierarchy == true)
+            {
+                CameraController.instance.Shake(0);
+            }
+
+            //testing
+            if (confuse)
+            {
+                confuse = false;
+                confuseParticle.Play();
+            }
+
+
         }
-        else{
-            MovementKeyboard();
-            KeyboardAction();
-            KeyboardJump();
-        }
-        
-        //Jump
-        if (isGrounded)
-            current.SetBool("isJumping", false);
-        else
-            current.SetBool("isJumping", true);
-    
+
     }
 
+    #region Movement
 
-    // Movement
-
-    private void Movement()
+    private void MovementJoystick()
     {
-        if (joystick.Horizontal >= sensitivity && !wallAtRight)
+        if (isInWater)
         {
-            //Move Right
-            current.SetBool("Run", true);
-            rb2d.transform.Translate(Vector2.right * speed * Time.deltaTime);
-            if (!facingRight) Flip();
-        }
-        else if (joystick.Horizontal <= -sensitivity && !wallAtLeft)
-        {
-            //Move Left
-            current.SetBool("Run", true);
-            rb2d.transform.Translate(Vector2.left * speed * Time.deltaTime);
-            if (facingRight) Flip();
-        }
-        else if (current.GetBool("Run"))
-        {
-            current.SetBool("Run", false);
-        }
-    }
-
-    private void ConfuseMovement(){
-        if ((joystick.Horizontal >= sensitivity) && !wallAtLeft)
-        {
-            //Move Left
-            current.SetBool("Run", true);
-            rb2d.transform.Translate(Vector2.left * speed * Time.deltaTime);
-            if (facingRight) Flip();
-        }
-        else if ((joystick.Horizontal <= -sensitivity) && !wallAtRight)
-        {
-            //Move Right
-            current.SetBool("Run", true);
-            rb2d.transform.Translate(Vector2.right * speed * Time.deltaTime);
-            if (!facingRight) Flip();
-        }
-        else if (current.GetBool("Run"))
-        {
-            current.SetBool("Run", false);
-        }
-    }
-
-    private void Swimming(){
-        if (joystick.Horizontal >= (sensitivity * 5) && !wallAtRight)
+            if (joystick.Horizontal >= (sensitivity * 5) && !wallAtRight)
             {
                 //Move Right
                 rb2d.transform.Translate(Vector2.right * speed * 0.75f * Time.deltaTime);
@@ -209,6 +179,130 @@ public class PlayerController : MonoBehaviour
                 //Move Down
                 rb2d.transform.Translate(Vector2.down * speed * 0.5f * Time.deltaTime);
             }
+            
+        }
+        else   //Normal
+        {
+            if (!confuseParticle.isPlaying)
+            {
+                if (joystick.Horizontal >= sensitivity && !wallAtRight)
+                {
+                    //Move Right
+                    characterAnimation.SetBool("Run", true);
+                    rb2d.transform.Translate(Vector2.right * speed * Time.deltaTime);
+                    if (!facingRight) Flip();
+                }
+                else if (joystick.Horizontal <= -sensitivity && !wallAtLeft)
+                {
+                    //Move Left
+                    characterAnimation.SetBool("Run", true);
+                    rb2d.transform.Translate(Vector2.left * speed * Time.deltaTime);
+                    if (facingRight) Flip();
+                }
+                else if (characterAnimation.GetBool("Run"))
+                {
+                    characterAnimation.SetBool("Run", false);
+                }
+            }
+
+            else //Confuse
+            {
+                if ((joystick.Horizontal >= sensitivity) && !wallAtLeft)
+                {
+                    //Move Left
+                    characterAnimation.SetBool("Run", true);
+                    rb2d.transform.Translate(Vector2.left * speed * Time.deltaTime);
+                    if (facingRight) Flip();
+                }
+                else if ((joystick.Horizontal <= -sensitivity) && !wallAtRight)
+                {
+                    //Move Right
+                    characterAnimation.SetBool("Run", true);
+                    rb2d.transform.Translate(Vector2.right * speed * Time.deltaTime);
+                    if (!facingRight) Flip();
+                }
+                else if (characterAnimation.GetBool("Run"))
+                {
+                    characterAnimation.SetBool("Run", false);
+                }
+            }
+        }
+        
+    }
+
+    private void MovementKeyboard()
+    {
+        if (isInWater)
+        {
+            if (Input.GetKey(KeyCode.RightArrow) && !wallAtRight)
+            {
+                //Move Right
+                rb2d.transform.Translate(Vector2.right * speed * 0.75f * Time.deltaTime);
+                if (!facingRight) Flip();
+            }
+            else if (Input.GetKey(KeyCode.LeftArrow) && !wallAtLeft)
+            {
+                //Move Left
+                rb2d.transform.Translate(Vector2.left * speed * 0.75f * Time.deltaTime);
+                if (facingRight) Flip();
+            }
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                //Move Up
+                rb2d.transform.Translate(Vector2.up * speed * 0.5f * Time.deltaTime);
+            }
+            else if (Input.GetKey(KeyCode.DownArrow))
+            {
+                //Move Down
+                rb2d.transform.Translate(Vector2.down * speed * 0.5f * Time.deltaTime);
+            }
+        }
+        else   //Normal
+        {
+            if (!confuseParticle.isPlaying)
+            {
+                if (Input.GetKey(KeyCode.RightArrow) && !wallAtRight)
+                {
+                    //Move Right
+                    characterAnimation.SetBool("Run", true);
+                    rb2d.transform.Translate(Vector2.right * speed * Time.deltaTime);
+                    if (!facingRight) Flip();
+                }
+                else if (Input.GetKey(KeyCode.LeftArrow) && !wallAtLeft)
+                {
+                    //Move Left
+                    characterAnimation.SetBool("Run", true);
+                    rb2d.transform.Translate(Vector2.left * speed * Time.deltaTime);
+                    if (facingRight) Flip();
+                }
+                else if (characterAnimation.GetBool("Run"))
+                {
+                    characterAnimation.SetBool("Run", false);
+                }
+            }
+
+            else //Confuse
+            {
+                if (Input.GetKey(KeyCode.RightArrow) && !wallAtLeft)
+                {
+                    //Move Left
+                    characterAnimation.SetBool("Run", true);
+                    rb2d.transform.Translate(Vector2.left * speed * Time.deltaTime);
+                    if (facingRight) Flip();
+                }
+                else if (Input.GetKey(KeyCode.LeftArrow) && !wallAtRight)
+                {
+                    //Move Right
+                    characterAnimation.SetBool("Run", true);
+                    rb2d.transform.Translate(Vector2.right * speed * Time.deltaTime);
+                    if (!facingRight) Flip();
+                }
+                else if (characterAnimation.GetBool("Run"))
+                {
+                    characterAnimation.SetBool("Run", false);
+                }
+            }
+        }
     }
 
     public void Jump()
@@ -219,22 +313,28 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    #endregion
 
-    // Action
+    #region Action
+
     public void startAction()
     {
-        if (current.GetStaminaFillAmount() >= 1)
-        {
-            current.SetBool("Action", true);
+        bool cancelAction = false;
 
-            if (current.CompareNameTo("Kero")){
-                current.SetBool("Action2", true);
-                current.SetBool("Action3", true);
-                /// FIXME: Shake
-            }
+        if ((staminaPanda.fillAmount < 1 && currentCharacter == "panda") ||
+            (staminaCinamon.fillAmount < 1 && currentCharacter == "cinamon") ||
+            (staminaKutter.fillAmount < 1 && currentCharacter == "kutter") ||
+            (staminaTrisky.fillAmount < 1 && currentCharacter == "trisky"))
+        {
+            cancelAction = true;
+        }
+        
+        if (!cancelAction)
+        {
+            characterAnimation.SetBool("Action", true);
 
             //Restore health
-            else if (current.CompareNameTo("Trisky"))
+            if (currentCharacter == "trisky")
             {
                 if (health >= (initialHealth - 30))
                 {
@@ -246,37 +346,34 @@ public class PlayerController : MonoBehaviour
                 }
                 healthParticle.Play();
             }
-            
             //Sound explosion
-            else if (current.CompareNameTo("Cinamon") && isGrounded)
+            else if (currentCharacter == "cinamon" && isGrounded)
             {
-                CameraController.instance.Shake(1f);
+                rb2d.AddForce(Vector2.up * jumpForce * 20);
+                rb2d.gravityScale = 0.4f;
+                StartCoroutine(Wait("RestoreGravity", 2f));
+                CameraController.instance.Shake(0.7f);
             }
-
             //Throw scissor
-            else if (current.CompareNameTo("Kutter"))
+            else if (currentCharacter == "kutter")
             {
                 StartCoroutine(Wait("ThrowScissor", 0.3f));
             }
-            
         }
         
     }
 
     public void stopAction()
     {
-        current.SetBool("Action", false);
-        if (current.CompareNameTo("Kero")){
-            current.SetBool("Action2", false);
-            current.SetBool("Action3", false);
-        }
+        characterAnimation.SetBool("Action", false);
     }
+    #endregion
 
+    #region Collisions
 
-    // Collisions
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("MeleeEnemy"))
+        if (collision.gameObject.CompareTag("MeleeEnemy") && !bloodShowed)
         {
             TakeDamage(damageFromEnemy);
         }
@@ -346,7 +443,10 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    // Aux functions
+    #endregion
+
+    #region Other functions
+
     private void TakeDamage(float damage)
     {
         frame.SetActive(true);
@@ -355,13 +455,11 @@ public class PlayerController : MonoBehaviour
         {
             health = health - damage;
             bloodParticle.Play();
-            if (!current.IsImpactFaceActive())
+            if (!impactFace.gameObject.activeSelf)
             {
-                current.SetImpactFaceActive(true);
+                impactFace.SetActive(true);
                 StartCoroutine(Wait("ImpactFaceFalse", 2f));
             }
-            if (health <= 0)
-                Die();
         }
     }
 
@@ -369,34 +467,14 @@ public class PlayerController : MonoBehaviour
     {
         if (facingRight)
         {
-            transform.localScale = new Vector3(-0.75f, 0.75f, 0.75f);
+            transform.localScale = new Vector3(-scale, scale, scale);
         }
         else
         {
-            transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
+            transform.localScale = new Vector3(scale, scale, scale);
         }
         shotPoint.Rotate(0f, 180f, 0f);
         facingRight = !facingRight;
-    }
-
-    private void Die()
-    {
-        confuseParticle.Stop();
-        healthParticle.Stop();
-        current.GetCharacter().SetActive(false);
-        deathCollider.SetActive(true);
-        current.SetImpactFaceActive(false);
-        Instantiate(deathEffect, transform.position, Quaternion.identity);
-
-        if (Random.Range(1, 2) == 1)
-        {
-            Instantiate(bloodEffect1, transform.position, Quaternion.identity);
-        }
-        else
-        {
-            Instantiate(bloodEffect2, transform.position, Quaternion.identity);
-        }
-        StartCoroutine(Wait("MoveToSpawnPoint", 2f));
     }
 
     IEnumerator Wait(string type, float sec)
@@ -405,19 +483,25 @@ public class PlayerController : MonoBehaviour
         switch (type)
         {
             case "ImpactFaceFalse":
-                current.SetImpactFaceActive(false);
+                impactFace.SetActive(false);
+                break;
+
+            case "RestoreGravity":
+                rb2d.gravityScale = 3f;
                 break;
 
             case "MoveToSpawnPoint":
                 deathCollider.SetActive(false);
                 gameObject.GetComponent<Transform>().position = spawnPoint.position;
                 spawnParticle.Play();
+                gameObject.layer = 8;
                 StartCoroutine(Wait("Respawn", 3f));
                 break;
 
             case "Respawn":
-                current.GetCharacter().SetActive(true);
+                characters.SetActive(true);
                 health = initialHealth;
+                bloodShowed = false;
                 break;
 
             case "ThrowScissor":
@@ -430,36 +514,64 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void Die()
+    {
+        if (!bloodShowed)
+        {
+            deathCollider.SetActive(true);
+            impactFace.SetActive(false);
+            characters.SetActive(false);
+            Instantiate(deathEffect, transform.position, Quaternion.identity);
 
-    // Switch character
-    public void switchToPanda(){
-        switchTo(panda);
+            if (Random.Range(1, 2) == 1)
+            {
+                Instantiate(bloodEffect1, transform.position, Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(bloodEffect2, transform.position, Quaternion.identity);
+            }
+            bloodShowed = true;
+            StartCoroutine(Wait("MoveToSpawnPoint", 2f));
+        } 
+    }
+    #endregion
+
+    #region Keyboard controllers
+
+    private void KeyboardSwitch()
+    {
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+
+            if (currentCharacter == "panda")
+                switchToKero();
+            else if (currentCharacter == "kero")
+                switchToCinamon();
+            else if (currentCharacter == "cinamon")
+                switchToKutter();
+            else if (currentCharacter == "kutter")
+                switchToTrisky();
+            else if (currentCharacter == "trisky")
+                switchToPanda();
+        }
+        else if (Input.GetKeyDown(KeyCode.C))
+        {
+
+            if (currentCharacter == "panda")
+                switchToTrisky();
+            else if (currentCharacter == "kero")
+                switchToPanda();
+            else if (currentCharacter == "cinamon")
+                switchToKero();
+            else if (currentCharacter == "kutter")
+                switchToCinamon();
+            else if (currentCharacter == "trisky")
+                switchToKutter();
+
+        }
     }
 
-    public void switchToKero(){
-        switchTo(kero);
-    }
-
-    public void switchToCinamon(){
-        switchTo(cinamon);
-    }
-
-    public void switchToKutter(){
-        switchTo(kutter);
-    }
-
-    public void switchToTrisky(){
-        switchTo(trisky);
-    }
-
-    private void switchTo(Character next){
-        current.Hide();
-        current = next;
-        current.Show();
-    }
-
-
-    // Keyboard
     private void KeyboardJump()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -480,80 +592,99 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void MovementKeyboard()
-    {
-        if (isInWater)
-        {
-            if (Input.GetKey(KeyCode.RightArrow) && !wallAtRight)
-            {
-                //Move Right
-                rb2d.transform.Translate(Vector2.right * speed * 0.75f * Time.deltaTime);
-                if (!facingRight) Flip();
-            }
-            else if (Input.GetKey(KeyCode.LeftArrow) && !wallAtLeft)
-            {
-                //Move Left
-                rb2d.transform.Translate(Vector2.left * speed * 0.75f * Time.deltaTime);
-                if (facingRight) Flip();
-            }
-            if (Input.GetKey(KeyCode.UpArrow))
-            {
-                //Move Up
-                rb2d.transform.Translate(Vector2.up * speed * 0.5f * Time.deltaTime);
-            }
-            else if (Input.GetKey(KeyCode.DownArrow))
-            {
-                //Move Down
-                rb2d.transform.Translate(Vector2.down * speed * 0.5f * Time.deltaTime);
-            }
-        }
-        else   //Normal
-        {
-            if (!confuseParticle.isPlaying)
-            {
-                if (Input.GetKey(KeyCode.RightArrow) && !wallAtRight)
-                {
-                    //Move Right
-                    current.SetBool("Run", true);
-                    rb2d.transform.Translate(Vector2.right * speed * Time.deltaTime);
-                    if (!facingRight) Flip();
-                }
-                else if (Input.GetKey(KeyCode.LeftArrow) && !wallAtLeft)
-                {
-                    //Move Left
-                    current.SetBool("Run", true);
-                    rb2d.transform.Translate(Vector2.left * speed * Time.deltaTime);
-                    if (facingRight) Flip();
-                }
-                else if (current.GetBool("Run"))
-                {
-                    current.SetBool("Run", false);
-                }
-            }
+    #endregion
 
-            else //Confuse
-            {
-                if (Input.GetKey(KeyCode.RightArrow) && !wallAtLeft)
-                {
-                    //Move Left
-                    current.SetBool("Run", true);
-                    rb2d.transform.Translate(Vector2.left * speed * Time.deltaTime);
-                    if (facingRight) Flip();
-                }
-                else if (Input.GetKey(KeyCode.LeftArrow) && !wallAtRight)
-                {
-                    //Move Right
-                    current.SetBool("Run", true);
-                    rb2d.transform.Translate(Vector2.right * speed * Time.deltaTime);
-                    if (!facingRight) Flip();
-                }
-                else if (current.GetBool("Run"))
-                {
-                    current.SetBool("Run", false);
-                }
-            }
-        }
+    #region Switch Characters
+    public void switchToPanda()
+    {
+        panda.SetActive(true);
+        kero.SetActive(false);
+        cinamon.SetActive(false);
+        kutter.SetActive(false);
+        trisky.SetActive(false);
+        characterAnimation = panda.GetComponent<Animator>();
+        impactFace = pandaImpactFace;
+        currentCharacter = "panda";
+        pandaImpactFace.SetActive(false);
+        fillPanda.color = new Color32(0, 80, 255, 255);
+        fillKero.color = new Color32(255, 255, 255, 255);
+        fillCinamon.color = new Color32(255, 255, 255, 255);
+        fillKutter.color = new Color32(255, 255, 255, 255);
+        fillTrisky.color = new Color32(255, 255, 255, 255);
     }
+
+    public void switchToKero()
+    {
+        panda.SetActive(false);
+        kero.SetActive(true);
+        cinamon.SetActive(false);
+        kutter.SetActive(false);
+        trisky.SetActive(false);
+        characterAnimation = kero.GetComponent<Animator>();
+        impactFace = keroImpactFace;
+        currentCharacter = "kero";
+        keroImpactFace.SetActive(false);
+        fillPanda.color = new Color32(255, 255, 255, 255);
+        fillKero.color = new Color32(0, 80, 255, 255);
+        fillCinamon.color = new Color32(255, 255, 255, 255);
+        fillKutter.color = new Color32(255, 255, 255, 255);
+        fillTrisky.color = new Color32(255, 255, 255, 255);
+    }
+
+    public void switchToCinamon()
+    {
+        panda.SetActive(false);
+        kero.SetActive(false);
+        cinamon.SetActive(true);
+        kutter.SetActive(false);
+        trisky.SetActive(false);
+        characterAnimation = cinamon.GetComponent<Animator>();
+        impactFace = cinamonImpactFace;
+        currentCharacter = "cinamon";
+        cinamonImpactFace.SetActive(false);
+        fillPanda.color = new Color32(255, 255, 255, 255);
+        fillKero.color = new Color32(255, 255, 255, 255);
+        fillCinamon.color = new Color32(0, 80, 255, 255);
+        fillKutter.color = new Color32(255, 255, 255, 255);
+        fillTrisky.color = new Color32(255, 255, 255, 255);
+    }
+
+    public void switchToKutter()
+    {
+        panda.SetActive(false);
+        kero.SetActive(false);
+        cinamon.SetActive(false);
+        kutter.SetActive(true);
+        trisky.SetActive(false);
+        characterAnimation = kutter.GetComponent<Animator>();
+        impactFace = kutterImpactFace;
+        currentCharacter = "kutter";
+        kutterImpactFace.SetActive(false);
+        fillPanda.color = new Color32(255, 255, 255, 255);
+        fillKero.color = new Color32(255, 255, 255, 255);
+        fillCinamon.color = new Color32(255, 255, 255, 255);
+        fillKutter.color = new Color32(0, 80, 255, 255);
+        fillTrisky.color = new Color32(255, 255, 255, 255);
+    }
+
+    public void switchToTrisky()
+    {
+        panda.SetActive(false);
+        kero.SetActive(false);
+        cinamon.SetActive(false);
+        kutter.SetActive(false);
+        trisky.SetActive(true);
+        characterAnimation = trisky.GetComponent<Animator>();
+        impactFace = triskyImpactFace;
+        currentCharacter = "trisky";
+        triskyImpactFace.SetActive(false);
+        fillPanda.color = new Color32(255, 255, 255, 255);
+        fillKero.color = new Color32(255, 255, 255, 255);
+        fillCinamon.color = new Color32(255, 255, 255, 255);
+        fillKutter.color = new Color32(255, 255, 255, 255);
+        fillTrisky.color = new Color32(0, 80, 255, 255);
+    }
+    #endregion
 
 }
 

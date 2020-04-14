@@ -6,16 +6,18 @@ public class Missile : MonoBehaviour
 {
     public float speed = 10f;
     public GameObject explosion;
-    private Rigidbody2D rb2d;
+    private Rigidbody2D rb;
 
+    // Start is called before the first frame update
     void Start()
     {
-        rb2d = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    void FixedUpdate()
+    // Update is called once per frame
+    void Update()
     {
-        rb2d.velocity = transform.right * speed * 100 * Time.deltaTime;
+        rb.velocity = transform.right * speed * 100 * Time.deltaTime;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

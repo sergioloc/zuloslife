@@ -9,6 +9,17 @@ public class PushController : MonoBehaviour
     public bool front;
     public int strong, high;
 
+    // Start is called before the first frame update
+    void Start()
+    {
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        facingRight = PlayerController.instance.facingRight;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("MeleeEnemy") || collision.gameObject.CompareTag("OgreFist") || collision.gameObject.CompareTag("OgreQuake"))
@@ -19,9 +30,10 @@ public class PushController : MonoBehaviour
 
     private void Push()
     {
+
         if (front)
         {
-            if (PlayerController.instance.facingRight)
+            if (facingRight)
             {
                 rigidbody2d.AddForce(new Vector3(-strong, high));
             }
@@ -32,7 +44,7 @@ public class PushController : MonoBehaviour
         }
         else
         {
-            if (PlayerController.instance.facingRight)
+            if (facingRight)
             {
                 rigidbody2d.AddForce(new Vector3(strong, high));
             }
@@ -41,5 +53,8 @@ public class PushController : MonoBehaviour
                 rigidbody2d.AddForce(new Vector3(-strong, high));
             }
         }
+        
     }
+
+
 }

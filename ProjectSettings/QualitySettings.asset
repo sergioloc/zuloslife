@@ -218,7 +218,7 @@ QualitySettings:
     excludedTargetPlatforms: []
   - serializedVersion: 2
     name: Mobile
-    pixelLightCount: 2
+    pixelLightCount: 0
     shadows: 0
     shadowResolution: 0
     shadowProjection: 0

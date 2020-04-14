@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5221424881294796815}
   - component: {fileID: 4316643843555794575}
   - component: {fileID: 8996090127100621258}
-  m_Layer: 17
+  m_Layer: 0
   m_Name: ElectricityPulse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4763,7 +4763,7 @@ GameObject:
   - component: {fileID: 8263439628461423902}
   - component: {fileID: 624816807433203884}
   - component: {fileID: 8005603461166653918}
-  m_Layer: 17
+  m_Layer: 0
   m_Name: Scissors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4865,7 +4865,7 @@ GameObject:
   - component: {fileID: 8452933571079668232}
   - component: {fileID: 2337062513718034339}
   - component: {fileID: 8294147087929759272}
-  m_Layer: 17
+  m_Layer: 0
   m_Name: Scissor
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -4972,7 +4972,7 @@ GameObject:
   - component: {fileID: 5312263732983995456}
   - component: {fileID: 1357697144711026469}
   - component: {fileID: 1854079297355242919}
-  m_Layer: 17
+  m_Layer: 0
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
