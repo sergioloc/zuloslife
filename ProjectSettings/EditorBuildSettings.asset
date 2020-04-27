@@ -14,7 +14,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Prision.unity
     guid: b3f74780fe13b6a4db872ed297f6b53d
-  - enabled: 0
-    path: Assets/Scenes/Cinematic2.unity
-    guid: 49dd3956c54202149b882daa1aecd9b8
   m_configObjects: {}
