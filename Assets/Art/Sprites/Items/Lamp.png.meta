@@ -3,16 +3,16 @@ guid: 74497be05f8b88d46b6bbe61d7281a1a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8536458619386366448
+      213: -3535221090349844623
     second: Lamp_Base
   - first:
-      213: 865448678626521639
+      213: 8197276694922559856
     second: Lamp_Chain
   - first:
-      213: 3356131328165311924
+      213: 6069046777230207982
     second: Lamp_Light
   externalObjects: {}
-  serializedVersion: 10
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -66,8 +66,9 @@ TextureImporter:
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  applyGammaDecoding: 0
   platformSettings:
-  - serializedVersion: 2
+  - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -78,7 +79,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -89,7 +91,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
     buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -100,6 +103,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -107,8 +111,8 @@ TextureImporter:
       name: Lamp_Base
       rect:
         serializedVersion: 2
-        x: 413
-        y: 1431
+        x: 118
+        y: 391
         width: 255
         height: 38
       alignment: 0
@@ -118,8 +122,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c0f4ddb273fb1d242aaaeb12380176be
-      internalID: 8536458619386366448
+      spriteID: 1777a33162f50fec0800000000000000
+      internalID: -3535221090349844623
       vertices: []
       indices: 
       edges: []
@@ -128,8 +132,8 @@ TextureImporter:
       name: Lamp_Chain
       rect:
         serializedVersion: 2
-        x: 506
-        y: 1285
+        x: 211
+        y: 245
         width: 68
         height: 134
       alignment: 0
@@ -139,8 +143,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cf33bfadb190f5144a07e3f8821f8bd4
-      internalID: 865448678626521639
+      spriteID: 071827619b392c170800000000000000
+      internalID: 8197276694922559856
       vertices: []
       indices: 
       edges: []
@@ -149,10 +153,10 @@ TextureImporter:
       name: Lamp_Light
       rect:
         serializedVersion: 2
-        x: 16
-        y: 12
-        width: 1048
-        height: 1256
+        x: 0
+        y: 0
+        width: 490
+        height: 228
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,8 +164,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 35f2403bddafef24d838bffedecb7075
-      internalID: 3356131328165311924
+      spriteID: eeb290283e5993450800000000000000
+      internalID: 6069046777230207982
       vertices: []
       indices: 
       edges: []
@@ -169,7 +173,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 302efc11d9d6fec4085e14cc47325a90
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
