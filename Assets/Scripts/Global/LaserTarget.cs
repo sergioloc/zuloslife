@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class LaserTarget : MonoBehaviour
 {
     private LineRenderer lineRenderer;
@@ -14,8 +15,7 @@ public class LaserTarget : MonoBehaviour
 
     void Update()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up);
         lineRenderer.SetPosition(0, transform.position);
-        lineRenderer.SetPosition(1, transform.right);
+        lineRenderer.SetPosition(1, target.position);
     }
 }
