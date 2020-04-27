@@ -3,52 +3,25 @@ guid: 4b83f6db008b7544fa8c4dc9c8287ee1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8946965450097088476
+      213: 1643286923708169606
     second: Trisky_Face_Dead
   - first:
-      213: -4880191266041720808
+      213: -3826567020558095833
     second: Trisky_Face_Impact
   - first:
-      213: -1834917502544612265
-    second: Trisky_Shouder_R
-  - first:
-      213: -1812597498554466909
-    second: Trisky_Arm_R
-  - first:
-      213: -3092742496382455306
-    second: Trisky_Chest
-  - first:
-      213: -1327724044252275585
+      213: 9135496588689871470
     second: Trisky_Face_Action
   - first:
-      213: -4792569323592253552
-    second: Trisky_Face_Blink
+      213: 2749629260456829278
+    second: TriskyFace_Blink
   - first:
-      213: -7647841803540732993
-    second: Trisky_Pants
+      213: 641990223784325035
+    second: Trisky_Beer_Full
   - first:
-      213: 6991526367755265156
-    second: Trisky_Shoulder_L
-  - first:
-      213: 2421624771801265419
-    second: Trisky_Head
-  - first:
-      213: 8761458491533976893
-    second: Trisky_Hand_R_Empty
-  - first:
-      213: -2765901638854803406
-    second: Trisky_Arm_L
-  - first:
-      213: -2793968795078469138
-    second: Trisky_Hand_R_Full
-  - first:
-      213: -5334411373776449585
-    second: Trisky_Leg
-  - first:
-      213: 996203551990504906
-    second: Trisky_Foot
+      213: -9057924758403109213
+    second: Trisky_Beer_Empty
   externalObjects: {}
-  serializedVersion: 10
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -102,8 +75,9 @@ TextureImporter:
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  applyGammaDecoding: 0
   platformSettings:
-  - serializedVersion: 2
+  - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -114,7 +88,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -125,7 +100,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
     buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -136,6 +112,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -144,18 +121,18 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 3
-        y: 1315
+        y: 744
         width: 432
         height: 370
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 32e229bc0c713074888c87ac9935d008
-      internalID: -8946965450097088476
+      spriteID: 68d7ba720c02ec610800000000000000
+      internalID: 1643286923708169606
       vertices: []
       indices: 
       edges: []
@@ -165,81 +142,18 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 447
-        y: 1342
+        y: 771
         width: 305
         height: 343
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 118dbed782d356a4591886478a5a6bf9
-      internalID: -4880191266041720808
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Trisky_Shouder_R
-      rect:
-        serializedVersion: 2
-        x: 771
-        y: 1500
-        width: 247
-        height: 184
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cf1722c6f8f78f8498569aa84e0bff55
-      internalID: -1834917502544612265
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Trisky_Arm_R
-      rect:
-        serializedVersion: 2
-        x: 1024
-        y: 1388
-        width: 205
-        height: 296
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b8d22a9f0705c304cabc1121355fac9a
-      internalID: -1812597498554466909
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Trisky_Chest
-      rect:
-        serializedVersion: 2
-        x: 1269
-        y: 1313
-        width: 412
-        height: 365
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 482573903721145409d405db32046755
-      internalID: -3092742496382455306
+      spriteID: 72ae86e919d45eac0800000000000000
+      internalID: -3826567020558095833
       vertices: []
       indices: 
       edges: []
@@ -249,207 +163,81 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 978
+        y: 407
         width: 425
         height: 320
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cb24f33b7f2ed804fa9afeabf6331797
-      internalID: -1327724044252275585
+      spriteID: e6217a7debdc7ce70800000000000000
+      internalID: 9135496588689871470
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Trisky_Face_Blink
+      name: TriskyFace_Blink
       rect:
         serializedVersion: 2
         x: 447
-        y: 1137
+        y: 566
         width: 423
         height: 161
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 35305ce59cd41ee4fa357b78cccef065
-      internalID: -4792569323592253552
+      spriteID: e51ac858e35a82620800000000000000
+      internalID: 2749629260456829278
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Trisky_Pants
+      name: Trisky_Beer_Full
       rect:
         serializedVersion: 2
-        x: 938
-        y: 1075
-        width: 405
-        height: 161
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 777d2a01c4ea0974eaa77f8cb96c117f
-      internalID: -7647841803540732993
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Trisky_Shoulder_L
-      rect:
-        serializedVersion: 2
-        x: 1407
-        y: 1047
-        width: 188
-        height: 184
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7b4e966c9e3220f4ebba4285643c04a3
-      internalID: 6991526367755265156
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Trisky_Head
-      rect:
-        serializedVersion: 2
-        x: 9
-        y: 4
-        width: 885
-        height: 950
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6c8e822c5c439b441b33dcb54e602c8d
-      internalID: 2421624771801265419
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Trisky_Hand_R_Empty
-      rect:
-        serializedVersion: 2
-        x: 944
-        y: 505
-        width: 364
-        height: 449
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a874f4202b341ef46a40813046d00fe2
-      internalID: 8761458491533976893
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Trisky_Arm_L
-      rect:
-        serializedVersion: 2
-        x: 1387
-        y: 687
-        width: 259
-        height: 289
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 930653d2ea7bec54da693565b9038586
-      internalID: -2765901638854803406
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Trisky_Hand_R_Full
-      rect:
-        serializedVersion: 2
-        x: 940
-        y: 20
+        x: 3
+        y: 0
         width: 403
-        height: 479
+        height: 387
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f14fc1d8d0632404c9fac2f392a3574c
-      internalID: -2793968795078469138
+      spriteID: baf20f505bec8e800800000000000000
+      internalID: 641990223784325035
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Trisky_Leg
+      name: Trisky_Beer_Empty
       rect:
         serializedVersion: 2
-        x: 1426
-        y: 365
-        width: 155
-        height: 263
+        x: 480
+        y: 0
+        width: 356
+        height: 357
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d892e401cfa4c14386e220c9d2ae31f
-      internalID: -5334411373776449585
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Trisky_Foot
-      rect:
-        serializedVersion: 2
-        x: 1411
-        y: 106
-        width: 223
-        height: 205
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1a292a0e8b3524d48a632f7c39dd4aa7
-      internalID: 996203551990504906
+      spriteID: 3aeaa255c69cb4280800000000000000
+      internalID: -9057924758403109213
       vertices: []
       indices: 
       edges: []
@@ -457,7 +245,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 40cb5f0050ce4eb4da7e184aff3b42f5
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 

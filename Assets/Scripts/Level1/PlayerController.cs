@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem confuseParticle;
     public ParticleSystem healthParticle;
     public ParticleSystem spawnParticle;
+    public ParticleSystem jumpParticle;
+    public GameObject dustParticle;
 
     [Header("Damage")]
     public GameObject deathEffect;
@@ -69,7 +71,7 @@ public class PlayerController : MonoBehaviour
     private Transform spawnPoint;
     private Rigidbody2D rb2d;
     private Animator cameraAnimation;
-    private float sensitivity = 0.1f;
+    private float sensitivity = 0.2f;
     private bool wallAtRight, wallAtLeft, isInWater = false;
 
     public static PlayerController instance;
@@ -127,7 +129,15 @@ public class PlayerController : MonoBehaviour
             }
         }
         else{
-            MovementKeyboard();
+            if (isInWater){
+                SwimmingKeyboard();
+            }
+            else if (confuseParticle.isPlaying){
+                ConfuseMovementKeyboard();
+            }
+            else {
+                MovementKeyboard();
+            }
             KeyboardAction();
             KeyboardJump();
         }
@@ -145,44 +155,33 @@ public class PlayerController : MonoBehaviour
 
     private void Movement()
     {
+        Debug.Log(joystick.Horizontal);
         if (joystick.Horizontal >= sensitivity && !wallAtRight)
         {
-            //Move Right
-            current.SetBool("Run", true);
-            rb2d.transform.Translate(Vector2.right * speed * Time.deltaTime);
-            if (!facingRight) Flip();
+            RunTo("Right");
         }
         else if (joystick.Horizontal <= -sensitivity && !wallAtLeft)
         {
-            //Move Left
-            current.SetBool("Run", true);
-            rb2d.transform.Translate(Vector2.left * speed * Time.deltaTime);
-            if (facingRight) Flip();
+            RunTo("Left");
         }
         else if (current.GetBool("Run"))
         {
-            current.SetBool("Run", false);
+            StopRunning();
         }
     }
 
     private void ConfuseMovement(){
         if ((joystick.Horizontal >= sensitivity) && !wallAtLeft)
         {
-            //Move Left
-            current.SetBool("Run", true);
-            rb2d.transform.Translate(Vector2.left * speed * Time.deltaTime);
-            if (facingRight) Flip();
+            RunTo("Left");
         }
         else if ((joystick.Horizontal <= -sensitivity) && !wallAtRight)
         {
-            //Move Right
-            current.SetBool("Run", true);
-            rb2d.transform.Translate(Vector2.right * speed * Time.deltaTime);
-            if (!facingRight) Flip();
+            RunTo("Right");
         }
         else if (current.GetBool("Run"))
         {
-            current.SetBool("Run", false);
+            StopRunning();
         }
     }
 
@@ -215,10 +214,29 @@ public class PlayerController : MonoBehaviour
     {
         if (!isInWater && isGrounded)
         {
+            jumpParticle.Play();
             rb2d.AddForce(Vector2.up * jumpForce * 100);
         }
     }
 
+    private void RunTo(string direction){
+        current.SetBool("Run", true);
+        if (isGrounded)
+            dustParticle.SetActive(true);
+        if (direction == "Right"){
+            rb2d.transform.Translate(Vector2.right * speed * Time.deltaTime);
+            if (!facingRight) Flip();
+        }
+        else{
+            rb2d.transform.Translate(Vector2.left * speed * Time.deltaTime);
+            if (facingRight) Flip();
+        }  
+    }
+
+    private void StopRunning(){
+        dustParticle.SetActive(false);
+        current.SetBool("Run", false);
+    }
 
     // Action
     public void startAction()
@@ -234,7 +252,7 @@ public class PlayerController : MonoBehaviour
             }
 
             //Restore health
-            else if (current.CompareNameTo("Trisky"))
+            else if (current.CompareNameTo("Trisky") && isGrounded)
             {
                 if (health >= (initialHealth - 30))
                 {
@@ -482,9 +500,37 @@ public class PlayerController : MonoBehaviour
 
     private void MovementKeyboard()
     {
-        if (isInWater)
+        if (Input.GetKey(KeyCode.RightArrow) && !wallAtRight)
         {
-            if (Input.GetKey(KeyCode.RightArrow) && !wallAtRight)
+            RunTo("Right");
+        }
+        else if (Input.GetKey(KeyCode.LeftArrow) && !wallAtLeft)
+        {
+            RunTo("Left");
+        }
+        else if (current.GetBool("Run"))
+        {
+            StopRunning();
+        }  
+    }
+
+    private void ConfuseMovementKeyboard(){
+        if (Input.GetKey(KeyCode.RightArrow) && !wallAtLeft)
+        {
+            RunTo("Left");
+        }
+        else if (Input.GetKey(KeyCode.LeftArrow) && !wallAtRight)
+        {
+            RunTo("Right");
+        }
+        else if (current.GetBool("Run"))
+        {
+            StopRunning();
+        }
+    }
+
+    private void SwimmingKeyboard(){
+        if (Input.GetKey(KeyCode.RightArrow) && !wallAtRight)
             {
                 //Move Right
                 rb2d.transform.Translate(Vector2.right * speed * 0.75f * Time.deltaTime);
@@ -505,55 +551,7 @@ public class PlayerController : MonoBehaviour
             {
                 //Move Down
                 rb2d.transform.Translate(Vector2.down * speed * 0.5f * Time.deltaTime);
-            }
-        }
-        else   //Normal
-        {
-            if (!confuseParticle.isPlaying)
-            {
-                if (Input.GetKey(KeyCode.RightArrow) && !wallAtRight)
-                {
-                    //Move Right
-                    current.SetBool("Run", true);
-                    rb2d.transform.Translate(Vector2.right * speed * Time.deltaTime);
-                    if (!facingRight) Flip();
-                }
-                else if (Input.GetKey(KeyCode.LeftArrow) && !wallAtLeft)
-                {
-                    //Move Left
-                    current.SetBool("Run", true);
-                    rb2d.transform.Translate(Vector2.left * speed * Time.deltaTime);
-                    if (facingRight) Flip();
-                }
-                else if (current.GetBool("Run"))
-                {
-                    current.SetBool("Run", false);
-                }
-            }
-
-            else //Confuse
-            {
-                if (Input.GetKey(KeyCode.RightArrow) && !wallAtLeft)
-                {
-                    //Move Left
-                    current.SetBool("Run", true);
-                    rb2d.transform.Translate(Vector2.left * speed * Time.deltaTime);
-                    if (facingRight) Flip();
-                }
-                else if (Input.GetKey(KeyCode.LeftArrow) && !wallAtRight)
-                {
-                    //Move Right
-                    current.SetBool("Run", true);
-                    rb2d.transform.Translate(Vector2.right * speed * Time.deltaTime);
-                    if (!facingRight) Flip();
-                }
-                else if (current.GetBool("Run"))
-                {
-                    current.SetBool("Run", false);
-                }
-            }
         }
     }
-
 }
 
