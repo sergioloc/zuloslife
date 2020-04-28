@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb2d;
     private Animator cameraAnimation;
     private float sensitivity = 0.2f;
-    private bool wallAtRight, wallAtLeft, isInWater = false, isJumping = false;
+    private bool wallAtRight, wallAtLeft, isInWater = false, isJumping = false, isTakingPhoto = false;
 
     public static PlayerController instance;
     public bool confuse = false, keyboard = false;
@@ -228,16 +228,18 @@ public class PlayerController : MonoBehaviour
     }
 
     private void RunTo(string direction){
-        current.SetBool("Run", true);
-        if (isGrounded)
-            dustParticle.SetActive(true);
-        if (direction == "Right"){
-            rb2d.transform.Translate(Vector2.right * speed * Time.deltaTime);
-            if (!facingRight) Flip();
-        }
-        else{
-            rb2d.transform.Translate(Vector2.left * speed * Time.deltaTime);
-            if (facingRight) Flip();
+        if (!isTakingPhoto){
+            current.SetBool("Run", true);
+            if (isGrounded)
+                dustParticle.SetActive(true);
+            if (direction == "Right"){
+                rb2d.transform.Translate(Vector2.right * speed * Time.deltaTime);
+                if (!facingRight) Flip();
+            }
+            else{
+                rb2d.transform.Translate(Vector2.left * speed * Time.deltaTime);
+                if (facingRight) Flip();
+            } 
         }  
     }
 
@@ -284,9 +286,19 @@ public class PlayerController : MonoBehaviour
             {
                 StartCoroutine(Wait("ThrowScissor", 0.3f));
             }
+
+            else if (current.CompareNameTo("Panda") && !current.GetBool("Run")){
+                isTakingPhoto = true;
+                StartCoroutine(NoTakingPhoto());
+            }
             
         }
         
+    }
+
+    private IEnumerator NoTakingPhoto(){
+        yield return new WaitForSeconds(0.9f);
+        isTakingPhoto = false;
     }
 
     public void stopAction()
