@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb2d;
     private Animator cameraAnimation;
     private float sensitivity = 0.2f;
-    private bool wallAtRight, wallAtLeft, isInWater = false;
+    private bool wallAtRight, wallAtLeft, isInWater = false, isJumping = false;
 
     public static PlayerController instance;
     public bool confuse = false, keyboard = false;
@@ -212,11 +212,19 @@ public class PlayerController : MonoBehaviour
 
     public void Jump()
     {
-        if (!isInWater && isGrounded)
+        if (!isInWater && isGrounded && !isJumping)
         {
+            isJumping = true;
             jumpParticle.Play();
             rb2d.AddForce(Vector2.up * jumpForce * 100);
+            StartCoroutine(EnableJump());
         }
+    }
+
+    private IEnumerator EnableJump(){
+        yield return new WaitForSeconds(0.1f);
+        isJumping = false;
+        StopCoroutine(EnableJump());
     }
 
     private void RunTo(string direction){
