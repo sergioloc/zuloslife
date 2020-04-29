@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public Joystick joystick;
     public float speed = 0;
     public bool facingRight = true;
+    public float linearDrag = 4f;
 
     [Header("Jump")]
     public int jumpForce = 0;
@@ -26,6 +27,7 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem healthParticle;
     public ParticleSystem spawnParticle;
     public ParticleSystem jumpParticle;
+    public ParticleSystem slideParticle;
     public GameObject dustParticle;
 
     [Header("Damage")]
@@ -77,9 +79,10 @@ public class PlayerController : MonoBehaviour
     public static PlayerController instance;
     public bool confuse = false, keyboard = false;
 
-    public GameObject pandaGameObject, keroGameObject, cinamonGameObject, kutterGameObject,triskyGameObject;
+    public GameObject pandaGameObject, keroGameObject, cinamonGameObject, kutterGameObject, triskyGameObject;
 
     private Character panda, kero, cinamon, kutter, trisky, current;
+    
 
     #endregion
 
@@ -155,7 +158,6 @@ public class PlayerController : MonoBehaviour
 
     private void Movement()
     {
-        Debug.Log(joystick.Horizontal);
         if (joystick.Horizontal >= sensitivity && !wallAtRight)
         {
             RunTo("Right");
@@ -228,24 +230,46 @@ public class PlayerController : MonoBehaviour
     }
 
     private void RunTo(string direction){
+       
         if (!isTakingPhoto){
-            current.SetBool("Run", true);
+            //Slide effect
+            if (direction == "Right" && rb2d.velocity.x < -9 ||
+                direction == "Left" && rb2d.velocity.x > 9){
+                rb2d.drag = 0f;
+                current.SetBool("Slide", true);
+                slideParticle.Play();
+                StartCoroutine(StopSlide());
+            }
+            else{
+                current.SetBool("Run", true);
+                rb2d.drag = linearDrag;
+            }
+
             if (isGrounded)
                 dustParticle.SetActive(true);
             if (direction == "Right"){
-                rb2d.transform.Translate(Vector2.right * speed * Time.deltaTime);
+                rb2d.AddForce(Vector2.right * speed * 50);
                 if (!facingRight) Flip();
             }
             else{
-                rb2d.transform.Translate(Vector2.left * speed * Time.deltaTime);
+                rb2d.AddForce(Vector2.left * speed * 50);
                 if (facingRight) Flip();
-            } 
+            }
+
+            if (Mathf.Abs(rb2d.velocity.x) > speed){
+                rb2d.velocity = new Vector2(Mathf.Sign(rb2d.velocity.x) * speed, rb2d.velocity.y);
+            }
         }  
     }
 
     private void StopRunning(){
         dustParticle.SetActive(false);
         current.SetBool("Run", false);
+    }
+
+    private IEnumerator StopSlide(){
+        yield return new WaitForSeconds(0.15f);
+        current.SetBool("Slide", false);
     }
 
     // Action
