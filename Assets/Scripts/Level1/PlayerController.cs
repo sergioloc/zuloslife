@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    #region Variables
 
     [Header("Movement")]
     public Joystick joystick;
@@ -21,6 +20,19 @@ public class PlayerController : MonoBehaviour
     public LayerMask whatIsGround;
     private bool isGrounded;
 
+    [Header("Health")]
+    public Slider healthBar;
+    public int damageFromEnemy = 10;
+    public int initialHealth = 100;
+    public float health;
+    public GameObject deathCollider;
+
+    [Header("Damage")]
+    public GameObject deathEffect;
+    public GameObject bloodEffect1;
+    public GameObject bloodEffect2;
+    public GameObject frame;
+
     [Header("Particles")]
     public ParticleSystem bloodParticle;
     public ParticleSystem confuseParticle;
@@ -30,30 +42,12 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem slideParticle;
     public GameObject dustParticle;
 
-    [Header("Damage")]
-    public GameObject deathEffect;
-    public GameObject bloodEffect1;
-    public GameObject bloodEffect2;
-    public GameObject frame;
-
-    [Header("Attack")]
-    public GameObject megaCombo;
-    public GameObject projectile;
-    public Transform shotPoint;
-
     [Header("Stamina")]
     public Image staminaPanda;
     public Image staminaKero;
     public Image staminaCinamon;
     public Image staminaKutter;
     public Image staminaTrisky;
-
-    [Header("Health")]
-    public Slider healthBar;
-    public int damageFromEnemy = 10;
-    public int initialHealth = 100;
-    public float health;
-    public GameObject deathCollider;
 
     [Header("Impact Faces")]
     public GameObject pandaImpactFace;
@@ -68,31 +62,28 @@ public class PlayerController : MonoBehaviour
     public Image fillCinamon;
     public Image fillKutter;
     public Image fillTrisky;
-    public Image fillCurrent;
-
-    private Transform spawnPoint;
-    private Rigidbody2D rb2d;
-    private Animator cameraAnimation;
-    private float sensitivity = 0.2f;
-    private bool wallAtRight, wallAtLeft, isInWater = false, isJumping = false, isTakingPhoto = false;
-
-    public static PlayerController instance;
-    public bool confuse = false, keyboard = false;
+    private Image fillCurrent;
 
     public GameObject pandaGameObject, keroGameObject, cinamonGameObject, kutterGameObject, triskyGameObject;
 
-    private Character panda, kero, cinamon, kutter, trisky, current;
-    
+    public static PlayerController instance;
+    private Transform spawnPoint;
+    private Rigidbody2D rb2d;
 
-    #endregion
+    //Values
+    private float sensitivity = 0.2f;
+    private bool wallAtRight = false, wallAtLeft = false, isInWater = false, isJumping = false, isTakingPhoto = false;
+    public bool keyboard = false;
+    public Transform shootPoint;
+
+
+    private Character panda, kero, cinamon, kutter, trisky, current;
 
     void Start()
     {
         instance = this;
         health = initialHealth;
         rb2d = GetComponent<Rigidbody2D>();
-        wallAtRight = false;
-        wallAtLeft = false;
         panda = new Character("Panda", pandaGameObject, pandaImpactFace, fillPanda, staminaPanda);
         kero = new Character("Kero", keroGameObject, keroImpactFace, fillKero, staminaKero);
         cinamon = new Character("Cinamon", cinamonGameObject, cinamonImpactFace, fillCinamon, staminaCinamon);
@@ -155,7 +146,6 @@ public class PlayerController : MonoBehaviour
 
 
     // Movement
-
     private void Movement()
     {
         if (joystick.Horizontal >= sensitivity && !wallAtRight)
@@ -279,14 +269,8 @@ public class PlayerController : MonoBehaviour
         {
             current.SetBool("Action", true);
 
-            if (current.CompareNameTo("Kero")){
-                current.SetBool("Action2", true);
-                current.SetBool("Action3", true);
-                /// FIXME: Shake
-            }
-
             //Restore health
-            else if (current.CompareNameTo("Trisky") && isGrounded)
+            if (current.CompareNameTo("Trisky") && isGrounded)
             {
                 if (health >= (initialHealth - 30))
                 {
@@ -303,12 +287,6 @@ public class PlayerController : MonoBehaviour
             else if (current.CompareNameTo("Cinamon") && isGrounded)
             {
                 CameraController.instance.Shake(1f);
-            }
-
-            //Throw scissor
-            else if (current.CompareNameTo("Kutter"))
-            {
-                StartCoroutine(Wait("ThrowScissor", 0.3f));
             }
 
             else if (current.CompareNameTo("Panda") && !current.GetBool("Run")){
@@ -437,7 +415,7 @@ public class PlayerController : MonoBehaviour
         {
             transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
         }
-        shotPoint.Rotate(0f, 180f, 0f);
+        shootPoint.Rotate(0f, 180f, 0f);
         facingRight = !facingRight;
     }
 
@@ -480,10 +458,6 @@ public class PlayerController : MonoBehaviour
             case "Respawn":
                 current.GetCharacter().SetActive(true);
                 health = initialHealth;
-                break;
-
-            case "ThrowScissor":
-                Instantiate(projectile, shotPoint.position, shotPoint.rotation);
                 break;
 
             case "HideFrame":
