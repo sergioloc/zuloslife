@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2298089464363007052}
   - component: {fileID: 3903891869165198552}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Collision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68,7 +68,7 @@ GameObject:
   - component: {fileID: 5472840439216426443}
   - component: {fileID: 7571231334647452015}
   - component: {fileID: 3832346458928690359}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: BloodParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4762,10 +4762,11 @@ ParticleSystemRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10308, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -4774,6 +4775,7 @@ ParticleSystemRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -4785,7 +4787,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 15
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -4819,7 +4821,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3067207830891115686}
   - component: {fileID: 3139488030570146589}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Weapon
   m_TagString: MeleeEnemy
   m_Icon: {fileID: 0}
@@ -4866,7 +4868,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4681482526955847017}
   - component: {fileID: 4681482526955847016}
-  - component: {fileID: 4681482526955846999}
   m_Layer: 13
   m_Name: Guard_Head
   m_TagString: Guard
@@ -4904,10 +4905,11 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 517403b38c7a8474d8521d70efcc626e, type: 2}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4915,6 +4917,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -4938,22 +4941,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &4681482526955846999
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4681482526955847018}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: b8838da8ba7841241a904cd171aba8be, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.33, y: 3.43}
-  serializedVersion: 2
-  m_Radius: 3.69
 --- !u!1 &4681482527069079400
 GameObject:
   m_ObjectHideFlags: 0
@@ -4964,7 +4951,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4681482527069079383}
   - component: {fileID: 4681482527069079382}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Guard_Face_Flash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4999,10 +4986,11 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 517403b38c7a8474d8521d70efcc626e, type: 2}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5010,6 +4998,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -5043,7 +5032,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4681482527215627179}
   - component: {fileID: 4681482527215627178}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Guard_Face_Dead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5078,10 +5067,11 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 517403b38c7a8474d8521d70efcc626e, type: 2}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5089,6 +5079,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -5122,7 +5113,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4681482527318465234}
   - component: {fileID: 4681482527318465233}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Guard_Shoulder_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5158,10 +5149,11 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 517403b38c7a8474d8521d70efcc626e, type: 2}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5169,6 +5161,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -5202,8 +5195,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4681482527448096688}
   - component: {fileID: 4681482527448096703}
-  - component: {fileID: 4681482527448096702}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Guard_Body_Down
   m_TagString: Guard
   m_Icon: {fileID: 0}
@@ -5238,10 +5230,11 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 517403b38c7a8474d8521d70efcc626e, type: 2}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5249,6 +5242,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -5272,22 +5266,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!70 &4681482527448096702
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4681482527448096689}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.5}
-  m_Size: {x: 4.4699993, y: 6.48}
-  m_Direction: 0
 --- !u!1 &4681482527657838207
 GameObject:
   m_ObjectHideFlags: 0
@@ -5298,7 +5276,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4681482527657838206}
   - component: {fileID: 4681482527657838205}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Guard_Shoulder_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5334,10 +5312,11 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 517403b38c7a8474d8521d70efcc626e, type: 2}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5345,6 +5324,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -5380,7 +5360,8 @@ GameObject:
   - component: {fileID: 4681482527946413910}
   - component: {fileID: 4681482527946413909}
   - component: {fileID: 4681482527946413908}
-  m_Layer: 0
+  - component: {fileID: 456310087512186524}
+  m_Layer: 13
   m_Name: Guard
   m_TagString: Guard
   m_Icon: {fileID: 0}
@@ -5469,6 +5450,22 @@ MonoBehaviour:
   bloodEffect2: {fileID: 6892392146948598567, guid: ac94230b394a1ab4a81a50a3a98e9277,
     type: 3}
   bloodParticle: {fileID: 7571231334647452015}
+--- !u!70 &456310087512186524
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4681482527946413928}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 2}
+  m_Size: {x: 5, y: 14}
+  m_Direction: 0
 --- !u!1 &4681482528175000241
 GameObject:
   m_ObjectHideFlags: 0
@@ -5479,7 +5476,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4681482528175000240}
   - component: {fileID: 4681482528175000255}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Guard_Arm_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5515,10 +5512,11 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 517403b38c7a8474d8521d70efcc626e, type: 2}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5526,6 +5524,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -5559,7 +5558,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4681482528355143586}
   - component: {fileID: 4681482528355143585}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Guard_Arm_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5594,10 +5593,11 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 517403b38c7a8474d8521d70efcc626e, type: 2}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5605,6 +5605,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -5638,7 +5639,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4681482528494369755}
   - component: {fileID: 4681482528494369754}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Guard_Body
   m_TagString: Guard
   m_Icon: {fileID: 0}
@@ -5676,10 +5677,11 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 517403b38c7a8474d8521d70efcc626e, type: 2}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5687,6 +5689,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -5720,7 +5723,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4681482528825819482}
   - component: {fileID: 4681482528825819481}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Guard_Leg_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5755,10 +5758,11 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 517403b38c7a8474d8521d70efcc626e, type: 2}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5766,6 +5770,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -5799,7 +5804,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4681482528960527540}
   - component: {fileID: 4681482528960527539}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Guard_Leg_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5834,10 +5839,11 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 517403b38c7a8474d8521d70efcc626e, type: 2}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5845,6 +5851,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0

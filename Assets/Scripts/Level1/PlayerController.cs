@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
@@ -78,6 +79,8 @@ public class PlayerController : MonoBehaviour
 
 
     private Character panda, kero, cinamon, kutter, trisky, current;
+
+    public UnityEvent OnKeroAttack;
 
     void Start()
     {
@@ -292,6 +295,10 @@ public class PlayerController : MonoBehaviour
             else if (current.CompareNameTo("Panda") && !current.GetBool("Run")){
                 isTakingPhoto = true;
                 StartCoroutine(NoTakingPhoto());
+            }
+
+            else if (current.CompareNameTo("Kero")){
+                OnKeroAttack.Invoke();
             }
             
         }
