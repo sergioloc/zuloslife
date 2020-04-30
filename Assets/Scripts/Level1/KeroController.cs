@@ -5,46 +5,60 @@ using UnityEngine;
 public class KeroController : MonoBehaviour
 {
 
-    [Header("Targets in radius")]
-    public List<Transform> targets;
-    public int targetIndex;
-    public Transform player;
+    [Header("Player")]
+    public GameObject player;
+
+    [Header("Values")]
     public float speed = 0;
-    private bool moving = false;
+    public float minDistance = 0;
+    public float minVelocity = 0;
+
+    [Header("Targets in area")]
+    public List<Transform> targets;
+    
+    private bool isMoving = false;
+    private string currentAttack;
     private Animator animator;
+    private Rigidbody2D rb2d;
 
     void Start(){
         animator = GetComponent<Animator>();
+        rb2d = player.GetComponent<Rigidbody2D>();
     }
 
     void FixedUpdate(){
-        if (moving){
-            StartCoroutine(Dash());
-            float distance = targets[NearestTarget()].position.x - player.position.x;
-            if (Mathf.Abs(distance) < 2)
-                moving = false;
-            else if (Mathf.Abs(distance) < 4)
-                StartCoroutine(Uppercut());
-            
+        if (isMoving){
+            player.transform.position = Vector2.Lerp(player.transform.position, targets[NearestTarget()].position, speed * Time.deltaTime);
+            if (Mathf.Abs(DistanceToNearest()) < minDistance){
+                isMoving = false;
+                animator.SetBool(currentAttack, false);
+            } 
         }
     }
 
-    public void MoveToTarget()
+    public void Attack(){
+        if (Mathf.Abs(rb2d.velocity.x) > minVelocity)
+            currentAttack = "Dash";
+        else
+            currentAttack = "Smash";
+        MoveToTarget();
+    }
+
+    public void StopAttack(){
+        
+    }
+
+
+    private void MoveToTarget()
     {
-        moving = true;
+        if (NearestTarget() != -1 && Mathf.Abs(DistanceToNearest()) > minDistance){
+            isMoving = true;
+            animator.SetBool(currentAttack, true);
+        }
     }
 
-    private IEnumerator Dash(){
-        player.position = Vector2.Lerp(player.position, targets[NearestTarget()].position, speed * Time.deltaTime);
-        animator.SetBool("Dash", true);
-        yield return new WaitForSeconds(0.25f);
-        animator.SetBool("Dash", false);
-    }
-
-    private IEnumerator Uppercut(){
-        animator.SetBool("Uppercut", true);
-        yield return new WaitForSeconds(0.5f);
-        animator.SetBool("Uppercut", false);
+    private float DistanceToNearest(){
+        return targets[NearestTarget()].position.x - player.transform.position.x;
     }
 
     private int NearestTarget()
@@ -53,11 +67,11 @@ public class KeroController : MonoBehaviour
 
         for (int i = 0; i < targets.Count; i++)
         {
-            distances[i] = (Mathf.Abs(targets[i].position.x - player.position.x));
+            distances[i] = (Mathf.Abs(targets[i].position.x - player.transform.position.x));
         }
 
         float minDistance = Mathf.Min(distances);
-        int index = 0;
+        int index = -1;
 
         for (int i = 0; i < distances.Length; i++)
         {
