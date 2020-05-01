@@ -28,11 +28,14 @@ public class KeroController : MonoBehaviour
 
     void FixedUpdate(){
         if (isMoving){
-            player.transform.position = Vector2.Lerp(player.transform.position, targets[NearestTarget()].position, speed * Time.deltaTime);
+            int indexTarget = NearestTarget();
+            if (indexTarget != -1)
+                player.transform.position = Vector2.Lerp(player.transform.position, targets[indexTarget].position, speed * Time.deltaTime);
+                
             if (Mathf.Abs(DistanceToNearest()) < minDistance){
                 isMoving = false;
                 animator.SetBool(currentAttack, false);
-            } 
+            }
         }
     }
 
@@ -43,11 +46,6 @@ public class KeroController : MonoBehaviour
             currentAttack = "Smash";
         MoveToTarget();
     }
-
-    public void StopAttack(){
-        
-    }
-
 
     private void MoveToTarget()
     {

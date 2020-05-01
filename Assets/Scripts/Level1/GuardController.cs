@@ -162,6 +162,7 @@ public class GuardController : MonoBehaviour
     {
         EnableRagdoll();
         dissolveMat.Disappear();
+        StartCoroutine(DestroyGameObject());
         Instantiate(deathEffect, transform.position, Quaternion.identity);
         Instantiate(bloodMask, new Vector3(transform.position.x, transform.position.y, -0.9f), Quaternion.identity);
     }
@@ -176,7 +177,8 @@ public class GuardController : MonoBehaviour
         }
     }
 
-    public void Destroy(){
+    private IEnumerator DestroyGameObject(){
+        yield return new WaitForSeconds(2);
         Destroy(gameObject);
     }
 
