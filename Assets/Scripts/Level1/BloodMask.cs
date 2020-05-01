@@ -8,7 +8,7 @@ public class BloodMask : MonoBehaviour
 
     void Start()
     {
-        int rand = Random.Range(0, blood.Length-1);
+        int rand = Random.Range(0, blood.Length);
         GetComponent<SpriteRenderer>().sprite = blood[rand];
     }
 
