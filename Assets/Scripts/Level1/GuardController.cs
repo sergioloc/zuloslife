@@ -18,6 +18,7 @@ public class GuardController : MonoBehaviour
     [Header("Ragdoll")]
     public GameObject explosion;
     public GameObject[] bodyParts;
+    private Dissolve dissolveMat;
 
 
 
@@ -25,6 +26,7 @@ public class GuardController : MonoBehaviour
     {
         guardAnimation = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
+        dissolveMat = GetComponent<Dissolve>();
 
         if (transform.localScale.x < 0)
         {
@@ -159,7 +161,8 @@ public class GuardController : MonoBehaviour
     private void Die()
     {
         EnableRagdoll();
-        //Instantiate(deathEffect, transform.position, Quaternion.identity);
+        dissolveMat.Disappear();
+        Instantiate(deathEffect, transform.position, Quaternion.identity);
         Instantiate(bloodMask, new Vector3(transform.position.x, transform.position.y, -0.9f), Quaternion.identity);
     }
 
