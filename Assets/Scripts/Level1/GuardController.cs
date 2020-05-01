@@ -6,11 +6,11 @@ public class GuardController : MonoBehaviour
 {
     public int health = 100;
     public float speed;
-    public GameObject target, deathEffect, bloodEffect1, bloodEffect2;
+    public GameObject target, deathEffect, bloodMask;
     public ParticleSystem bloodParticle;
     private Animator guardAnimation;
     private bool lookRight = true;
-    private bool freeze = false;
+    private bool freeze = false, deadEffect = false;
     private float limit = 2.3f, distance, velocity;
     private Rigidbody2D rb2d;
     Vector3 lastPosition = Vector3.zero;
@@ -149,26 +149,18 @@ public class GuardController : MonoBehaviour
     {
         health = health - damage;
 
-        if(health <= 0)
+        if(health <= 0 && !deadEffect)
         {
+            deadEffect = true;
             Die();
         }
     }
 
     private void Die()
     {
-        //guardAnimation.SetTrigger("Die");
         EnableRagdoll();
-        Instantiate(deathEffect, transform.position, Quaternion.identity);
-
-        if (Random.Range(1, 2) == 1)
-        {
-            Instantiate(bloodEffect1, new Vector3(transform.position.x, transform.position.y, -0.9f), Quaternion.identity);
-        }
-        else
-        {
-            Instantiate(bloodEffect2, new Vector3(transform.position.x, transform.position.y, -0.9f), Quaternion.identity);
-        }
+        //Instantiate(deathEffect, transform.position, Quaternion.identity);
+        Instantiate(bloodMask, new Vector3(transform.position.x, transform.position.y, -0.9f), Quaternion.identity);
     }
 
     private void EnableRagdoll(){
@@ -178,7 +170,6 @@ public class GuardController : MonoBehaviour
         for (int i=0; i < bodyParts.Length; i++){
             bodyParts[i].GetComponent<Rigidbody2D>().isKinematic = false;
             bodyParts[i].GetComponent<Collider2D>().enabled = true;
-            //bodyParts[i].GetComponent<Rigidbody2D>().AddForce(new Vector3(100, 100));
         }
     }
 

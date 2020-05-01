@@ -5643,9 +5643,7 @@ MonoBehaviour:
   target: {fileID: 0}
   deathEffect: {fileID: 864369462689951706, guid: 2ef4ce86acfb91a4b823fab37d63603d,
     type: 3}
-  bloodEffect1: {fileID: 3295300928962464619, guid: ff364d9be755eec4b9071bcdea670e6d,
-    type: 3}
-  bloodEffect2: {fileID: 6892392146948598567, guid: ac94230b394a1ab4a81a50a3a98e9277,
+  bloodMask: {fileID: 4344595315765654328, guid: 7e044fe83597b1a4f90a5adebfc3da45,
     type: 3}
   bloodParticle: {fileID: 7571231334647452015}
   explosion: {fileID: 8273661176139174291}
