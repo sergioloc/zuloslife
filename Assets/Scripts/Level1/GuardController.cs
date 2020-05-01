@@ -15,6 +15,10 @@ public class GuardController : MonoBehaviour
     private Rigidbody2D rb2d;
     Vector3 lastPosition = Vector3.zero;
 
+    [Header("Ragdoll")]
+    public GameObject explosion;
+    public GameObject[] bodyParts;
+
 
 
     void Start()
@@ -30,7 +34,8 @@ public class GuardController : MonoBehaviour
 
     void FixedUpdate()
     {
-        distance = target.transform.position.x - transform.position.x;
+        if (target != null){
+            distance = target.transform.position.x - transform.position.x;
 
         //Look
         if (distance > 0 && !lookRight && !freeze)
@@ -65,7 +70,7 @@ public class GuardController : MonoBehaviour
             guardAnimation.SetBool("Action", true);
         else
             guardAnimation.SetBool("Action", false);
-        
+        }  
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -73,7 +78,7 @@ public class GuardController : MonoBehaviour
         if (col.gameObject.tag == "Melee")
         {  
             bloodParticle.Play();
-            TakeDamage(20);
+            TakeDamage(100);
             Push();
         }
         else if (col.gameObject.tag == "Flash")
@@ -152,8 +157,9 @@ public class GuardController : MonoBehaviour
 
     private void Die()
     {
+        //guardAnimation.SetTrigger("Die");
+        EnableRagdoll();
         Instantiate(deathEffect, transform.position, Quaternion.identity);
-        Destroy(gameObject);
 
         if (Random.Range(1, 2) == 1)
         {
@@ -163,7 +169,21 @@ public class GuardController : MonoBehaviour
         {
             Instantiate(bloodEffect2, new Vector3(transform.position.x, transform.position.y, -0.9f), Quaternion.identity);
         }
+    }
 
+    private void EnableRagdoll(){
+        guardAnimation.enabled = false;
+        explosion.SetActive(true);
+        gameObject.GetComponent<Collider2D>().enabled = false;
+        for (int i=0; i < bodyParts.Length; i++){
+            bodyParts[i].GetComponent<Rigidbody2D>().isKinematic = false;
+            bodyParts[i].GetComponent<Collider2D>().enabled = true;
+            //bodyParts[i].GetComponent<Rigidbody2D>().AddForce(new Vector3(100, 100));
+        }
+    }
+
+    public void Destroy(){
+        Destroy(gameObject);
     }
 
 }

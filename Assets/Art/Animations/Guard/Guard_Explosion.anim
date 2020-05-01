@@ -47,7 +47,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Guard_Body
+    path: GuardParts/Guard_Body
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -81,7 +81,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Guard_Body/Guard_Head
+    path: GuardParts/Guard_Body/Guard_Head
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -115,7 +115,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Guard_Body/Guard_Shoulder_L
+    path: GuardParts/Guard_Body/Guard_Shoulder_L
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -149,7 +149,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Guard_Body/Guard_Shoulder_L/Guard_Arm_L
+    path: GuardParts/Guard_Body/Guard_Shoulder_L/Guard_Arm_L
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -183,7 +183,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Guard_Body/Guard_Shoulder_R
+    path: GuardParts/Guard_Body/Guard_Shoulder_R
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -217,7 +217,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Guard_Body/Guard_Shoulder_R/Guard_Arm_R
+    path: GuardParts/Guard_Body/Guard_Shoulder_R/Guard_Arm_R
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -251,7 +251,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Guard_Leg_L
+    path: GuardParts/Guard_Leg_L
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -285,7 +285,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Guard_Leg_R
+    path: GuardParts/Guard_Leg_R
   m_PositionCurves: []
   m_ScaleCurves: []
   m_FloatCurves:
@@ -314,7 +314,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Guard_Body/Guard_Shoulder_R
+    path: GuardParts/Guard_Body/Guard_Shoulder_R
     classID: 1
     script: {fileID: 0}
   m_PPtrCurves: []
@@ -326,63 +326,63 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 831978964
+      path: 2651429449
       attribute: 4
       script: {fileID: 0}
       typeID: 4
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 2054706742
+      path: 1031900579
       attribute: 4
       script: {fileID: 0}
       typeID: 4
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 3544050446
+      path: 3993559262
       attribute: 4
       script: {fileID: 0}
       typeID: 4
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 577675196
+      path: 207045613
       attribute: 4
       script: {fileID: 0}
       typeID: 4
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 691197549
+      path: 336059837
       attribute: 4
       script: {fileID: 0}
       typeID: 4
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 2524973237
+      path: 3099186404
       attribute: 4
       script: {fileID: 0}
       typeID: 4
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 1039270270
+      path: 3018027488
       attribute: 4
       script: {fileID: 0}
       typeID: 4
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 3355261981
+      path: 1240222851
       attribute: 4
       script: {fileID: 0}
       typeID: 4
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 691197549
+      path: 336059837
       attribute: 2086281974
       script: {fileID: 0}
       typeID: 1
@@ -435,7 +435,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: Guard_Body
+    path: GuardParts/Guard_Body
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -463,7 +463,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: Guard_Body
+    path: GuardParts/Guard_Body
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -500,7 +500,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: Guard_Body
+    path: GuardParts/Guard_Body
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -528,7 +528,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: Guard_Body/Guard_Head
+    path: GuardParts/Guard_Body/Guard_Head
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -556,7 +556,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: Guard_Body/Guard_Head
+    path: GuardParts/Guard_Body/Guard_Head
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -593,7 +593,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: Guard_Body/Guard_Head
+    path: GuardParts/Guard_Body/Guard_Head
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -621,7 +621,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: Guard_Body/Guard_Shoulder_L
+    path: GuardParts/Guard_Body/Guard_Shoulder_L
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -649,7 +649,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: Guard_Body/Guard_Shoulder_L
+    path: GuardParts/Guard_Body/Guard_Shoulder_L
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -686,7 +686,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: Guard_Body/Guard_Shoulder_L
+    path: GuardParts/Guard_Body/Guard_Shoulder_L
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -714,7 +714,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: Guard_Body/Guard_Shoulder_L/Guard_Arm_L
+    path: GuardParts/Guard_Body/Guard_Shoulder_L/Guard_Arm_L
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -742,7 +742,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: Guard_Body/Guard_Shoulder_L/Guard_Arm_L
+    path: GuardParts/Guard_Body/Guard_Shoulder_L/Guard_Arm_L
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -779,7 +779,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: Guard_Body/Guard_Shoulder_L/Guard_Arm_L
+    path: GuardParts/Guard_Body/Guard_Shoulder_L/Guard_Arm_L
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -807,7 +807,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: Guard_Body/Guard_Shoulder_R
+    path: GuardParts/Guard_Body/Guard_Shoulder_R
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -835,7 +835,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: Guard_Body/Guard_Shoulder_R
+    path: GuardParts/Guard_Body/Guard_Shoulder_R
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -872,7 +872,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: Guard_Body/Guard_Shoulder_R
+    path: GuardParts/Guard_Body/Guard_Shoulder_R
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -900,7 +900,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Guard_Body/Guard_Shoulder_R
+    path: GuardParts/Guard_Body/Guard_Shoulder_R
     classID: 1
     script: {fileID: 0}
   - curve:
@@ -928,7 +928,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: Guard_Body/Guard_Shoulder_R/Guard_Arm_R
+    path: GuardParts/Guard_Body/Guard_Shoulder_R/Guard_Arm_R
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -956,7 +956,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: Guard_Body/Guard_Shoulder_R/Guard_Arm_R
+    path: GuardParts/Guard_Body/Guard_Shoulder_R/Guard_Arm_R
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -993,7 +993,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: Guard_Body/Guard_Shoulder_R/Guard_Arm_R
+    path: GuardParts/Guard_Body/Guard_Shoulder_R/Guard_Arm_R
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1021,7 +1021,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: Guard_Leg_L
+    path: GuardParts/Guard_Leg_L
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1049,7 +1049,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: Guard_Leg_L
+    path: GuardParts/Guard_Leg_L
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1086,7 +1086,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: Guard_Leg_L
+    path: GuardParts/Guard_Leg_L
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1114,7 +1114,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: Guard_Leg_R
+    path: GuardParts/Guard_Leg_R
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1142,7 +1142,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: Guard_Leg_R
+    path: GuardParts/Guard_Leg_R
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1179,7 +1179,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: Guard_Leg_R
+    path: GuardParts/Guard_Leg_R
     classID: 4
     script: {fileID: 0}
   m_EulerEditorCurves:
@@ -1190,7 +1190,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Guard_Body/Guard_Shoulder_L/Guard_Arm_L
+    path: GuardParts/Guard_Body/Guard_Shoulder_L
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1200,7 +1200,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Guard_Body/Guard_Shoulder_L/Guard_Arm_L
+    path: GuardParts/Guard_Body/Guard_Shoulder_L
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1210,7 +1210,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Guard_Body/Guard_Shoulder_L/Guard_Arm_L
+    path: GuardParts/Guard_Body/Guard_Shoulder_L
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1220,7 +1220,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Guard_Body/Guard_Shoulder_R/Guard_Arm_R
+    path: GuardParts/Guard_Body/Guard_Shoulder_R
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1230,7 +1230,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Guard_Body/Guard_Shoulder_R/Guard_Arm_R
+    path: GuardParts/Guard_Body/Guard_Shoulder_R
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1240,7 +1240,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Guard_Body/Guard_Shoulder_R/Guard_Arm_R
+    path: GuardParts/Guard_Body/Guard_Shoulder_R
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1250,7 +1250,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Guard_Body/Guard_Head
+    path: GuardParts/Guard_Body
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1260,7 +1260,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Guard_Body/Guard_Head
+    path: GuardParts/Guard_Body
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1270,7 +1270,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Guard_Body/Guard_Head
+    path: GuardParts/Guard_Body
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1280,7 +1280,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Guard_Leg_L
+    path: GuardParts/Guard_Body/Guard_Shoulder_R/Guard_Arm_R
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1290,7 +1290,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Guard_Leg_L
+    path: GuardParts/Guard_Body/Guard_Shoulder_R/Guard_Arm_R
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1300,7 +1300,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Guard_Leg_L
+    path: GuardParts/Guard_Body/Guard_Shoulder_R/Guard_Arm_R
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1310,7 +1310,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Guard_Body
+    path: GuardParts/Guard_Leg_L
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1320,7 +1320,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Guard_Body
+    path: GuardParts/Guard_Leg_L
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1330,7 +1330,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Guard_Body
+    path: GuardParts/Guard_Leg_L
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1340,7 +1340,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Guard_Body/Guard_Shoulder_L
+    path: GuardParts/Guard_Body/Guard_Head
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1350,7 +1350,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Guard_Body/Guard_Shoulder_L
+    path: GuardParts/Guard_Body/Guard_Head
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1360,7 +1360,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Guard_Body/Guard_Shoulder_L
+    path: GuardParts/Guard_Body/Guard_Head
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1370,7 +1370,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Guard_Body/Guard_Shoulder_R
+    path: GuardParts/Guard_Body/Guard_Shoulder_L/Guard_Arm_L
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1380,7 +1380,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Guard_Body/Guard_Shoulder_R
+    path: GuardParts/Guard_Body/Guard_Shoulder_L/Guard_Arm_L
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1390,7 +1390,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Guard_Body/Guard_Shoulder_R
+    path: GuardParts/Guard_Body/Guard_Shoulder_L/Guard_Arm_L
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1400,7 +1400,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Guard_Leg_R
+    path: GuardParts/Guard_Leg_R
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1410,7 +1410,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Guard_Leg_R
+    path: GuardParts/Guard_Leg_R
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1420,7 +1420,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Guard_Leg_R
+    path: GuardParts/Guard_Leg_R
     classID: 4
     script: {fileID: 0}
   m_HasGenericRootTransform: 0
