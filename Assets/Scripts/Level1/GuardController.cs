@@ -185,6 +185,9 @@ public class GuardController : MonoBehaviour
 
     private IEnumerator DestroyGameObject(){
         yield return new WaitForSeconds(2);
+        for (int i=0; i < bodyParts.Length; i++){
+            bodyParts[i].GetComponent<Collider2D>().enabled = false;
+        }
         Destroy(gameObject);
     }
 

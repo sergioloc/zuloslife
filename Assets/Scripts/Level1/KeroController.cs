@@ -16,7 +16,7 @@ public class KeroController : MonoBehaviour
     [Header("Targets in area")]
     public List<Transform> targets;
     
-    private bool isMoving = false;
+    private bool isMovingAttack = false, isStandAttack = false;
     private string currentAttack;
     private Animator animator;
     private Rigidbody2D rb2d;
@@ -27,15 +27,18 @@ public class KeroController : MonoBehaviour
     }
 
     void FixedUpdate(){
-        if (isMoving){
+        if (isMovingAttack){
             int indexTarget = NearestTarget();
             if (indexTarget != -1)
                 player.transform.position = Vector2.Lerp(player.transform.position, targets[indexTarget].position, speed * Time.deltaTime);
                 
             if (Mathf.Abs(DistanceToNearest()) < minDistance){
-                isMoving = false;
+                isMovingAttack = false;
                 animator.SetBool(currentAttack, false);
             }
+        }
+        else if(isStandAttack){
+            isStandAttack = false;
         }
     }
 
@@ -44,19 +47,34 @@ public class KeroController : MonoBehaviour
             currentAttack = "Dash";
         else
             currentAttack = "Smash";
-        MoveToTarget();
+
+        if (targets.Count > 0){
+            Debug.Log("Move");
+            MoveToTarget();
+        }
+        else {
+            StartCoroutine(AttackToNothing());
+        }
+        
     }
 
     private void MoveToTarget()
     {
-        if (NearestTarget() != -1 && Mathf.Abs(DistanceToNearest()) > minDistance){
-            isMoving = true;
+        if (Mathf.Abs(DistanceToNearest()) > minDistance){
+            isMovingAttack = true;
             animator.SetBool(currentAttack, true);
         }
     }
 
     private float DistanceToNearest(){
         return targets[NearestTarget()].position.x - player.transform.position.x;
+    }
+
+    private IEnumerator AttackToNothing()
+    {
+        animator.SetBool(currentAttack, true);
+        yield return new WaitForSeconds(0.25f);
+        animator.SetBool(currentAttack, false);
     }
 
     private int NearestTarget()
@@ -79,6 +97,10 @@ public class KeroController : MonoBehaviour
         return index;
     }
 
+    public void ShakeScreen(){
+        CameraController.instance.Shake(0f);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Guard"))
@@ -92,8 +114,9 @@ public class KeroController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Guard"))
         {
-            if (targets.Contains(collision.transform))
+            if (targets.Contains(collision.transform)){
                 targets.Remove(collision.transform);
+            }
         }
     }
 
