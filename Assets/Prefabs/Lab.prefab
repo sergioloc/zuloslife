@@ -5788,7 +5788,7 @@ GameObject:
   - component: {fileID: 8280040118146928561}
   m_Layer: 0
   m_Name: Lab
-  m_TagString: Untagged
+  m_TagString: Lab
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     public GameObject bloodEffect1;
     public GameObject bloodEffect2;
     public GameObject frame;
+    public float confuseTime = 0;
 
     [Header("Particles")]
     public ParticleSystem bloodParticle;
@@ -351,9 +352,9 @@ public class PlayerController : MonoBehaviour
         {
             wallAtRight = true;
         }
-        else if (collision.gameObject.CompareTag("Fox"))
+        else if (collision.gameObject.CompareTag("Lab"))
         {
-            confuseParticle.Play();
+            StartCoroutine(Confuse());
         }
     }
 
@@ -406,6 +407,16 @@ public class PlayerController : MonoBehaviour
             if (health <= 0)
                 Die();
         }
+    }
+
+    IEnumerator Confuse(){
+        confuseParticle.Play();
+        frame.SetActive(true);
+        frame.GetComponent<Image>().color = new Color32(142, 0, 91, 255);
+        yield return new WaitForSeconds(confuseTime);
+        confuseParticle.Stop();
+        frame.SetActive(false);
+        frame.GetComponent<Image>().color = new Color32(207, 28, 28, 255);
     }
 
     private void Flip()
