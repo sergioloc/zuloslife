@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7740182697317215503}
   - component: {fileID: 6331889104452761813}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: PupileL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5231243072175014652}
   - component: {fileID: 1613770886936067718}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Half_Eye_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1769265800312041490}
   - component: {fileID: 1740721876040113129}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Half_Eye_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -258,7 +258,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7556807727087142668}
   - component: {fileID: 7672635050714728282}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -339,7 +339,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3195535608381445317}
   - component: {fileID: 7741511305521361653}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: PupileR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -422,7 +422,7 @@ GameObject:
   - component: {fileID: 8990160725523044448}
   - component: {fileID: 891180576677519436}
   - component: {fileID: 2346094092593833804}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: BodyParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5183,7 +5183,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4663582662908845378}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Parts
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5222,7 +5222,7 @@ GameObject:
   - component: {fileID: 5624053655698089097}
   - component: {fileID: 8216663599942054834}
   - component: {fileID: 5198397560672394568}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: WhiteHalf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5355,7 +5355,7 @@ GameObject:
   - component: {fileID: 2257478530312998800}
   - component: {fileID: 7081475340359177641}
   - component: {fileID: 2058085744529104713}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: WhiteFull
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5486,7 +5486,7 @@ GameObject:
   - component: {fileID: 7057712893975141482}
   - component: {fileID: 3954869680408178013}
   - component: {fileID: 6209998783030276417}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: WhiteHalf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5618,7 +5618,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8623255691460309421}
   - component: {fileID: 8623255691460309420}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Full_Eye_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5701,7 +5701,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8623255692129300237}
   - component: {fileID: 8623255692129300236}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Full_Eye_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5786,7 +5786,7 @@ GameObject:
   - component: {fileID: 629201624926537417}
   - component: {fileID: 2056332397450952399}
   - component: {fileID: 8280040118146928561}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Lab
   m_TagString: Lab
   m_Icon: {fileID: 0}
@@ -5816,7 +5816,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8623255693273991160}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ca6598e7772baf4b92a1c77b73cb261, type: 3}
   m_Name: 
@@ -5834,7 +5834,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8623255693273991160}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 1095733625104a54fa480ca289f6b2bb, type: 2}
   m_CullingMode: 0
@@ -5872,7 +5872,7 @@ GameObject:
   - component: {fileID: 3547887006918204793}
   - component: {fileID: 4473252566624542293}
   - component: {fileID: 8433856962163605204}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: WhiteFull
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
 
     private Character panda, kero, cinamon, kutter, trisky, current;
 
-    public UnityEvent OnKeroAttack, OnFlip;
+    public UnityEvent OnKeroAttack, onKutterAttack;
 
     void Start()
     {
@@ -301,6 +301,9 @@ public class PlayerController : MonoBehaviour
             else if (current.CompareNameTo("Kero")){
                 OnKeroAttack.Invoke();
             }
+            else if (current.CompareNameTo("Kutter")){
+                onKutterAttack.Invoke();
+            }
             
         }
         
@@ -352,7 +355,7 @@ public class PlayerController : MonoBehaviour
         {
             wallAtRight = true;
         }
-        else if (collision.gameObject.CompareTag("Lab"))
+        else if (collision.gameObject.CompareTag("Confuse"))
         {
             StartCoroutine(Confuse());
         }
@@ -431,9 +434,6 @@ public class PlayerController : MonoBehaviour
         }
         shootPoint.Rotate(0f, 180f, 0f);
         facingRight = !facingRight;
-
-        if (current.CompareNameTo("Kero"))
-            OnFlip.Invoke();
     }
 
     private void Die()

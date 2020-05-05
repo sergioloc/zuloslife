@@ -29,6 +29,7 @@ TagManager:
   - Air
   - Shield
   - Lab
+  - Confuse
   layers:
   - Default
   - TransparentFX
@@ -50,8 +51,8 @@ TagManager:
   - Light
   - PlayerArea
   - GuardPart
-  - 
-  - 
+  - Lab
+  - Projectile
   - 
   - 
   - 
