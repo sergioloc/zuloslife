@@ -6,10 +6,10 @@ public class KutterController : MonoBehaviour
 {
     public Transform body;
     public float rotateSpeed;
+    public GameObject marker;
 
     [Header("Targets in area")]
     public List<Transform> targets;
-
 
     public void Shoot(){
         int index = NearestTarget();
