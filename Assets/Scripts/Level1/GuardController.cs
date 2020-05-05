@@ -95,6 +95,10 @@ public class GuardController : MonoBehaviour
             guardAnimation.SetBool("Freeze",true);
             StartCoroutine(FinishFreeze(5f));
         }
+        else if (col.gameObject.tag == "Shield")
+        {
+            freeze = true;
+        }
         else if (col.gameObject.tag == "Explosion")
         {
             TakeDamage(20);
@@ -116,6 +120,10 @@ public class GuardController : MonoBehaviour
     private void OnTriggerExit2D(Collider2D col)
     {
         if (col.gameObject.tag == "Guard")
+        {
+            freeze = false;
+        }
+        else if (col.gameObject.tag == "Shield")
         {
             freeze = false;
         }

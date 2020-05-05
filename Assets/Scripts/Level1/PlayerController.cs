@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem spawnParticle;
     public ParticleSystem jumpParticle;
     public ParticleSystem slideParticle;
+    public GameObject shieldParticle;
     public GameObject dustParticle;
 
     [Header("Stamina")]
@@ -276,15 +277,7 @@ public class PlayerController : MonoBehaviour
             //Restore health
             if (current.CompareNameTo("Trisky") && isGrounded)
             {
-                if (health >= (initialHealth - 30))
-                {
-                    health = initialHealth;
-                }
-                else
-                {
-                    health = health + 30;
-                }
-                healthParticle.Play();
+                StartCoroutine(Health());
             }
             
             //Sound explosion
@@ -312,6 +305,21 @@ public class PlayerController : MonoBehaviour
     private IEnumerator NoTakingPhoto(){
         yield return new WaitForSeconds(0.9f);
         isTakingPhoto = false;
+    }
+
+    private IEnumerator Health(){
+        if (health >= (initialHealth - 30))
+        {
+            health = initialHealth;
+        }
+        else
+        {
+            health = health + 30;
+        }
+        healthParticle.Play();
+        shieldParticle.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        shieldParticle.SetActive(false);
     }
 
     public void stopAction()
