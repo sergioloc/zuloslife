@@ -101,9 +101,11 @@ public class GuardController : MonoBehaviour
         }
         else if (col.gameObject.tag == "Explosion")
         {
-            TakeDamage(20);
-            guardAnimation.SetBool("Explosion", true);
-            StartCoroutine(FinishExplosion());
+            bloodParticle.Play();
+            TakeDamage(100);
+            Push();
+            //guardAnimation.SetBool("Explosion", true);
+            //StartCoroutine(FinishExplosion());
         }
         else if (col.gameObject.tag == "Guard")
         {

@@ -286,7 +286,7 @@ public class PlayerController : MonoBehaviour
             else if (current.CompareNameTo("Cinamon") && isGrounded)
             {
                 current.SetBool("Action", true);
-                CameraController.instance.Shake(1f);
+                CameraController.instance.Shake(0.9f);
             }
             else if (current.CompareNameTo("Panda") && !current.GetBool("Run")){
                 current.SetBool("Action", true);
