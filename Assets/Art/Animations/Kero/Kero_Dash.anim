@@ -35,7 +35,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 0, y: 0, z: -181.23799}
+        value: {x: 0, y: 0, z: -97.65}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -115,7 +115,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 0, y: 0, z: 19.160002}
+        value: {x: 0, y: 0, z: 11.4800005}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -195,7 +195,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 0, y: 0, z: -200.87999}
+        value: {x: 0, y: 0, z: -149.87701}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -211,7 +211,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 0, y: 0, z: 10.549001}
+        value: {x: 0, y: 0, z: 33.510002}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -227,7 +227,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 0, y: 0, z: 1.746}
+        value: {x: 0, y: 0, z: 13.805}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -276,7 +276,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 0.5144248, y: 0.090379864, z: 0}
+        value: {x: 0.30646905, y: -0.011508033, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -621,7 +621,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -181.23799
+        value: -97.65
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -906,7 +906,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 19.160002
+        value: 11.4800005
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1191,7 +1191,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -200.87999
+        value: -149.87701
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1248,7 +1248,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 10.549001
+        value: 33.510002
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1305,7 +1305,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1.746
+        value: 13.805
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1400,7 +1400,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.5144248
+        value: 0.30646905
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1419,7 +1419,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.090379864
+        value: -0.011508033
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1520,7 +1520,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: KeroBody/bone_body/bone_leg_l
+    path: KeroBody/bone_body/bone_chest/bone_shoulder_r/bone_arm_r
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1530,7 +1530,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: KeroBody/bone_body/bone_leg_l
+    path: KeroBody/bone_body/bone_chest/bone_shoulder_r/bone_arm_r
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1540,7 +1540,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: KeroBody/bone_body/bone_leg_l
+    path: KeroBody/bone_body/bone_chest/bone_shoulder_r/bone_arm_r
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1580,7 +1580,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: KeroBody/bone_body/bone_chest/bone_shoulder_r/bone_arm_r
+    path: KeroBody/bone_body/bone_leg_r/bone_11
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1590,7 +1590,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: KeroBody/bone_body/bone_chest/bone_shoulder_r/bone_arm_r
+    path: KeroBody/bone_body/bone_leg_r/bone_11
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1600,7 +1600,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: KeroBody/bone_body/bone_chest/bone_shoulder_r/bone_arm_r
+    path: KeroBody/bone_body/bone_leg_r/bone_11
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1610,7 +1610,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: KeroBody/bone_body/bone_chest/bone_shoulder_l/bone_arm_l/bone_hand_l
+    path: KeroBody/bone_body/bone_chest/bone_shoulder_l/bone_arm_l
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1620,7 +1620,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: KeroBody/bone_body/bone_chest/bone_shoulder_l/bone_arm_l/bone_hand_l
+    path: KeroBody/bone_body/bone_chest/bone_shoulder_l/bone_arm_l
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1630,7 +1630,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: KeroBody/bone_body/bone_chest/bone_shoulder_l/bone_arm_l/bone_hand_l
+    path: KeroBody/bone_body/bone_chest/bone_shoulder_l/bone_arm_l
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1700,7 +1700,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: KeroBody/bone_body/bone_chest/bone_shoulder_l
+    path: KeroBody/bone_body/bone_leg_l
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1710,7 +1710,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: KeroBody/bone_body/bone_chest/bone_shoulder_l
+    path: KeroBody/bone_body/bone_leg_l
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1720,7 +1720,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: KeroBody/bone_body/bone_chest/bone_shoulder_l
+    path: KeroBody/bone_body/bone_leg_l
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1790,7 +1790,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: KeroBody/bone_body/bone_chest/bone_shoulder_l/bone_arm_l
+    path: KeroBody/bone_body/bone_chest/bone_shoulder_l
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1800,7 +1800,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: KeroBody/bone_body/bone_chest/bone_shoulder_l/bone_arm_l
+    path: KeroBody/bone_body/bone_chest/bone_shoulder_l
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1810,7 +1810,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: KeroBody/bone_body/bone_chest/bone_shoulder_l/bone_arm_l
+    path: KeroBody/bone_body/bone_chest/bone_shoulder_l
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1880,7 +1880,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: KeroBody/bone_body/bone_leg_r/bone_11
+    path: KeroBody/bone_body/bone_chest/bone_shoulder_l/bone_arm_l/bone_hand_l
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1890,7 +1890,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: KeroBody/bone_body/bone_leg_r/bone_11
+    path: KeroBody/bone_body/bone_chest/bone_shoulder_l/bone_arm_l/bone_hand_l
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1900,7 +1900,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: KeroBody/bone_body/bone_leg_r/bone_11
+    path: KeroBody/bone_body/bone_chest/bone_shoulder_l/bone_arm_l/bone_hand_l
     classID: 4
     script: {fileID: 0}
   m_HasGenericRootTransform: 0

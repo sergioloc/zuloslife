@@ -49,7 +49,6 @@ public class KeroController : MonoBehaviour
             currentAttack = "Smash";
 
         if (targets.Count > 0){
-            Debug.Log("Move");
             MoveToTarget();
         }
         else {
@@ -64,10 +63,20 @@ public class KeroController : MonoBehaviour
             isMovingAttack = true;
             animator.SetBool(currentAttack, true);
         }
+        else {
+            StartCoroutine(CloseSmash());
+        }
     }
 
     private float DistanceToNearest(){
         return targets[NearestTarget()].position.x - player.transform.position.x;
+    }
+
+    private IEnumerator CloseSmash()
+    {
+        animator.SetBool("Smash", true);
+        yield return new WaitForSeconds(0.25f);
+        animator.SetBool("Smash", false);
     }
 
     private IEnumerator AttackToNothing()

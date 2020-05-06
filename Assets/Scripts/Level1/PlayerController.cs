@@ -272,32 +272,27 @@ public class PlayerController : MonoBehaviour
     {
         if (current.GetStaminaFillAmount() >= 1)
         {
-            current.SetBool("Action", true);
-
-            //Restore health
-            if (current.CompareNameTo("Trisky") && isGrounded)
-            {
-                StartCoroutine(Health());
-            }
-            
-            //Sound explosion
-            else if (current.CompareNameTo("Cinamon") && isGrounded)
-            {
-                CameraController.instance.Shake(1f);
-            }
-
-            else if (current.CompareNameTo("Panda") && !current.GetBool("Run")){
-                isTakingPhoto = true;
-                StartCoroutine(NoTakingPhoto());
-            }
-
-            else if (current.CompareNameTo("Kero")){
+            if (current.CompareNameTo("Kero")){
                 OnKeroAttack.Invoke();
             }
             else if (current.CompareNameTo("Kutter")){
                 onKutterAttack.Invoke();
             }
-            
+            else if (current.CompareNameTo("Trisky") && isGrounded)
+            {
+                current.SetBool("Action", true);
+                StartCoroutine(Health());
+            }  
+            else if (current.CompareNameTo("Cinamon") && isGrounded)
+            {
+                current.SetBool("Action", true);
+                CameraController.instance.Shake(1f);
+            }
+            else if (current.CompareNameTo("Panda") && !current.GetBool("Run")){
+                current.SetBool("Action", true);
+                isTakingPhoto = true;
+                StartCoroutine(NoTakingPhoto());
+            }            
         }
         
     }
@@ -324,7 +319,8 @@ public class PlayerController : MonoBehaviour
 
     public void stopAction()
     {
-        current.SetBool("Action", false);
+        if (current.CompareNameTo("Panda") || current.CompareNameTo("Trisky") || current.CompareNameTo("Cinamon"))
+            current.SetBool("Action", false);
     }
 
 

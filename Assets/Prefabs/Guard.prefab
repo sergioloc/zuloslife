@@ -6411,7 +6411,7 @@ PointEffector2D:
     serializedVersion: 2
     m_Bits: 524288
   m_ForceMagnitude: 10
-  m_ForceVariation: 300
+  m_ForceVariation: 200
   m_DistanceScale: 1
   m_ForceSource: 1
   m_ForceTarget: 0
