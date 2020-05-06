@@ -73,12 +73,6 @@ public class GuardController : MonoBehaviour
         else
             guardAnimation.SetBool("Action", false);
         }  
-
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            Instantiate(bloodMask, new Vector3(transform.position.x, transform.position.y, -0.9f), Quaternion.identity);
-        }
-
     }
 
     void OnTriggerEnter2D(Collider2D col)

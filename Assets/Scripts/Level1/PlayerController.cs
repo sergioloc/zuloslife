@@ -142,10 +142,14 @@ public class PlayerController : MonoBehaviour
         }
         
         //Jump
-        if (isGrounded)
+        if (isGrounded) {
             current.SetBool("isJumping", false);
-        else
+            rb2d.drag = linearDrag;
+        }
+        else {
             current.SetBool("isJumping", true);
+            rb2d.drag = 0f;
+        }
     
     }
 
