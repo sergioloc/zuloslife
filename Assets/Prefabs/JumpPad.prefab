@@ -4844,8 +4844,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6891360614296986488}
-  - component: {fileID: 6891360614296986495}
   - component: {fileID: 6891360614296986489}
+  - component: {fileID: 6891360614296986495}
   m_Layer: 11
   m_Name: JumpPad
   m_TagString: Untagged
@@ -4870,6 +4870,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6891360614296986489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6891360614296986494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 136802baee3c3c4499562e4dfcf89a32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpForce: 13
+  electricPulse: {fileID: 6891360614345692997}
 --- !u!61 &6891360614296986495
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4896,20 +4910,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.49, y: 0.27}
   m_EdgeRadius: 0
---- !u!114 &6891360614296986489
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6891360614296986494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 136802baee3c3c4499562e4dfcf89a32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpForce: 11
-  electricPulse: {fileID: 6891360614345692997}
 --- !u!1 &6891360614345693050
 GameObject:
   m_ObjectHideFlags: 0

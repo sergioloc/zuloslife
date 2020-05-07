@@ -7,6 +7,7 @@ public class JumpPad : MonoBehaviour
 
     public float jumpForce = 11f;
     public ParticleSystem electricPulse;
+    private Rigidbody2D target;
 
     void Start()
     {
@@ -17,7 +18,11 @@ public class JumpPad : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce));
+            Debug.Log("Jumpad");
+            target = collision.gameObject.GetComponent<Rigidbody2D>();
+            target.drag = 0f;
+            target.velocity = new Vector3(0f, 0f, 0f);
+            target.AddForce(new Vector2(0f, jumpForce));
             electricPulse.Play();
         } 
     }
