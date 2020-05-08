@@ -30,8 +30,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Damage")]
     public GameObject deathEffect;
-    public GameObject bloodEffect1;
-    public GameObject bloodEffect2;
+    public GameObject bloodEffect;
     public GameObject frame;
     public float confuseTime = 0;
 
@@ -341,11 +340,11 @@ public class PlayerController : MonoBehaviour
         }
         else if (collision.gameObject.tag == "OgreFist")
         {
-            TakeDamage(10);
+            TakeDamage(damageFromEnemy);
         }
         else if (collision.gameObject.tag == "OgreQuake")
         {
-            TakeDamage(20);
+            TakeDamage(damageFromEnemy);
         }
         else if (collision.gameObject.tag == "Respawn")
         {
@@ -452,15 +451,7 @@ public class PlayerController : MonoBehaviour
         deathCollider.SetActive(true);
         current.SetImpactFaceActive(false);
         Instantiate(deathEffect, transform.position, Quaternion.identity);
-
-        if (Random.Range(1, 2) == 1)
-        {
-            Instantiate(bloodEffect1, transform.position, Quaternion.identity);
-        }
-        else
-        {
-            Instantiate(bloodEffect2, transform.position, Quaternion.identity);
-        }
+        Instantiate(bloodEffect, transform.position, Quaternion.identity);
         StartCoroutine(Wait("MoveToSpawnPoint", 2f));
     }
 
