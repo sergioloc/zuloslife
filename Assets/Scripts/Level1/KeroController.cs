@@ -112,7 +112,7 @@ public class KeroController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Guard"))
+        if (collision.gameObject.CompareTag("Enemy"))
         {
             if (!targets.Contains(collision.transform))
                 targets.Add(collision.transform);
@@ -121,7 +121,7 @@ public class KeroController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Guard"))
+        if (collision.gameObject.CompareTag("Enemy"))
         {
             if (targets.Contains(collision.transform)){
                 targets.Remove(collision.transform);

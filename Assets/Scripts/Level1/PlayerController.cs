@@ -23,12 +23,14 @@ public class PlayerController : MonoBehaviour
 
     [Header("Health")]
     public Slider healthBar;
-    public int damageFromEnemy = 10;
     public int initialHealth = 100;
     public float health;
     public GameObject deathCollider;
 
     [Header("Damage")]
+    public int softDamage = 5;
+    public int mediumDamage = 10;
+    public int hardDamage = 15;
     public GameObject deathEffect;
     public GameObject bloodEffect;
     public GameObject frame;
@@ -336,15 +338,15 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("WeaponSoft"))
         {
-            TakeDamage(damageFromEnemy);
+            TakeDamage(softDamage);
         }
         else if (collision.gameObject.CompareTag("WeaponMedium"))
         {
-            TakeDamage(damageFromEnemy);
+            TakeDamage(mediumDamage);
         }
         else if (collision.gameObject.CompareTag("WeaponHard"))
         {
-            TakeDamage(damageFromEnemy);
+            TakeDamage(hardDamage);
         }
         else if (collision.gameObject.CompareTag("Confuse"))
         {
