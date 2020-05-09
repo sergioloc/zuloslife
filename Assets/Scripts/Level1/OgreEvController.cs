@@ -208,14 +208,6 @@ public class OgreEvController : MonoBehaviour
         cooldown = false;
     }
 
-
-    IEnumerator UnFreeze()
-    {
-        yield return new WaitForSeconds(2f);
-        freeze = false;
-        //StartCoroutine(StopFist());
-    }
-
     IEnumerator Respawn()
     {
         yield return new WaitForSeconds(3f);
@@ -267,28 +259,14 @@ public class OgreEvController : MonoBehaviour
             }
         }
 
-        if (collision.gameObject.tag == "Projectile")
+        if (collision.gameObject.tag == "WeaponSoft")
         {
             TakeDamage(10);
-        }
-        if (collision.gameObject.tag == "Explosion")
-        {
-            TakeDamage(30);
         }
         else if (collision.gameObject.tag == "PlayerDeath")
         {
             freeze = true;
             StartCoroutine(Respawn());
         }
-
-        /*
-        if (collision.gameObject.tag == "Sparks")
-        {
-            health = health - 20;
-            freeze = true;
-            StartCoroutine(UnFreeze());
-            if (health <= 0)
-                Die();
-        }*/
     }
 }

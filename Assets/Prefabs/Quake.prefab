@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8704190431362627569}
   - component: {fileID: 8704190431362627583}
   - component: {fileID: 8704190431362627568}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: QuakeParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4767,9 +4767,9 @@ GameObject:
   - component: {fileID: -5511064848481631953}
   - component: {fileID: 8704190432017895298}
   - component: {fileID: 8704190432017895299}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Quake
-  m_TagString: OgreQuake
+  m_TagString: WeaponSoft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

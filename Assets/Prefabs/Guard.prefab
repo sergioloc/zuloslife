@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2298089464363007052}
   - component: {fileID: 3903891869165198552}
-  m_Layer: 19
+  m_Layer: 17
   m_Name: Collision
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -68,9 +68,9 @@ GameObject:
   - component: {fileID: 5472840439216426443}
   - component: {fileID: 7571231334647452015}
   - component: {fileID: 3832346458928690359}
-  m_Layer: 19
+  m_Layer: 11
   m_Name: BloodParticle
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4821,9 +4821,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3067207830891115686}
   - component: {fileID: 3139488030570146589}
-  m_Layer: 19
+  m_Layer: 12
   m_Name: Weapon
-  m_TagString: MeleeEnemy
+  m_TagString: WeaponSoft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4867,9 +4867,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4182242938179866710}
-  m_Layer: 19
+  m_Layer: 12
   m_Name: GuardParts
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4907,9 +4907,9 @@ GameObject:
   - component: {fileID: 4681482526955847016}
   - component: {fileID: 7774588812666384575}
   - component: {fileID: 2898694045307889132}
-  m_Layer: 19
+  m_Layer: 12
   m_Name: Guard_Head
-  m_TagString: Guard
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5027,9 +5027,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4681482527069079383}
   - component: {fileID: 4681482527069079382}
-  m_Layer: 19
+  m_Layer: 12
   m_Name: Guard_Face_Flash
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5108,9 +5108,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4681482527215627179}
   - component: {fileID: 4681482527215627178}
-  m_Layer: 19
+  m_Layer: 12
   m_Name: Guard_Face_Dead
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5191,9 +5191,9 @@ GameObject:
   - component: {fileID: 4681482527318465233}
   - component: {fileID: 6668548983850414977}
   - component: {fileID: 7677656643474408637}
-  m_Layer: 19
+  m_Layer: 12
   m_Name: Guard_Shoulder_R
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5312,9 +5312,9 @@ GameObject:
   - component: {fileID: 4681482527448096703}
   - component: {fileID: 1208460945602794407}
   - component: {fileID: 1975322520758601927}
-  m_Layer: 19
+  m_Layer: 12
   m_Name: Guard_Body_Down
-  m_TagString: Guard
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5442,9 +5442,9 @@ GameObject:
   - component: {fileID: 4681482527657838205}
   - component: {fileID: 5518347321062238759}
   - component: {fileID: 195337517755232489}
-  m_Layer: 19
+  m_Layer: 12
   m_Name: Guard_Shoulder_L
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5565,9 +5565,9 @@ GameObject:
   - component: {fileID: 4681482527946413908}
   - component: {fileID: 456310087512186524}
   - component: {fileID: 3846384960330898389}
-  m_Layer: 13
+  m_Layer: 17
   m_Name: Guard
-  m_TagString: Guard
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5708,9 +5708,9 @@ GameObject:
   - component: {fileID: 4681482528175000255}
   - component: {fileID: 7218172245175699056}
   - component: {fileID: 8977504908996940337}
-  m_Layer: 19
+  m_Layer: 12
   m_Name: Guard_Arm_R
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5839,9 +5839,9 @@ GameObject:
   - component: {fileID: 4681482528355143585}
   - component: {fileID: 4233833451424909008}
   - component: {fileID: 2086507124554590918}
-  m_Layer: 19
+  m_Layer: 12
   m_Name: Guard_Arm_L
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5969,9 +5969,9 @@ GameObject:
   - component: {fileID: 4681482528494369754}
   - component: {fileID: 6129065450414429781}
   - component: {fileID: 7793162619550464143}
-  m_Layer: 19
+  m_Layer: 12
   m_Name: Guard_Body
-  m_TagString: Guard
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6102,9 +6102,9 @@ GameObject:
   - component: {fileID: 4681482528825819481}
   - component: {fileID: 1784897647348937282}
   - component: {fileID: 2679565663149187255}
-  m_Layer: 19
+  m_Layer: 12
   m_Name: Guard_Leg_L
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6232,9 +6232,9 @@ GameObject:
   - component: {fileID: 4681482528960527539}
   - component: {fileID: 7726857873470167263}
   - component: {fileID: 3621739122209347280}
-  m_Layer: 19
+  m_Layer: 12
   m_Name: Guard_Leg_R
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6361,9 +6361,9 @@ GameObject:
   - component: {fileID: 8077216937672894752}
   - component: {fileID: 8824323132567631414}
   - component: {fileID: 8290278438419796216}
-  m_Layer: 19
+  m_Layer: 17
   m_Name: ExplosionCollider
-  m_TagString: Explosion
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6409,7 +6409,7 @@ PointEffector2D:
   m_UseColliderMask: 1
   m_ColliderMask:
     serializedVersion: 2
-    m_Bits: 524288
+    m_Bits: 4096
   m_ForceMagnitude: 10
   m_ForceVariation: 200
   m_DistanceScale: 1

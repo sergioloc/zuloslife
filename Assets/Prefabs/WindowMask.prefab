@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8174949580188758184}
   - component: {fileID: 8174949580188758185}
   - component: {fileID: 8174949580188758186}
-  m_Layer: 12
+  m_Layer: 9
   m_Name: Space (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 8174949580247032801}
   - component: {fileID: 8174949580247032802}
   - component: {fileID: 8174949580247032803}
-  m_Layer: 12
+  m_Layer: 9
   m_Name: Space (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -328,7 +328,7 @@ GameObject:
   - component: {fileID: 8174949580363748474}
   - component: {fileID: 8174949580363748475}
   - component: {fileID: 8174949580363748476}
-  m_Layer: 12
+  m_Layer: 9
   m_Name: Space (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -486,7 +486,7 @@ GameObject:
   - component: {fileID: 8174949580388931335}
   - component: {fileID: 8174949580388931352}
   - component: {fileID: 8174949580388931353}
-  m_Layer: 12
+  m_Layer: 9
   m_Name: Space (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -644,7 +644,7 @@ GameObject:
   - component: {fileID: 8174949581075588374}
   - component: {fileID: 8174949581075588375}
   - component: {fileID: 8174949581075588392}
-  m_Layer: 12
+  m_Layer: 9
   m_Name: Space (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -802,7 +802,7 @@ GameObject:
   - component: {fileID: 8174949581204404327}
   - component: {fileID: 8174949581204404344}
   - component: {fileID: 8174949581204404345}
-  m_Layer: 12
+  m_Layer: 9
   m_Name: Space (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -957,12 +957,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8174949581418562681}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: WindowMask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &8174949581418562681
 Transform:
@@ -971,7 +971,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8174949581418562682}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.552, y: 28.234, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -997,7 +997,7 @@ GameObject:
   - component: {fileID: 8174949581863391708}
   - component: {fileID: 8174949581863391709}
   - component: {fileID: 8174949581863391710}
-  m_Layer: 12
+  m_Layer: 9
   m_Name: Space (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

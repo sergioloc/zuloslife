@@ -334,8 +334,15 @@ public class PlayerController : MonoBehaviour
     // Collisions
     void OnTriggerEnter2D(Collider2D collision)
     {
-        //Enemies
-        if (collision.gameObject.CompareTag("MeleeEnemy"))
+        if (collision.gameObject.CompareTag("WeaponSoft"))
+        {
+            TakeDamage(damageFromEnemy);
+        }
+        else if (collision.gameObject.CompareTag("WeaponMedium"))
+        {
+            TakeDamage(damageFromEnemy);
+        }
+        else if (collision.gameObject.CompareTag("WeaponHard"))
         {
             TakeDamage(damageFromEnemy);
         }
@@ -343,24 +350,6 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(Confuse());
         }
-        else if (collision.gameObject.CompareTag("Missile"))
-        {
-            TakeDamage(damageFromEnemy);
-        }
-        //Boss
-        else if (collision.gameObject.tag == "OgreFist")
-        {
-            TakeDamage(damageFromEnemy);
-        }
-        else if (collision.gameObject.tag == "OgreQuake")
-        {
-            TakeDamage(damageFromEnemy);
-        }
-        else if (collision.gameObject.tag == "Laser")
-        {
-            TakeDamage(damageFromEnemy);
-        }
-        //Walls
         else if (collision.gameObject.CompareTag("WallLeft"))
         {
             wallAtLeft = true;

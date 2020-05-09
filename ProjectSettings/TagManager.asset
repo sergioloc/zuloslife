@@ -6,30 +6,19 @@ TagManager:
   tags:
   - Ground
   - Flash
-  - Melee
-  - Projectile
-  - MeleeEnemy
-  - Explosion
-  - Guard
-  - Fox
-  - Ignore
   - WallRight
   - WallLeft
-  - OgreFist
-  - OgreQuake
   - PlayerDeath
-  - Laser
-  - Sparks
   - BossScreen
   - Enemy
   - Water
-  - Missile
-  - Weapon
-  - WeaponEnemy
   - Air
   - Shield
   - Lab
   - Confuse
+  - WeaponSoft
+  - WeaponMedium
+  - WeaponHard
   layers:
   - Default
   - TransparentFX
@@ -39,22 +28,22 @@ TagManager:
   - UI
   - 
   - 
-  - Player
   - Ground
-  - ScreenBox
-  - JumpPad
-  - Wall
-  - Guard
-  - Liquid
-  - Laser
-  - Shield
+  - Background
   - Light
+  - Particle
+  - Prop
+  - Player
   - PlayerArea
-  - GuardPart
-  - Lab
-  - Projectile
+  - Shield
   - Push
+  - Enemy
+  - Lab
   - Ghost
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 

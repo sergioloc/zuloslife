@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9068758976014608776}
   - component: {fileID: 7220822996932213297}
   - component: {fileID: 253114459645861010}
-  m_Layer: 17
+  m_Layer: 10
   m_Name: TorchLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 3220116550581547454}
   - component: {fileID: 3220116550581547452}
   - component: {fileID: 3220116550581547455}
-  m_Layer: 17
+  m_Layer: 10
   m_Name: Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4850,7 +4850,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3220116552126668402}
   - component: {fileID: 3220116552126668403}
-  m_Layer: 17
+  m_Layer: 10
   m_Name: TorchWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6891360613338818948}
   - component: {fileID: 6891360613338818950}
   - component: {fileID: 6891360613338818949}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: Aura
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4764,12 +4764,12 @@ GameObject:
   m_Component:
   - component: {fileID: 6891360613733832593}
   - component: {fileID: 6891360613733832594}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &6891360613733832593
 Transform:
@@ -4846,12 +4846,12 @@ GameObject:
   - component: {fileID: 6891360614296986488}
   - component: {fileID: 6891360614296986489}
   - component: {fileID: 6891360614296986495}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: JumpPad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &6891360614296986488
 Transform:
@@ -4921,7 +4921,7 @@ GameObject:
   - component: {fileID: 6891360614345693051}
   - component: {fileID: 6891360614345692997}
   - component: {fileID: 6891360614345692996}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: ElectricityPulse
   m_TagString: Untagged
   m_Icon: {fileID: 0}

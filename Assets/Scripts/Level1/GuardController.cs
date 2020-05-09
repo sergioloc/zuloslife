@@ -21,7 +21,6 @@ public class GuardController : MonoBehaviour
     private Dissolve dissolveMat;
 
 
-
     void Start()
     {
         guardAnimation = GetComponent<Animator>();
@@ -77,8 +76,20 @@ public class GuardController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag == "Melee")
+        if (col.gameObject.tag == "WeaponSoft")
         {  
+            bloodParticle.Play();
+            TakeDamage(100);
+            Push();
+        }
+        else if (col.gameObject.tag == "WeaponMedium")
+        {
+            bloodParticle.Play();
+            TakeDamage(100);
+            Push();
+        }
+        else if (col.gameObject.tag == "WeaponHard")
+        {
             bloodParticle.Play();
             TakeDamage(100);
             Push();
@@ -93,15 +104,7 @@ public class GuardController : MonoBehaviour
         {
             freeze = true;
         }
-        else if (col.gameObject.tag == "Explosion")
-        {
-            bloodParticle.Play();
-            TakeDamage(100);
-            Push();
-            //guardAnimation.SetBool("Explosion", true);
-            //StartCoroutine(FinishExplosion());
-        }
-        else if (col.gameObject.tag == "Guard")
+        else if (col.gameObject.tag == "Enemy")
         {
             freeze = true;
             guardAnimation.SetBool("Run", false);
@@ -115,23 +118,13 @@ public class GuardController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D col)
     {
-        if (col.gameObject.tag == "Guard")
+        if (col.gameObject.tag == "Enemy")
         {
             freeze = false;
         }
         else if (col.gameObject.tag == "Shield")
         {
             freeze = false;
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.gameObject.tag == "Projectile")
-        {
-            bloodParticle.Play();
-            TakeDamage(10);
-            Push();
         }
     }
 
@@ -149,12 +142,6 @@ public class GuardController : MonoBehaviour
         yield return new WaitForSeconds(sec);
         freeze = false;
         guardAnimation.SetBool("Freeze", false);
-    }
-
-    private IEnumerator FinishExplosion()
-    {
-        yield return new WaitForSeconds(1);
-        guardAnimation.SetBool("Explosion", false);
     }
 
     private void TakeDamage(int damage)

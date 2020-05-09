@@ -131,7 +131,7 @@ public class OgreController : MonoBehaviour
             ogreAnimation.SetBool("Freeze", true);
             StartCoroutine(finishFreeze());
         }
-        else if (collision.gameObject.tag == "Melee")
+        else if (collision.gameObject.tag == "WeaponMedium")
         {
             if (freeze)
                 TakeDamage(10);

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4344595315336479709}
   - component: {fileID: 4344595315336479708}
   - component: {fileID: 1614313310755895534}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Blood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4344595315765654335}
   - component: {fileID: 5376666637613901580}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BloodMask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
