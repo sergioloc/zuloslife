@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 9068758976014608776}
   - component: {fileID: 7220822996932213297}
+  - component: {fileID: 253114459645861010}
   m_Layer: 17
-  m_Name: Point Light 2D
+  m_Name: TorchLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72,6 +73,19 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &253114459645861010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2943469881776574477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffb40b78519f8804393950a518adc273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  light2D: {fileID: 7220822996932213297}
 --- !u!1 &3220116550581547449
 GameObject:
   m_ObjectHideFlags: 0

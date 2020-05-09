@@ -280,6 +280,7 @@ public class PlayerController : MonoBehaviour
             }
             else if (current.CompareNameTo("Kutter")){
                 onKutterAttack.Invoke();
+                current.SetBool("Action", true);
             }
             else if (current.CompareNameTo("Trisky") && isGrounded)
             {
@@ -322,7 +323,10 @@ public class PlayerController : MonoBehaviour
 
     public void stopAction()
     {
-        if (current.CompareNameTo("Panda") || current.CompareNameTo("Trisky") || current.CompareNameTo("Cinamon"))
+        if (current.CompareNameTo("Panda") || 
+            current.CompareNameTo("Trisky") || 
+            current.CompareNameTo("Cinamon") ||
+            current.CompareNameTo("Kutter"))
             current.SetBool("Action", false);
     }
 
@@ -330,14 +334,20 @@ public class PlayerController : MonoBehaviour
     // Collisions
     void OnTriggerEnter2D(Collider2D collision)
     {
+        //Enemies
         if (collision.gameObject.CompareTag("MeleeEnemy"))
         {
             TakeDamage(damageFromEnemy);
+        }
+        else if (collision.gameObject.CompareTag("Confuse"))
+        {
+            StartCoroutine(Confuse());
         }
         else if (collision.gameObject.CompareTag("Missile"))
         {
             TakeDamage(damageFromEnemy);
         }
+        //Boss
         else if (collision.gameObject.tag == "OgreFist")
         {
             TakeDamage(damageFromEnemy);
@@ -346,14 +356,11 @@ public class PlayerController : MonoBehaviour
         {
             TakeDamage(damageFromEnemy);
         }
-        else if (collision.gameObject.tag == "Respawn")
+        else if (collision.gameObject.tag == "Laser")
         {
-            spawnPoint = collision.gameObject.transform;
+            TakeDamage(damageFromEnemy);
         }
-        else if (collision.gameObject.CompareTag("BossScreen"))
-        {
-            CameraController.instance.ModifyZoom(10f);
-        }
+        //Walls
         else if (collision.gameObject.CompareTag("WallLeft"))
         {
             wallAtLeft = true;
@@ -362,9 +369,13 @@ public class PlayerController : MonoBehaviour
         {
             wallAtRight = true;
         }
-        else if (collision.gameObject.CompareTag("Confuse"))
+        else if (collision.gameObject.tag == "Respawn")
         {
-            StartCoroutine(Confuse());
+            spawnPoint = collision.gameObject.transform;
+        }
+        else if (collision.gameObject.CompareTag("BossScreen"))
+        {
+            CameraController.instance.ModifyZoom(10f);
         }
     }
 
@@ -375,10 +386,6 @@ public class PlayerController : MonoBehaviour
             CameraController.instance.ModifyZoom(10f);
             rb2d.gravityScale = -0.004f;
             isInWater = true;
-        }
-        else if (collision.gameObject.tag == "Laser")
-        {
-            TakeDamage(0.1f);
         }
     }
 
