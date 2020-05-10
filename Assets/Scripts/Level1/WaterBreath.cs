@@ -5,18 +5,16 @@ using UnityEngine.UI;
 
 public class WaterBreath : MonoBehaviour
 {
-    private Slider waterSlider;
     public GameObject waterBar;
+    private Slider waterSlider;
     public int Oxygen = 100;
-    private bool checkOxy = true, checkHealth = true;
+    private bool checkOxy = false, checkHealth = true;
 
-    // Start is called before the first frame update
     void Start()
     {
         waterSlider = waterBar.GetComponent<Slider>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         waterSlider.value = Oxygen;
@@ -29,30 +27,29 @@ public class WaterBreath : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Water"))
+        if (collision.gameObject.CompareTag("Water") && !checkOxy)
         {
-            waterBar.SetActive(true);
-            if (checkOxy)
-            {
-                checkOxy = false;
-                StartCoroutine(DecrementOxygen());
-            }
+            StartCoroutine(DecrementOxygen());
+        }
+        if (collision.gameObject.CompareTag("Air"))
+        {
+            StartCoroutine(RestoreBreath());
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    IEnumerator RestoreBreath()
     {
-        if (collision.gameObject.CompareTag("Air"))
-        {
-            Oxygen = 100;
-        }
+        Oxygen = 100;
+        yield return new WaitForSeconds(2f);
     }
 
     IEnumerator DecrementOxygen()
     {
-        yield return new WaitForSeconds(0.1f);
-        Oxygen--;
+        waterBar.SetActive(true);
         checkOxy = true;
+        yield return new WaitForSeconds(0.001f);
+        Oxygen--;
+        checkOxy = false;
     }
 
     IEnumerator DecrementHealth()

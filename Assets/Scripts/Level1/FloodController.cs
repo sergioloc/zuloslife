@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.Events;
 
 public class FloodController : MonoBehaviour
 {
-    public GameObject door2, part1;
-    public ParticleSystem bubblesParticle;
+    public GameObject door;
     private bool activated = false;
     private Animator animator;
-    public Animator animAlarm;
 
+    [Space(10)]
+    public UnityEvent OnSwitchLight;
 
     void Start()
     {
@@ -21,12 +22,11 @@ public class FloodController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player") && !activated)
         {
-            door2.SetActive(true);
+            door.SetActive(true);
             StartCoroutine(StartLevel());
         }
         else if (collision.gameObject.CompareTag("PlayerDeath") && activated)
         {
-            part1.SetActive(true);
             StartCoroutine(RestartLevel());
         }
     }
@@ -35,9 +35,9 @@ public class FloodController : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
         activated = true;
-        bubblesParticle.Play();
         animator.SetTrigger("Start");
-        animAlarm.SetTrigger("Start");
+        CameraController.instance.ModifyZoom(10f);
+        OnSwitchLight.Invoke();
     }
 
     IEnumerator RestartLevel()
@@ -45,9 +45,8 @@ public class FloodController : MonoBehaviour
         yield return new WaitForSeconds(2f);
         CameraController.instance.ModifyZoom(5.15f);
         animator.SetTrigger("Stop");
-        animAlarm.SetTrigger("Stop");
         activated = false;
-        door2.SetActive(false);
-        bubblesParticle.Stop();
+        door.SetActive(false);
+        OnSwitchLight.Invoke();
     }
 }

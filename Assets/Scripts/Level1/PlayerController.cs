@@ -360,7 +360,7 @@ public class PlayerController : MonoBehaviour
         {
             wallAtRight = true;
         }
-        else if (collision.gameObject.tag == "Respawn")
+        else if (collision.gameObject.CompareTag("Respawn"))
         {
             spawnPoint = collision.gameObject.transform;
         }
@@ -368,16 +368,16 @@ public class PlayerController : MonoBehaviour
         {
             CameraController.instance.ModifyZoom(10f);
         }
+        else if (collision.gameObject.CompareTag("Water"))
+        {
+            rb2d.gravityScale = -0.004f;
+            isInWater = true;
+        }
     }
 
     void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Water")
-        {
-            CameraController.instance.ModifyZoom(10f);
-            rb2d.gravityScale = -0.004f;
-            isInWater = true;
-        }
+        
     }
 
     void OnTriggerExit2D(Collider2D collision)

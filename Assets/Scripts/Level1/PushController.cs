@@ -11,7 +11,7 @@ public class PushController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("WeaponSoft") || collision.gameObject.CompareTag("WeaponMedium"))
+        if (collision.gameObject.CompareTag("WeaponMedium"))
         {
             Push(strong);
         }
