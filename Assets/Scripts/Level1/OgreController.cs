@@ -58,12 +58,10 @@ public class OgreController : MonoBehaviour
         else if (Mathf.Abs(distanceToTarget) > range && !quakeCooldown)
         {
             StartCoroutine(QuakeAttack());
-            //StartCoroutine(FinishAttacking());
         }  
         else if (Mathf.Abs(distanceToTarget) > 4 && distanceToTarget < range && !hammerCooldown)
         {
             StartCoroutine(HammerAttack());
-            StartCoroutine(FinishAttacking());
         }    
     }
 
@@ -99,6 +97,8 @@ public class OgreController : MonoBehaviour
         hammerCooldown = true;
         isAttacking = true;
         ogreAnimation.SetTrigger("Hammer");
+        yield return new WaitForSeconds(1f);
+        isAttacking = false;
         yield return new WaitForSeconds(RESTORE_HAMMER);
         hammerCooldown = false;
     }
@@ -108,18 +108,14 @@ public class OgreController : MonoBehaviour
         quakeCooldown = true;
         isAttacking = true;
         ogreAnimation.SetTrigger("Quake");
+        yield return new WaitForSeconds(1f);
+        isAttacking = false;
         yield return new WaitForSeconds(RESTORE_QUAKE);
         quakeCooldown = false;
     }
 
     public void InvokeQuake(){
         Instantiate(quake, quakePoint.position, quakePoint.rotation);
-    }
-
-    IEnumerator FinishAttacking()
-    {
-        yield return new WaitForSeconds(1f);
-        isAttacking = false;
     }
 
     //Collisions

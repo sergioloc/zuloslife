@@ -11,10 +11,12 @@ public class LabController : MonoBehaviour
     private Vector2 newPosition;
     private Animator animator;
     private float distanceX, distanceY, angle;
+    private bool firstTime;
 
     void Start()
     {
-        PositionChange();
+        firstTime = true;
+        newPosition = new Vector2(transform.position.x, transform.position.y - 5f);
         animator = GetComponent<Animator>();
     }
 
@@ -51,12 +53,16 @@ public class LabController : MonoBehaviour
         animator.SetBool("View", false);
         if (Vector2.Distance(transform.position, newPosition) < 1)
             PositionChange();
-        transform.position = Vector2.Lerp(transform.position, newPosition, Time.deltaTime * speed);
+        if (firstTime)
+            transform.position = Vector2.Lerp(transform.position, newPosition, Time.deltaTime * speed * 10);
+        else
+            transform.position = Vector2.Lerp(transform.position, newPosition, Time.deltaTime * speed);
+        firstTime = false;
     }
 
     private void PositionChange()
     {
-        newPosition = new Vector2(Random.Range(-5.0f, 5.0f), Random.Range(-5.0f, 5.0f));
+        newPosition = new Vector2(Random.Range(transform.position.x-5f, transform.position.x+5f), Random.Range(transform.position.y-5f, transform.position.y+5f));
     }
 
     public void Die()

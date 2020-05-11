@@ -36,6 +36,11 @@ public class PlayerController : MonoBehaviour
     public GameObject frame;
     public float confuseTime = 0;
 
+    [Header("Underwater")]
+    public GameObject waterBar;
+    private Slider waterSlider;
+    public float Oxygen = 100;
+
     [Header("Particles")]
     public ParticleSystem bloodParticle;
     public ParticleSystem confuseParticle;
@@ -90,6 +95,7 @@ public class PlayerController : MonoBehaviour
         instance = this;
         health = initialHealth;
         rb2d = GetComponent<Rigidbody2D>();
+        waterSlider = waterBar.GetComponent<Slider>();
         panda = new Character("Panda", pandaGameObject, pandaImpactFace, fillPanda, staminaPanda);
         kero = new Character("Kero", keroGameObject, keroImpactFace, fillKero, staminaKero);
         cinamon = new Character("Cinamon", cinamonGameObject, cinamonImpactFace, fillCinamon, staminaCinamon);
@@ -116,6 +122,11 @@ public class PlayerController : MonoBehaviour
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
         healthBar.value = health;
+        waterSlider.value = Oxygen;
+
+        if (Oxygen < 0){
+            health -= Time.deltaTime * 10f;
+        }
 
         if (!keyboard){
             if (isInWater){
@@ -375,9 +386,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        
+        if (collision.gameObject.CompareTag("Water"))
+        {
+            waterBar.SetActive(true);
+            if (Oxygen > 0)
+                Oxygen -= Time.deltaTime * 5f;
+        }
+        if (collision.gameObject.CompareTag("Air"))
+        {
+            if (Oxygen < 100)
+                Oxygen += Time.deltaTime * 50f;
+        }
     }
 
     void OnTriggerExit2D(Collider2D collision)
