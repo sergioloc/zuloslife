@@ -151,6 +151,7 @@ public class PlayerController : MonoBehaviour
             }
             KeyboardAction();
             KeyboardJump();
+            KeyboardSwitch();
         }
         
         //Jump
@@ -604,6 +605,24 @@ public class PlayerController : MonoBehaviour
             {
                 //Move Down
                 rb2d.transform.Translate(Vector2.down * speed * 0.5f * Time.deltaTime);
+        }
+    }
+
+    private void KeyboardSwitch(){
+        if (Input.GetKeyDown(KeyCode.Alpha1)){
+            switchTo(trisky);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2)){
+            switchTo(kutter);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3)){
+            switchTo(cinamon);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4)){
+            switchTo(kero);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha5)){
+            switchTo(panda);
         }
     }
 }

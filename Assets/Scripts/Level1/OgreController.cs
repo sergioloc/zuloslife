@@ -28,7 +28,7 @@ public class OgreController : MonoBehaviour
     private Vector3 initialPosition;
     private int RESTORE_HAMMER = 5, RESTORE_QUAKE = 5;
     private float distanceToTarget;
-    private bool hammerCooldown = false, quakeCooldown = false, isAttacking = false, lookRight = false, freeze;
+    private bool hammerCooldown = false, quakeCooldown = false, isAttacking = false, lookRight = false, freeze, isDead = false;
 
     void Start(){
         initialPosition = transform.position;
@@ -47,22 +47,24 @@ public class OgreController : MonoBehaviour
     {
         healthSlider.value = health;
 
-        distanceToTarget = target.transform.position.x - transform.position.x;
-        UpdateLook();
-        FollowTarget();
+        if (!isDead){
+            distanceToTarget = target.transform.position.x - transform.position.x;
+            UpdateLook();
+            FollowTarget();
         
-        if (Mathf.Abs(distanceToTarget) < 2.5)
-        {
-            ogreAnimation.SetTrigger("Punch");
-        }
-        else if (Mathf.Abs(distanceToTarget) > range && !quakeCooldown)
-        {
-            StartCoroutine(QuakeAttack());
+            if (Mathf.Abs(distanceToTarget) < 2.5)
+            {
+                ogreAnimation.SetTrigger("Punch");
+            }
+            else if (Mathf.Abs(distanceToTarget) > range && !quakeCooldown)
+            {
+                StartCoroutine(QuakeAttack());
+            }  
+            else if (Mathf.Abs(distanceToTarget) > 4 && distanceToTarget < range && !hammerCooldown)
+            {
+                StartCoroutine(HammerAttack());
+            }  
         }  
-        else if (Mathf.Abs(distanceToTarget) > 4 && distanceToTarget < range && !hammerCooldown)
-        {
-            StartCoroutine(HammerAttack());
-        }    
     }
 
     //Movement
@@ -127,12 +129,12 @@ public class OgreController : MonoBehaviour
             ogreAnimation.SetBool("Freeze", true);
             StartCoroutine(finishFreeze());
         }
-        else if (collision.gameObject.tag == "WeaponMedium")
+        else if (collision.gameObject.tag == "WeaponMedium" && !isDead)
         {
             if (freeze)
                 TakeDamage(10);
             else
-                TakeDamage(1);
+                TakeDamage(2);
         }
         else if (collision.gameObject.tag == "PlayerDeath")
         {
@@ -148,9 +150,9 @@ public class OgreController : MonoBehaviour
     private void TakeDamage(int damage)
     {
         health = health - damage;
-        Debug.Log(health);
-        if (health <= 0)
+        if (health <= 50)
         {
+            health = 50;
             ogreAnimation.SetTrigger("Die");
             StartCoroutine(Die());
         }
@@ -182,7 +184,7 @@ public class OgreController : MonoBehaviour
 
     IEnumerator Die()
     {
-        freeze = true;
+        isDead = true;
         healthBar.SetActive(false);
         yield return new WaitForSeconds(3);
         Instantiate(smoke, transform.position, transform.rotation);
