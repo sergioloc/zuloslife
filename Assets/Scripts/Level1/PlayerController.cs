@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [Header("Movement")]
     public Joystick joystick;
     public float speed = 0;
+    public int slide = 4;
     public bool facingRight = true;
     public float linearDrag = 4f;
 
@@ -242,11 +243,10 @@ public class PlayerController : MonoBehaviour
     }
 
     private void RunTo(string direction){
-       
         if (!isTakingPhoto){
             //Slide effect
-            if (direction == "Right" && rb2d.velocity.x < -9 ||
-                direction == "Left" && rb2d.velocity.x > 9){
+            if (direction == "Right" && rb2d.velocity.x < -slide ||
+                direction == "Left" && rb2d.velocity.x > slide){
                 rb2d.drag = 0f;
                 current.SetBool("Slide", true);
                 slideParticle.Play();
