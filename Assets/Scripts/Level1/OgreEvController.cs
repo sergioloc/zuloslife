@@ -13,6 +13,7 @@ public class OgreEvController : MonoBehaviour
     public int initialHealth = 1;
     public GameObject healthBar;
     private Slider healthSlider;
+    public int damage = 50;
 
     [Header("Movement")]
     public float speed = 50;
@@ -261,7 +262,7 @@ public class OgreEvController : MonoBehaviour
 
         if (collision.gameObject.tag == "WeaponSoft")
         {
-            TakeDamage(10);
+            TakeDamage(damage);
         }
         else if (collision.gameObject.tag == "PlayerDeath")
         {

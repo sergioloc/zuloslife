@@ -12,6 +12,7 @@ public class OgreController : MonoBehaviour
     public GameObject healthBar;
     private Slider healthSlider;
     public int range = 6;
+    public int damage = 20;
 
     [Header("Controllers")]
     public int speed = 10;
@@ -132,9 +133,9 @@ public class OgreController : MonoBehaviour
         else if (collision.gameObject.tag == "WeaponMedium" && !isDead)
         {
             if (freeze)
-                TakeDamage(10);
+                TakeDamage(damage);
             else
-                TakeDamage(2);
+                TakeDamage(damage/4);
         }
         else if (collision.gameObject.tag == "PlayerDeath")
         {

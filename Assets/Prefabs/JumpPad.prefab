@@ -4882,7 +4882,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 136802baee3c3c4499562e4dfcf89a32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 13
+  jumpForce: 14
   electricPulse: {fileID: 6891360614345692997}
 --- !u!61 &6891360614296986495
 BoxCollider2D:

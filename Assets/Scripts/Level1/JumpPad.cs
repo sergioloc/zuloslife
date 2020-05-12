@@ -18,7 +18,6 @@ public class JumpPad : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            Debug.Log("Jumpad");
             target = collision.gameObject.GetComponent<Rigidbody2D>();
             target.drag = 0f;
             target.velocity = new Vector3(0f, 0f, 0f);
