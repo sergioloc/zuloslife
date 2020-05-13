@@ -438,7 +438,6 @@ public class PlayerController : MonoBehaviour
     private void TakeDamage(float damage)
     {
         frame.SetActive(true);
-        StartCoroutine(Wait("HideFrame", 0.5f));
         if (health > 0)
         {
             health = health - damage;
@@ -446,11 +445,18 @@ public class PlayerController : MonoBehaviour
             if (!current.IsImpactFaceActive())
             {
                 current.SetImpactFaceActive(true);
-                StartCoroutine(Wait("ImpactFaceFalse", 2f));
+                StartCoroutine(HideDamage());
             }
             if (health <= 0)
                 Die();
         }
+    }
+
+    IEnumerator HideDamage()
+    {
+        yield return new WaitForSeconds(1.5f);
+        frame.SetActive(false);
+        current.SetImpactFaceActive(false);
     }
 
     IEnumerator Confuse(){
@@ -501,21 +507,6 @@ public class PlayerController : MonoBehaviour
         current.GetCharacter().SetActive(true);
         health = initialHealth;
         oxygen = InitialOxygen;
-    }
-
-    IEnumerator Wait(string type, float sec)
-    {
-        yield return new WaitForSeconds(sec);
-        switch (type)
-        {
-            case "ImpactFaceFalse":
-                current.SetImpactFaceActive(false);
-                break;
-
-            case "HideFrame":
-                frame.SetActive(false);
-                break;
-        }
     }
 
 
