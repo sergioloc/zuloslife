@@ -6,7 +6,9 @@ public class GuardController : MonoBehaviour
 {
     public int health = 100;
     public float speed;
-    public GameObject target, deathEffect, bloodMask;
+    public float timeFreeze = 5f;
+    public GameObject deathEffect, bloodMask, eyesFreeze;
+    private GameObject target;
     public ParticleSystem bloodParticle;
     private Animator guardAnimation;
     private bool lookRight = true;
@@ -23,6 +25,7 @@ public class GuardController : MonoBehaviour
 
     void Start()
     {
+        target = GameObject.Find("Player");
         guardAnimation = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
         dissolveMat = GetComponent<Dissolve>();
@@ -53,15 +56,18 @@ public class GuardController : MonoBehaviour
         }
 
         //Follow
-        if (Mathf.Abs(distance) < 9 && !freeze)
+        if (Mathf.Abs(distance) < 9)
         {
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.transform.position.x - limit, transform.position.y, transform.position.z), speed * Time.deltaTime);
+            if (!freeze)
+                transform.position = Vector3.MoveTowards(transform.position, new Vector2(target.transform.position.x - limit, transform.position.y), speed * Time.deltaTime);
+            else
+                transform.position = Vector3.MoveTowards(transform.position, new Vector2(target.transform.position.x - limit, transform.position.y), 0.001f * Time.deltaTime);
             velocity = (transform.position - lastPosition).magnitude;
             lastPosition = transform.position;
         }
 
         //Run
-        if (velocity != 0)
+        if (velocity != 0 && !freeze)
             guardAnimation.SetBool("Run", true);
         else
             guardAnimation.SetBool("Run", false);
@@ -76,32 +82,27 @@ public class GuardController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag == "WeaponSoft")
+        if (col.gameObject.tag == "WeaponHard")
         {
-            Debug.Log("Soft");
             bloodParticle.Play();
             TakeDamage(100);
+            Push();
+        }
+        else if (col.gameObject.tag == "WeaponSoft")
+        {
+            bloodParticle.Play();
+            TakeDamage(50);
             Push();
         }
         else if (col.gameObject.tag == "WeaponMedium")
         {
-            Debug.Log("Medium");
-            bloodParticle.Play();
-            TakeDamage(100);
-            Push();
-        }
-        else if (col.gameObject.tag == "WeaponHard")
-        {
-            Debug.Log("Hard");
             bloodParticle.Play();
             TakeDamage(100);
             Push();
         }
         else if (col.gameObject.tag == "Flash")
         {
-            freeze = true;
-            guardAnimation.SetBool("Freeze",true);
-            StartCoroutine(FinishFreeze(5f));
+            StartCoroutine(Freeze());
         }
         else if (col.gameObject.tag == "Shield")
         {
@@ -115,7 +116,7 @@ public class GuardController : MonoBehaviour
         else if (col.gameObject.tag == "PlayerDeath")
         {
             freeze = true;
-            StartCoroutine(FinishFreeze(7f));
+            StartCoroutine(Freeze());
         }
     }
 
@@ -140,10 +141,15 @@ public class GuardController : MonoBehaviour
     }
 
 
-    private IEnumerator FinishFreeze(float sec)
+    IEnumerator Freeze()
     {
-        yield return new WaitForSeconds(sec);
+        freeze = true;
+        eyesFreeze.SetActive(true);
+        guardAnimation.SetBool("Freeze", true);
+        yield return new WaitForSeconds(timeFreeze);
+
         freeze = false;
+        eyesFreeze.SetActive(false);
         guardAnimation.SetBool("Freeze", false);
     }
 
@@ -160,6 +166,7 @@ public class GuardController : MonoBehaviour
 
     private void Die()
     {
+        eyesFreeze.SetActive(false);
         EnableRagdoll();
         dissolveMat.Disappear();
         StartCoroutine(DestroyGameObject());

@@ -5823,7 +5823,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.25
   range: 7
-  target: {fileID: 0}
+  target: {fileID: 4223892574323577165, guid: 96bfde90cd4f3924dbacd5ba8fadca89, type: 3}
   deathParticle: {fileID: 1612240857036614965, guid: d725062cc1d6572469e9d3e93b1d4a9a,
     type: 3}
 --- !u!95 &2056332397450952399

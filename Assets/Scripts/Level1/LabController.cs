@@ -7,7 +7,8 @@ public class LabController : MonoBehaviour
 {
     public float speed = 0.1f;
     public int range = 5;
-    public GameObject target, deathParticle;
+    public GameObject deathParticle;
+    private GameObject target;
     private Vector2 newPosition;
     private Animator animator;
     private float distanceX, distanceY, angle;
@@ -16,6 +17,7 @@ public class LabController : MonoBehaviour
     void Start()
     {
         firstTime = true;
+        target = GameObject.Find("Player");
         newPosition = new Vector2(transform.position.x, transform.position.y - 5f);
         animator = GetComponent<Animator>();
     }
