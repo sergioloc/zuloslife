@@ -7,7 +7,6 @@ using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
-
     [Header("Movement")]
     public Joystick joystick;
     public float speed = 0;
@@ -28,6 +27,12 @@ public class PlayerController : MonoBehaviour
     public float health;
     public GameObject deathCollider;
 
+    [Header("Underwater")]
+    public GameObject waterBar;
+    private Slider waterSlider;
+    public float InitialOxygen = 150;
+    private float oxygen;
+
     [Header("Damage")]
     public int softDamage = 5;
     public int mediumDamage = 10;
@@ -36,12 +41,6 @@ public class PlayerController : MonoBehaviour
     public GameObject bloodEffect;
     public GameObject frame;
     public float confuseTime = 0;
-
-    [Header("Underwater")]
-    public GameObject waterBar;
-    private Slider waterSlider;
-    public float InitialOxygen = 150;
-    private float oxygen;
 
     [Header("Particles")]
     public ParticleSystem bloodParticle;
@@ -53,44 +52,17 @@ public class PlayerController : MonoBehaviour
     public GameObject shieldParticle;
     public GameObject dustParticle;
 
-    [Header("Stamina")]
-    public Image staminaPanda;
-    public Image staminaKero;
-    public Image staminaCinamon;
-    public Image staminaKutter;
-    public Image staminaTrisky;
-
-    [Header("Impact Faces")]
-    public GameObject pandaImpactFace;
-    public GameObject keroImpactFace;
-    public GameObject cinamonImpactFace;
-    public GameObject kutterImpactFace;
-    public GameObject triskyImpactFace;
-
-    [Header("Icons")]
-    public Image fillPanda;
-    public Image fillKero;
-    public Image fillCinamon;
-    public Image fillKutter;
-    public Image fillTrisky;
-    private Image fillCurrent;
-
-    public GameObject pandaGameObject, keroGameObject, cinamonGameObject, kutterGameObject, triskyGameObject;
-
-    public static PlayerController instance;
     private Transform spawnPoint;
     private Rigidbody2D rb2d;
+    public static PlayerController instance;
 
     //Values
     private float sensitivity = 0.2f;
     private bool wallAtRight = false, wallAtLeft = false, isInWater = false, isSwimming = false, isJumping = false, isTakingPhoto = false;
     public bool keyboard = false;
     public Transform shootPoint;
-
-
     private Character panda, kero, cinamon, kutter, trisky, current;
-
-    public UnityEvent OnKeroAttack, onKutterAttack;
+    public UnityEvent OnKeroAttack, OnKutterAttack, OnPlayerAction;
 
     void Start()
     {
@@ -99,26 +71,16 @@ public class PlayerController : MonoBehaviour
         oxygen = InitialOxygen;
         rb2d = GetComponent<Rigidbody2D>();
         waterSlider = waterBar.GetComponent<Slider>();
-        panda = new Character("Panda", pandaGameObject, pandaImpactFace, fillPanda, staminaPanda);
-        kero = new Character("Kero", keroGameObject, keroImpactFace, fillKero, staminaKero);
-        cinamon = new Character("Cinamon", cinamonGameObject, cinamonImpactFace, fillCinamon, staminaCinamon);
-        kutter = new Character("Kutter", kutterGameObject, kutterImpactFace, fillKutter, staminaKutter);
-        trisky = new Character("Trisky", triskyGameObject, triskyImpactFace, fillTrisky, staminaTrisky);
-        SetInitialCharacter();
+        panda = LevelOneValues.characters[0];
+        kero = LevelOneValues.characters[1];
+        cinamon = LevelOneValues.characters[2];
+        kutter = LevelOneValues.characters[3];
+        trisky = LevelOneValues.characters[4];
+        for (int i = 0; i < 5; i++){
+            if (LevelOneValues.characters[i].GetCharacter().activeInHierarchy)
+                current = LevelOneValues.characters[i];
+        }
         current.SetIconColor(new Color32(0, 80, 255, 255));
-    }
-
-    private void SetInitialCharacter(){
-        if (pandaGameObject.activeInHierarchy)
-            current = panda;
-        else if (keroGameObject.activeInHierarchy)
-            current = kero;
-        else if (cinamonGameObject.activeInHierarchy)
-            current = cinamon;
-        else if (kutterGameObject.activeInHierarchy)
-            current = kutter;
-        else
-            current = trisky;
     }
 
     void FixedUpdate()
@@ -303,11 +265,12 @@ public class PlayerController : MonoBehaviour
     {
         if (current.GetStaminaFillAmount() >= 1)
         {
+            OnPlayerAction.Invoke();
             if (current.CompareNameTo("Kero")){
                 OnKeroAttack.Invoke();
             }
             else if (current.CompareNameTo("Kutter")){
-                onKutterAttack.Invoke();
+                OnKutterAttack.Invoke();
                 current.SetBool("Action", true);
             }
             else if (current.CompareNameTo("Trisky") && isGrounded)

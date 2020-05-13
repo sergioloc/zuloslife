@@ -82,19 +82,19 @@ public class GuardController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag == "WeaponHard")
-        {
-            bloodParticle.Play();
-            TakeDamage(100);
-            Push();
-        }
-        else if (col.gameObject.tag == "WeaponSoft")
+        if (col.gameObject.tag == "WeaponSoft")
         {
             bloodParticle.Play();
             TakeDamage(50);
             Push();
         }
         else if (col.gameObject.tag == "WeaponMedium")
+        {
+            bloodParticle.Play();
+            TakeDamage(100);
+            Push();
+        }
+        else if (col.gameObject.tag == "WeaponHard")
         {
             bloodParticle.Play();
             TakeDamage(100);
