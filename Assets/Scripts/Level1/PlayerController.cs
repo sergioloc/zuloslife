@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
 
     [Header("Health")]
-    public Slider healthBar;
+    public Slider healthSlider;
     public int initialHealth = 100;
     public float health;
     public GameObject deathCollider;
@@ -40,7 +40,8 @@ public class PlayerController : MonoBehaviour
     [Header("Underwater")]
     public GameObject waterBar;
     private Slider waterSlider;
-    public float Oxygen = 100;
+    public float InitialOxygen = 150;
+    private float oxygen;
 
     [Header("Particles")]
     public ParticleSystem bloodParticle;
@@ -95,6 +96,7 @@ public class PlayerController : MonoBehaviour
     {
         instance = this;
         health = initialHealth;
+        oxygen = InitialOxygen;
         rb2d = GetComponent<Rigidbody2D>();
         waterSlider = waterBar.GetComponent<Slider>();
         panda = new Character("Panda", pandaGameObject, pandaImpactFace, fillPanda, staminaPanda);
@@ -122,11 +124,13 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
-        healthBar.value = health;
-        waterSlider.value = Oxygen;
+        healthSlider.value = health;
+        waterSlider.value = oxygen;
 
-        if (Oxygen < 0){
+        if (oxygen < 0 && health > 0){
             health -= Time.deltaTime * 10f;
+            if (health <= 0)
+                Die();
         }
 
         if (!keyboard){
@@ -392,13 +396,13 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Water"))
         {
             waterBar.SetActive(true);
-            if (Oxygen > 0)
-                Oxygen -= Time.deltaTime * 5f;
+            if (oxygen > 0)
+                oxygen -= Time.deltaTime * 5f;
         }
         if (collision.gameObject.CompareTag("Air"))
         {
-            if (Oxygen < 100)
-                Oxygen += Time.deltaTime * 50f;
+            if (oxygen < 100)
+                oxygen += Time.deltaTime * 50f;
         }
     }
 
@@ -472,7 +476,21 @@ public class PlayerController : MonoBehaviour
         current.SetImpactFaceActive(false);
         Instantiate(deathEffect, transform.position, Quaternion.identity);
         Instantiate(bloodEffect, transform.position, Quaternion.identity);
-        StartCoroutine(Wait("MoveToSpawnPoint", 2f));
+        StartCoroutine(Respawn());
+    }
+
+    IEnumerator Respawn()
+    {
+        yield return new WaitForSeconds(2f);
+        deathCollider.SetActive(false);
+        waterBar.SetActive(false);
+        gameObject.GetComponent<Transform>().position = spawnPoint.position;
+        spawnParticle.Play();
+
+        yield return new WaitForSeconds(3f);
+        current.GetCharacter().SetActive(true);
+        health = initialHealth;
+        oxygen = InitialOxygen;
     }
 
     IEnumerator Wait(string type, float sec)
@@ -482,18 +500,6 @@ public class PlayerController : MonoBehaviour
         {
             case "ImpactFaceFalse":
                 current.SetImpactFaceActive(false);
-                break;
-
-            case "MoveToSpawnPoint":
-                deathCollider.SetActive(false);
-                gameObject.GetComponent<Transform>().position = spawnPoint.position;
-                spawnParticle.Play();
-                StartCoroutine(Wait("Respawn", 3f));
-                break;
-
-            case "Respawn":
-                current.GetCharacter().SetActive(true);
-                health = initialHealth;
                 break;
 
             case "HideFrame":

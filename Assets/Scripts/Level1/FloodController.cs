@@ -43,7 +43,7 @@ public class FloodController : MonoBehaviour
     IEnumerator RestartLevel()
     {
         yield return new WaitForSeconds(2f);
-        CameraController.instance.ModifyZoom(5.15f);
+        CameraController.instance.ModifyZoom(6f);
         animator.SetTrigger("Stop");
         activated = false;
         door.SetActive(false);
