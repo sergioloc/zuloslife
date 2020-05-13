@@ -102,7 +102,7 @@ public class GuardController : MonoBehaviour
         }
         else if (col.gameObject.tag == "Flash")
         {
-            StartCoroutine(Freeze());
+            StartCoroutine(Freeze(true));
         }
         else if (col.gameObject.tag == "Shield")
         {
@@ -116,7 +116,7 @@ public class GuardController : MonoBehaviour
         else if (col.gameObject.tag == "PlayerDeath")
         {
             freeze = true;
-            StartCoroutine(Freeze());
+            StartCoroutine(Freeze(false));
         }
     }
 
@@ -141,10 +141,11 @@ public class GuardController : MonoBehaviour
     }
 
 
-    IEnumerator Freeze()
+    IEnumerator Freeze(bool eyes)
     {
         freeze = true;
-        eyesFreeze.SetActive(true);
+        if (eyes)
+            eyesFreeze.SetActive(true);
         guardAnimation.SetBool("Freeze", true);
         yield return new WaitForSeconds(timeFreeze);
 
