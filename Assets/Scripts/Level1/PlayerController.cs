@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour
 
     //Values
     private float sensitivity = 0.2f;
-    private bool wallAtRight = false, wallAtLeft = false, isInWater = false, isJumping = false, isTakingPhoto = false;
+    private bool wallAtRight = false, wallAtLeft = false, isInWater = false, isSwimming = false, isJumping = false, isTakingPhoto = false;
     public bool keyboard = false;
     public Transform shootPoint;
 
@@ -159,8 +159,13 @@ public class PlayerController : MonoBehaviour
             KeyboardSwitch();
         }
         
-        //Jump
-        if (isGrounded) {
+        if (isInWater){
+            if (isSwimming)
+                current.SetBool("isJumping", true);
+            else
+                StartCoroutine(StartSwimming());
+        }
+        else if (isGrounded) {
             current.SetBool("isJumping", false);
             rb2d.drag = linearDrag;
         }
@@ -170,7 +175,6 @@ public class PlayerController : MonoBehaviour
         }
     
     }
-
 
     // Movement
     private void Movement()
@@ -244,6 +248,12 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         isJumping = false;
         StopCoroutine(EnableJump());
+    }
+
+    IEnumerator StartSwimming(){
+        yield return new WaitForSeconds(3f);
+        current.SetBool("isJumping", true);
+        isSwimming = true;
     }
 
     private void RunTo(string direction){
