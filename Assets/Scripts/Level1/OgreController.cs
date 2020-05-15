@@ -39,6 +39,7 @@ public class OgreController : MonoBehaviour
             limit = -limit;
         quakePoint.Rotate(0f, 180f, 0f);
     }
+
     void OnEnable()
     {
         StartCoroutine(InitAttack());
@@ -186,7 +187,6 @@ public class OgreController : MonoBehaviour
     IEnumerator Die()
     {
         isDead = true;
-        healthBar.SetActive(false);
         yield return new WaitForSeconds(3);
         Instantiate(smoke, transform.position, transform.rotation);
         StartCoroutine(InvokeEvolution());

@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Health")]
     public Slider healthSlider;
+    public Image healthColor;
     public int initialHealth = 100;
     public float health;
     public GameObject deathCollider;
@@ -59,7 +60,7 @@ public class PlayerController : MonoBehaviour
     //Values
     private float sensitivity = 0.2f;
     private bool wallAtRight = false, wallAtLeft = false, isInWater = false, isSwimming = false, isJumping = false, isTakingPhoto = false;
-    public bool keyboard = false;
+    public bool keyboard = false, godMode = false;
     public Transform shootPoint;
     private Character panda, kero, cinamon, kutter, trisky, current;
     public UnityEvent OnKeroAttack, OnKutterAttack, OnPlayerAction;
@@ -94,31 +95,33 @@ public class PlayerController : MonoBehaviour
             if (health <= 0)
                 Die();
         }
-
-        if (!keyboard){
-            if (isInWater){
-                Swimming();
+        
+        if (health > 0){
+            if (!keyboard){
+                if (isInWater){
+                    Swimming();
+                }
+                else if (confuseParticle.isPlaying){
+                    ConfuseMovement();
+                }
+                else {
+                    Movement();
+                }
             }
-            else if (confuseParticle.isPlaying){
-                ConfuseMovement();
+            else{
+                if (isInWater){
+                    SwimmingKeyboard();
+                }
+                else if (confuseParticle.isPlaying){
+                    ConfuseMovementKeyboard();
+                }
+                else {
+                    MovementKeyboard();
+                }
+                KeyboardAction();
+                KeyboardJump();
+                KeyboardSwitch();
             }
-            else {
-                Movement();
-            }
-        }
-        else{
-            if (isInWater){
-                SwimmingKeyboard();
-            }
-            else if (confuseParticle.isPlaying){
-                ConfuseMovementKeyboard();
-            }
-            else {
-                MovementKeyboard();
-            }
-            KeyboardAction();
-            KeyboardJump();
-            KeyboardSwitch();
         }
         
         if (isInWater){
@@ -134,6 +137,16 @@ public class PlayerController : MonoBehaviour
         else {
             current.SetBool("isJumping", true);
             rb2d.drag = 0f;
+        }
+
+        //Set God Mode
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            godMode = !godMode;
+            if (godMode)
+                healthColor.color = new Color32(255, 255, 0, 255);
+            else
+                healthColor.color = new Color32(207, 28, 28, 255);
         }
     
     }
@@ -276,7 +289,7 @@ public class PlayerController : MonoBehaviour
             else if (current.CompareNameTo("Trisky") && isGrounded)
             {
                 current.SetBool("Action", true);
-                StartCoroutine(Health());
+                StartCoroutine(Heal());
             }  
             else if (current.CompareNameTo("Cinamon") && isGrounded)
             {
@@ -297,15 +310,8 @@ public class PlayerController : MonoBehaviour
         isTakingPhoto = false;
     }
 
-    private IEnumerator Health(){
-        if (health >= (initialHealth - 30))
-        {
-            health = initialHealth;
-        }
-        else
-        {
-            health = health + 30;
-        }
+    private IEnumerator Heal(){
+        health = initialHealth;
         healthParticle.Play();
         shieldParticle.SetActive(true);
         yield return new WaitForSeconds(2f);
@@ -366,7 +372,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Water"))
+        if (collision.gameObject.CompareTag("Water") && !godMode)
         {
             waterBar.SetActive(true);
             if (oxygen > 0)
@@ -400,18 +406,20 @@ public class PlayerController : MonoBehaviour
     // Aux functions
     private void TakeDamage(float damage)
     {
-        frame.SetActive(true);
-        if (health > 0)
-        {
-            health = health - damage;
-            bloodParticle.Play();
-            if (!current.IsImpactFaceActive())
+        if (!godMode){
+            frame.SetActive(true);
+            if (health > 0)
             {
-                current.SetImpactFaceActive(true);
-                StartCoroutine(HideDamage());
+                health = health - damage;
+                bloodParticle.Play();
+                if (!current.IsImpactFaceActive())
+                {
+                    current.SetImpactFaceActive(true);
+                    StartCoroutine(HideDamage());
+                }
+                if (health <= 0)
+                    Die();
             }
-            if (health <= 0)
-                Die();
         }
     }
 

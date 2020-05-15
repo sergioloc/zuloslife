@@ -41,7 +41,6 @@ public class OgreEvController : MonoBehaviour
 
     void Start()
     {
-        OpenSecondScreen();
         initialPosition = new Vector3(0f,0f,0f);
         rb2d = GetComponent<Rigidbody2D>();
         healthSlider = healthBar.GetComponent<Slider>();

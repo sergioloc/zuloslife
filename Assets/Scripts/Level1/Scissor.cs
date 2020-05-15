@@ -25,7 +25,7 @@ public class Scissor : MonoBehaviour
             Destroy(collision.gameObject);
             DestroyProjectile();
         }
-        else if (collision.gameObject.tag == "Guard"  || collision.gameObject.tag == "Ground" || collision.gameObject.tag == "WallRight" || collision.gameObject.tag == "WallLeft"){
+        else if (collision.gameObject.tag == "Enemy"  || collision.gameObject.tag == "Ground" || collision.gameObject.tag == "WallRight" || collision.gameObject.tag == "WallLeft"){
             DestroyProjectile();
         }
     }
