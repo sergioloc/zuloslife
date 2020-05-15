@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour
         healthSlider.value = health;
         waterSlider.value = oxygen;
 
-        if (oxygen < 0 && health > 0){
+        if (oxygen < 0 && health > 0 && !godMode){
             health -= Time.deltaTime * 10f;
             if (health <= 0)
                 Die();
@@ -125,6 +125,7 @@ public class PlayerController : MonoBehaviour
         }
         
         if (isInWater){
+            current.SetBool("Run", false);
             if (isSwimming)
                 current.SetBool("isJumping", true);
             else
@@ -286,7 +287,7 @@ public class PlayerController : MonoBehaviour
                 OnKutterAttack.Invoke();
                 current.SetBool("Action", true);
             }
-            else if (current.CompareNameTo("Trisky") && isGrounded)
+            else if (current.CompareNameTo("Trisky"))
             {
                 current.SetBool("Action", true);
                 StartCoroutine(Heal());
