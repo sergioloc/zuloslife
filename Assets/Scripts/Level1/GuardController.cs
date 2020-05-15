@@ -6,21 +6,29 @@ public class GuardController : MonoBehaviour
 {
     public int health = 100;
     public float speed;
-    public GameObject target, deathEffect, bloodEffect1, bloodEffect2;
+    public float timeFreeze = 5f;
+    public GameObject deathEffect, bloodMask, eyesFreeze;
+    private GameObject target;
     public ParticleSystem bloodParticle;
     private Animator guardAnimation;
     private bool lookRight = true;
-    private bool freeze = false;
+    private bool freeze = false, deadEffect = false;
     private float limit = 2.3f, distance, velocity;
     private Rigidbody2D rb2d;
     Vector3 lastPosition = Vector3.zero;
 
+    [Header("Ragdoll")]
+    public GameObject explosion;
+    public GameObject[] bodyParts;
+    private Dissolve dissolveMat;
 
 
     void Start()
     {
+        target = GameObject.Find("Player");
         guardAnimation = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
+        dissolveMat = GetComponent<Dissolve>();
 
         if (transform.localScale.x < 0)
         {
@@ -30,7 +38,8 @@ public class GuardController : MonoBehaviour
 
     void FixedUpdate()
     {
-        distance = target.transform.position.x - transform.position.x;
+        if (target != null){
+            distance = target.transform.position.x - transform.position.x;
 
         //Look
         if (distance > 0 && !lookRight && !freeze)
@@ -47,15 +56,18 @@ public class GuardController : MonoBehaviour
         }
 
         //Follow
-        if (Mathf.Abs(distance) < 9 && !freeze)
+        if (Mathf.Abs(distance) < 9)
         {
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.transform.position.x - limit, transform.position.y, transform.position.z), speed * Time.deltaTime);
+            if (!freeze)
+                transform.position = Vector3.MoveTowards(transform.position, new Vector2(target.transform.position.x - limit, transform.position.y), speed * Time.deltaTime);
+            else
+                transform.position = Vector3.MoveTowards(transform.position, new Vector2(target.transform.position.x - limit, transform.position.y), 0.001f * Time.deltaTime);
             velocity = (transform.position - lastPosition).magnitude;
             lastPosition = transform.position;
         }
 
         //Run
-        if (velocity != 0)
+        if (velocity != 0 && !freeze)
             guardAnimation.SetBool("Run", true);
         else
             guardAnimation.SetBool("Run", false);
@@ -65,30 +77,38 @@ public class GuardController : MonoBehaviour
             guardAnimation.SetBool("Action", true);
         else
             guardAnimation.SetBool("Action", false);
-        
+        }  
     }
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag == "Melee")
-        {  
+        if (col.gameObject.tag == "WeaponSoft")
+        {
             bloodParticle.Play();
-            TakeDamage(20);
+            TakeDamage(50);
+            Push();
+        }
+        else if (col.gameObject.tag == "WeaponMedium")
+        {
+            bloodParticle.Play();
+            TakeDamage(100);
+            Push();
+        }
+        else if (col.gameObject.tag == "WeaponHard")
+        {
+            bloodParticle.Play();
+            TakeDamage(100);
             Push();
         }
         else if (col.gameObject.tag == "Flash")
         {
-            freeze = true;
-            guardAnimation.SetBool("Freeze",true);
-            StartCoroutine(FinishFreeze(5f));
+            StartCoroutine(Freeze(true));
         }
-        else if (col.gameObject.tag == "Explosion")
+        else if (col.gameObject.tag == "Shield")
         {
-            TakeDamage(20);
-            guardAnimation.SetBool("Explosion", true);
-            StartCoroutine(FinishExplosion());
+            freeze = true;
         }
-        else if (col.gameObject.tag == "Guard")
+        else if (col.gameObject.tag == "Enemy")
         {
             freeze = true;
             guardAnimation.SetBool("Run", false);
@@ -96,25 +116,19 @@ public class GuardController : MonoBehaviour
         else if (col.gameObject.tag == "PlayerDeath")
         {
             freeze = true;
-            StartCoroutine(FinishFreeze(7f));
+            StartCoroutine(Freeze(false));
         }
     }
 
     private void OnTriggerExit2D(Collider2D col)
     {
-        if (col.gameObject.tag == "Guard")
+        if (col.gameObject.tag == "Enemy")
         {
             freeze = false;
         }
-    }
-
-    private void OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.gameObject.tag == "Projectile")
+        else if (col.gameObject.tag == "Shield")
         {
-            bloodParticle.Play();
-            TakeDamage(10);
-            Push();
+            freeze = false;
         }
     }
 
@@ -127,43 +141,56 @@ public class GuardController : MonoBehaviour
     }
 
 
-    private IEnumerator FinishFreeze(float sec)
+    IEnumerator Freeze(bool eyes)
     {
-        yield return new WaitForSeconds(sec);
-        freeze = false;
-        guardAnimation.SetBool("Freeze", false);
-    }
+        freeze = true;
+        if (eyes)
+            eyesFreeze.SetActive(true);
+        guardAnimation.SetBool("Freeze", true);
+        yield return new WaitForSeconds(timeFreeze);
 
-    private IEnumerator FinishExplosion()
-    {
-        yield return new WaitForSeconds(1);
-        guardAnimation.SetBool("Explosion", false);
+        freeze = false;
+        eyesFreeze.SetActive(false);
+        guardAnimation.SetBool("Freeze", false);
     }
 
     private void TakeDamage(int damage)
     {
         health = health - damage;
 
-        if(health <= 0)
+        if(health <= 0 && !deadEffect)
         {
+            deadEffect = true;
             Die();
         }
     }
 
     private void Die()
     {
+        eyesFreeze.SetActive(false);
+        EnableRagdoll();
+        dissolveMat.Disappear();
+        StartCoroutine(DestroyGameObject());
         Instantiate(deathEffect, transform.position, Quaternion.identity);
+        Instantiate(bloodMask, new Vector3(transform.position.x, transform.position.y, -0.9f), Quaternion.identity);
+    }
+
+    private void EnableRagdoll(){
+        guardAnimation.enabled = false;
+        explosion.SetActive(true);
+        gameObject.GetComponent<Collider2D>().enabled = false;
+        for (int i=0; i < bodyParts.Length; i++){
+            bodyParts[i].GetComponent<Rigidbody2D>().isKinematic = false;
+            bodyParts[i].GetComponent<Collider2D>().enabled = true;
+        }
+    }
+
+    private IEnumerator DestroyGameObject(){
+        yield return new WaitForSeconds(2);
+        for (int i=0; i < bodyParts.Length; i++){
+            bodyParts[i].GetComponent<Collider2D>().enabled = false;
+        }
         Destroy(gameObject);
-
-        if (Random.Range(1, 2) == 1)
-        {
-            Instantiate(bloodEffect1, new Vector3(transform.position.x, transform.position.y, -0.9f), Quaternion.identity);
-        }
-        else
-        {
-            Instantiate(bloodEffect2, new Vector3(transform.position.x, transform.position.y, -0.9f), Quaternion.identity);
-        }
-
     }
 
 }

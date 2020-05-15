@@ -5,37 +5,60 @@ using UnityEngine.UI;
 
 public class Stamina : MonoBehaviour
 {
-    public float maxPanda, maxKero, maxCinamon, maxKutter, maxTrisky;
+    [Header("Cooldown Times")]
+    public float cooldownPanda;
+    public float cooldownKero;
+    public float cooldownCinamon;
+    public float cooldownKutter;
+    public float cooldownTrisky;
     public float speed = 0.1f;
     private float currentPanda, currentKero, currentCinamon, currentKutter, currentTrisky;
-    public Image maskPanda, maskKero, maskCinamon, maskKutter, maskTrisky;
-    public GameObject panda, kero, cinamon, kutter, trisky;
+    
+    [Header("Icons")]
+    public Image maskPanda;
+    public Image maskKero;
+    public Image maskCinamon;
+    public Image maskKutter;
+    public Image maskTrisky;
+
+    [Header("Characters")]
+    public GameObject panda;
+    public GameObject kero;
+    public GameObject cinamon;
+    public GameObject kutter;
+    public GameObject trisky;
 
     void Start()
     {
-        currentPanda = maxPanda;
-        currentKero = maxKero;
-        currentCinamon = maxCinamon;
-        currentKutter = maxKutter;
-        currentTrisky = maxTrisky;
+        cooldownPanda = cooldownPanda * 4;
+        cooldownKero = cooldownKero * 4;
+        cooldownCinamon = cooldownCinamon * 4;
+        cooldownKutter = cooldownKutter * 4;
+        cooldownTrisky = cooldownTrisky * 4;
+
+        currentPanda = cooldownPanda;
+        currentKero = cooldownKero;
+        currentCinamon = cooldownCinamon;
+        currentKutter = cooldownKutter;
+        currentTrisky = cooldownTrisky;
     }
 
     void FixedUpdate()
     {
         currentPanda = currentPanda + speed;
-        maskPanda.fillAmount = currentPanda / maxPanda;
+        maskPanda.fillAmount = currentPanda / cooldownPanda;
 
         currentKero = currentKero + speed;
-        maskKero.fillAmount = currentKero / maxKero;
+        maskKero.fillAmount = currentKero / cooldownKero;
 
         currentCinamon = currentCinamon + speed;
-        maskCinamon.fillAmount = currentCinamon / maxCinamon;
+        maskCinamon.fillAmount = currentCinamon / cooldownCinamon;
 
         currentKutter = currentKutter + speed;
-        maskKutter.fillAmount = currentKutter / maxKutter;
+        maskKutter.fillAmount = currentKutter / cooldownKutter;
 
         currentTrisky = currentTrisky + speed;
-        maskTrisky.fillAmount = currentTrisky / maxTrisky;
+        maskTrisky.fillAmount = currentTrisky / cooldownTrisky;
     }
 
     public void ResetCurrent()

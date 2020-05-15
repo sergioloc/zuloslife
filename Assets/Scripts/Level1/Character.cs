@@ -74,6 +74,10 @@ public class Character
         return animator.GetBool(name);
     }
 
+    public void SetTrigger(string name){
+        animator.SetTrigger(name);
+    }
+
     public bool IsPlayingAnimation(string anim){
         if (animator.GetCurrentAnimatorStateInfo(0).IsName(anim)){
             return true;

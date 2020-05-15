@@ -3,60 +3,68 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+[ExecuteInEditMode]
 public class MissileLauncherController : MonoBehaviour
 {
-    private bool check = false, isInArea = false;
     public GameObject projectile, laser;
-    public Transform target, shotPoint;
-
-    void Start()
-    {
-    }
+    public Transform target, cannon, shotPoint;
+    public float speedRotation = 50f;
+    public bool reverse;
+    private bool cooldown = false, isInArea = false, targetDead = false;
 
     void FixedUpdate()
     {
-
-        if (isInArea)
+        if (isInArea && !targetDead)
         {
             laser.SetActive(true);
+            RotateCannon();
+            if (!cooldown)
+            {
+                cooldown = true;
+                StartCoroutine(FireMissile());
+            }
         }
         else
         {
             laser.SetActive(false);
-        }
-
-        if (check && isInArea)
-        {
-            check = false;
-            StartCoroutine(ThrowMissile());
-        }
+        } 
     }
 
-    IEnumerator ThrowMissile()
+    private void RotateCannon(){
+        Quaternion rotation;
+        if (reverse)
+            rotation = GetRotation(195f);
+        else
+            rotation = GetRotation(-15);
+        cannon.rotation = Quaternion.Slerp(cannon.rotation, rotation, speedRotation * Time.deltaTime);
+    }
+
+    IEnumerator FireMissile()
     {
         yield return new WaitForSeconds(2f);
         if (isInArea)
-        {
-            Fire();
-            check = true;
+        {  
+            Instantiate(projectile, new Vector3(shotPoint.position.x, shotPoint.position.y, 0f), GetRotation(0f));
+            cooldown = false;
         }
-        
     }
 
-    private void Fire()
-    {
-        Vector2 direction1 = target.position - transform.position;
-        float angle1 = Mathf.Atan2(direction1.y, direction1.x) * Mathf.Rad2Deg;
-        Quaternion rotation1 = Quaternion.AngleAxis(angle1, Vector3.forward);
-        Instantiate(projectile, new Vector3(shotPoint.position.x, shotPoint.position.y, 0f), rotation1);
+    private Quaternion GetRotation(float offset){
+        Vector2 direction = target.position - cannon.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        return Quaternion.AngleAxis(angle + offset, Vector3.forward);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            check = true;
+            cooldown = false;
             isInArea = true;
+        }
+        else if (collision.gameObject.CompareTag("PlayerDeath"))
+        {
+            StartCoroutine(Restart());
         }
     }
 
@@ -65,7 +73,13 @@ public class MissileLauncherController : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             isInArea = false;
-            check = false;
+            cooldown = true;
         }
+    }
+
+    IEnumerator Restart(){
+        targetDead = true;
+        yield return new WaitForSeconds(4f);
+        targetDead = false;
     }
 }
