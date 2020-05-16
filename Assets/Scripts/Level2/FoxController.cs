@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObstacleController : MonoBehaviour
+public class FoxController : MonoBehaviour
 {
     public float speed = 5;
     public GameObject particle;
