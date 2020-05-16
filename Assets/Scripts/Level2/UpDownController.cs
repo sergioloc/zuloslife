@@ -21,14 +21,18 @@ public class UpDownController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            MoveUp();
+        if (LevelTwoValues.phase < 10){
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                MoveUp();
+            }
+            else if (Input.GetKeyDown(KeyCode.DownArrow)) 
+            {
+                MoveDown();
+            }
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow)) 
-        {
-            MoveDown();
-        }
+        else if (transform.position.y != 0)
+            transform.position = new Vector2(transform.position.x, 0f);
     }
 
     public void MoveUp(){

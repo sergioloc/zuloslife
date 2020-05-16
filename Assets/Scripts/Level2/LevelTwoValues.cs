@@ -12,7 +12,7 @@ public class LevelTwoValues : MonoBehaviour
 
     void FixedUpdate(){
         time = Time.timeSinceLevelLoad - delay;
-        CheckPhase();
+        CheckLastPhase();
     }
 
     private void CheckPhase(){
