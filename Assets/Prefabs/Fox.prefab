@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4052977637855204632}
   - component: {fileID: 2575999387673742096}
   - component: {fileID: 1295514817649174239}
+  - component: {fileID: 359642247001175764}
   m_Layer: 0
   m_Name: Fox
   m_TagString: Untagged
@@ -133,3 +134,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 20
   particle: {fileID: 593478439584057630, guid: 59c7d96128555a44487b5ee35ce2d475, type: 3}
+--- !u!114 &359642247001175764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4052977637855204646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46ea8b03cbee26648b79ad973be56ca5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 3

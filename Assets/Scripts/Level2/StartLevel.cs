@@ -11,7 +11,7 @@ public class StartLevel : MonoBehaviour
 
     void Start()
     {
-        //animKekeo.SetTrigger("Intro");
+        animKekeo.SetTrigger("Intro");
         StartCoroutine(ActiveButtons());
         StartCoroutine(StartMusic());
     }

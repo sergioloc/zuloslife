@@ -18,6 +18,7 @@ public class ChangeSide : MonoBehaviour
     }
 
     private void CheckPhase(){
+        Debug.Log(LevelTwoValues.phase);
         if (LevelTwoValues.phase == 2 && !side2.activeSelf){ //right
             side2.SetActive(true);
             MoveRight();
