@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5366684326344588987}
   - component: {fileID: 5366684326344588990}
   - component: {fileID: 353030417734233081}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Obstacle
   m_TagString: WeaponSoft
   m_Icon: {fileID: 0}
@@ -112,7 +112,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b73a90ef67befbd4e894826d57bda8f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
   speed: 20
   particle: {fileID: 593478439584057630, guid: 59c7d96128555a44487b5ee35ce2d475, type: 3}
 --- !u!114 &353030417734233081

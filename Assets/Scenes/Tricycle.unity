@@ -20376,7 +20376,7 @@ GameObject:
   - component: {fileID: 185797810}
   - component: {fileID: 185797812}
   - component: {fileID: 185797811}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LaserParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48615,7 +48615,7 @@ GameObject:
   - component: {fileID: 876765663}
   - component: {fileID: 876765665}
   - component: {fileID: 876765664}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48629,9 +48629,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 876765662}
-  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: -0.7071068}
-  m_LocalPosition: {x: 2.37, y: 0.89, z: 0}
-  m_LocalScale: {x: -0.92934096, y: 0.92934096, z: 0.46467}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 2.318, y: 0.876, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1043453998}
   m_RootOrder: 0
@@ -48648,8 +48648,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7adf732500b4e714ca3431cabde3d8c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mask: 
-  mask2: 
+  mask: Enemy
+  mask2: Ground
   particle: {fileID: 0}
 --- !u!120 &876765665
 LineRenderer:
@@ -48691,8 +48691,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: -2.815, y: 0.445, z: 0}
-  - {x: 0, y: 0, z: 0}
+  - {x: -2.841, y: 0.438, z: 0}
+  - {x: 9.370001, y: 0.43799853, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.1
@@ -59783,7 +59783,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1043453997}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -70161,7 +70161,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1273091459}
   - component: {fileID: 1273091460}
-  m_Layer: 16
+  m_Layer: 15
   m_Name: Shield
   m_TagString: Shield
   m_Icon: {fileID: 0}
@@ -70176,7 +70176,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1273091458}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 8.42, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1043453998}
@@ -70195,7 +70195,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 10.9, y: 0}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -70206,7 +70206,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 14.02, y: 3.09}
+  m_Size: {x: 10, y: 3}
   m_EdgeRadius: 0
 --- !u!1 &1291049459
 GameObject:
@@ -150926,13 +150926,13 @@ GameObject:
   - component: {fileID: 2050497705}
   - component: {fileID: 2050497704}
   - component: {fileID: 2050497706}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Spawner
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4
-  m_IsActive: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
 --- !u!114 &2050497704
 MonoBehaviour:
   m_ObjectHideFlags: 0
