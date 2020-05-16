@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class UpDownController : MonoBehaviour
 {
     public int range;
-    public bool shake = true;
+    public bool shake = true, freeze = false;
     public GameObject particle;
     private int minHeight, maxHeight;
     private Animator animator;
@@ -32,7 +32,7 @@ public class UpDownController : MonoBehaviour
     }
 
     public void MoveUp(){
-        if (transform.position.y < maxHeight)
+        if (transform.position.y < maxHeight && !freeze)
         {
             animator.SetTrigger("Jump");
             transform.position = new Vector2(transform.position.x, transform.position.y + range);
@@ -42,12 +42,20 @@ public class UpDownController : MonoBehaviour
     }
 
     public void MoveDown(){
-        if (transform.position.y > minHeight)
+        if (transform.position.y > minHeight && !freeze)
         {
             animator.SetTrigger("Jump");
             transform.position = new Vector2(transform.position.x, transform.position.y - range);
             if (shake) OnShake.Invoke();
             if (particle != null) Instantiate(particle, transform.position, Quaternion.identity);
         }
+    }
+
+    public void Freeze(){
+        freeze = true;
+    }
+
+    public void UnFreeze(){
+        freeze = false;
     }
 }

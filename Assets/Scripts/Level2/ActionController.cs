@@ -13,7 +13,7 @@ public class ActionController : MonoBehaviour
     private Animator animator;
     private int phase;
 
-    void Start()
+    void Awake()
     {
         animator = GetComponent<Animator>();
     }
@@ -21,7 +21,8 @@ public class ActionController : MonoBehaviour
     void OnEnable(){
         phase = LevelTwoValues.phase;
         if (phase == 1){
-            StartCoroutine(EnableAttackButton(15f));
+            animator.SetTrigger("Evolution");
+            StartCoroutine(EnableAttackButton(7f));
         }
         else if (phase == 2){
             StartCoroutine(EnableAttackButton(15f));
