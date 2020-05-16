@@ -21,33 +21,33 @@ public class EndlessBG : MonoBehaviour
             transform.position = p;
         }
 
-        if (TrycicleLevelValues.phase == 1){
+        if (LevelTwoValues.phase == 1){
             speed = 2f + plus;
         }
-        else if (TrycicleLevelValues.phase == 2){
+        else if (LevelTwoValues.phase == 2){
             speed = 4f + plus;
         }
-        else if (TrycicleLevelValues.phase == 3){
+        else if (LevelTwoValues.phase == 3){
             speed = 6f + plus;
         }
-        else if (TrycicleLevelValues.phase == 4){
+        else if (LevelTwoValues.phase == 4){
             speed = 8f + plus;
         }
-        else if (TrycicleLevelValues.phase == 5){
+        else if (LevelTwoValues.phase == 5){
             speed = 10f + plus;
         }
-        else if (TrycicleLevelValues.phase == 6){
+        else if (LevelTwoValues.phase == 6){
             speed = 12f + plus;
         }
-        else if (TrycicleLevelValues.phase == 7 && !slowMotion){
+        else if (LevelTwoValues.phase == 7 && !slowMotion){
             slowMotion = true;
             speed = 14f + plus;
             StartCoroutine(StartSlowMotion());
         }
-        else if (TrycicleLevelValues.phase == 8){
+        else if (LevelTwoValues.phase == 8){
             speed = 16f + plus;
         }
-        else if (TrycicleLevelValues.phase == 9){
+        else if (LevelTwoValues.phase == 9){
             speed = 18f + plus;
         }
 

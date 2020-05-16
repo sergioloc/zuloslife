@@ -6,15 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class TricycleController : MonoBehaviour
 {
+    [Header("Health")]
+    public Slider healthSlider;
     public float range;
     public float speed;
     public GameObject particle;
-    public Image healthBar;
     public Animator camAnim;
     private Animator kekeoAnim;
-    public bool shake = true;
-    private float maxHeight;
-    private float minHeight;
     public GameObject wheelF, wheelB1, wheelB2;
     private bool freeze, mech;
     public GameObject mechParticle;
@@ -25,12 +23,10 @@ public class TricycleController : MonoBehaviour
     {
         kekeoAnim = gameObject.GetComponent<Animator>();
         freeze = mech = false;
-        maxHeight = range;
-        minHeight = -range;
     }
 
     void OnEnable(){
-        phase = TrycicleLevelValues.phase;
+        phase = LevelTwoValues.phase;
         if (phase == 1){
             StartCoroutine(EnableAttackButton(15f));
         }
@@ -53,55 +49,19 @@ public class TricycleController : MonoBehaviour
         kekeoAnim.SetBool("Attack", false);
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        if (phase == 7 && !mech){
-            SuitUp();
-        }
-        if (TrycicleLevelValues.health <= 0)
+        if (LevelTwoValues.health <= 0)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
-        healthBar.fillAmount = TrycicleLevelValues.health / 10;
-
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            MoveUp();
-        }
-        else if (Input.GetKeyDown(KeyCode.DownArrow)) 
-        {
-            MoveDown();
-        }
+        healthSlider.value = LevelTwoValues.health;
 
         //Rotate wheels
         wheelF.transform.Rotate(0, 0, -180 * Time.deltaTime);
         wheelB1.transform.Rotate(0, 0, -180 * Time.deltaTime);
         wheelB2.transform.Rotate(0, 0, -180 * Time.deltaTime);
 
-    }
-
-    public void MoveUp()
-    {
-        if (transform.position.y < maxHeight && !freeze)
-        {
-            kekeoAnim.SetTrigger("Jump");
-            transform.position = new Vector2(transform.position.x, transform.position.y + range);
-            if (shake) camAnim.SetTrigger("Shake2");
-            if (!mech) Instantiate(particle, transform.position, Quaternion.identity);
-            else Instantiate(particle, new Vector2(0f, transform.position.y), Quaternion.identity);
-        }
-    }
-
-    public void MoveDown()
-    {
-        if (transform.position.y > minHeight && !freeze)
-        {
-            kekeoAnim.SetTrigger("Jump");
-            transform.position = new Vector2(transform.position.x, transform.position.y - range);
-            if (shake) camAnim.SetTrigger("Shake2");
-            if (!mech) Instantiate(particle, transform.position, Quaternion.identity);
-            else Instantiate(particle, new Vector2(0f, transform.position.y), Quaternion.identity);
-        }
     }
 
     private void SuitUp(){
@@ -124,17 +84,12 @@ public class TricycleController : MonoBehaviour
     {
         yield return new WaitForSeconds(sec);
         buttonAttack.SetActive(true);
-        StartCoroutine(DisableAttackButton());
+        yield return new WaitForSeconds(3f);
+        buttonAttack.SetActive(false);
     }
 
     public void Attack(){
         kekeoAnim.SetBool("Attack", true);
-        buttonAttack.SetActive(false);
-    }
-
-    IEnumerator DisableAttackButton()
-    {
-        yield return new WaitForSeconds(3f);
         buttonAttack.SetActive(false);
     }
 }

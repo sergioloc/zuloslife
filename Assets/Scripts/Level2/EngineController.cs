@@ -27,7 +27,7 @@ public class EngineController : MonoBehaviour
             StartCoroutine(Attack());
         }
 
-        if (TrycicleLevelValues.phase == 10){
+        if (LevelTwoValues.phase == 10){
             implosion.SetActive(true);
             StartCoroutine(Die());
         }
@@ -84,7 +84,7 @@ public class EngineController : MonoBehaviour
     }
 
     private void UpdatePhase(){
-        if (TrycicleLevelValues.phase == 4)
+        if (LevelTwoValues.phase == 4)
         {
             if (!feeding){
                 StartCoroutine(Feed());

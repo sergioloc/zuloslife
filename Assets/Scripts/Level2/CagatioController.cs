@@ -8,13 +8,8 @@ public class CagatioController : MonoBehaviour
     private int phase;
     public GameObject buttonAttack;
 
-    void Start()
-    {
-        
-    }
-
     void OnEnable(){
-        phase = TrycicleLevelValues.phase;
+        phase = LevelTwoValues.phase;
         if (phase == 2){
             StartCoroutine(EnableAttackButton(9f));
         }
@@ -35,7 +30,7 @@ public class CagatioController : MonoBehaviour
 
     void Update()
     {
-        phase = TrycicleLevelValues.phase;
+        phase = LevelTwoValues.phase;
         if (phase == 10){
             Debug.Log("eee");
             animCagatio.SetTrigger("Ulti");
@@ -47,11 +42,6 @@ public class CagatioController : MonoBehaviour
         yield return new WaitForSeconds(sec);
         buttonAttack.SetActive(true);
         StartCoroutine(DisableAttackButton());
-    }
-
-    public void Attack(){
-        animCagatio.SetBool("Fire", true);
-        buttonAttack.SetActive(false);
     }
 
     IEnumerator DisableAttackButton()

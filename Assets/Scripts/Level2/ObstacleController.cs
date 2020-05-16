@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ObstacleController : MonoBehaviour
 {
-    public int damage;
     public float speed = 5;
     public GameObject particle;
     private float time = 0;
@@ -27,7 +26,6 @@ public class ObstacleController : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             Instantiate(particle, transform.position, Quaternion.identity);
-            TrycicleLevelValues.health -= damage;
             Destroy(gameObject);
         }
         else if (collision.CompareTag("Shield")){

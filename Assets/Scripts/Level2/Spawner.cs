@@ -17,7 +17,7 @@ public class Spawner : MonoBehaviour
 
     private void FixedUpdate()
     {
-        phase = TrycicleLevelValues.phase;
+        phase = LevelTwoValues.phase;
 
         if (!wait && phase != 7){
             StartCoroutine(Spawn());

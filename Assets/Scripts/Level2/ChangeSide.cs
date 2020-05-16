@@ -18,39 +18,39 @@ public class ChangeSide : MonoBehaviour
     }
 
     private void CheckPhase(){
-        if (TrycicleLevelValues.phase == 2 && !side2.activeSelf){ //right
+        if (LevelTwoValues.phase == 2 && !side2.activeSelf){ //right
             side2.SetActive(true);
             MoveRight();
             EngineController.wait = true;
         }
-        else if (TrycicleLevelValues.phase == 3 && !side1.activeSelf){ // left
+        else if (LevelTwoValues.phase == 3 && !side1.activeSelf){ // left
             side1.SetActive(true);
             MoveLeft();
         }
-        else if (TrycicleLevelValues.phase == 4 && !side2.activeSelf){ // right
+        else if (LevelTwoValues.phase == 4 && !side2.activeSelf){ // right
             side2.SetActive(true);
             MoveRight();
             EngineController.wait = true;
         }
-        else if (TrycicleLevelValues.phase == 5 && !side1.activeSelf){ //left
+        else if (LevelTwoValues.phase == 5 && !side1.activeSelf){ //left
             side1.SetActive(true);
             MoveLeft();
         }
-        else if (TrycicleLevelValues.phase == 6 && !side2.activeSelf){ //right
+        else if (LevelTwoValues.phase == 6 && !side2.activeSelf){ //right
             side2.SetActive(true);
             MoveRight();
             EngineController.wait = true;
         }
-        else if (TrycicleLevelValues.phase == 7 && !side1.activeSelf){ //left
+        else if (LevelTwoValues.phase == 7 && !side1.activeSelf){ //left
             side1.SetActive(true);
             MoveLeft();
         }
-        else if (TrycicleLevelValues.phase == 9 && !side2.activeSelf){ //right
+        else if (LevelTwoValues.phase == 9 && !side2.activeSelf){ //right
             side2.SetActive(true);
             MoveRight();
             EngineController.wait = true;
         }
-        else if (TrycicleLevelValues.phase == 10){ //center
+        else if (LevelTwoValues.phase == 10){ //center
             side1.SetActive(true);
             MoveCenter();
         }
