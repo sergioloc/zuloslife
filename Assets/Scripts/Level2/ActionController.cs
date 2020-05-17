@@ -15,7 +15,7 @@ public class ActionController : MonoBehaviour
     public bool isLeft = false;
     private Animator animator;
     private int phase = 0;
-    public UnityEvent OnShake, OnShakeStop;
+    public UnityEvent OnShake, OnShakeLoop, OnShakeLoopStop;
 
     void Awake()
     {
@@ -47,21 +47,25 @@ public class ActionController : MonoBehaviour
             StartCoroutine(EnableAttackButton(7f));
         }
         else if (phase == 6){
+            if (!isLeft) transform.position = new Vector2(transform.position.x, 0);
             animator.SetTrigger("Evolution");
+            StartCoroutine(EnableAttackButton(6f));
         }
         else if (phase == 7){
+            if (isLeft) transform.position = new Vector2(transform.position.x, 0);
             animator.SetTrigger("Evolution");
         }
         else if (phase == 8){
-            StartCoroutine(EnableAttackButton(1.5f));
+            StartCoroutine(EnableAttackButton(1f));
         }
         else if (phase == 9){
-            StartCoroutine(EnableAttackButton(4f));
+            animator.SetBool("isEvolved", true);
         }
         else if (phase == 10){
+            transform.position = new Vector2(transform.position.x, 0);
             animator.SetTrigger("Ulti");
             if (isLeft) Instantiate(chargeParticle, new Vector2(5f, 0f), Quaternion.identity);
-            //else Instantiate(chargeParticle, transform.position, Quaternion.identity);
+            else Instantiate(chargeParticle, new Vector2(24f, 2f), Quaternion.identity);
         }
         else if (phase == 11){
             //end
@@ -82,15 +86,20 @@ public class ActionController : MonoBehaviour
     }
 
     public void ShowPowerParticle(){
-        Instantiate(powerParticle, new Vector2(5f, 0f), Quaternion.identity);
+        if (isLeft) Instantiate(powerParticle, new Vector2(5f, 0f), Quaternion.identity);
+        else Instantiate(powerParticle, new Vector2(24f, 2f), Quaternion.identity);
     }
 
-    public void StartShakeScreen(){
+    public void ShakeScreen(){
         OnShake.Invoke();
     }
 
+    public void StartShakeScreen(){
+        OnShakeLoop.Invoke();
+    }
+
     public void StopShakeScreen(){
-        OnShakeStop.Invoke();
+        OnShakeLoopStop.Invoke();
     }
 
     void OnTriggerEnter2D(Collider2D collision)
