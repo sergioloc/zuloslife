@@ -11,7 +11,10 @@ public class StartLevel : MonoBehaviour
 
     void Start()
     {
-        animKekeo.SetTrigger("Intro");
+        if (LevelTwoValues.isFinalPhase)
+            animKekeo.SetTrigger("Evolution");
+        else
+            animKekeo.SetTrigger("Intro");
         StartCoroutine(ActiveButtons());
         StartCoroutine(StartMusic());
     }

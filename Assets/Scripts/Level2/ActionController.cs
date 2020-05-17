@@ -20,7 +20,6 @@ public class ActionController : MonoBehaviour
     void Awake()
     {
         animator = GetComponent<Animator>();
-        animator.SetTrigger("Evolution");
     }
 
     void Update(){
@@ -32,7 +31,6 @@ public class ActionController : MonoBehaviour
 
     void OnEnable(){
         phase = LevelTwoValues.phase;
-        Debug.Log("Sup");
         if (phase == 1){
             StartCoroutine(EnableAttackButton(15f));
         }
@@ -81,10 +79,7 @@ public class ActionController : MonoBehaviour
     }
 
     public void Attack(){
-        if (phase < 11)
-            animator.SetBool("Attack", true);
-        else
-            animator.SetBool("Ulti", true);
+        animator.SetBool("Attack", true);
         buttonAttack.SetActive(false);
     }
 
