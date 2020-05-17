@@ -48229,7 +48229,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2d70f258684dbd449ab38ef3ee32d72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finalPhase: 1
+  finalPhase: 0
+  OnNewPhase:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1352981851}
+        m_MethodName: UpdateCameraPosition
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 389052876}
+        m_MethodName: UpdateActionState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &808699562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136113,10 +136138,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cbdc22a7b1c832459240043c229dfd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstaclePatterns:
-  - {fileID: 8785760383543984304, guid: a45f1096da1ae8143bab1a78dfee6aa2, type: 3}
-  - {fileID: 7156419646001587867, guid: 530688da16d7c0c499a0c8283193c567, type: 3}
-  - {fileID: 7308601778883621580, guid: 76146718450f3f946b5bd780a67ad072, type: 3}
+  obstacle: {fileID: 4052977637855204646, guid: 8dacce80dab8aa04092cce5f8ea45c70,
+    type: 3}
   timeBtwSpawn: 2
 --- !u!4 &2050497705
 Transform:

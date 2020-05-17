@@ -8,40 +8,40 @@ public class ChangeSide : MonoBehaviour
     public GameObject side1, side2, spawner;
     public UnityEvent OnSwitch, OnCenter;
 
-    void Update()
-    {
-        CheckPhase();
-    }
-
-    private void CheckPhase(){
-        if (LevelTwoValues.phase == 2 && !side2.activeSelf){ //right
+    public void UpdateCameraPosition(){
+        if (LevelTwoValues.phase == 2){ //right
             side2.SetActive(true);
             MoveRight();
             EngineController.wait = true;
         }
-        else if (LevelTwoValues.phase == 3 && !side1.activeSelf){ // left
+        else if (LevelTwoValues.phase == 3){ // left
             side1.SetActive(true);
             MoveLeft();
         }
-        else if (LevelTwoValues.phase == 4 && !side2.activeSelf){ // right
+        else if (LevelTwoValues.phase == 4){ // right
             side2.SetActive(true);
             MoveRight();
             EngineController.wait = true;
         }
-        else if (LevelTwoValues.phase == 5 && !side1.activeSelf){ //left
+        else if (LevelTwoValues.phase == 5){ //left
             side1.SetActive(true);
             MoveLeft();
         }
-        else if (LevelTwoValues.phase == 6 && !side2.activeSelf){ //right
+        else if (LevelTwoValues.phase == 6){ //right
             side2.SetActive(true);
             MoveRight();
             EngineController.wait = true;
         }
-        else if (LevelTwoValues.phase == 7 && !side1.activeSelf){ //left
+        else if (LevelTwoValues.phase == 7){ //left
             side1.SetActive(true);
             MoveLeft();
+            spawner.SetActive(false);
         }
-        else if (LevelTwoValues.phase == 9 && !side2.activeSelf){ //right
+        else if (LevelTwoValues.phase == 8){ //left
+            spawner.SetActive(true);
+            Spawner.wait = false;
+        }
+        else if (LevelTwoValues.phase == 9){ //right
             side2.SetActive(true);
             MoveRight();
             EngineController.wait = true;

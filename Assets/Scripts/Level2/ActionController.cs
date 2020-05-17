@@ -29,7 +29,7 @@ public class ActionController : MonoBehaviour
         }
     }
 
-    void OnEnable(){
+    public void UpdateActionState(){
         phase = LevelTwoValues.phase;
         if (phase == 1){
             StartCoroutine(EnableAttackButton(15f));
@@ -48,14 +48,12 @@ public class ActionController : MonoBehaviour
         }
         else if (phase == 6){
             animator.SetTrigger("Evolution");
-            StartCoroutine(EnableAttackButton(7f));
         }
         else if (phase == 7){
             animator.SetTrigger("Evolution");
-            StartCoroutine(EnableAttackButton(4f));
         }
         else if (phase == 8){
-            StartCoroutine(EnableAttackButton(4f));
+            StartCoroutine(EnableAttackButton(1.5f));
         }
         else if (phase == 9){
             StartCoroutine(EnableAttackButton(4f));

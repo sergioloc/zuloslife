@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class LevelTwoValues : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class LevelTwoValues : MonoBehaviour
     private float time = 0;
     private int lastPhase = 0;
     private float delay = 5f;
+    public UnityEvent OnNewPhase;
 
     void Awake(){
         isFinalPhase = finalPhase;
@@ -64,6 +66,7 @@ public class LevelTwoValues : MonoBehaviour
 
     private void PrintLastPhase(){
         if (lastPhase != phase){
+            OnNewPhase.Invoke();
             Debug.Log("Phase: " + phase);
             lastPhase = phase;
         }

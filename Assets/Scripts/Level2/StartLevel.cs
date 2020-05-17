@@ -21,14 +21,14 @@ public class StartLevel : MonoBehaviour
 
     IEnumerator StartMusic()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(4.5f);
         music.Play();
-        spawner.SetActive(true);
     }
 
     IEnumerator ActiveButtons()
     {
         yield return new WaitForSeconds(3f);
         buttons.SetActive(true);
+        spawner.SetActive(true);
     }
 }

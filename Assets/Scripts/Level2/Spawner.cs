@@ -4,25 +4,21 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public GameObject[] obstaclePatterns;
+    public GameObject obstacle;
+    private Vector2[] patterns;
     public float timeBtwSpawn;
-    public static bool wait;
+    public static bool wait = false;
     private int phase;
 
     private void Start(){
-        wait = false;
-        int rand = Random.Range(0, obstaclePatterns.Length);
-        Instantiate(obstaclePatterns[rand], transform.position, Quaternion.identity); 
+        patterns = new Vector2[3];
+        patterns[0] = new Vector2(3f, 0f);
+        patterns[1] = new Vector2(0f, -3f);
+        patterns[2] = new Vector2(3f, -3f);
     }
 
-    private void FixedUpdate()
-    {
+    void OnEnable(){
         phase = LevelTwoValues.phase;
-
-        if (!wait && phase != 7){
-            StartCoroutine(Spawn());
-            wait = true;
-        }
         if (phase == 1){
             timeBtwSpawn = 1.6f;
         }
@@ -38,16 +34,25 @@ public class Spawner : MonoBehaviour
         else if (phase == 5){
             timeBtwSpawn = 0.6f;
         }
-        else if (phase == 6){
-            timeBtwSpawn = 2f;
-        }
+        else
+            timeBtwSpawn = 0.6f;
+
+        StartCoroutine(Spawn());
+    }
+
+    void OnDisable(){
+        wait = true;
+        StopCoroutine(Spawn());
     }
 
     private IEnumerator Spawn()
     {
-        yield return new WaitForSeconds(timeBtwSpawn);
-        int rand = Random.Range(0, obstaclePatterns.Length);
-        Instantiate(obstaclePatterns[rand], transform.position, Quaternion.identity);
-        wait = false;
+        yield return new WaitForSeconds(1.5f);
+        while (!wait){
+            int rand = Random.Range(0, patterns.Length);
+            Instantiate(obstacle, new Vector2(transform.position.x, patterns[rand].x), Quaternion.identity);
+            Instantiate(obstacle, new Vector2(transform.position.x, patterns[rand].y), Quaternion.identity);
+            yield return new WaitForSeconds(timeBtwSpawn);
+        }
     }
 }
