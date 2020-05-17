@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class LevelTwoValues : MonoBehaviour
 {
+    public bool finalPhase = false;
     public static int phase = 1; // 11 phases
     public static float health = 3;
     private float time = 0;
     private int lastPhase = 0;
     private float delay = 5f;
 
-    void FixedUpdate(){
+    void Update(){
         time = Time.timeSinceLevelLoad - delay;
-        CheckLastPhase();
+        if (finalPhase) CheckLastPhase();
+        else CheckPhase();
     }
 
     private void CheckPhase(){

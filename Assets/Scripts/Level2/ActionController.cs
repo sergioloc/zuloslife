@@ -15,7 +15,7 @@ public class ActionController : MonoBehaviour
     public bool isLeft = false;
     private Animator animator;
     private int phase = 0;
-    public UnityEvent OnShake;
+    public UnityEvent OnShake, OnShakeStop;
 
     void Awake()
     {
@@ -65,7 +65,7 @@ public class ActionController : MonoBehaviour
         else if (phase == 10){
             animator.SetTrigger("Ulti");
             if (isLeft) Instantiate(chargeParticle, new Vector2(5f, 0f), Quaternion.identity);
-            else Instantiate(chargeParticle, transform.position, Quaternion.identity);
+            //else Instantiate(chargeParticle, transform.position, Quaternion.identity);
         }
         else if (phase == 11){
             //end
@@ -89,8 +89,15 @@ public class ActionController : MonoBehaviour
     }
 
     public void ShowPowerParticle(){
-        OnShake.Invoke();
         Instantiate(powerParticle, new Vector2(5f, 0f), Quaternion.identity);
+    }
+
+    public void StartShakeScreen(){
+        OnShake.Invoke();
+    }
+
+    public void StopShakeScreen(){
+        OnShakeStop.Invoke();
     }
 
     void OnTriggerEnter2D(Collider2D collision)

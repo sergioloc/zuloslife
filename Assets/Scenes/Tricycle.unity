@@ -36342,7 +36342,21 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2091014506}
-        m_MethodName: ShakeScreen
+        m_MethodName: ShakeScreenLoop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnShakeStop:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2091014506}
+        m_MethodName: StopShakeScreenLoop
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -47207,7 +47221,7 @@ RectTransform:
   - {fileID: 327861180}
   - {fileID: 820371742}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -48169,6 +48183,94 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &808699559
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 808699560}
+  - component: {fileID: 808699561}
+  - component: {fileID: 808699562}
+  - component: {fileID: 808699563}
+  - component: {fileID: 808699564}
+  m_Layer: 0
+  m_Name: SceneController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &808699560
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 808699559}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &808699561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 808699559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2d70f258684dbd449ab38ef3ee32d72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finalPhase: 0
+--- !u!114 &808699562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 808699559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5c046e44ccaf1d46a0d31e4c5130dad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &808699563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 808699559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ecc38c8e01de0946a82a76b66048f6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scene: Tricycle
+--- !u!114 &808699564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 808699559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea9593f27f7d09f499d54fe5a34832dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawner: {fileID: 2050497703}
+  buttons: {fileID: 664208154}
+  animKekeo: {fileID: 389052874}
+  music: {fileID: 1622292351}
 --- !u!1 &817731161
 GameObject:
   m_ObjectHideFlags: 0
@@ -70164,6 +70266,20 @@ MonoBehaviour:
   isLeft: 0
   OnShake:
     m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2091014506}
+        m_MethodName: ShakeScreenLoop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnShakeStop:
+    m_PersistentCalls:
       m_Calls: []
 --- !u!1 &1299862456
 GameObject:
@@ -79919,7 +80035,7 @@ Transform:
   - {fileID: 182625404}
   - {fileID: 718832695}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1352981851
 MonoBehaviour:
@@ -100139,7 +100255,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: -180, y: 90, z: 0}
 --- !u!114 &1567223456
 MonoBehaviour:
@@ -105349,7 +105465,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1627964781
 GameObject:
@@ -105741,7 +105857,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1701021573
 GameObject:
@@ -120238,7 +120354,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: -180, y: 90, z: 0}
 --- !u!1 &1767102711
 GameObject:
@@ -130294,7 +130410,7 @@ Transform:
   - {fileID: 311744141}
   - {fileID: 952889891}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1893000099 stripped
 MonoBehaviour:
@@ -136529,11 +136645,7 @@ GameObject:
   - component: {fileID: 2091014497}
   - component: {fileID: 2091014500}
   - component: {fileID: 2091014505}
-  - component: {fileID: 2091014503}
-  - component: {fileID: 2091014504}
-  - component: {fileID: 2091014502}
   - component: {fileID: 2091014506}
-  - component: {fileID: 2091014507}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -136625,47 +136737,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2091014502
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2091014496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2d70f258684dbd449ab38ef3ee32d72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2091014503
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2091014496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ecc38c8e01de0946a82a76b66048f6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scene: Tricycle
---- !u!114 &2091014504
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2091014496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea9593f27f7d09f499d54fe5a34832dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawner: {fileID: 2050497703}
-  buttons: {fileID: 664208154}
-  animKekeo: {fileID: 389052874}
-  music: {fileID: 1622292351}
 --- !u!114 &2091014505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136707,18 +136778,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 98a7a241cd624b44e9186d3de8e0f163, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2091014507
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2091014496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5c046e44ccaf1d46a0d31e4c5130dad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2100249432

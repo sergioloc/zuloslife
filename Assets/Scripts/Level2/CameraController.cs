@@ -1,5 +1,4 @@
-﻿
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,6 +17,10 @@ public class CameraController : MonoBehaviour
 
     public void ShakeScreenLoop(){
         animator.SetBool("isShaking", true);
+    }
+
+    public void StopShakeScreenLoop(){
+        animator.SetBool("isShaking", false);
     }
 
     public void CenterCamera(){
