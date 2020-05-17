@@ -1,16 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ChangeSide : MonoBehaviour
 {
-    private Animator animCam;
     public GameObject side1, side2, spawner;
-
-    void Start()
-    {
-        animCam = GetComponent<Animator>();
-    }
+    public UnityEvent OnSwitch, OnCenter;
 
     void Update()
     {
@@ -18,7 +14,6 @@ public class ChangeSide : MonoBehaviour
     }
 
     private void CheckPhase(){
-        Debug.Log(LevelTwoValues.phase);
         if (LevelTwoValues.phase == 2 && !side2.activeSelf){ //right
             side2.SetActive(true);
             MoveRight();
@@ -53,28 +48,23 @@ public class ChangeSide : MonoBehaviour
         }
         else if (LevelTwoValues.phase == 10){ //center
             side1.SetActive(true);
-            MoveCenter();
+            OnCenter.Invoke();
         }
     }
 
     private void MoveRight(){
         spawner.SetActive(false);
-        animCam.SetBool("isRight", true);
+        OnSwitch.Invoke();
         StartCoroutine(HideSide(side1));
         StartCoroutine(AllowAttack());
     }
 
     private void MoveLeft(){
         spawner.SetActive(true);
-        animCam.SetBool("isRight", false);
+        OnSwitch.Invoke();
         StartCoroutine(HideSide(side2));
         Spawner.wait = false;
     }
-
-    private void MoveCenter(){
-        animCam.SetTrigger("Center");
-    }
-
 
     IEnumerator HideSide(GameObject side)
     {

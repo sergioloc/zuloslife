@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class ActionController : MonoBehaviour
@@ -10,8 +11,11 @@ public class ActionController : MonoBehaviour
     [Header("Health")]
     public Slider healthSlider;
     public GameObject buttonAttack;
+    public GameObject chargeParticle, powerParticle;
+    public bool isLeft = false;
     private Animator animator;
     private int phase = 0;
+    public UnityEvent OnShake;
 
     void Awake()
     {
@@ -59,8 +63,9 @@ public class ActionController : MonoBehaviour
             StartCoroutine(EnableAttackButton(4f));
         }
         else if (phase == 10){
-            Debug.Log("Final");
             animator.SetTrigger("Ulti");
+            if (isLeft) Instantiate(chargeParticle, new Vector2(5f, 0f), Quaternion.identity);
+            else Instantiate(chargeParticle, transform.position, Quaternion.identity);
         }
         else if (phase == 11){
             //end
@@ -81,6 +86,11 @@ public class ActionController : MonoBehaviour
         else
             animator.SetBool("Ulti", true);
         buttonAttack.SetActive(false);
+    }
+
+    public void ShowPowerParticle(){
+        OnShake.Invoke();
+        Instantiate(powerParticle, new Vector2(5f, 0f), Quaternion.identity);
     }
 
     void OnTriggerEnter2D(Collider2D collision)

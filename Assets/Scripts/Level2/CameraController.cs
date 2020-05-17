@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,12 +12,22 @@ public class CameraController : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    void Update()
-    {
-        
+    public void ShakeScreen(){
+        animator.SetTrigger("Shake");
     }
 
-    public void ShakeScreen(){
-        animator.SetTrigger("Shake2");
+    public void ShakeScreenLoop(){
+        animator.SetBool("isShaking", true);
+    }
+
+    public void CenterCamera(){
+        animator.SetTrigger("Center");
+    }
+
+    public void SwitchSide(){
+        if (animator.GetBool("isRight"))
+            animator.SetBool("isRight", false);
+        else
+            animator.SetBool("isRight", true);
     }
 }
