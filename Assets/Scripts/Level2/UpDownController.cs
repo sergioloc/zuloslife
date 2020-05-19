@@ -38,7 +38,6 @@ public class UpDownController : MonoBehaviour
     public void MoveUp(){
         if (transform.position.y < maxHeight && !freeze)
         {
-            animator.SetTrigger("Jump");
             transform.position = new Vector2(transform.position.x, transform.position.y + range);
             if (shake) OnShake.Invoke();
             if (particle != null) Instantiate(particle, transform.position, Quaternion.identity);
@@ -48,7 +47,6 @@ public class UpDownController : MonoBehaviour
     public void MoveDown(){
         if (transform.position.y > minHeight && !freeze)
         {
-            animator.SetTrigger("Jump");
             transform.position = new Vector2(transform.position.x, transform.position.y - range);
             if (shake) OnShake.Invoke();
             if (particle != null) Instantiate(particle, transform.position, Quaternion.identity);
