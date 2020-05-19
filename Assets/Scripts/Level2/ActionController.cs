@@ -86,8 +86,8 @@ public class ActionController : MonoBehaviour
     }
 
     public void ShowPowerParticle(){
-        if (isLeft) Instantiate(powerParticle, new Vector2(5f, 0f), Quaternion.identity);
-        else Instantiate(powerParticle, new Vector2(24f, 2f), Quaternion.identity);
+        if (isLeft) Instantiate(powerParticle, new Vector2(-5f, 0f), Quaternion.identity);
+        else Instantiate(powerParticle, new Vector2(14f, 2f), Quaternion.identity);
     }
 
     public void ShakeScreen(){
