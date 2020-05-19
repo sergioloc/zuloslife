@@ -6,22 +6,36 @@ public class EngineController : MonoBehaviour
 {
     private Animator animEngine;
     public Animator animFeeder;
-    public GameObject implosion, bullet, spikes;
+    public GameObject explosion, bullet, spikes, cagatio, kekeo;
     public Transform bulletPoint, spikesPoint;
 
-    private bool isFeeded, feeding;
-    private int lastAttack;
+    private int lastAttack, phase;
     public float timeBtwAttack = 2f;
-    public static bool wait;
+    private bool wait;
     
     void Start()
     {
         animEngine = GetComponent<Animator>();
-        feeding = wait = false;
     }
 
-    void OnEnable(){
-        StartCoroutine(Attack());
+    public void UpdateEngineState(){
+        wait = false;
+        phase = LevelTwoValues.phase;
+        if (phase == 4) {
+            animEngine.SetTrigger("Feed");
+            animFeeder.SetTrigger("Feed");
+        }
+        else if (phase == 10){
+            wait = true;
+        }
+        else if (phase == 11){
+            wait = true;
+            StartCoroutine(FinalAnimation());
+        }
+        else {
+            StartCoroutine(Attack());
+        }
+        
     }
 
     void OnDisable(){
@@ -29,7 +43,7 @@ public class EngineController : MonoBehaviour
     }
 
     IEnumerator Attack(){
-        while (true) {
+        while (!wait) {
             yield return new WaitForSeconds(timeBtwAttack);
             ChooseAttack(Random.Range(1, 3));
         }
@@ -68,6 +82,11 @@ public class EngineController : MonoBehaviour
         }
     }
 
+    private IEnumerator FinalAnimation(){
+        yield return new WaitForSeconds(2.5f);
+        animEngine.SetTrigger("Die");   
+    }
+
     public void ShootBullet(){
         Instantiate(bullet, bulletPoint.position, bulletPoint.rotation);
     }
@@ -76,26 +95,13 @@ public class EngineController : MonoBehaviour
         Instantiate(spikes, spikesPoint.position, spikesPoint.rotation);
     }
 
-    IEnumerator Feed()
-    {
-        yield return new WaitForSeconds(2f);
-        animEngine.SetTrigger("Feed");
-        animFeeder.SetTrigger("Feed");
+    public void InvokeDieParticles(){
+        Instantiate(explosion, transform.position, transform.rotation);
     }
 
-    IEnumerator Die()
-    {
-        yield return new WaitForSeconds(9.5f);
+    public void Die(){
+        kekeo.SetActive(false);
+        cagatio.SetActive(false);
         gameObject.SetActive(false);
-    }
-
-    public void UpdateEngineState(){
-        if (LevelTwoValues.phase == 4) {
-            StartCoroutine(Feed());
-        }
-        else if (LevelTwoValues.phase == 10) {
-            implosion.SetActive(true);
-            StartCoroutine(Die());
-        }
     }
 }

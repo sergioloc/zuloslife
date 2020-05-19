@@ -50,13 +50,13 @@ public class LevelTwoValues : MonoBehaviour
     }
 
     private void CheckLastPhase(){
-        if (time >= 27f){
+        if (time >= 20f){
             phase = 11;
-        }else if (time >= 20f){
+        }else if (time >= 15f){
             phase = 10;
-        }else if (time >= 14f){
+        }else if (time >= 10f){
             phase = 9;
-        }else if (time >= 7f){
+        }else if (time >= 5f){
             phase = 8;
         }else {
             phase = 7;

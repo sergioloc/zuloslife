@@ -12,7 +12,6 @@ public class ChangeSide : MonoBehaviour
         if (LevelTwoValues.phase == 2){ //right
             side2.SetActive(true);
             MoveRight();
-            EngineController.wait = true;
         }
         else if (LevelTwoValues.phase == 3){ // left
             side1.SetActive(true);
@@ -21,7 +20,6 @@ public class ChangeSide : MonoBehaviour
         else if (LevelTwoValues.phase == 4){ // right
             side2.SetActive(true);
             MoveRight();
-            EngineController.wait = true;
         }
         else if (LevelTwoValues.phase == 5){ //left
             side1.SetActive(true);
@@ -30,11 +28,12 @@ public class ChangeSide : MonoBehaviour
         else if (LevelTwoValues.phase == 6){ //right
             side2.SetActive(true);
             MoveRight();
-            EngineController.wait = true;
         }
         else if (LevelTwoValues.phase == 7){ //left
-            side1.SetActive(true);
-            MoveLeft();
+            if (!side1.activeSelf){
+                side1.SetActive(true);
+                MoveLeft();
+            }
             spawner.SetActive(false);
         }
         else if (LevelTwoValues.phase == 8){ //left
@@ -44,7 +43,6 @@ public class ChangeSide : MonoBehaviour
         else if (LevelTwoValues.phase == 9){ //right
             side2.SetActive(true);
             MoveRight();
-            EngineController.wait = true;
         }
         else if (LevelTwoValues.phase == 10){ //center
             side1.SetActive(true);
@@ -56,7 +54,6 @@ public class ChangeSide : MonoBehaviour
         spawner.SetActive(false);
         OnSwitch.Invoke();
         StartCoroutine(HideSide(side1));
-        StartCoroutine(AllowAttack());
     }
 
     private void MoveLeft(){
@@ -71,12 +68,4 @@ public class ChangeSide : MonoBehaviour
         yield return new WaitForSeconds(1f);
         side.SetActive(false);
     }
-
-    IEnumerator AllowAttack()
-    {
-        yield return new WaitForSeconds(1f);
-        EngineController.wait = false;
-    }
-
-
 }
