@@ -104,7 +104,7 @@ public class ActionController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("WeaponSoft"))
+        if (collision.gameObject.CompareTag("WeaponSoft") || (collision.gameObject.CompareTag("Laser")))
         {
             //LevelTwoValues.health--;
             healthSlider.value = LevelTwoValues.health;

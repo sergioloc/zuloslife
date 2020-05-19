@@ -6,9 +6,10 @@ public class EngineController : MonoBehaviour
 {
     private Animator animEngine;
     public Animator animFeeder;
-    public GameObject implosion;
+    public GameObject implosion, bullet, spikes;
+    public Transform bulletPoint, spikesPoint;
 
-    private bool isFeeded, feeding, attacking;
+    private bool isFeeded, feeding;
     private int lastAttack;
     public float timeBtwAttack = 2f;
     public static bool wait;
@@ -16,58 +17,63 @@ public class EngineController : MonoBehaviour
     void Start()
     {
         animEngine = GetComponent<Animator>();
-        feeding = wait = attacking = false;
+        feeding = wait = false;
     }
 
-    void Update()
-    {
-        UpdatePhase();
+    void OnEnable(){
+        StartCoroutine(Attack());
+    }
 
-        if (!feeding && !attacking){
-            StartCoroutine(Attack());
-        }
-
-        if (LevelTwoValues.phase == 10){
-            implosion.SetActive(true);
-            StartCoroutine(Die());
-        }
+    void OnDisable(){
+        StopCoroutine(Attack());
     }
 
     IEnumerator Attack(){
-        yield return new WaitForSeconds(1f);
-        attacking = true;
-        int rand = Random.Range(1, 3);
+        while (true) {
+            yield return new WaitForSeconds(timeBtwAttack);
+            ChooseAttack(Random.Range(1, 3));
+        }
+    }
 
-        if (rand == 1){
+    private void ChooseAttack(int i){
+        if (i == 1){
             if (lastAttack != 1){
-                EngineStartLaser();
+                animEngine.SetTrigger("Laser");
                 lastAttack = 1;
             }
             else{
-                EngineStartSpikes();
+                animEngine.SetBool("Spikes", true);
                 lastAttack = 2;
             }
         }
-        else if (rand == 2){
+        else if (i == 2){
             if (lastAttack != 2){
-                EngineStartSpikes();
+                animEngine.SetBool("Spikes", true);
                 lastAttack = 2;
             }
             else {
-                EngineStartGun();
+                animEngine.SetBool("Gun", true);
                 lastAttack = 3;
             }
         }
-        else if (rand == 3){
+        else if (i == 3){
             if (lastAttack != 3){
-                EngineStartGun();
+                animEngine.SetBool("Gun", true);
                 lastAttack = 3;
             }
             else{
-                EngineStartLaser();
+                animEngine.SetTrigger("Laser");
                 lastAttack = 1;
             }
         }
+    }
+
+    public void ShootBullet(){
+        Instantiate(bullet, bulletPoint.position, bulletPoint.rotation);
+    }
+
+    public void ShootSpikes(){
+        Instantiate(spikes, spikesPoint.position, spikesPoint.rotation);
     }
 
     IEnumerator Feed()
@@ -83,57 +89,13 @@ public class EngineController : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void UpdatePhase(){
-        if (LevelTwoValues.phase == 4)
-        {
-            if (!feeding){
-                StartCoroutine(Feed());
-                feeding = true;
-            }
+    public void UpdateEngineState(){
+        if (LevelTwoValues.phase == 4) {
+            StartCoroutine(Feed());
         }
-        else{
-            feeding = false;
+        else if (LevelTwoValues.phase == 10) {
+            implosion.SetActive(true);
+            StartCoroutine(Die());
         }
     }
-
-    // Laser
-    private void EngineStartLaser(){
-        animEngine.SetBool("Laser", true);
-        StartCoroutine(EngineStopLaser());
-    }
-
-    IEnumerator EngineStopLaser()
-    {
-        yield return new WaitForSeconds(1.1f);
-        attacking = false;
-        animEngine.SetBool("Laser", false);
-    }
-
-    // Spikes
-    private void EngineStartSpikes(){
-        animEngine.SetBool("Spikes", true);
-        StartCoroutine(EngineStopSpikes());
-    }
-
-    IEnumerator EngineStopSpikes()
-    {
-        yield return new WaitForSeconds(1.5f);
-        attacking = false;
-        animEngine.SetBool("Spikes", false);
-        animEngine.SetBool("SpikesFail", false);
-    }
-
-    // Gun
-    private void EngineStartGun(){
-        animEngine.SetBool("Gun", true);
-        StartCoroutine(EngineStopGun());
-    }
-
-    IEnumerator EngineStopGun()
-    {
-        yield return new WaitForSeconds(1f);
-        animEngine.SetBool("Gun", false);
-        attacking = false;
-    }
-
 }
