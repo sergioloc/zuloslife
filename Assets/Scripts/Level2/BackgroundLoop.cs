@@ -8,6 +8,7 @@ public class BackgroundLoop : MonoBehaviour
     private float width = 38.4f;
     public float speed = 0f;
     public int offset = 0;
+    private bool isStop = false;
 
     void Start(){
         speed = -speed;
@@ -16,7 +17,8 @@ public class BackgroundLoop : MonoBehaviour
     }
 
     void Update(){
-        UpdateSpeed(LevelTwoValues.phase);
+        if (!isStop)
+            UpdateSpeed(LevelTwoValues.phase);
         if (transform.position.x < -width){
             Reposition();
         }
@@ -50,13 +52,27 @@ public class BackgroundLoop : MonoBehaviour
         else if (phase == 9){
             speed = 20;
         }
-        speed = speed + offset;
+        else if (phase == 10){
+            speed = 20;
+        }
+        else if (phase == 11){
+            speed = -5;
+            isStop = true;
+        }
+        speed = speed + offset;    
         SetSpeed(-speed);
     }
 
     private void SetSpeed(float s){
+        Debug.Log(speed);
         speed = s;
         rg2d.velocity = new Vector2(speed, 0f);
+    }
+
+    IEnumerator StopSpeed()
+    {
+        yield return new WaitForSeconds(6f);
+        SetSpeed(-speed);
     }
 
     private void Reposition(){

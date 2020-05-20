@@ -270,9 +270,9 @@ AnimationClip:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 34
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
         weightedMode: 0
         inWeight: 0
         outWeight: 0
@@ -280,7 +280,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Suit/Tricycle/Laser
+    path: Suit/Shield
     classID: 1
     script: {fileID: 0}
   m_PPtrCurves: []
@@ -341,7 +341,7 @@ AnimationClip:
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 2116065631
+      path: 3546928008
       attribute: 2086281974
       script: {fileID: 0}
       typeID: 1
@@ -701,25 +701,6 @@ AnimationClip:
     attribute: localEulerAnglesRaw.z
     path: Suit/Armor/KekeoArmor_Pants/KekeoArmor_Leg_R/KekeoArmor_Foot
     classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_IsActive
-    path: Suit/Tricycle/Laser
-    classID: 1
     script: {fileID: 0}
   - curve:
       serializedVersion: 2
@@ -1191,6 +1172,25 @@ AnimationClip:
     attribute: localEulerAnglesRaw.z
     path: Suit
     classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_IsActive
+    path: Suit/Shield
+    classID: 1
     script: {fileID: 0}
   m_EulerEditorCurves:
   - curve:

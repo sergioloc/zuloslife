@@ -5,7 +5,7 @@ using UnityEngine;
 public class EngineController : MonoBehaviour
 {
     private Animator animEngine;
-    public GameObject explosion, bullet, spikes, cagatio, cannons, feeder, kekeo;
+    public GameObject explosion, bullet, spikes, cagatio, cannons, feeder, wind, kekeo;
     public Transform bulletPoint, spikesPoint;
 
     private int lastAttack, phase;
@@ -103,6 +103,7 @@ public class EngineController : MonoBehaviour
         kekeo.SetActive(false);
         cagatio.SetActive(false);
         cannons.SetActive(false);
+        wind.SetActive(false);
         gameObject.SetActive(false);
     }
 }
