@@ -8,6 +8,7 @@ public class Spawner : MonoBehaviour
     private Vector2[] patterns;
     public float timeBtwSpawn;
     public static bool wait = false;
+    public Animator cannon1, cannon2, cannon3;
     private int phase;
 
     private void Start(){
@@ -50,8 +51,20 @@ public class Spawner : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         while (!wait){
             int rand = Random.Range(0, patterns.Length);
-            Instantiate(obstacle, new Vector2(transform.position.x, patterns[rand].x), Quaternion.identity);
-            Instantiate(obstacle, new Vector2(transform.position.x, patterns[rand].y), Quaternion.identity);
+            if (rand == 0){
+                cannon1.SetTrigger("Shoot");
+                cannon2.SetTrigger("Shoot");
+            }
+            else if (rand == 1){
+                cannon2.SetTrigger("Shoot");
+                cannon3.SetTrigger("Shoot");
+            }
+            else if (rand == 2){
+                cannon1.SetTrigger("Shoot");
+                cannon3.SetTrigger("Shoot");
+            }
+            Instantiate(obstacle, new Vector2(transform.position.x, patterns[rand].x + 0.17f), Quaternion.identity);
+            Instantiate(obstacle, new Vector2(transform.position.x, patterns[rand].y + 0.17f), Quaternion.identity);
             yield return new WaitForSeconds(timeBtwSpawn);
         }
     }

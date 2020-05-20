@@ -64,8 +64,8 @@ public class ActionController : MonoBehaviour
         else if (phase == 10){
             transform.position = new Vector2(transform.position.x, 0);
             animator.SetTrigger("Ulti");
-            if (isLeft) Instantiate(chargeParticle, new Vector2(5f, 0f), Quaternion.identity);
-            else Instantiate(chargeParticle, new Vector2(24f, 2f), Quaternion.identity);
+            if (isLeft) Instantiate(chargeParticle, new Vector2(-6f, 0f), Quaternion.identity);
+            else Instantiate(chargeParticle, new Vector2(13f, 2f), Quaternion.identity);
         }
         else if (phase == 11){
             //end
