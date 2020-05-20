@@ -5,8 +5,7 @@ using UnityEngine;
 public class EngineController : MonoBehaviour
 {
     private Animator animEngine;
-    public Animator animFeeder;
-    public GameObject explosion, bullet, spikes, cagatio, kekeo;
+    public GameObject explosion, bullet, spikes, cagatio, cannons, feeder, kekeo;
     public Transform bulletPoint, spikesPoint;
 
     private int lastAttack, phase;
@@ -23,10 +22,11 @@ public class EngineController : MonoBehaviour
         phase = LevelTwoValues.phase;
         if (phase == 4) {
             animEngine.SetTrigger("Feed");
-            animFeeder.SetTrigger("Feed");
+            feeder.GetComponent<Animator>().SetTrigger("Feed");
         }
         else if (phase == 10){
             wait = true;
+            Destroy(feeder);
         }
         else if (phase == 11){
             wait = true;
@@ -102,6 +102,7 @@ public class EngineController : MonoBehaviour
     public void Die(){
         kekeo.SetActive(false);
         cagatio.SetActive(false);
+        cannons.SetActive(false);
         gameObject.SetActive(false);
     }
 }
