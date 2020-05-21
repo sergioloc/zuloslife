@@ -31,8 +31,8 @@ public class UpDownController : MonoBehaviour
                 MoveDown();
             }
         }
-        else if (transform.position.y != 0)
-            transform.position = new Vector2(transform.position.x, 0f);
+        //else if (transform.position.y != 0)
+            //transform.position = new Vector2(transform.position.x, 0f);
     }
 
     public void MoveUp(){

@@ -64,7 +64,6 @@ public class BackgroundLoop : MonoBehaviour
     }
 
     private void SetSpeed(float s){
-        Debug.Log(speed);
         speed = s;
         rg2d.velocity = new Vector2(speed, 0f);
     }
