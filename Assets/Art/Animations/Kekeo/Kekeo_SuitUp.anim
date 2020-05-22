@@ -8248,7 +8248,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 2.4333334
+  - time: 2.4
     functionName: ShakeScreen
     data: 
     objectReferenceParameter: {fileID: 0}

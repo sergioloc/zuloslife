@@ -23,9 +23,10 @@ public class ChangeSide : MonoBehaviour
         }
         else if (LevelTwoValues.phase == 6){ //center
             MoveCenter();
+            Spawner.wait = true;
         }
         else if (LevelTwoValues.phase == 7){ //
-            
+            Spawner.wait = true;
         }
         else if (LevelTwoValues.phase == 8){ //
             Spawner.wait = true;
@@ -47,7 +48,7 @@ public class ChangeSide : MonoBehaviour
         spawner.SetActive(true);
         OnSwitch.Invoke();
         StartCoroutine(HideSide(side2));
-        //Spawner.wait = false;
+        Spawner.wait = false;
     }
 
     private void MoveCenter(){

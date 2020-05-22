@@ -12,7 +12,14 @@ public class CameraController : MonoBehaviour
     }
 
     public void ShakeScreen(){
-        animator.SetTrigger("Shake");
+        animator.SetBool("isShaking", true);
+        StartCoroutine(StopShakeScreen());
+    }
+
+    private IEnumerator StopShakeScreen()
+    {
+        yield return new WaitForSeconds(0.06f);
+        animator.SetBool("isShaking", false);
     }
 
     public void ShakeScreenLoop(){
