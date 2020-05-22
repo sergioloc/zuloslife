@@ -8,15 +8,10 @@ public class LevelTwoValues : MonoBehaviour
     public bool finalPhase = false;
     public static int phase = 1; // 11 phases
     public static float health = 3;
-    public static bool isFinalPhase;
     private float time = 0;
     private int lastPhase = 0;
     private float delay = 5f;
     public UnityEvent OnNewPhase;
-
-    void Awake(){
-        isFinalPhase = finalPhase;
-    }
 
     void Update(){
         time = Time.timeSinceLevelLoad - delay;

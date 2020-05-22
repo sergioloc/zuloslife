@@ -83,7 +83,7 @@ public class EngineController : MonoBehaviour
     }
 
     private IEnumerator FinalAnimation(){
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(2f);
         animEngine.SetTrigger("Die");   
     }
 

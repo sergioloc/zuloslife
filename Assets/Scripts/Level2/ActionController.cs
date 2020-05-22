@@ -50,6 +50,7 @@ public class ActionController : MonoBehaviour
             StartCoroutine(EnableAttackButton(6f));
         }
         else if (phase == 7){
+            transform.position = new Vector2(transform.position.x, 0);
             StartCoroutine(Evolve());
         }
         else if (phase == 8){
