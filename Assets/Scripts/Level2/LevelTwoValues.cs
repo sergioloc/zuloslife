@@ -11,12 +11,18 @@ public class LevelTwoValues : MonoBehaviour
     private float time = 0;
     private int lastPhase = 0;
     private float delay = 5f;
+    public static float timeBtwSpawn = 2f;
     public UnityEvent OnNewPhase;
+
+    void Start(){
+        StartCoroutine(Tempo());
+    }
 
     void Update(){
         time = Time.timeSinceLevelLoad - delay;
         if (finalPhase) CheckLastPhase();
         else CheckPhase();
+        Debug.Log(timeBtwSpawn);
     }
 
     private void CheckPhase(){
@@ -70,5 +76,15 @@ public class LevelTwoValues : MonoBehaviour
             lastPhase = phase;
         }
             
+    }
+
+    IEnumerator Tempo(){
+        yield return new WaitForSeconds(delay);
+        float timeAdd = 1.5f / 67;
+        while(true){
+            if (timeBtwSpawn > 0.5)
+                timeBtwSpawn = timeBtwSpawn - timeAdd;
+            yield return new WaitForSeconds(1f);
+        }
     }
 }

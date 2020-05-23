@@ -154797,7 +154797,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1957140630
 Transform:
   m_ObjectHideFlags: 0
@@ -159958,7 +159958,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstacle: {fileID: 4052977637855204646, guid: 8dacce80dab8aa04092cce5f8ea45c70,
     type: 3}
-  timeBtwSpawn: 2
   cannon1: {fileID: 1264099295}
   cannon2: {fileID: 992599884}
   cannon3: {fileID: 1069445134}
@@ -159970,7 +159969,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2050497703}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.62, y: 0, z: 0}
+  m_LocalPosition: {x: 9, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 182625404}

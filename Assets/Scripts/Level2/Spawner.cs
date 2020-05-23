@@ -6,10 +6,8 @@ public class Spawner : MonoBehaviour
 {
     public GameObject obstacle;
     private Vector2[] patterns;
-    public float timeBtwSpawn;
     public static bool wait = false;
     public Animator cannon1, cannon2, cannon3;
-    private int phase;
 
     private void Start(){
         patterns = new Vector2[3];
@@ -19,25 +17,6 @@ public class Spawner : MonoBehaviour
     }
 
     void OnEnable(){
-        phase = LevelTwoValues.phase;
-        if (phase == 1){
-            timeBtwSpawn = 1.6f;
-        }
-        else if (phase == 2){
-            timeBtwSpawn = 1.4f;
-        }
-        else if (phase == 3){
-            timeBtwSpawn = 1f;
-        }
-        else if (phase == 4){
-            timeBtwSpawn = 0.8f;
-        }
-        else if (phase == 5){
-            timeBtwSpawn = 0.6f;
-        }
-        else
-            timeBtwSpawn = 0.6f;
-
         StartCoroutine(Spawn());
     }
 
@@ -65,7 +44,7 @@ public class Spawner : MonoBehaviour
             }
             Instantiate(obstacle, new Vector2(transform.position.x, patterns[rand].x + 0.17f), Quaternion.identity);
             Instantiate(obstacle, new Vector2(transform.position.x, patterns[rand].y + 0.17f), Quaternion.identity);
-            yield return new WaitForSeconds(timeBtwSpawn);
+            yield return new WaitForSeconds(LevelTwoValues.timeBtwSpawn);
         }
     }
 }
