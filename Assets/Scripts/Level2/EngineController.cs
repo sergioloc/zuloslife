@@ -9,7 +9,6 @@ public class EngineController : MonoBehaviour
     public Transform bulletPoint, spikesPoint;
 
     private int lastAttack, phase;
-    public float timeBtwAttack = 2f;
     private bool wait;
     
     void Start()
@@ -44,7 +43,7 @@ public class EngineController : MonoBehaviour
 
     IEnumerator Attack(){
         while (!wait) {
-            yield return new WaitForSeconds(timeBtwAttack);
+            yield return new WaitForSeconds(LevelTwoValues.timeBtwSpawn);
             ChooseAttack(Random.Range(1, 3));
         }
     }
