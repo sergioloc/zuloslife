@@ -22,7 +22,6 @@ public class LevelTwoValues : MonoBehaviour
         time = Time.timeSinceLevelLoad - delay;
         if (finalPhase) CheckLastPhase();
         else CheckPhase();
-        Debug.Log(timeBtwSpawn);
     }
 
     private void CheckPhase(){

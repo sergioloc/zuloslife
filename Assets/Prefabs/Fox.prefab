@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 359642247001175764}
   m_Layer: 17
   m_Name: Fox
-  m_TagString: Enemy
+  m_TagString: WeaponSoft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

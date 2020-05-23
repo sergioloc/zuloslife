@@ -5,8 +5,8 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public float speed;
-    public string destroyTag;
     public GameObject destroyEffect;
+    public string[] destroyTag;
 
     void FixedUpdate()
     {
@@ -15,11 +15,14 @@ public class Projectile : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == destroyTag)
-        {
-            if (destroyEffect != null)
-                Instantiate(destroyEffect, transform.position, transform.rotation);
-            Destroy(gameObject);
+        for (int i = 0; i < destroyTag.Length; i++){
+            if (collision.gameObject.tag == destroyTag[i])
+            {
+                if (destroyEffect != null)
+                    Instantiate(destroyEffect, transform.position, transform.rotation);
+                Destroy(gameObject);
+            }
         }
+        
     }
 }

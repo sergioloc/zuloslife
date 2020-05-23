@@ -48,9 +48,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 50
-  destroyTag: Player
   destroyEffect: {fileID: 6877200432681353439, guid: 11023cdaf4b19a94891a2a3a39297530,
     type: 3}
+  destroyTag:
+  - Player
+  - Shield
 --- !u!114 &580204870038501992
 MonoBehaviour:
   m_ObjectHideFlags: 0

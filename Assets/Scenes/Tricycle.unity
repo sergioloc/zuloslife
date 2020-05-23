@@ -55905,7 +55905,7 @@ GameObject:
   m_Component:
   - component: {fileID: 574811136}
   - component: {fileID: 574811137}
-  m_Layer: 13
+  m_Layer: 8
   m_Name: Shield
   m_TagString: Shield
   m_Icon: {fileID: 0}
@@ -55950,7 +55950,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2, y: 20}
+  m_Size: {x: 2, y: 30}
   m_EdgeRadius: 0
 --- !u!1 &624200197
 GameObject:
@@ -56271,7 +56271,6 @@ MonoBehaviour:
   kekeo: {fileID: 389052873}
   bulletPoint: {fileID: 1284085643}
   spikesPoint: {fileID: 1485047579}
-  timeBtwAttack: 2
 --- !u!1 &664208154
 GameObject:
   m_ObjectHideFlags: 0
@@ -56542,13 +56541,14 @@ GameObject:
   m_Component:
   - component: {fileID: 700251033}
   - component: {fileID: 700251034}
+  - component: {fileID: 700251035}
   m_Layer: 17
   m_Name: Laser
-  m_TagString: Laser
+  m_TagString: WeaponSoft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &700251033
 Transform:
   m_ObjectHideFlags: 0
@@ -56595,6 +56595,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 20, y: 1}
   m_EdgeRadius: 0
+--- !u!50 &700251035
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700251032}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &701134724
 GameObject:
   m_ObjectHideFlags: 0
@@ -56869,7 +56890,6 @@ GameObject:
   - component: {fileID: 740986194}
   - component: {fileID: 740986197}
   - component: {fileID: 740986196}
-  - component: {fileID: 740986195}
   m_Layer: 11
   m_Name: LaserParticle
   m_TagString: WeaponHard
@@ -56885,28 +56905,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 740986193}
   m_LocalRotation: {x: -0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -12.021423, y: 6.8263454, z: 0}
+  m_LocalPosition: {x: 14.332017, y: 0.010001697, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 700251033}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
---- !u!58 &740986195
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 740986193}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.5}
-  serializedVersion: 2
-  m_Radius: 1
 --- !u!199 &740986196
 ParticleSystemRenderer:
   serializedVersion: 6
