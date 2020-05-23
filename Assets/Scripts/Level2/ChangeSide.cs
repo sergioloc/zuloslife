@@ -34,6 +34,9 @@ public class ChangeSide : MonoBehaviour
         else if (LevelTwoValues.phase == 9){ //
             Spawner.wait = false;
         }
+        else if (LevelTwoValues.phase == 10){ //
+            Spawner.wait = true;
+        }
     }
 
     private void MoveRight(){

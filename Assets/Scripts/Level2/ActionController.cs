@@ -60,13 +60,13 @@ public class ActionController : MonoBehaviour
             
         }
         else if (phase == 10){
+            
+        }
+        else if (phase == 11){
             transform.position = new Vector2(transform.position.x, 0);
             animator.SetTrigger("Ulti");
             if (isLeft) Instantiate(chargeParticle, new Vector2(-8f, 0f), Quaternion.identity);
             else Instantiate(chargeParticle, new Vector2(13f, 2f), Quaternion.identity);
-        }
-        else if (phase == 11){
-            //end
         }
     }
 
@@ -85,7 +85,7 @@ public class ActionController : MonoBehaviour
 
     public void ShowPowerParticle(){
         if (isLeft) Instantiate(powerParticle, new Vector2(-8f, 0f), Quaternion.identity);
-        else Instantiate(powerParticle, new Vector2(14f, 2f), Quaternion.identity);
+        else Instantiate(powerParticle, new Vector2(13f, 2f), Quaternion.identity);
     }
 
     public void ShakeScreen(){
@@ -115,7 +115,7 @@ public class ActionController : MonoBehaviour
 
     IEnumerator Evolve()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
         animator.SetTrigger("Evolution");
     }
 }

@@ -8,12 +8,13 @@ public class BackgroundLoop : MonoBehaviour
     private float width = 38.4f;
     public float speed = 0f;
     public int offset = 0;
-    private bool isStop = false;
+    public ParticleSystem wind;
+    private bool isStop = false, isSlowMotion = false;
 
     void Start(){
-        speed = -speed;
-        rg2d = GetComponent<Rigidbody2D>();
-        rg2d.velocity = new Vector2(speed, 0f);
+        //speed = -speed;
+        //rg2d = GetComponent<Rigidbody2D>();
+        //rg2d.velocity = new Vector2(speed, 0f);
     }
 
     void Update(){
@@ -43,11 +44,8 @@ public class BackgroundLoop : MonoBehaviour
         else if (phase == 6){
             speed = 14;
         }
-        else if (phase == 7){
-            speed = 16;
-        }
-        else if (phase == 8){
-            speed = 18;
+        else if (phase == 7 && !isSlowMotion){
+            StartCoroutine(SlowMotion());
         }
         else if (phase == 9){
             speed = 20;
@@ -56,26 +54,33 @@ public class BackgroundLoop : MonoBehaviour
             speed = 20;
         }
         else if (phase == 11){
-            speed = -5;
+            speed = 0;
             isStop = true;
         }
-        speed = speed + offset;    
-        SetSpeed(-speed);
+        //SetSpeed(speed);
+        transform.Translate(Vector2.left * speed * Time.deltaTime);
     }
 
     private void SetSpeed(float s){
-        speed = s;
-        rg2d.velocity = new Vector2(speed, 0f);
+        speed = s + offset;
+        //rg2d.velocity = new Vector2(-speed, 0f);
     }
 
-    IEnumerator StopSpeed()
+    IEnumerator SlowMotion()
     {
-        yield return new WaitForSeconds(6f);
-        SetSpeed(-speed);
+        isSlowMotion = true;
+        speed = 16;
+        yield return new WaitForSeconds(4f);
+        speed = 1;
+        if (wind != null) wind.Pause();
+        yield return new WaitForSeconds(4f);
+        speed = 18;
+        if (wind != null) wind.Play();
     }
 
     private void Reposition(){
         Vector2 vector = new Vector2(width * 2f, 0f);
         transform.position = (Vector2) transform.position + vector;
+        //transform.Translate(Vector2.left * speed * Time.deltaTime);
     }
 }

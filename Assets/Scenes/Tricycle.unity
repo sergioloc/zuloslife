@@ -334,6 +334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   offset: 10
+  wind: {fileID: 0}
 --- !u!50 &50551049
 Rigidbody2D:
   serializedVersion: 4
@@ -46067,6 +46068,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 6
   offset: 0
+  wind: {fileID: 0}
 --- !u!50 &533534108
 Rigidbody2D:
   serializedVersion: 4
@@ -62363,7 +62365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2d70f258684dbd449ab38ef3ee32d72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finalPhase: 1
+  finalPhase: 0
   OnNewPhase:
     m_PersistentCalls:
       m_Calls:
@@ -62965,7 +62967,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &889725177
 Transform:
   m_ObjectHideFlags: 0
@@ -68103,7 +68105,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 6
 --- !u!114 &923390059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68118,6 +68120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   offset: 10
+  wind: {fileID: 1763398725}
 --- !u!1 &947809514
 GameObject:
   m_ObjectHideFlags: 0
@@ -73239,6 +73242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   offset: 10
+  wind: {fileID: 0}
 --- !u!50 &976524882
 Rigidbody2D:
   serializedVersion: 4
@@ -73486,7 +73490,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &996064357
 Transform:
   m_ObjectHideFlags: 0
@@ -78551,6 +78555,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   offset: 10
+  wind: {fileID: 0}
 --- !u!50 &1013929338
 Rigidbody2D:
   serializedVersion: 4
@@ -78571,7 +78576,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 6
 --- !u!212 &1013929339
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -118370,7 +118375,7 @@ Transform:
   - {fileID: 718832695}
   - {fileID: 1702845502}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1352981851
 MonoBehaviour:
@@ -133657,11 +133662,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1567223452}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0.7071068, w: 0}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: 0.7071068, w: 0}
   m_LocalPosition: {x: 29.67, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1892202426}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -180, y: 90, z: 0}
 --- !u!114 &1567223456
@@ -144105,6 +144110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 6
   offset: 0
+  wind: {fileID: 0}
 --- !u!50 &1751835343
 Rigidbody2D:
   serializedVersion: 4
@@ -144187,7 +144193,6 @@ GameObject:
   - component: {fileID: 1763398726}
   - component: {fileID: 1763398725}
   - component: {fileID: 1763398724}
-  - component: {fileID: 1763398723}
   m_Layer: 0
   m_Name: Wind
   m_TagString: Untagged
@@ -144195,18 +144200,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1763398723
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1763398722}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b58552679045d24581389ce63c75d26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!199 &1763398724
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -148936,12 +148929,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1763398722}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0.7071068, w: 0}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: 0.7071068, w: 0}
   m_LocalPosition: {x: 29.67, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_Father: {fileID: 1892202426}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: -180, y: 90, z: 0}
 --- !u!1 &1767102711
 GameObject:
@@ -154292,6 +154285,8 @@ Transform:
   - {fileID: 996064357}
   - {fileID: 736643407}
   - {fileID: 1240245953}
+  - {fileID: 1763398726}
+  - {fileID: 1567223455}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -154802,7 +154797,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1957140630
 Transform:
   m_ObjectHideFlags: 0
@@ -154833,7 +154828,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 4.5
+  m_Radius: 4.25
 --- !u!1 &2002895437
 GameObject:
   m_ObjectHideFlags: 0
@@ -160678,7 +160673,7 @@ GameObject:
   - component: {fileID: 2118639835}
   - component: {fileID: 2118639834}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: BottleWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
