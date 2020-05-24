@@ -12,6 +12,7 @@ public class LevelTwoValues : MonoBehaviour
     private int lastPhase;
     private float delay = 5f;
     public static float timeBtwSpawn;
+    public static int numBuilding;
     public UnityEvent OnNewPhase;
 
     void Start(){
@@ -20,6 +21,7 @@ public class LevelTwoValues : MonoBehaviour
         time = 0;
         lastPhase = 0;
         timeBtwSpawn = 2f;
+        numBuilding = 0;
         StartCoroutine(Tempo());
     }
 

@@ -60986,7 +60986,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  offset: 10
+  offset: 2
   wind: {fileID: 0}
   chair: {fileID: 0}
 --- !u!50 &686456363
@@ -66867,7 +66867,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2d70f258684dbd449ab38ef3ee32d72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finalPhase: 1
+  finalPhase: 0
   OnNewPhase:
     m_PersistentCalls:
       m_Calls:
@@ -67645,6 +67645,53 @@ Transform:
   m_Father: {fileID: 916052448}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &902780673
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 902780674}
+  - component: {fileID: 902780675}
+  m_Layer: 0
+  m_Name: BuildingSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &902780674
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902780673}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.43, y: 1.85, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1892202426}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &902780675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902780673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5576dbebac24251448fb4891cfa23bc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  building: {fileID: 7751616288782067319, guid: 90d15fe414b7c4745a38274f3bf47764,
+    type: 3}
+  timeBtwSpawn: 2
+  maxBuildings: 8
 --- !u!1 &909513933
 GameObject:
   m_ObjectHideFlags: 0
@@ -72634,7 +72681,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  offset: 15
+  offset: 4
   wind: {fileID: 1763398725}
   chair: {fileID: 1883244904}
 --- !u!1 &947809514
@@ -77912,7 +77959,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  offset: 10
+  offset: 2
   wind: {fileID: 1763398725}
   chair: {fileID: 1883244904}
 --- !u!50 &991014304
@@ -83039,7 +83086,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  offset: 15
+  offset: 4
   wind: {fileID: 0}
   chair: {fileID: 0}
 --- !u!50 &1013929338
@@ -158704,6 +158751,7 @@ Transform:
   - {fileID: 1240245953}
   - {fileID: 1763398726}
   - {fileID: 1567223455}
+  - {fileID: 902780674}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

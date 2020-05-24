@@ -2,21 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BackgroundLoop : MonoBehaviour
+public class Building : MonoBehaviour
 {
-    private float width = 38.4f;
-    public float speed = 0f;
-    public int offset = 0;
-    public ParticleSystem wind, chair;
+    public int speed = 0;
+    public Sprite[] sprites;
 
-    void Update(){
-        if (transform.position.x < -width){
-            Reposition();
-        }
+    void Start()
+    {
+        GetComponent<SpriteRenderer>().sprite = sprites[LevelTwoValues.numBuilding];
+        LevelTwoValues.numBuilding++;
+        speed = GetSpeed(LevelTwoValues.phase);
+        Destroy(gameObject, 10f);
     }
 
-    void FixedUpdate(){
-        speed = GetSpeed(LevelTwoValues.phase) + offset;
+    void FixedUpdate()
+    {
         transform.Translate(Vector2.left * speed * Time.deltaTime);
     }
 
@@ -51,10 +51,5 @@ public class BackgroundLoop : MonoBehaviour
         else {
             return 0;
         }
-    }
-
-    private void Reposition(){
-        Vector2 vector = new Vector2(width * 2f, 0f);
-        transform.position = (Vector2) transform.position + vector;
     }
 }
