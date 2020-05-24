@@ -21,22 +21,18 @@ public class UpDownController : MonoBehaviour
 
     void Update()
     {
-        if (LevelTwoValues.phase < 10){
-            if (Input.GetKeyDown(KeyCode.UpArrow))
-            {
-                MoveUp();
-            }
-            else if (Input.GetKeyDown(KeyCode.DownArrow)) 
-            {
-                MoveDown();
-            }
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            MoveUp();
         }
-        //else if (transform.position.y != 0)
-            //transform.position = new Vector2(transform.position.x, 0f);
+        else if (Input.GetKeyDown(KeyCode.DownArrow)) 
+        {
+            MoveDown();
+        }
     }
 
     public void MoveUp(){
-        if (transform.position.y < maxHeight && !freeze)
+        if (transform.position.y < maxHeight && !freeze && LevelTwoValues.phase < 10)
         {
             transform.position = new Vector2(transform.position.x, transform.position.y + range);
             if (shake) OnShake.Invoke();
@@ -45,7 +41,7 @@ public class UpDownController : MonoBehaviour
     }
 
     public void MoveDown(){
-        if (transform.position.y > minHeight && !freeze)
+        if (transform.position.y > minHeight && !freeze && LevelTwoValues.phase < 10)
         {
             transform.position = new Vector2(transform.position.x, transform.position.y - range);
             if (shake) OnShake.Invoke();

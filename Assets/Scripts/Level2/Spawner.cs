@@ -14,6 +14,7 @@ public class Spawner : MonoBehaviour
         patterns[0] = new Vector2(3f, 0f);
         patterns[1] = new Vector2(0f, -3f);
         patterns[2] = new Vector2(3f, -3f);
+        wait = false;
     }
 
     void OnEnable(){

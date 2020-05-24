@@ -118,7 +118,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.15, y: -0.35}
-  m_Size: {x: 4, y: 2}
+  m_Size: {x: 3, y: 2}
   m_Direction: 1
 --- !u!114 &1295514817649174239
 MonoBehaviour:
@@ -134,6 +134,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 15
   particle: {fileID: 593478439584057630, guid: 59c7d96128555a44487b5ee35ce2d475, type: 3}
+  particleShield: {fileID: 5913354292229195062, guid: cc38ba08e33c76c4ab6cb4656aa29d29,
+    type: 3}
 --- !u!114 &359642247001175764
 MonoBehaviour:
   m_ObjectHideFlags: 0

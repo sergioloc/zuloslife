@@ -5,7 +5,7 @@ using UnityEngine;
 public class FoxController : MonoBehaviour
 {
     public float speed = 5;
-    public GameObject particle;
+    public GameObject particle, particleShield;
     private float time = 0;
 
     void Start()
@@ -29,7 +29,7 @@ public class FoxController : MonoBehaviour
             Destroy(gameObject);
         }
         else if (collision.CompareTag("Shield")){
-            Instantiate(particle, transform.position, Quaternion.identity);
+            Instantiate(particleShield, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

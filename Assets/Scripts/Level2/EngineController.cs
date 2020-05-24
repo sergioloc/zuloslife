@@ -19,25 +19,31 @@ public class EngineController : MonoBehaviour
     public void UpdateEngineState(){
         wait = false;
         phase = LevelTwoValues.phase;
-        if (phase == 4) {
-            animEngine.SetTrigger("Feed");
-            feeder.GetComponent<Animator>().SetTrigger("Feed");
-        }
-        else if (phase == 10){
-            wait = true;
-            Destroy(feeder);
-        }
-        else if (phase == 11){
-            wait = true;
-            StartCoroutine(FinalAnimation());
-        }
-        else {
+        if (phase == 2){
             StartCoroutine(Attack());
         }
-        
+        else if (phase == 4){
+            animEngine.SetTrigger("Feed");
+            feeder.SetActive(true);
+            feeder.GetComponent<Animator>().SetTrigger("Feed");
+        }
+        else if (phase == 6){
+            Destroy(feeder);
+            StartCoroutine(Attack());
+        }
+        else if (phase == 7){
+            wait = true;
+        }
+        else if (phase == 9){
+            animEngine.SetTrigger("Weak");
+        }
+        else if (phase == 11){
+            StartCoroutine(Die());
+        } 
     }
 
     void OnDisable(){
+        animEngine.SetTrigger("Idle");
         StopCoroutine(Attack());
     }
 
@@ -81,9 +87,14 @@ public class EngineController : MonoBehaviour
         }
     }
 
-    private IEnumerator FinalAnimation(){
-        yield return new WaitForSeconds(2f);
-        animEngine.SetTrigger("Die");   
+    private IEnumerator Die(){
+        Instantiate(explosion, transform.position, transform.rotation);
+        yield return new WaitForSeconds(3f);
+        kekeo.SetActive(false);
+        cagatio.SetActive(false);
+        cannons.SetActive(false);
+        wind.SetActive(false);
+        gameObject.SetActive(false);
     }
 
     public void ShootBullet(){
@@ -92,17 +103,5 @@ public class EngineController : MonoBehaviour
 
     public void ShootSpikes(){
         Instantiate(spikes, spikesPoint.position, spikesPoint.rotation);
-    }
-
-    public void InvokeDieParticles(){
-        Instantiate(explosion, transform.position, transform.rotation);
-    }
-
-    public void Die(){
-        kekeo.SetActive(false);
-        cagatio.SetActive(false);
-        cannons.SetActive(false);
-        wind.SetActive(false);
-        gameObject.SetActive(false);
     }
 }

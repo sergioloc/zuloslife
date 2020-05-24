@@ -4,18 +4,11 @@ using UnityEngine;
 
 public class BackgroundLoop : MonoBehaviour
 {
-    private Rigidbody2D rg2d;
     private float width = 38.4f;
     public float speed = 0f;
     public int offset = 0;
-    public ParticleSystem wind;
-    private bool isStop = false, isSlowMotion = false;
-
-    void Start(){
-        //speed = -speed;
-        //rg2d = GetComponent<Rigidbody2D>();
-        //rg2d.velocity = new Vector2(speed, 0f);
-    }
+    public ParticleSystem wind, chair;
+    private bool isStop = false;
 
     void Update(){
         if (!isStop)
@@ -44,8 +37,8 @@ public class BackgroundLoop : MonoBehaviour
         else if (phase == 6){
             speed = 14;
         }
-        else if (phase == 7 && !isSlowMotion){
-            StartCoroutine(SlowMotion());
+        else if (phase == 7){
+            speed = 16;
         }
         else if (phase == 9){
             speed = 20;
@@ -57,30 +50,11 @@ public class BackgroundLoop : MonoBehaviour
             speed = 0;
             isStop = true;
         }
-        //SetSpeed(speed);
-        transform.Translate(Vector2.left * speed * Time.deltaTime);
-    }
-
-    private void SetSpeed(float s){
-        speed = s + offset;
-        //rg2d.velocity = new Vector2(-speed, 0f);
-    }
-
-    IEnumerator SlowMotion()
-    {
-        isSlowMotion = true;
-        speed = 16;
-        yield return new WaitForSeconds(4f);
-        speed = 1;
-        if (wind != null) wind.Pause();
-        yield return new WaitForSeconds(4f);
-        speed = 18;
-        if (wind != null) wind.Play();
+        transform.Translate(Vector2.left * (speed+offset) * Time.deltaTime);
     }
 
     private void Reposition(){
         Vector2 vector = new Vector2(width * 2f, 0f);
         transform.position = (Vector2) transform.position + vector;
-        //transform.Translate(Vector2.left * speed * Time.deltaTime);
     }
 }

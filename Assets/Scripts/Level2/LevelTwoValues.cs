@@ -6,15 +6,20 @@ using UnityEngine.Events;
 public class LevelTwoValues : MonoBehaviour
 {
     public bool finalPhase = false;
-    public static int phase = 1; // 11 phases
-    public static float health = 3;
-    private float time = 0;
-    private int lastPhase = 0;
+    public static int phase; // 11 phases
+    public static float health;
+    private float time;
+    private int lastPhase;
     private float delay = 5f;
-    public static float timeBtwSpawn = 2f;
+    public static float timeBtwSpawn;
     public UnityEvent OnNewPhase;
 
     void Start(){
+        phase = 1;
+        health = 3;
+        time = 0;
+        lastPhase = 0;
+        timeBtwSpawn = 2f;
         StartCoroutine(Tempo());
     }
 
@@ -79,10 +84,10 @@ public class LevelTwoValues : MonoBehaviour
 
     IEnumerator Tempo(){
         yield return new WaitForSeconds(delay);
-        float timeAdd = 1.5f / 67;
+        float timeAdded = 1.5f / 67;
         while(true){
             if (timeBtwSpawn > 0.5)
-                timeBtwSpawn = timeBtwSpawn - timeAdd;
+                timeBtwSpawn = timeBtwSpawn - timeAdded;
             yield return new WaitForSeconds(1f);
         }
     }

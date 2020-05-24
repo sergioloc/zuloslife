@@ -10,16 +10,21 @@ public class ActionController : MonoBehaviour
 {
     [Header("Health")]
     public Slider healthSlider;
+    public Image colorSlider;
     public GameObject buttonAttack;
     public GameObject chargeParticle, powerParticle;
-    public bool isLeft = false;
+    public bool isLeft = false; 
+    public Color32 healColor;
+    private Color32 red;
     private Animator animator;
     private int phase = 0;
+    public TimeManager timeManager;
     public UnityEvent OnShake, OnShakeLoop, OnShakeLoopStop;
 
     void Awake()
     {
         animator = GetComponent<Animator>();
+        red = new Color32(207, 28, 28, 255);
     }
 
     void Update(){
@@ -31,43 +36,43 @@ public class ActionController : MonoBehaviour
 
     public void UpdateActionState(){
         phase = LevelTwoValues.phase;
-        if (phase == 1){
-            StartCoroutine(EnableAttackButton(15f));
+        if (gameObject.activeInHierarchy){
+            if (phase == 3){
+                StartCoroutine(EnableAttackButton(14f));
+            }
+            else if (phase == 4){
+                StartCoroutine(EnableAttackButton(6f));
+            }
+            else if (phase == 5){
+                StartCoroutine(EnableAttackButton(8f));
+            }
+            else if (phase == 6){
+                
+            }
+            else if (phase == 7){
+                transform.position = new Vector2(transform.position.x, 0);
+                StartCoroutine(Evolve());
+            }
+            else if (phase == 8){
+                StartCoroutine(EnableAttackButton(4f));
+            }
+            else if (phase == 9){
+                
+            }
+            else if (phase == 10){
+                transform.position = new Vector2(transform.position.x, 0);
+                animator.SetTrigger("Ulti");
+                if (isLeft) Instantiate(chargeParticle, new Vector2(-8f, 0f), Quaternion.identity);
+                else Instantiate(chargeParticle, new Vector2(13f, 2f), Quaternion.identity);
+            }
+            else if (phase == 11){
+                
+            }
         }
-        else if (phase == 2){
-            StartCoroutine(EnableAttackButton(8f));
-        }
-        else if (phase == 3){
-            StartCoroutine(EnableAttackButton(15f));
-        }
-        else if (phase == 4){
-            StartCoroutine(EnableAttackButton(8f));
-        }
-        else if (phase == 5){
-            StartCoroutine(EnableAttackButton(7f));
-        }
-        else if (phase == 6){
-            StartCoroutine(EnableAttackButton(6f));
-        }
-        else if (phase == 7){
-            transform.position = new Vector2(transform.position.x, 0);
-            StartCoroutine(Evolve());
-        }
-        else if (phase == 8){
-            
-        }
-        else if (phase == 9){
-            
-        }
-        else if (phase == 10){
-            
-        }
-        else if (phase == 11){
-            transform.position = new Vector2(transform.position.x, 0);
-            animator.SetTrigger("Ulti");
-            if (isLeft) Instantiate(chargeParticle, new Vector2(-8f, 0f), Quaternion.identity);
-            else Instantiate(chargeParticle, new Vector2(13f, 2f), Quaternion.identity);
-        }
+    }
+
+    void OnDisable(){
+        colorSlider.color = red;
     }
 
     IEnumerator EnableAttackButton(float sec)
@@ -79,8 +84,15 @@ public class ActionController : MonoBehaviour
     }
 
     public void Attack(){
-        animator.SetBool("Attack", true);
-        buttonAttack.SetActive(false);
+        if (gameObject.activeInHierarchy){
+            if (LevelTwoValues.health < 3){
+                LevelTwoValues.health++;
+                healthSlider.value = LevelTwoValues.health;
+            }
+            animator.SetBool("Attack", true);
+            buttonAttack.SetActive(false);
+            colorSlider.color = healColor;
+        }
     }
 
     public void ShowPowerParticle(){
@@ -100,22 +112,30 @@ public class ActionController : MonoBehaviour
         OnShakeLoopStop.Invoke();
     }
 
+    public void StartSlowMo(){
+        timeManager.StartSlowMotion();
+    }
+
+    public void StopSlowMo(){
+        timeManager.StopSlowMotion();
+    }
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("WeaponSoft") && !animator.GetBool("Attack"))
         {
-            LevelTwoValues.health--;
+            //LevelTwoValues.health--;
             healthSlider.value = LevelTwoValues.health;
             if (LevelTwoValues.health <= 0){
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-                LevelTwoValues.health = 3;
             }
         }
     }
 
     IEnumerator Evolve()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
+        animator.SetBool("Attack", false);
         animator.SetTrigger("Evolution");
     }
 }

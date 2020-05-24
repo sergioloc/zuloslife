@@ -6,7 +6,13 @@ using UnityEngine.Events;
 public class ChangeSide : MonoBehaviour
 {
     public GameObject side1, side2, kekeo, spawner;
+    public Collider2D colliderKekeo, colliderCagatio;
     public UnityEvent OnSwitch, OnCenter;
+
+    void Start(){
+        side1.SetActive(true);
+        side2.SetActive(false);
+    }
 
     public void UpdateCameraPosition(){
         if (LevelTwoValues.phase == 2){ //right
@@ -40,6 +46,8 @@ public class ChangeSide : MonoBehaviour
     }
 
     private void MoveRight(){
+        colliderKekeo.enabled = false;
+        colliderCagatio.enabled = true;
         side2.SetActive(true);
         spawner.SetActive(false);
         OnSwitch.Invoke();
@@ -47,6 +55,8 @@ public class ChangeSide : MonoBehaviour
     }
 
     private void MoveLeft(){
+        colliderKekeo.enabled = true;
+        colliderCagatio.enabled = false;
         side1.SetActive(true);
         spawner.SetActive(true);
         OnSwitch.Invoke();
