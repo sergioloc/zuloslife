@@ -7,7 +7,6 @@ public class BackgroundLoop : MonoBehaviour
     private float width = 38.4f;
     public float speed = 0f;
     public int offset = 0;
-    public ParticleSystem wind, chair;
 
     void Update(){
         if (transform.position.x < -width){

@@ -7,6 +7,7 @@ public class ChangeSide : MonoBehaviour
 {
     public GameObject side1, side2, kekeo, spawner;
     public Collider2D colliderKekeo, colliderCagatio;
+    public ParticleSystem starlightL, starlightR;
     public UnityEvent OnSwitch, OnCenter;
 
     void Start(){
@@ -46,6 +47,7 @@ public class ChangeSide : MonoBehaviour
     }
 
     private void MoveRight(){
+        starlightR.Play();
         colliderKekeo.enabled = false;
         colliderCagatio.enabled = true;
         side2.SetActive(true);
@@ -55,6 +57,7 @@ public class ChangeSide : MonoBehaviour
     }
 
     private void MoveLeft(){
+        starlightL.Play();
         colliderKekeo.enabled = true;
         colliderCagatio.enabled = false;
         side1.SetActive(true);
