@@ -18,13 +18,13 @@ public class BuildingSpawner : MonoBehaviour
     IEnumerator SpawnBuilding()
     {
         while(hasBuildings){
-            yield return new WaitForSeconds(timeBtwSpawn);
             if (LevelTwoValues.numBuilding < maxBuildings){
                 Instantiate(building, transform.position, Quaternion.identity);
             }
             else{
                 hasBuildings = false;
             }
+            yield return new WaitForSeconds(timeBtwSpawn);
         }
     }
 

@@ -72,7 +72,8 @@ public class ActionController : MonoBehaviour
     }
 
     void OnDisable(){
-        colorSlider.color = red;
+        if (colorSlider != null)
+            colorSlider.color = red;
     }
 
     IEnumerator EnableAttackButton(float sec)
@@ -124,7 +125,7 @@ public class ActionController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("WeaponSoft") && !animator.GetBool("Attack"))
         {
-            //LevelTwoValues.health--;
+            LevelTwoValues.health--;
             healthSlider.value = LevelTwoValues.health;
             if (LevelTwoValues.health <= 0){
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

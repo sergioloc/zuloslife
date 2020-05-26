@@ -5,14 +5,15 @@ using UnityEngine;
 public class Building : MonoBehaviour
 {
     public int speed = 0;
+    public float lifetime = 0;
     public Sprite[] sprites;
 
     void Start()
     {
         GetComponent<SpriteRenderer>().sprite = sprites[LevelTwoValues.numBuilding];
         LevelTwoValues.numBuilding++;
-        speed = GetSpeed(LevelTwoValues.phase);
-        Destroy(gameObject, 10f);
+        speed = 2;/*GetSpeed(LevelTwoValues.phase);*/
+        Destroy(gameObject, lifetime);
     }
 
     void FixedUpdate()
