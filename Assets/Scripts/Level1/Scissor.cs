@@ -13,7 +13,7 @@ public class Scissor : MonoBehaviour
         Invoke("DestroyProjectile", lifeTime);
     }
 
-    void Update()
+    void FixedUpdate()
     {
         transform.Translate(Vector2.right * speed * Time.deltaTime);
     }

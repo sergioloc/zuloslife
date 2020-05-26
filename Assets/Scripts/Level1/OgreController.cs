@@ -146,7 +146,7 @@ public class OgreController : MonoBehaviour
 
     //Auxiliar functions
     public void ShakeScreen(){
-        CameraController.instance.Shake(0f);
+        CinemachineController.instance.Shake(0f);
     }
 
     private void TakeDamage(int damage)

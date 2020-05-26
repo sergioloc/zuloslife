@@ -36,14 +36,14 @@ public class FloodController : MonoBehaviour
         yield return new WaitForSeconds(3f);
         activated = true;
         animator.SetTrigger("Start");
-        CameraController.instance.ModifyZoom(10f);
+        CinemachineController.instance.ModifyZoom(10f);
         OnSwitchLight.Invoke();
     }
 
     IEnumerator RestartLevel()
     {
         yield return new WaitForSeconds(2f);
-        CameraController.instance.ModifyZoom(6f);
+        CinemachineController.instance.ModifyZoom(6f);
         animator.SetTrigger("Stop");
         activated = false;
         door.SetActive(false);

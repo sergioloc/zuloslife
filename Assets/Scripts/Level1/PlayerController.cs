@@ -295,7 +295,7 @@ public class PlayerController : MonoBehaviour
             else if (current.CompareNameTo("Cinamon") && isGrounded)
             {
                 current.SetBool("Action", true);
-                CameraController.instance.Shake(0.9f);
+                CinemachineController.instance.Shake(0.9f);
             }
             else if (current.CompareNameTo("Panda") && !current.GetBool("Run")){
                 current.SetBool("Action", true);
@@ -362,7 +362,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("BossScreen"))
         {
-            CameraController.instance.ModifyZoom(10f);
+            CinemachineController.instance.ModifyZoom(10f);
         }
         else if (collision.gameObject.CompareTag("Water"))
         {

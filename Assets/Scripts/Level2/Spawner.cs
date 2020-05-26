@@ -4,50 +4,48 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public GameObject[] obstaclePatterns;
-    public float timeBtwSpawn;
-    public static bool wait;
-    private int phase;
+    public GameObject obstacle;
+    private Vector2[] patterns;
+    public static bool wait = false;
+    public Animator cannon1, cannon2, cannon3;
 
     private void Start(){
+        patterns = new Vector2[3];
+        patterns[0] = new Vector2(3f, 0f);
+        patterns[1] = new Vector2(0f, -3f);
+        patterns[2] = new Vector2(3f, -3f);
         wait = false;
-        int rand = Random.Range(0, obstaclePatterns.Length);
-        Instantiate(obstaclePatterns[rand], transform.position, Quaternion.identity); 
     }
 
-    private void FixedUpdate()
-    {
-        phase = TrycicleLevelValues.phase;
+    void OnEnable(){
+        StartCoroutine(Spawn());
+    }
 
-        if (!wait && phase != 7){
-            StartCoroutine(Spawn());
-            wait = true;
-        }
-        if (phase == 1){
-            timeBtwSpawn = 1.6f;
-        }
-        else if (phase == 2){
-            timeBtwSpawn = 1.4f;
-        }
-        else if (phase == 3){
-            timeBtwSpawn = 1f;
-        }
-        else if (phase == 4){
-            timeBtwSpawn = 0.8f;
-        }
-        else if (phase == 5){
-            timeBtwSpawn = 0.6f;
-        }
-        else if (phase == 6){
-            timeBtwSpawn = 2f;
-        }
+    void OnDisable(){
+        wait = true;
+        StopCoroutine(Spawn());
     }
 
     private IEnumerator Spawn()
     {
-        yield return new WaitForSeconds(timeBtwSpawn);
-        int rand = Random.Range(0, obstaclePatterns.Length);
-        Instantiate(obstaclePatterns[rand], transform.position, Quaternion.identity);
-        wait = false;
+        yield return new WaitForSeconds(1.5f);
+        while (!wait){
+            int rand = Random.Range(0, patterns.Length);
+            if (rand == 0){
+                cannon1.SetTrigger("Shoot");
+                cannon2.SetTrigger("Shoot");
+            }
+            else if (rand == 1){
+                cannon2.SetTrigger("Shoot");
+                cannon3.SetTrigger("Shoot");
+            }
+            else if (rand == 2){
+                cannon1.SetTrigger("Shoot");
+                cannon3.SetTrigger("Shoot");
+            }
+            Instantiate(obstacle, new Vector2(transform.position.x, patterns[rand].x + 0.17f), Quaternion.identity);
+            Instantiate(obstacle, new Vector2(transform.position.x, patterns[rand].y + 0.17f), Quaternion.identity);
+            yield return new WaitForSeconds(LevelTwoValues.timeBtwSpawn);
+        }
     }
 }
