@@ -52,7 +52,7 @@ MonoBehaviour:
   title: 
   intro: 
   outro: 
-  unlocked: 1
+  unlocked: 0
   button: {fileID: 2094725061656335454}
 --- !u!1 &2094725061656335426
 GameObject:

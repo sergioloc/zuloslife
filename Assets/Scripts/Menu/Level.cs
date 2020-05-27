@@ -10,7 +10,7 @@ public class Level: MonoBehaviour
     public string title;
     public string intro;
     public string outro;
-    public bool unlocked;
+    public bool unlocked = false;
     public Button button;
 
     void Start()

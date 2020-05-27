@@ -17,6 +17,7 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     public int fastSwipeThresholdDistance = 100;
     [Tooltip("How fast will page lerp to target position")]
     public float decelerationRate = 10f;
+    
     [Tooltip("Button to go to the previous page (optional)")]
     public GameObject prevButton;
     [Tooltip("Button to go to the next page (optional)")]
@@ -40,19 +41,16 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     private bool lerp;
     private Vector2 lerpTo;
 
-    // target position of every page
-    private List<Vector2> pagePositions = new List<Vector2>();
 
     // in draggging, when dragging started and where it started
     private bool dragging;
     private float timeStamp;
     private Vector2 startPosition;
 
-    // for showing small page icons
-    private bool showPageSelection;
-    private int previousPageSelectionIndex;
-    // container with Image components - one Image for each page
+    private int previousPage;
     private List<Image> pageSelectionImages;
+    private List<Vector2> pagePositions = new List<Vector2>();
+
 
     //------------------------------------------------------------------------
     void Start() {
@@ -62,18 +60,18 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         pageCount = container.childCount;
         lerp = false;
 
-        // init
         SetPagePositions();
         SetPage(startingPage);
-        //InitPageSelection();
-        //SetPageSelection(startingPage);
-
+        InitPageSelection();
+        SelectPage(startingPage);
 
         if (nextButton)
             nextButton.GetComponent<Button>().onClick.AddListener(() => { NextScreen(); });
 
         if (prevButton)
             prevButton.GetComponent<Button>().onClick.AddListener(() => { PreviousScreen(); });
+
+        prevButton.SetActive(false);
 	}
 
     //------------------------------------------------------------------------
@@ -88,12 +86,6 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
                 lerp = false;
                 scrollRectComponent.velocity = Vector2.zero;
             }
-
-            /* switches selection icon exactly to correct page
-            if (_showPageSelection) {
-                SetPageSelection(GetNearestPage());
-            }
-            */
         }
     }
 
@@ -136,14 +128,23 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         lerpTo = pagePositions[position];
         lerp = true;
         currentPage = position;
+        SelectPage(position);
+
+        if (position == 0)
+            prevButton.SetActive(false);
+        else if (position == pagePositions.Count-1)
+            nextButton.SetActive(false);
+
     }
 
     private void NextScreen() {
         GoToPage(currentPage + 1);
+        prevButton.SetActive(true);
     }
 
     private void PreviousScreen() {
         GoToPage(currentPage - 1);
+        nextButton.SetActive(true);
     }
 
     //------------------------------------------------------------------------
@@ -185,70 +186,26 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     }
 
 
-    /*
-    //------------------------------------------------------------------------
+    
     private void InitPageSelection() {
-        // page selection - only if defined sprites for selection icons
-        _showPageSelection = unselectedPage != null && selectedPage != null;
-        if (_showPageSelection) {
-            // also container with selection images must be defined and must have exatly the same amount of items as pages container
-            if (pageSelectionIcons == null || pageSelectionIcons.childCount != _pageCount) {
-                Debug.LogWarning("Different count of pages and selection icons - will not show page selection");
-                _showPageSelection = false;
-            } else {
-                _previousPageSelectionIndex = -1;
-                _pageSelectionImages = new List<Image>();
+        previousPage--;
+        pageSelectionImages = new List<Image>();
 
-                // cache all Image components into list
-                for (int i = 0; i < pageSelectionIcons.childCount; i++) {
-                    Image image = pageSelectionIcons.GetChild(i).GetComponent<Image>();
-                    if (image == null) {
-                        Debug.LogWarning("Page selection icon at position " + i + " is missing Image component");
-                    }
-                    _pageSelectionImages.Add(image);
-                }
+        for (int i = 0; i < pageSelectionIcons.childCount; i++) {
+            Image image = pageSelectionIcons.GetChild(i).GetComponent<Image>();
+            pageSelectionImages.Add(image);
+        }
+    }
+
+    private void SelectPage(int position) {
+        if (previousPage != position) {
+
+            if (previousPage >= 0) {
+                pageSelectionImages[previousPage].sprite = unselectedPage;
             }
+
+            pageSelectionImages[position].sprite = selectedPage;
+            previousPage = position;
         }
     }
-
-    //------------------------------------------------------------------------
-    private void SetPageSelection(int aPageIndex) {
-        // nothing to change
-        if (_previousPageSelectionIndex == aPageIndex) {
-            return;
-        }
-        
-        // unselect old
-        if (_previousPageSelectionIndex >= 0) {
-            _pageSelectionImages[_previousPageSelectionIndex].sprite = unselectedPage;
-            _pageSelectionImages[_previousPageSelectionIndex].SetNativeSize();
-        }
-
-        // select new
-        _pageSelectionImages[aPageIndex].sprite = selectedPage;
-        _pageSelectionImages[aPageIndex].SetNativeSize();
-
-        _previousPageSelectionIndex = aPageIndex;
-    }
-
-    //------------------------------------------------------------------------
-
-        private int GetNearestPage() {
-        // based on distance from current position, find nearest page
-        Vector2 currentPosition = _container.anchoredPosition;
-
-        float distance = float.MaxValue;
-        int nearestPage = _currentPage;
-
-        for (int i = 0; i < _pagePositions.Count; i++) {
-            float testDist = Vector2.SqrMagnitude(currentPosition - _pagePositions[i]);
-            if (testDist < distance) {
-                distance = testDist;
-                nearestPage = i;
-            }
-        }
-
-        return nearestPage;
-    }
-    */
 }
