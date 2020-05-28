@@ -50,6 +50,8 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     private int previousPage;
     private List<Image> pageSelectionImages;
     private List<Vector2> pagePositions = new List<Vector2>();
+    public Image background;
+    public Color32[] levelColor;
 
 
     //------------------------------------------------------------------------
@@ -59,6 +61,7 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         container = scrollRectComponent.content;
         pageCount = container.childCount;
         lerp = false;
+        background.color = levelColor[0];
 
         SetPagePositions();
         SetPage(startingPage);
@@ -136,6 +139,7 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         lerp = true;
         currentPage = position;
         SelectPage(position);
+        background.color = levelColor[position];
 
         if (position == 0)
             prevButton.SetActive(false);
