@@ -87,6 +87,13 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
                 scrollRectComponent.velocity = Vector2.zero;
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.RightArrow)){
+            NextScreen();
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftArrow)){
+            PreviousScreen();
+        }
     }
 
     //------------------------------------------------------------------------

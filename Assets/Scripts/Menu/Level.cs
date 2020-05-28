@@ -12,6 +12,7 @@ public class Level: MonoBehaviour
     public string outro;
     public int unlocked = 0;
     public Button button;
+    public Text textTitle;
     public GameObject unlockedImage, lockedImage;
 
     void Start()
@@ -22,6 +23,8 @@ public class Level: MonoBehaviour
             unlockedImage.SetActive(false);
             lockedImage.SetActive(true);
         }
+        else
+            textTitle.text = title;
     }
 
     private void GoToLevel(){
