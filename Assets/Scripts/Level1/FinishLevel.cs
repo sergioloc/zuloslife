@@ -18,8 +18,9 @@ public class FinishLevel : MonoBehaviour
     private IEnumerator LoadLevel()
     {
         door.SetActive(true);
+        PlayerPrefs.SetInt("UnlockLevel2", 1);
         yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene("Tricycle");
+        SceneManager.LoadScene("Index");
     }
 
 }
