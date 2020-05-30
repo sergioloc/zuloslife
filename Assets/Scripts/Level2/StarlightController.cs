@@ -15,7 +15,7 @@ public class StarlightController : MonoBehaviour
 
     void FixedUpdate()
     {
-        currentPhase = TrycicleLevelValues.phase;
+        currentPhase = LevelTwoValues.phase;
         if (currentPhase == 1 && !phase1){
             starlight.Play();
             phase1 = true;

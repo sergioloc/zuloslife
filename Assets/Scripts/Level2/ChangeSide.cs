@@ -1,91 +1,88 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ChangeSide : MonoBehaviour
 {
-    private Animator animCam;
-    public GameObject side1, side2, spawner;
+    public GameObject side1, side2, kekeo, spawner;
+    public Collider2D colliderKekeo, colliderCagatio;
+    public ParticleSystem starlightL, starlightR;
+    public UnityEvent OnSwitch, OnCenter;
 
-    void Start()
-    {
-        animCam = GetComponent<Animator>();
+    void Start(){
+        side1.SetActive(true);
+        side2.SetActive(false);
     }
 
-    void Update()
-    {
-        CheckPhase();
-    }
-
-    private void CheckPhase(){
-        if (TrycicleLevelValues.phase == 2 && !side2.activeSelf){ //right
-            side2.SetActive(true);
+    public void UpdateCameraPosition(){
+        if (LevelTwoValues.phase == 2){ //right
             MoveRight();
-            EngineController.wait = true;
         }
-        else if (TrycicleLevelValues.phase == 3 && !side1.activeSelf){ // left
-            side1.SetActive(true);
+        else if (LevelTwoValues.phase == 3){ // left
             MoveLeft();
         }
-        else if (TrycicleLevelValues.phase == 4 && !side2.activeSelf){ // right
-            side2.SetActive(true);
+        else if (LevelTwoValues.phase == 4){ // right
             MoveRight();
-            EngineController.wait = true;
         }
-        else if (TrycicleLevelValues.phase == 5 && !side1.activeSelf){ //left
-            side1.SetActive(true);
+        else if (LevelTwoValues.phase == 5){ //left
             MoveLeft();
         }
-        else if (TrycicleLevelValues.phase == 6 && !side2.activeSelf){ //right
-            side2.SetActive(true);
-            MoveRight();
-            EngineController.wait = true;
-        }
-        else if (TrycicleLevelValues.phase == 7 && !side1.activeSelf){ //left
-            side1.SetActive(true);
-            MoveLeft();
-        }
-        else if (TrycicleLevelValues.phase == 9 && !side2.activeSelf){ //right
-            side2.SetActive(true);
-            MoveRight();
-            EngineController.wait = true;
-        }
-        else if (TrycicleLevelValues.phase == 10){ //center
-            side1.SetActive(true);
+        else if (LevelTwoValues.phase == 6){ //center
             MoveCenter();
+            Spawner.wait = true;
+        }
+        else if (LevelTwoValues.phase == 7){ //
+            Spawner.wait = true;
+        }
+        else if (LevelTwoValues.phase == 8){ //
+            Spawner.wait = true;
+        }
+        else if (LevelTwoValues.phase == 9){ //
+            Spawner.wait = false;
+        }
+        else if (LevelTwoValues.phase == 10){ //
+            Spawner.wait = true;
         }
     }
 
     private void MoveRight(){
+        starlightR.Play();
+        colliderKekeo.enabled = false;
+        colliderCagatio.enabled = true;
+        side2.SetActive(true);
         spawner.SetActive(false);
-        animCam.SetBool("isRight", true);
+        OnSwitch.Invoke();
         StartCoroutine(HideSide(side1));
-        StartCoroutine(AllowAttack());
     }
 
     private void MoveLeft(){
+        starlightL.Play();
+        colliderKekeo.enabled = true;
+        colliderCagatio.enabled = false;
+        side1.SetActive(true);
         spawner.SetActive(true);
-        animCam.SetBool("isRight", false);
+        OnSwitch.Invoke();
         StartCoroutine(HideSide(side2));
         Spawner.wait = false;
     }
 
     private void MoveCenter(){
-        animCam.SetTrigger("Center");
+        side2.SetActive(true);
+        OnSwitch.Invoke();
+        OnCenter.Invoke();
+        StartCoroutine(MoveKekeo());
     }
 
+    IEnumerator MoveKekeo()
+    {
+        yield return new WaitForSeconds(3f);
+        kekeo.transform.position = new Vector2(-8f, 0f);
+    }
 
     IEnumerator HideSide(GameObject side)
     {
         yield return new WaitForSeconds(1f);
         side.SetActive(false);
     }
-
-    IEnumerator AllowAttack()
-    {
-        yield return new WaitForSeconds(1f);
-        EngineController.wait = false;
-    }
-
-
 }

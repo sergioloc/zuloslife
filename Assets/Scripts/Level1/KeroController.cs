@@ -107,7 +107,7 @@ public class KeroController : MonoBehaviour
     }
 
     public void ShakeScreen(){
-        CameraController.instance.Shake(0f);
+        CinemachineController.instance.Shake(0f);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
