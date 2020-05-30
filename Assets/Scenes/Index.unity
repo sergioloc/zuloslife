@@ -845,7 +845,7 @@ GameObject:
   - component: {fileID: 1103029195}
   - component: {fileID: 1103029194}
   m_Layer: 5
-  m_Name: ScrollSnap
+  m_Name: ScrollView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -898,14 +898,14 @@ MonoBehaviour:
   skyline: {fileID: 215439919}
   backgroundColor:
   - serializedVersion: 2
-    rgba: 4287993088
+    rgba: 4282946816
   - serializedVersion: 2
     rgba: 4285530261
   - serializedVersion: 2
     rgba: 4278232737
   skylineColor:
   - serializedVersion: 2
-    rgba: 4284769280
+    rgba: 4281426944
   - serializedVersion: 2
     rgba: 4283105380
   - serializedVersion: 2
