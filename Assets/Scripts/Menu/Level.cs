@@ -14,7 +14,12 @@ public class Level: MonoBehaviour
 
     void Start()
     {
-        unlocked = PlayerPrefs.GetInt("UnlockLevel"+id.ToString());
+        //PlayerPrefs.SetInt("UnlockLevel2", 0);
+        if (id == 1)
+            unlocked = 1;
+        else
+            unlocked = PlayerPrefs.GetInt("UnlockLevel"+id.ToString());
+        
         if (unlocked == 0){
             unlockedImage.SetActive(false);
             lockedImage.SetActive(true);

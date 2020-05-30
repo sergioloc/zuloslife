@@ -8,11 +8,17 @@ public class MusicController : MonoBehaviour
      private void Awake()
      {
          DontDestroyOnLoad(transform.gameObject);
+         audioSource = GetComponent<AudioSource>();
+     }
+
+     private void Start(){
+         PlayMusic();
      }
  
      public void PlayMusic()
      {
-         audioSource.Play();
+         if (!GameObject.Find("MusicMenu").GetComponent<AudioSource>().isPlaying)
+            audioSource.Play();
      }
  
      public void StopMusic()
