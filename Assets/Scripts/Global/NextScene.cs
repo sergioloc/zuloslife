@@ -10,4 +10,15 @@ public class NextScene : MonoBehaviour
     public void LoadScene(){
         SceneManager.LoadScene(scene);
     }
+
+    public void ClickToLoadScene(){
+        GetComponent<Animator>().SetTrigger("Pressed");
+        StartCoroutine(DelayLoadScene());
+    }
+
+    private IEnumerator DelayLoadScene()
+    {
+        yield return new WaitForSeconds(0.5f);
+        SceneManager.LoadScene(scene);
+    }
 }

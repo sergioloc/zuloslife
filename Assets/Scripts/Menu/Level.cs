@@ -28,7 +28,15 @@ public class Level: MonoBehaviour
     }
 
     private void GoToLevel(){
-        if (unlocked == 1 && gameObject.transform.position.x > 200 && gameObject.transform.position.x < 370)
-            SceneManager.LoadScene(intro);
+        if (unlocked == 1 && gameObject.transform.position.x > 200 && gameObject.transform.position.x < 370){
+            GetComponent<Animator>().SetTrigger("Pressed");
+            StartCoroutine(DelayLoadScene());
+        }
+    }
+
+    private IEnumerator DelayLoadScene()
+    {
+        yield return new WaitForSeconds(0.5f);
+        SceneManager.LoadScene(intro);
     }
 }

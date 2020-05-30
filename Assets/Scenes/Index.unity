@@ -661,6 +661,7 @@ GameObject:
   - component: {fileID: 793214455}
   - component: {fileID: 793214454}
   - component: {fileID: 793214453}
+  - component: {fileID: 793214456}
   m_Layer: 5
   m_Name: PrevPage
   m_TagString: Untagged
@@ -766,6 +767,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 793214451}
   m_CullTransparentMesh: 0
+--- !u!95 &793214456
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 793214451}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 46e46ef1fbb85dd4db83e370f13caa8c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1062958517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1291,6 +1311,7 @@ GameObject:
   - component: {fileID: 1495277102}
   - component: {fileID: 1495277101}
   - component: {fileID: 1495277100}
+  - component: {fileID: 1495277103}
   m_Layer: 5
   m_Name: NextPage
   m_TagString: Untagged
@@ -1307,7 +1328,7 @@ RectTransform:
   m_GameObject: {fileID: 1495277098}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 389875248}
   m_RootOrder: 0
@@ -1378,7 +1399,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0fe38245bb3e86e4487b52ae88a19583, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6ac87fca7d4aeb044bd2b26f48400c76, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1396,6 +1417,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1495277098}
   m_CullTransparentMesh: 0
+--- !u!95 &1495277103
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1495277098}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 46e46ef1fbb85dd4db83e370f13caa8c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1508215991
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1796,6 +1836,7 @@ GameObject:
   - component: {fileID: 2020199093}
   - component: {fileID: 2020199092}
   - component: {fileID: 2020199095}
+  - component: {fileID: 2020199096}
   m_Layer: 5
   m_Name: Back
   m_TagString: Untagged
@@ -1866,7 +1907,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2020199095}
-        m_MethodName: LoadScene
+        m_MethodName: ClickToLoadScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1925,3 +1966,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scene: Menu
+--- !u!95 &2020199096
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2020199090}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 46e46ef1fbb85dd4db83e370f13caa8c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

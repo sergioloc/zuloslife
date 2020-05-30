@@ -152,11 +152,13 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     }
 
     private void NextScreen() {
+        nextButton.GetComponent<Animator>().SetTrigger("Pressed");
         GoToPage(currentPage + 1);
         prevButton.SetActive(true);
     }
 
     private void PreviousScreen() {
+        prevButton.GetComponent<Animator>().SetTrigger("Pressed");
         GoToPage(currentPage - 1);
         nextButton.SetActive(true);
     }

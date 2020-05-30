@@ -127,6 +127,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2094725061121113287}
   - component: {fileID: 2094725061121113280}
+  - component: {fileID: 2004098195417608121}
   m_Layer: 5
   m_Name: Level
   m_TagString: Untagged
@@ -176,6 +177,25 @@ MonoBehaviour:
   textTitle: {fileID: 2807432840963856324}
   unlockedImage: {fileID: 8869993487906575703}
   lockedImage: {fileID: 540706463390838950}
+--- !u!95 &2004098195417608121
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2094725061121113286}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 46e46ef1fbb85dd4db83e370f13caa8c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2094725061656335426
 GameObject:
   m_ObjectHideFlags: 0
