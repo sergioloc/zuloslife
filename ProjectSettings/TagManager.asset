@@ -19,6 +19,9 @@ TagManager:
   - WeaponSoft
   - WeaponMedium
   - WeaponHard
+  - WeaponEnemy
+  - Missile
+  - Lamp
   layers:
   - Default
   - TransparentFX

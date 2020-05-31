@@ -53,6 +53,13 @@ public class PlayerController : MonoBehaviour
     public GameObject shieldParticle;
     public GameObject dustParticle;
 
+    [Header("Sounds")]
+    public AudioSource runAudio;
+    public AudioSource jumpAudio;
+    public AudioSource landAudio;
+    public AudioSource slideAudio;
+    public AudioSource deniedAudio;
+
     private Transform spawnPoint;
     private Rigidbody2D rb2d;
     public static PlayerController instance;
@@ -166,6 +173,7 @@ public class PlayerController : MonoBehaviour
         else if (current.GetBool("Run"))
         {
             StopRunning();
+            runAudio.Stop();
         }
     }
 
@@ -181,6 +189,7 @@ public class PlayerController : MonoBehaviour
         else if (current.GetBool("Run"))
         {
             StopRunning();
+            runAudio.Stop();
         }
     }
 
@@ -215,6 +224,8 @@ public class PlayerController : MonoBehaviour
         {
             isJumping = true;
             jumpParticle.Play();
+            if (!jumpAudio.isPlaying)
+                jumpAudio.Play();
             rb2d.AddForce(Vector2.up * jumpForce * 100);
             StartCoroutine(EnableJump());
         }
@@ -234,21 +245,29 @@ public class PlayerController : MonoBehaviour
 
     private void RunTo(string direction){
         if (!isTakingPhoto){
-            //Slide effect
-            if (direction == "Right" && rb2d.velocity.x < -slide ||
-                direction == "Left" && rb2d.velocity.x > slide){
-                rb2d.drag = 0f;
-                current.SetBool("Slide", true);
-                slideParticle.Play();
-                StartCoroutine(StopSlide());
-            }
-            else{
-                current.SetBool("Run", true);
-                rb2d.drag = linearDrag;
-            }
+            if (isGrounded){
+                //Audio
+                if (!runAudio.isPlaying)
+                    runAudio.Play();
 
-            if (isGrounded)
+                //Particle
                 dustParticle.SetActive(true);
+
+                //Slide
+                if (direction == "Right" && rb2d.velocity.x < -slide ||
+                    direction == "Left" && rb2d.velocity.x > slide){
+                    rb2d.drag = 0f;
+                    current.SetBool("Slide", true);
+                    slideParticle.Play();
+                    if (!slideAudio.isPlaying)
+                        slideAudio.Play();
+                    StartCoroutine(StopSlide());
+                }
+                else{
+                    current.SetBool("Run", true);
+                    rb2d.drag = linearDrag;
+                }
+            }
             if (direction == "Right"){
                 rb2d.AddForce(Vector2.right * speed * 50);
                 if (!facingRight) Flip();
@@ -257,7 +276,6 @@ public class PlayerController : MonoBehaviour
                 rb2d.AddForce(Vector2.left * speed * 50);
                 if (facingRight) Flip();
             }
-
             if (Mathf.Abs(rb2d.velocity.x) > speed){
                 rb2d.velocity = new Vector2(Mathf.Sign(rb2d.velocity.x) * speed, rb2d.velocity.y);
             }
@@ -302,6 +320,9 @@ public class PlayerController : MonoBehaviour
                 isTakingPhoto = true;
                 StartCoroutine(NoTakingPhoto());
             }            
+        }
+        else if (!deniedAudio.isPlaying){
+            deniedAudio.Play();
         }
         
     }
@@ -402,6 +423,17 @@ public class PlayerController : MonoBehaviour
             wallAtRight = false;
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground") && isGrounded)
+        {
+            if (!landAudio.isPlaying){}
+                landAudio.Play();
+        }
+    }
+
+    
 
 
     // Aux functions
@@ -544,6 +576,7 @@ public class PlayerController : MonoBehaviour
         else if (current.GetBool("Run"))
         {
             StopRunning();
+            runAudio.Stop();
         }  
     }
 
@@ -559,6 +592,7 @@ public class PlayerController : MonoBehaviour
         else if (current.GetBool("Run"))
         {
             StopRunning();
+            runAudio.Stop();
         }
     }
 
