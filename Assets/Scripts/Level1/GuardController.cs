@@ -17,10 +17,16 @@ public class GuardController : MonoBehaviour
     private Rigidbody2D rb2d;
     Vector3 lastPosition = Vector3.zero;
 
+    [Header("Sounds")]
+    public AudioSource walkSound;
+    public AudioSource attackSound;
+    public AudioSource dieSound;
+
     [Header("Ragdoll")]
     public GameObject explosion;
     public GameObject[] bodyParts;
     private Dissolve dissolveMat;
+
 
 
     void Start()
@@ -67,16 +73,26 @@ public class GuardController : MonoBehaviour
         }
 
         //Run
-        if (velocity != 0 && !freeze)
+        if (velocity != 0 && !freeze && health > 0){
             guardAnimation.SetBool("Run", true);
-        else
+            if (!walkSound.isPlaying)
+                walkSound.Play();
+        }
+            
+        else {
             guardAnimation.SetBool("Run", false);
+            walkSound.Stop();
+        }
 
         //Action
-        if (Mathf.Abs(distance) < 2.45 && Mathf.Abs(distance) > 0 && !freeze)
+        if (Mathf.Abs(distance) < 2.45 && Mathf.Abs(distance) > 0 && !freeze){
+            if (!attackSound.isPlaying)
+                attackSound.Play();
             guardAnimation.SetBool("Action", true);
+        }   
         else
             guardAnimation.SetBool("Action", false);
+            attackSound.Stop();
         }  
     }
 
@@ -167,6 +183,7 @@ public class GuardController : MonoBehaviour
 
     private void Die()
     {
+        dieSound.Play();
         eyesFreeze.SetActive(false);
         EnableRagdoll();
         dissolveMat.Disappear();
