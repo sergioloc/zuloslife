@@ -445,7 +445,7 @@ public class PlayerController : MonoBehaviour
     // Aux functions
     private void TakeDamage(float damage)
     {
-        if (!godMode){
+        if (!godMode && !shieldParticle.activeInHierarchy){
             frame.SetActive(true);
             if (health > 0)
             {
