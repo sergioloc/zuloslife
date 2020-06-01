@@ -13,6 +13,7 @@ public class LabController : MonoBehaviour
     private Animator animator;
     private float distanceX, distanceY, angle;
     private bool firstTime;
+    public AudioSource dieAudio;
 
     void Start()
     {
@@ -47,6 +48,7 @@ public class LabController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            dieAudio.Play();
             animator.SetTrigger("Die");
         }
     }
@@ -69,6 +71,7 @@ public class LabController : MonoBehaviour
 
     public void Die()
     {
+        dieAudio.Play();
         Instantiate(deathParticle, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }

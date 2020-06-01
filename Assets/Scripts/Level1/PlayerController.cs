@@ -58,6 +58,7 @@ public class PlayerController : MonoBehaviour
     public AudioSource jumpAudio;
     public AudioSource landAudio;
     public AudioSource slideAudio;
+    public AudioSource confusedAudio;
     public AudioSource deniedAudio;
 
     private Transform spawnPoint;
@@ -66,7 +67,7 @@ public class PlayerController : MonoBehaviour
 
     //Values
     private float sensitivity = 0.2f;
-    private bool wallAtRight = false, wallAtLeft = false, isInWater = false, isSwimming = false, isJumping = false, isTakingPhoto = false;
+    private bool wallAtRight = false, wallAtLeft = false, isInWater = false, isSwimming = false, isJumping = false, isTakingPhoto = false, isConfuse = false;
     public bool keyboard = false, godMode = false;
     public Transform shootPoint;
     private Character panda, kero, cinamon, kutter, trisky, current;
@@ -108,8 +109,9 @@ public class PlayerController : MonoBehaviour
                 if (isInWater){
                     Swimming();
                 }
-                else if (confuseParticle.isPlaying){
+                else if (isConfuse){
                     ConfuseMovement();
+
                 }
                 else {
                     Movement();
@@ -119,7 +121,7 @@ public class PlayerController : MonoBehaviour
                 if (isInWater){
                     SwimmingKeyboard();
                 }
-                else if (confuseParticle.isPlaying){
+                else if (isConfuse){
                     ConfuseMovementKeyboard();
                 }
                 else {
@@ -129,6 +131,11 @@ public class PlayerController : MonoBehaviour
                 KeyboardJump();
                 KeyboardSwitch();
             }
+        }
+        else{
+            runAudio.Stop();
+            confusedAudio.Stop();
+            dustParticle.SetActive(false);
         }
         
         if (isInWater){
@@ -426,10 +433,9 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground") && isGrounded)
+        if (collision.gameObject.CompareTag("Ground") && isGrounded && health > 0 && !landAudio.isPlaying)
         {
-            if (!landAudio.isPlaying){}
-                landAudio.Play();
+            landAudio.Play();
         }
     }
 
@@ -464,11 +470,16 @@ public class PlayerController : MonoBehaviour
     }
 
     IEnumerator Confuse(){
+        isConfuse = true;
         confuseParticle.Play();
+        confusedAudio.Play();
         frame.SetActive(true);
         frame.GetComponent<Image>().color = new Color32(142, 0, 91, 255);
         yield return new WaitForSeconds(confuseTime);
+
+        isConfuse = false;
         confuseParticle.Stop();
+        confusedAudio.Stop();
         frame.SetActive(false);
         frame.GetComponent<Image>().color = new Color32(207, 28, 28, 255);
     }
@@ -506,8 +517,9 @@ public class PlayerController : MonoBehaviour
         waterBar.SetActive(false);
         gameObject.GetComponent<Transform>().position = spawnPoint.position;
         spawnParticle.Play();
-
+        if (!facingRight) Flip();
         yield return new WaitForSeconds(3f);
+
         current.GetCharacter().SetActive(true);
         health = initialHealth;
         oxygen = InitialOxygen;
