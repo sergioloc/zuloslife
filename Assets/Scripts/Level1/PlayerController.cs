@@ -61,6 +61,7 @@ public class PlayerController : MonoBehaviour
     public AudioSource confusedAudio;
     public AudioSource deniedAudio;
     public AudioSource breathAudio;
+    public AudioSource respawnAudio;
     public AudioSource dieAudio;
 
     private Transform spawnPoint;
@@ -524,6 +525,7 @@ public class PlayerController : MonoBehaviour
         deathCollider.SetActive(false);
         waterBar.SetActive(false);
         gameObject.GetComponent<Transform>().position = spawnPoint.position;
+        respawnAudio.Play();
         spawnParticle.Play();
         if (!facingRight) Flip();
         yield return new WaitForSeconds(3f);

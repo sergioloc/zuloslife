@@ -65,7 +65,8 @@ public class Stamina : MonoBehaviour
     {
         if (panda.activeInHierarchy && maskPanda.fillAmount == 1)
         {
-            StartCoroutine(RestartPanda());
+            if (!panda.GetComponent<Animator>().GetBool("Run"))
+                StartCoroutine(RestartPanda());
         }
         else if (kero.activeInHierarchy && maskKero.fillAmount == 1)
         {
