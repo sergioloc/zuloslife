@@ -61,6 +61,7 @@ public class PlayerController : MonoBehaviour
     public AudioSource confusedAudio;
     public AudioSource deniedAudio;
     public AudioSource breathAudio;
+    public AudioSource dieAudio;
 
     private Transform spawnPoint;
     private Rigidbody2D rb2d;
@@ -506,6 +507,7 @@ public class PlayerController : MonoBehaviour
 
     private void Die()
     {
+        dieAudio.Play();
         confuseParticle.Stop();
         healthParticle.Stop();
         current.GetCharacter().SetActive(false);
