@@ -9,6 +9,8 @@ public class FloodController : MonoBehaviour
     public GameObject door;
     private bool activated = false;
     private Animator animator;
+    public AudioSource alarmSound;
+    private AudioSource floodSound;
 
     [Space(10)]
     public UnityEvent OnSwitchLight;
@@ -16,6 +18,7 @@ public class FloodController : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        floodSound = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -38,6 +41,16 @@ public class FloodController : MonoBehaviour
         animator.SetTrigger("Start");
         CinemachineController.instance.ModifyZoom(10f);
         OnSwitchLight.Invoke();
+        StartCoroutine(PlayAlarm());
+        floodSound.Play();
+    }
+
+    IEnumerator PlayAlarm()
+    {  
+        while (activated){
+            alarmSound.Play();
+            yield return new WaitForSeconds(2f);
+        }
     }
 
     IEnumerator RestartLevel()
@@ -48,5 +61,7 @@ public class FloodController : MonoBehaviour
         activated = false;
         door.SetActive(false);
         OnSwitchLight.Invoke();
+        floodSound.Stop();
+        alarmSound.Stop();
     }
 }

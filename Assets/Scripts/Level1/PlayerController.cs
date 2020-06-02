@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour
     public AudioSource slideAudio;
     public AudioSource confusedAudio;
     public AudioSource deniedAudio;
+    public AudioSource breathAudio;
 
     private Transform spawnPoint;
     private Rigidbody2D rb2d;
@@ -396,6 +397,11 @@ public class PlayerController : MonoBehaviour
         {
             rb2d.gravityScale = -0.004f;
             isInWater = true;
+        }
+        else if (collision.gameObject.CompareTag("Air"))
+        {
+            if (!breathAudio.isPlaying)
+                breathAudio.Play();
         }
     }
 
