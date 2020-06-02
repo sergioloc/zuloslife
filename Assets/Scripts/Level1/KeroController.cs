@@ -13,6 +13,12 @@ public class KeroController : MonoBehaviour
     public float minDistance = 0;
     public float minVelocity = 0;
 
+    [Header("Sounds")]
+    private AudioSource audioSource;
+    public AudioClip thunderSound;
+    public AudioClip swordSound;
+
+
     [Header("Targets in area")]
     public List<Transform> targets;
     
@@ -24,9 +30,10 @@ public class KeroController : MonoBehaviour
     void Start(){
         animator = GetComponent<Animator>();
         rb2d = player.GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
     }
 
-    void FixedUpdate(){
+    void Update(){
         if (isMovingAttack){
             int indexTarget = NearestTarget();
             if (indexTarget != -1)
@@ -43,8 +50,10 @@ public class KeroController : MonoBehaviour
     }
 
     public void Attack(){
-        if (Mathf.Abs(rb2d.velocity.x) > minVelocity)
+        if (Mathf.Abs(rb2d.velocity.x) > minVelocity){
             currentAttack = "Dash";
+            audioSource.PlayOneShot(swordSound);
+        }
         else
             currentAttack = "Smash";
 
@@ -108,6 +117,10 @@ public class KeroController : MonoBehaviour
 
     public void ShakeScreen(){
         CinemachineController.instance.Shake(0f);
+    }
+
+    public void PlayThunderSound(){
+        audioSource.PlayOneShot(thunderSound);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

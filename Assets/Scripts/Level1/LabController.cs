@@ -23,7 +23,7 @@ public class LabController : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (target != null){
             float distance = Vector2.Distance(transform.position, target.transform.position);

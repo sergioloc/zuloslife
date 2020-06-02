@@ -73,7 +73,7 @@ public class OgreEvController : MonoBehaviour
         freeze = false;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         healthSlider.value = health;
         AttackSystem();

@@ -42,7 +42,7 @@ public class GuardController : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (target != null){
             distance = target.transform.position.x - transform.position.x;
@@ -106,7 +106,6 @@ public class GuardController : MonoBehaviour
         }
         else if (col.gameObject.tag == "WeaponMedium")
         {
-            Debug.Log(col.gameObject);
             bloodParticle.Play();
             TakeDamage(100);
             Push();

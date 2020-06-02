@@ -50,7 +50,7 @@ public class OgreController : MonoBehaviour
         StartCoroutine(InitAttack());
     }
 
-    void FixedUpdate()
+    void Update()
     {
         healthSlider.value = health;
 

@@ -43,7 +43,7 @@ public class Stamina : MonoBehaviour
         currentTrisky = cooldownTrisky;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         currentPanda = currentPanda + speed;
         maskPanda.fillAmount = currentPanda / cooldownPanda;

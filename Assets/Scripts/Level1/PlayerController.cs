@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     [Header("Movement")]
     public Joystick joystick;
     public float speed = 0;
-    public int slide = 4;
+    private int slide = 0;
     public bool facingRight = true;
     public float linearDrag = 4f;
 
@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
         current.SetIconColor(new Color32(0, 80, 255, 255));
     }
 
-    void FixedUpdate()
+    void Update()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
         healthSlider.value = health;
@@ -285,7 +285,7 @@ public class PlayerController : MonoBehaviour
                 if (facingRight) Flip();
             }
             if (Mathf.Abs(rb2d.velocity.x) > speed){
-                rb2d.velocity = new Vector2(Mathf.Sign(rb2d.velocity.x) * speed, rb2d.velocity.y);
+                rb2d.velocity = new Vector2(Mathf.Sign(rb2d.velocity.x) * speed * Time.deltaTime, rb2d.velocity.y);
             }
         }  
     }

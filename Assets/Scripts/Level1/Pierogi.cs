@@ -18,7 +18,7 @@ public class Pierogi : MonoBehaviour
         collider2d = GetComponent<Collider2D>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         rb2d.velocity = transform.right * speed * 100 * Time.deltaTime;
     }

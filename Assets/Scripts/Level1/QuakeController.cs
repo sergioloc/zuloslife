@@ -15,7 +15,7 @@ public class QuakeController : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (!destroyed)
             rb2d.velocity = transform.right * speed * 100 * Time.deltaTime;
