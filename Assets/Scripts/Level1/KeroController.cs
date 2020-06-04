@@ -50,6 +50,7 @@ public class KeroController : MonoBehaviour
     }
 
     public void Attack(){
+        Debug.Log(rb2d.velocity.x);
         if (Mathf.Abs(rb2d.velocity.x) > minVelocity){
             currentAttack = "Dash";
             audioSource.PlayOneShot(swordSound);

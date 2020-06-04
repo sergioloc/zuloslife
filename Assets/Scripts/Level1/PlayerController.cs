@@ -97,6 +97,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        Debug.Log("Right: " + wallAtRight);
+        Debug.Log("Left: " + wallAtLeft);
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
         healthSlider.value = health;
         waterSlider.value = oxygen;
@@ -108,28 +110,7 @@ public class PlayerController : MonoBehaviour
         }
         
         if (health > 0){
-            if (!keyboard){
-                if (isInWater){
-                    Swimming();
-                }
-                else if (isConfuse){
-                    ConfuseMovement();
-
-                }
-                else {
-                    Movement();
-                }
-            }
-            else{
-                if (isInWater){
-                    SwimmingKeyboard();
-                }
-                else if (isConfuse){
-                    ConfuseMovementKeyboard();
-                }
-                else {
-                    MovementKeyboard();
-                }
+            if (keyboard){
                 KeyboardAction();
                 KeyboardJump();
                 KeyboardSwitch();
@@ -166,7 +147,33 @@ public class PlayerController : MonoBehaviour
             else
                 healthColor.color = new Color32(207, 28, 28, 255);
         }
-    
+    }
+
+    void FixedUpdate(){
+        if (health > 0){
+            if (!keyboard){
+                if (isInWater){
+                    Swimming();
+                }
+                else if (isConfuse){
+                    ConfuseMovement();
+                }
+                else {
+                    Movement();
+                }
+            }
+            else{
+                if (isInWater){
+                    SwimmingKeyboard();
+                }
+                else if (isConfuse){
+                    ConfuseMovementKeyboard();
+                }
+                else {
+                    MovementKeyboard();
+                }
+            }
+        }
     }
 
     // Movement
@@ -379,14 +386,6 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(Confuse());
         }
-        else if (collision.gameObject.CompareTag("WallLeft"))
-        {
-            wallAtLeft = true;
-        }
-        else if (collision.gameObject.CompareTag("WallRight"))
-        {
-            wallAtRight = true;
-        }
         else if (collision.gameObject.CompareTag("Respawn"))
         {
             spawnPoint = collision.gameObject.transform;
@@ -444,6 +443,25 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground") && isGrounded && health > 0 && !landAudio.isPlaying)
         {
             landAudio.Play();
+        }
+        else if (collision.gameObject.CompareTag("WallLeft"))
+        {
+            wallAtLeft = true;
+        }
+        else if (collision.gameObject.CompareTag("WallRight"))
+        {
+            wallAtRight = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision){
+        if (collision.gameObject.CompareTag("WallLeft"))
+        {
+            wallAtLeft = false;
+        }
+        else if (collision.gameObject.CompareTag("WallRight"))
+        {
+            wallAtRight = false;
         }
     }
 
