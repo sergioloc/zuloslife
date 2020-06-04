@@ -18,7 +18,7 @@ public class Dissolve : MonoBehaviour
     }
 
    
-    void FixedUpdate()
+    void Update()
     {
         if (isExecuting){
             if (isDisappearing){

@@ -6,6 +6,11 @@ public class OgrePreController : MonoBehaviour
 {
     public GameObject ogre;
     public ParticleSystem smoke;
+    private AudioSource audioSource;
+
+    void Start(){
+        audioSource = GetComponent<AudioSource>();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -18,6 +23,8 @@ public class OgrePreController : MonoBehaviour
 
     IEnumerator InvokeOgre()
     {
+        if (!audioSource.isPlaying)
+            audioSource.Play();
         yield return new WaitForSeconds(5);
         ogre.SetActive(true);
         gameObject.SetActive(false);

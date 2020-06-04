@@ -17,6 +17,11 @@ public class OgreController : MonoBehaviour
     [Header("Controllers")]
     public int speed = 10;
 
+    [Header("Sounds")]
+    public AudioSource audioSource;
+    public AudioClip dieSound;
+    public AudioClip[] attackSounds;
+
     [Header("Objects")]
     public GameObject target;
     public GameObject pre;
@@ -45,11 +50,11 @@ public class OgreController : MonoBehaviour
         StartCoroutine(InitAttack());
     }
 
-    void FixedUpdate()
+    void Update()
     {
         healthSlider.value = health;
 
-        if (!isDead){
+        if (!isDead && !freeze){
             distanceToTarget = target.transform.position.x - transform.position.x;
             UpdateLook();
             FollowTarget();
@@ -118,12 +123,19 @@ public class OgreController : MonoBehaviour
         quakeCooldown = false;
     }
 
+    public void PlaySoundAttack(){
+        if (!audioSource.isPlaying && !isDead){
+            int rand = new System.Random().Next(0, attackSounds.Length);
+            audioSource.PlayOneShot(attackSounds[rand]);
+        }
+    }
+
     public void InvokeQuake(){
         Instantiate(quake, quakePoint.position, quakePoint.rotation);
     }
 
     //Collisions
-        private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Flash")
         {
@@ -172,7 +184,7 @@ public class OgreController : MonoBehaviour
         health = initialHealth;
         healthBar.SetActive(true);
         freeze = true;
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
         freeze = false;
     }
 
@@ -188,6 +200,8 @@ public class OgreController : MonoBehaviour
     {
         isDead = true;
         yield return new WaitForSeconds(3);
+        audioSource.volume = 1f;
+        audioSource.PlayOneShot(dieSound);
         Instantiate(smoke, transform.position, transform.rotation);
         StartCoroutine(InvokeEvolution());
     }
