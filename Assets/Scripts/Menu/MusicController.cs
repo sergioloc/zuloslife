@@ -14,6 +14,13 @@ public class MusicController : MonoBehaviour
      private void Start(){
          PlayMusic();
      }
+
+     private void Update(){
+         if (MenuValues.muteMusic)
+            StopMusic();
+        else
+            PlayMusic();
+     }
  
      public void PlayMusic()
      {
