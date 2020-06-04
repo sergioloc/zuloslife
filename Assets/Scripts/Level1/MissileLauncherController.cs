@@ -12,7 +12,7 @@ public class MissileLauncherController : MonoBehaviour
     public bool reverse;
     private bool cooldown = false, isInArea = false, targetDead = false;
 
-    void FixedUpdate()
+    void Update()
     {
         if (isInArea && !targetDead)
         {

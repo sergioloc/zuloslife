@@ -29,6 +29,12 @@ public class OgreEvController : MonoBehaviour
     public ParticleSystem lava;
     public GameObject implosion;
     public GameObject death;
+
+    [Header("Sounds")]
+    public AudioSource audioSource;
+    public AudioClip laserSound;
+    public AudioClip fistSound;
+    public AudioClip mouthSound;
     
     
     public GameObject pre, jumpPad, door, floor6;
@@ -67,7 +73,7 @@ public class OgreEvController : MonoBehaviour
         freeze = false;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         healthSlider.value = health;
         AttackSystem();
@@ -177,6 +183,7 @@ public class OgreEvController : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
 
         StartMovement();
+        audioSource.PlayOneShot(laserSound);
         transform.position = new Vector3(transform.position.x, transform.position.y + 5, transform.position.z);
         yield return new WaitForSeconds(6f);
 
@@ -200,6 +207,14 @@ public class OgreEvController : MonoBehaviour
 
     public void InvokeLava(){
         lava.Play();
+    }
+
+    public void PlayMouthSound(){
+        audioSource.PlayOneShot(mouthSound);
+    }
+
+    public void PlayFistSound(){
+        audioSource.PlayOneShot(fistSound);
     }
 
     IEnumerator WaitCooldown()

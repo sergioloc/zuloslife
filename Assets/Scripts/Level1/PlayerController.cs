@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     [Header("Movement")]
     public Joystick joystick;
     public float speed = 0;
-    public int slide = 4;
+    private int slide = 0;
     public bool facingRight = true;
     public float linearDrag = 4f;
 
@@ -53,13 +53,24 @@ public class PlayerController : MonoBehaviour
     public GameObject shieldParticle;
     public GameObject dustParticle;
 
+    [Header("Sounds")]
+    public AudioSource runAudio;
+    public AudioSource jumpAudio;
+    public AudioSource landAudio;
+    public AudioSource slideAudio;
+    public AudioSource confusedAudio;
+    public AudioSource deniedAudio;
+    public AudioSource breathAudio;
+    public AudioSource respawnAudio;
+    public AudioSource dieAudio;
+
     private Transform spawnPoint;
     private Rigidbody2D rb2d;
     public static PlayerController instance;
 
     //Values
     private float sensitivity = 0.2f;
-    private bool wallAtRight = false, wallAtLeft = false, isInWater = false, isSwimming = false, isJumping = false, isTakingPhoto = false;
+    private bool wallAtRight = false, wallAtLeft = false, isInWater = false, isSwimming = false, isJumping = false, isTakingPhoto = false, isConfuse = false;
     public bool keyboard = false, godMode = false;
     public Transform shootPoint;
     private Character panda, kero, cinamon, kutter, trisky, current;
@@ -84,7 +95,7 @@ public class PlayerController : MonoBehaviour
         current.SetIconColor(new Color32(0, 80, 255, 255));
     }
 
-    void FixedUpdate()
+    void Update()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
         healthSlider.value = health;
@@ -97,31 +108,16 @@ public class PlayerController : MonoBehaviour
         }
         
         if (health > 0){
-            if (!keyboard){
-                if (isInWater){
-                    Swimming();
-                }
-                else if (confuseParticle.isPlaying){
-                    ConfuseMovement();
-                }
-                else {
-                    Movement();
-                }
-            }
-            else{
-                if (isInWater){
-                    SwimmingKeyboard();
-                }
-                else if (confuseParticle.isPlaying){
-                    ConfuseMovementKeyboard();
-                }
-                else {
-                    MovementKeyboard();
-                }
+            if (keyboard){
                 KeyboardAction();
                 KeyboardJump();
                 KeyboardSwitch();
             }
+        }
+        else{
+            runAudio.Stop();
+            confusedAudio.Stop();
+            dustParticle.SetActive(false);
         }
         
         if (isInWater){
@@ -149,7 +145,33 @@ public class PlayerController : MonoBehaviour
             else
                 healthColor.color = new Color32(207, 28, 28, 255);
         }
-    
+    }
+
+    void FixedUpdate(){
+        if (health > 0){
+            if (!keyboard){
+                if (isInWater){
+                    Swimming();
+                }
+                else if (isConfuse){
+                    ConfuseMovement();
+                }
+                else {
+                    Movement();
+                }
+            }
+            else{
+                if (isInWater){
+                    SwimmingKeyboard();
+                }
+                else if (isConfuse){
+                    ConfuseMovementKeyboard();
+                }
+                else {
+                    MovementKeyboard();
+                }
+            }
+        }
     }
 
     // Movement
@@ -166,6 +188,7 @@ public class PlayerController : MonoBehaviour
         else if (current.GetBool("Run"))
         {
             StopRunning();
+            runAudio.Stop();
         }
     }
 
@@ -181,6 +204,7 @@ public class PlayerController : MonoBehaviour
         else if (current.GetBool("Run"))
         {
             StopRunning();
+            runAudio.Stop();
         }
     }
 
@@ -215,6 +239,8 @@ public class PlayerController : MonoBehaviour
         {
             isJumping = true;
             jumpParticle.Play();
+            if (!jumpAudio.isPlaying)
+                jumpAudio.Play();
             rb2d.AddForce(Vector2.up * jumpForce * 100);
             StartCoroutine(EnableJump());
         }
@@ -234,21 +260,29 @@ public class PlayerController : MonoBehaviour
 
     private void RunTo(string direction){
         if (!isTakingPhoto){
-            //Slide effect
-            if (direction == "Right" && rb2d.velocity.x < -slide ||
-                direction == "Left" && rb2d.velocity.x > slide){
-                rb2d.drag = 0f;
-                current.SetBool("Slide", true);
-                slideParticle.Play();
-                StartCoroutine(StopSlide());
-            }
-            else{
-                current.SetBool("Run", true);
-                rb2d.drag = linearDrag;
-            }
+            if (isGrounded){
+                //Audio
+                if (!runAudio.isPlaying)
+                    runAudio.Play();
 
-            if (isGrounded)
+                //Particle
                 dustParticle.SetActive(true);
+
+                //Slide
+                if (direction == "Right" && rb2d.velocity.x < -slide ||
+                    direction == "Left" && rb2d.velocity.x > slide){
+                    rb2d.drag = 0f;
+                    current.SetBool("Slide", true);
+                    slideParticle.Play();
+                    if (!slideAudio.isPlaying)
+                        slideAudio.Play();
+                    StartCoroutine(StopSlide());
+                }
+                else{
+                    current.SetBool("Run", true);
+                    rb2d.drag = linearDrag;
+                }
+            }
             if (direction == "Right"){
                 rb2d.AddForce(Vector2.right * speed * 50);
                 if (!facingRight) Flip();
@@ -257,9 +291,8 @@ public class PlayerController : MonoBehaviour
                 rb2d.AddForce(Vector2.left * speed * 50);
                 if (facingRight) Flip();
             }
-
             if (Mathf.Abs(rb2d.velocity.x) > speed){
-                rb2d.velocity = new Vector2(Mathf.Sign(rb2d.velocity.x) * speed, rb2d.velocity.y);
+                rb2d.velocity = new Vector2(Mathf.Sign(rb2d.velocity.x) * speed * Time.deltaTime, rb2d.velocity.y);
             }
         }  
     }
@@ -302,6 +335,9 @@ public class PlayerController : MonoBehaviour
                 isTakingPhoto = true;
                 StartCoroutine(NoTakingPhoto());
             }            
+        }
+        else if (!deniedAudio.isPlaying){
+            deniedAudio.Play();
         }
         
     }
@@ -348,14 +384,6 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(Confuse());
         }
-        else if (collision.gameObject.CompareTag("WallLeft"))
-        {
-            wallAtLeft = true;
-        }
-        else if (collision.gameObject.CompareTag("WallRight"))
-        {
-            wallAtRight = true;
-        }
         else if (collision.gameObject.CompareTag("Respawn"))
         {
             spawnPoint = collision.gameObject.transform;
@@ -368,6 +396,11 @@ public class PlayerController : MonoBehaviour
         {
             rb2d.gravityScale = -0.004f;
             isInWater = true;
+        }
+        else if (collision.gameObject.CompareTag("Air"))
+        {
+            if (!breathAudio.isPlaying)
+                breathAudio.Play();
         }
     }
 
@@ -403,11 +436,40 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground") && isGrounded && health > 0 && !landAudio.isPlaying)
+        {
+            landAudio.Play();
+        }
+        else if (collision.gameObject.CompareTag("WallLeft"))
+        {
+            wallAtLeft = true;
+        }
+        else if (collision.gameObject.CompareTag("WallRight"))
+        {
+            wallAtRight = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision){
+        if (collision.gameObject.CompareTag("WallLeft"))
+        {
+            wallAtLeft = false;
+        }
+        else if (collision.gameObject.CompareTag("WallRight"))
+        {
+            wallAtRight = false;
+        }
+    }
+
+    
+
 
     // Aux functions
     private void TakeDamage(float damage)
     {
-        if (!godMode){
+        if (!godMode && !shieldParticle.activeInHierarchy){
             frame.SetActive(true);
             if (health > 0)
             {
@@ -432,11 +494,16 @@ public class PlayerController : MonoBehaviour
     }
 
     IEnumerator Confuse(){
+        isConfuse = true;
         confuseParticle.Play();
+        confusedAudio.Play();
         frame.SetActive(true);
         frame.GetComponent<Image>().color = new Color32(142, 0, 91, 255);
         yield return new WaitForSeconds(confuseTime);
+
+        isConfuse = false;
         confuseParticle.Stop();
+        confusedAudio.Stop();
         frame.SetActive(false);
         frame.GetComponent<Image>().color = new Color32(207, 28, 28, 255);
     }
@@ -457,6 +524,7 @@ public class PlayerController : MonoBehaviour
 
     private void Die()
     {
+        dieAudio.Play();
         confuseParticle.Stop();
         healthParticle.Stop();
         current.GetCharacter().SetActive(false);
@@ -473,9 +541,11 @@ public class PlayerController : MonoBehaviour
         deathCollider.SetActive(false);
         waterBar.SetActive(false);
         gameObject.GetComponent<Transform>().position = spawnPoint.position;
+        respawnAudio.Play();
         spawnParticle.Play();
-
+        if (!facingRight) Flip();
         yield return new WaitForSeconds(3f);
+
         current.GetCharacter().SetActive(true);
         health = initialHealth;
         oxygen = InitialOxygen;
@@ -544,6 +614,7 @@ public class PlayerController : MonoBehaviour
         else if (current.GetBool("Run"))
         {
             StopRunning();
+            runAudio.Stop();
         }  
     }
 
@@ -559,6 +630,7 @@ public class PlayerController : MonoBehaviour
         else if (current.GetBool("Run"))
         {
             StopRunning();
+            runAudio.Stop();
         }
     }
 
