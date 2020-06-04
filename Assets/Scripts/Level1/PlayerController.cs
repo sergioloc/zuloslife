@@ -97,8 +97,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("Right: " + wallAtRight);
-        Debug.Log("Left: " + wallAtLeft);
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
         healthSlider.value = health;
         waterSlider.value = oxygen;
