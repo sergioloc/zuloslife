@@ -23,30 +23,31 @@ public class OgreController : MonoBehaviour
     public AudioClip[] attackSounds;
 
     [Header("Objects")]
-    public GameObject target;
-    public GameObject pre;
-    public GameObject evolution;
+    private GameObject target;
+    public GameObject chief;
+    public GameObject spectro;
     public GameObject quake;
     public Transform quakePoint;
     public ParticleSystem smoke;
     private float limit = 2.3f;
     private Animator ogreAnimation;
-    private Vector3 initialPosition;
     private int RESTORE_HAMMER = 5, RESTORE_QUAKE = 5;
     private float distanceToTarget;
-    private bool hammerCooldown = false, quakeCooldown = false, isAttacking = false, lookRight = false, freeze, isDead = false;
+    private bool hammerCooldown = false, quakeCooldown = false, isAttacking = false, lookRight = false, freeze, isAlive;
 
     void Start(){
-        initialPosition = transform.position;
+        target = GameObject.Find("Player");
         healthSlider = healthBar.GetComponent<Slider>();
         ogreAnimation = GetComponent<Animator>();
-        if (transform.localScale.x < 0)
-            limit = -limit;
-        quakePoint.Rotate(0f, 180f, 0f);
     }
 
-    void OnEnable()
-    {
+    void OnEnable(){
+        isAlive = true;
+        gameObject.transform.position = new Vector3(20f, -63f, 0f);
+        if (transform.localScale.x < 0)
+            limit = -Mathf.Abs(limit);
+        quakeCooldown = false;
+        hammerCooldown = false;
         StartCoroutine(InitAttack());
     }
 
@@ -54,28 +55,33 @@ public class OgreController : MonoBehaviour
     {
         healthSlider.value = health;
 
-        if (!isDead && !freeze){
-            distanceToTarget = target.transform.position.x - transform.position.x;
-            UpdateLook();
-            FollowTarget();
-        
-            if (Mathf.Abs(distanceToTarget) < 2.5)
-            {
-                ogreAnimation.SetTrigger("Punch");
+        if (LevelOneValues.isPlayerAlive){
+            if (isAlive && !freeze){
+                distanceToTarget = target.transform.position.x - transform.position.x;
+                LookAtTarget();
+                FollowTarget();
+
+                if (Mathf.Abs(distanceToTarget) < 2.5)
+                {
+                    ogreAnimation.SetTrigger("Punch");
+                }
+                else if (Mathf.Abs(distanceToTarget) > range && !quakeCooldown)
+                {
+                    StartCoroutine(QuakeAttack());
+                }  
+                else if (Mathf.Abs(distanceToTarget) > 4 && Mathf.Abs(distanceToTarget) < range && !hammerCooldown)
+                {
+                    StartCoroutine(HammerAttack());
+                }
             }
-            else if (Mathf.Abs(distanceToTarget) > range && !quakeCooldown)
-            {
-                StartCoroutine(QuakeAttack());
-            }  
-            else if (Mathf.Abs(distanceToTarget) > 4 && distanceToTarget < range && !hammerCooldown)
-            {
-                StartCoroutine(HammerAttack());
-            }  
-        }  
+        }
+        else{
+            StartCoroutine(Respawn());
+        }
     }
 
     //Movement
-    private void UpdateLook(){
+    private void LookAtTarget(){
         if (distanceToTarget > 0 && !lookRight && !freeze)
         {
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
@@ -93,10 +99,14 @@ public class OgreController : MonoBehaviour
     }
 
     private void FollowTarget(){
-        if (Mathf.Abs(distanceToTarget) >= 2.3 && !freeze && !isAttacking)
+        if (Mathf.Abs(distanceToTarget) >= 2.3 && !isAttacking)
         {
             ogreAnimation.SetBool("Run", true);
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.transform.position.x - limit, transform.position.y, transform.position.z), speed * Time.deltaTime);
+            Vector3 position = new Vector3(target.transform.position.x - limit, transform.position.y, transform.position.z);
+            transform.position = Vector3.MoveTowards(transform.position, position, speed * Time.deltaTime);
+        }
+        else {
+            ogreAnimation.SetBool("Run", false);
         }
     }
 
@@ -124,7 +134,7 @@ public class OgreController : MonoBehaviour
     }
 
     public void PlaySoundAttack(){
-        if (!audioSource.isPlaying && !isDead){
+        if (!audioSource.isPlaying && isAlive){
             int rand = new System.Random().Next(0, attackSounds.Length);
             audioSource.PlayOneShot(attackSounds[rand]);
         }
@@ -143,16 +153,12 @@ public class OgreController : MonoBehaviour
             ogreAnimation.SetBool("Freeze", true);
             StartCoroutine(finishFreeze());
         }
-        else if (collision.gameObject.tag == "WeaponMedium" && !isDead)
+        else if (collision.gameObject.tag == "WeaponMedium" && isAlive)
         {
             if (freeze)
                 TakeDamage(damage);
             else
                 TakeDamage(damage/4);
-        }
-        else if (collision.gameObject.tag == "PlayerDeath")
-        {
-            StartCoroutine(Respawn());
         }
     }
 
@@ -190,15 +196,16 @@ public class OgreController : MonoBehaviour
 
     IEnumerator Respawn()
     {
-        ogreAnimation.SetBool("Idle", true);
+        ogreAnimation.SetBool("Run", false);
         yield return new WaitForSeconds(2.1f);
-        pre.SetActive(true);
+        chief.SetActive(true);
+        healthBar.SetActive(false);
         gameObject.SetActive(false);
     }
 
     IEnumerator Die()
     {
-        isDead = true;
+        isAlive = false;
         yield return new WaitForSeconds(3);
         audioSource.volume = 1f;
         audioSource.PlayOneShot(dieSound);
@@ -209,8 +216,8 @@ public class OgreController : MonoBehaviour
     IEnumerator InvokeEvolution()
     {
         yield return new WaitForSeconds(5);
-        evolution.transform.position = new Vector3(transform.position.x, transform.position.y, 0.63f);
-        evolution.SetActive(true);
+        spectro.transform.position = new Vector3(transform.position.x, transform.position.y, 0.63f);
+        spectro.SetActive(true);
         gameObject.SetActive(false);
     }
 }

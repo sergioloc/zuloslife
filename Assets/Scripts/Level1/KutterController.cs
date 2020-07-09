@@ -22,14 +22,10 @@ public class KutterController : MonoBehaviour
         float distanceX = lookAtPosition.x - transform.position.x;
         float distanceY = lookAtPosition.y - transform.position.y;
         float angle = Mathf.Atan2(distanceX, distanceY) * Mathf.Rad2Deg;
-        distanceX = lookAtPosition.x - transform.position.x;
-        distanceY = lookAtPosition.y - transform.position.y;
-        angle = Mathf.Atan2(distanceX, distanceY) * Mathf.Rad2Deg;
         Quaternion endRotation = Quaternion.AngleAxis(angle + 180, Vector3.back);
         body.rotation = Quaternion.Slerp(body.rotation, endRotation, Time.deltaTime * rotateSpeed);
 
         yield return new WaitForSeconds(1f);
-
         body.localRotation = Quaternion.Euler(0,0,0);
     }
 

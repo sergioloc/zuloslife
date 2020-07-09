@@ -8,7 +8,6 @@ TagManager:
   - Flash
   - WallRight
   - WallLeft
-  - PlayerDeath
   - BossScreen
   - Enemy
   - Water

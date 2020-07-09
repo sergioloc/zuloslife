@@ -8,11 +8,11 @@ public class LevelTwoValues : MonoBehaviour
     public bool finalPhase = false;
     public static int phase; // 11 phases
     public static float health;
+    public static float timeBtwSpawn;
+    public static int numBuilding;
     private float time;
     private int lastPhase;
     private float delay = 5f;
-    public static float timeBtwSpawn;
-    public static int numBuilding;
     public UnityEvent OnNewPhase;
 
     void Start(){

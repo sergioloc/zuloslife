@@ -22,7 +22,7 @@ public class KeroController : MonoBehaviour
     [Header("Targets in area")]
     public List<Transform> targets;
     
-    private bool isMovingAttack = false, isStandAttack = false;
+    private bool isMovingAttack = false;
     private string currentAttack;
     private Animator animator;
     private Rigidbody2D rb2d;
@@ -44,13 +44,10 @@ public class KeroController : MonoBehaviour
                 animator.SetBool(currentAttack, false);
             }
         }
-        else if(isStandAttack){
-            isStandAttack = false;
-        }
     }
 
     public void Attack(){
-        Debug.Log(rb2d.velocity.x);
+        //Animation
         if (Mathf.Abs(rb2d.velocity.x) > minVelocity){
             currentAttack = "Dash";
             audioSource.PlayOneShot(swordSound);
@@ -58,6 +55,7 @@ public class KeroController : MonoBehaviour
         else
             currentAttack = "Smash";
 
+        //Movement
         if (targets.Count > 0){
             MoveToTarget();
         }

@@ -10,24 +10,26 @@ public class MissileLauncherController : MonoBehaviour
     public Transform target, cannon, shotPoint;
     public float speedRotation = 50f;
     public bool reverse;
-    private bool cooldown = false, isInArea = false, targetDead = false;
+    private bool cooldown = false, isInArea = false;
 
     void Update()
     {
-        if (isInArea && !targetDead)
-        {
-            laser.SetActive(true);
-            RotateCannon();
-            if (!cooldown)
+        if (LevelOneValues.isPlayerAlive){
+            if (isInArea)
             {
-                cooldown = true;
-                StartCoroutine(FireMissile());
+                laser.SetActive(true);
+                RotateCannon();
+                if (!cooldown)
+                {
+                    cooldown = true;
+                    StartCoroutine(FireMissile());
+                }
             }
-        }
-        else
-        {
-            laser.SetActive(false);
-        } 
+            else
+            {
+                laser.SetActive(false);
+            }
+        }         
     }
 
     private void RotateCannon(){
@@ -62,10 +64,6 @@ public class MissileLauncherController : MonoBehaviour
             cooldown = false;
             isInArea = true;
         }
-        else if (collision.gameObject.CompareTag("PlayerDeath"))
-        {
-            StartCoroutine(Restart());
-        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -75,11 +73,5 @@ public class MissileLauncherController : MonoBehaviour
             isInArea = false;
             cooldown = true;
         }
-    }
-
-    IEnumerator Restart(){
-        targetDead = true;
-        yield return new WaitForSeconds(4f);
-        targetDead = false;
     }
 }

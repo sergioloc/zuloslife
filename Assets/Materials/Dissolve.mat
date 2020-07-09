@@ -30,7 +30,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Fade: 1
-    - _Scale: 2
+    - _Scale: 2.18
     - _Stroke: 0.1
     m_Colors:
     - Color_18C01136: {r: 0, g: 2.7764707, b: 2.9960785, a: 0}

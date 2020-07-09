@@ -56,7 +56,7 @@ public class LabController : MonoBehaviour
     private void RandomFly(){
         animator.SetBool("View", false);
         if (Vector2.Distance(transform.position, newPosition) < 1)
-            PositionChange();
+            ChangePosition();
         if (firstTime)
             transform.position = Vector2.Lerp(transform.position, newPosition, Time.deltaTime * speed * 10);
         else
@@ -64,9 +64,10 @@ public class LabController : MonoBehaviour
         firstTime = false;
     }
 
-    private void PositionChange()
+    private void ChangePosition()
     {
-        newPosition = new Vector2(Random.Range(transform.position.x-5f, transform.position.x+5f), Random.Range(transform.position.y-5f, transform.position.y+5f));
+        newPosition = new Vector2(Random.Range(transform.position.x-5f, transform.position.x+5f),
+                                  Random.Range(transform.position.y-5f, transform.position.y+5f));
     }
 
     public void Die()

@@ -28,8 +28,11 @@ public class FloodController : MonoBehaviour
             door.SetActive(true);
             StartCoroutine(StartLevel());
         }
-        else if (collision.gameObject.CompareTag("PlayerDeath") && activated)
-        {
+    }
+
+    void Update(){
+        if (!LevelOneValues.isPlayerAlive && activated){
+            activated = false;
             StartCoroutine(RestartLevel());
         }
     }
@@ -58,7 +61,6 @@ public class FloodController : MonoBehaviour
         yield return new WaitForSeconds(2f);
         CinemachineController.instance.ModifyZoom(6f);
         animator.SetTrigger("Stop");
-        activated = false;
         door.SetActive(false);
         OnSwitchLight.Invoke();
         floodSound.Stop();

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,8 +27,6 @@ public class GuardController : MonoBehaviour
     public GameObject[] bodyParts;
     private Dissolve dissolveMat;
 
-
-
     void Start()
     {
         target = GameObject.Find("Player");
@@ -44,56 +42,60 @@ public class GuardController : MonoBehaviour
 
     void Update()
     {
-        if (target != null){
+        if (target != null && LevelOneValues.isPlayerAlive){
             distance = target.transform.position.x - transform.position.x;
 
-        //Look
-        if (distance > 0 && !lookRight && !freeze)
-        {
-            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-            lookRight = true;
-            limit = -limit;
-        }
-        else if (distance < 0 && lookRight && !freeze)
-        {
-            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-            lookRight = false;
-            limit = -limit;
-        }
+            //Look
+            if (distance > 0 && !lookRight && !freeze)
+            {
+                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                lookRight = true;
+                limit = -limit;
+            }
+            else if (distance < 0 && lookRight && !freeze)
+            {
+                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                lookRight = false;
+                limit = -limit;
+            }
 
-        //Follow
-        if (Mathf.Abs(distance) < 9)
-        {
-            if (!freeze)
-                transform.position = Vector3.MoveTowards(transform.position, new Vector2(target.transform.position.x - limit, transform.position.y), speed * Time.deltaTime);
+            //Follow
+            if (Mathf.Abs(distance) < 9)
+            {
+                if (!freeze)
+                    transform.position = Vector3.MoveTowards(transform.position, new Vector2(target.transform.position.x - limit, transform.position.y), speed * Time.deltaTime);
+                else
+                    transform.position = Vector3.MoveTowards(transform.position, new Vector2(target.transform.position.x - limit, transform.position.y), 0.001f * Time.deltaTime);
+                velocity = (transform.position - lastPosition).magnitude;
+                lastPosition = transform.position;
+            }
+
+            //Run
+            if (velocity != 0 && !freeze && health > 0){
+                guardAnimation.SetBool("Run", true);
+                if (!walkSound.isPlaying)
+                    walkSound.Play();
+            }
+                
+            else {
+                guardAnimation.SetBool("Run", false);
+                walkSound.Stop();
+            }
+
+            //Action
+            if (Mathf.Abs(distance) < 2.45 && Mathf.Abs(distance) > 0 && !freeze){
+                if (!attackSound.isPlaying)
+                    attackSound.Play();
+                guardAnimation.SetBool("Action", true);
+            }   
             else
-                transform.position = Vector3.MoveTowards(transform.position, new Vector2(target.transform.position.x - limit, transform.position.y), 0.001f * Time.deltaTime);
-            velocity = (transform.position - lastPosition).magnitude;
-            lastPosition = transform.position;
-        }
-
-        //Run
-        if (velocity != 0 && !freeze && health > 0){
-            guardAnimation.SetBool("Run", true);
-            if (!walkSound.isPlaying)
-                walkSound.Play();
-        }
-            
-        else {
-            guardAnimation.SetBool("Run", false);
-            walkSound.Stop();
-        }
-
-        //Action
-        if (Mathf.Abs(distance) < 2.45 && Mathf.Abs(distance) > 0 && !freeze){
-            if (!attackSound.isPlaying)
-                attackSound.Play();
-            guardAnimation.SetBool("Action", true);
-        }   
-        else
+                guardAnimation.SetBool("Action", false);
+                attackSound.Stop();
+            }
+        else{
             guardAnimation.SetBool("Action", false);
-            attackSound.Stop();
-        }  
+            guardAnimation.SetBool("Run", false);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -128,11 +130,6 @@ public class GuardController : MonoBehaviour
         {
             freeze = true;
             guardAnimation.SetBool("Run", false);
-        }
-        else if (col.gameObject.tag == "PlayerDeath")
-        {
-            freeze = true;
-            StartCoroutine(Freeze(false));
         }
     }
 

@@ -91,9 +91,16 @@ public class ActionController : MonoBehaviour
                 healthSlider.value = LevelTwoValues.health;
             }
             animator.SetBool("Attack", true);
-            buttonAttack.SetActive(false);
+            buttonAttack.GetComponent<Animator>().SetTrigger("Pressed");
+            StartCoroutine(HideAttackButton());
             colorSlider.color = healColor;
         }
+    }
+
+    IEnumerator HideAttackButton()
+    {
+        yield return new WaitForSeconds(0.32f);
+        buttonAttack.SetActive(false);
     }
 
     public void ShowPowerParticle(){
@@ -125,7 +132,7 @@ public class ActionController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("WeaponSoft") && !animator.GetBool("Attack"))
         {
-            LevelTwoValues.health--;
+            //LevelTwoValues.health--;
             healthSlider.value = LevelTwoValues.health;
             if (LevelTwoValues.health <= 0){
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

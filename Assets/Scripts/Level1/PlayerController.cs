@@ -26,7 +26,6 @@ public class PlayerController : MonoBehaviour
     public Image healthColor;
     public int initialHealth = 100;
     public float health;
-    public GameObject deathCollider;
 
     [Header("Underwater")]
     public GameObject waterBar;
@@ -78,6 +77,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        LevelOneValues.isPlayerAlive = true;
         instance = this;
         health = initialHealth;
         oxygen = InitialOxygen;
@@ -524,11 +524,11 @@ public class PlayerController : MonoBehaviour
 
     private void Die()
     {
+        LevelOneValues.isPlayerAlive = false;
         dieAudio.Play();
         confuseParticle.Stop();
         healthParticle.Stop();
         current.GetCharacter().SetActive(false);
-        deathCollider.SetActive(true);
         current.SetImpactFaceActive(false);
         Instantiate(deathEffect, transform.position, Quaternion.identity);
         Instantiate(bloodEffect, transform.position, Quaternion.identity);
@@ -538,7 +538,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator Respawn()
     {
         yield return new WaitForSeconds(2f);
-        deathCollider.SetActive(false);
+        frame.SetActive(false);
         waterBar.SetActive(false);
         gameObject.GetComponent<Transform>().position = spawnPoint.position;
         respawnAudio.Play();
@@ -546,6 +546,7 @@ public class PlayerController : MonoBehaviour
         if (!facingRight) Flip();
         yield return new WaitForSeconds(3f);
 
+        LevelOneValues.isPlayerAlive = true;
         current.GetCharacter().SetActive(true);
         health = initialHealth;
         oxygen = InitialOxygen;
