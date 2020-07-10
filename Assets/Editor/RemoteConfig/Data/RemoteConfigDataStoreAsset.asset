@@ -1,0 +1,144 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 469c24fdb3bd6431b92cc1465bd9166b, type: 3}
+  m_Name: RemoteConfigDataStoreAsset
+  m_EditorClassIdentifier: 
+  rsKeyList:
+  - metadata:
+      entityId: 79ded6cd-ecb8-4752-996e-021524ed909d
+    rs:
+      key: playerSpeed
+      type: int
+      value: 18
+  - metadata:
+      entityId: 4d2a50f2-7a2e-464f-a5d7-c3463fd7d674
+    rs:
+      key: playerJump
+      type: int
+      value: 60
+  - metadata:
+      entityId: cd1be132-b94c-46a6-9907-7a74cf3913ca
+    rs:
+      key: joystickSensitivity
+      type: int
+      value: 20
+  - metadata:
+      entityId: 4aa24613-d44c-4bd9-8653-a2b8f6577a79
+    rs:
+      key: playerGravity
+      type: int
+      value: 4
+  - metadata:
+      entityId: 51fd8b9c-e16c-486d-b8b2-2d668c8cffe7
+    rs:
+      key: keroSpeed
+      type: int
+      value: 7
+  - metadata:
+      entityId: 190858ff-bb42-4511-a646-c4ad4391db72
+    rs:
+      key: guardSpeed
+      type: int
+      value: 9
+  - metadata:
+      entityId: fd8cb5c3-fe44-4d86-ba4d-99d7cb0546bb
+    rs:
+      key: scissorSpeed
+      type: int
+      value: 25
+  - metadata:
+      entityId: 65dfd8dc-b6e1-486e-bf3c-83bd5acec4ee
+    rs:
+      key: pierogiSpeed
+      type: int
+      value: 10
+  - metadata:
+      entityId: 73d5d180-054a-4673-983c-5a30dbe91788
+    rs:
+      key: globalLight
+      type: int
+      value: 50
+  rsLastCachedKeyList:
+  - metadata:
+      entityId: 79ded6cd-ecb8-4752-996e-021524ed909d
+    rs:
+      key: playerSpeed
+      type: int
+      value: 18
+  - metadata:
+      entityId: 4d2a50f2-7a2e-464f-a5d7-c3463fd7d674
+    rs:
+      key: playerJump
+      type: int
+      value: 60
+  - metadata:
+      entityId: cd1be132-b94c-46a6-9907-7a74cf3913ca
+    rs:
+      key: joystickSensitivity
+      type: int
+      value: 20
+  - metadata:
+      entityId: 4aa24613-d44c-4bd9-8653-a2b8f6577a79
+    rs:
+      key: playerGravity
+      type: int
+      value: 4
+  - metadata:
+      entityId: 51fd8b9c-e16c-486d-b8b2-2d668c8cffe7
+    rs:
+      key: keroSpeed
+      type: int
+      value: 7
+  - metadata:
+      entityId: 190858ff-bb42-4511-a646-c4ad4391db72
+    rs:
+      key: guardSpeed
+      type: int
+      value: 9
+  - metadata:
+      entityId: fd8cb5c3-fe44-4d86-ba4d-99d7cb0546bb
+    rs:
+      key: scissorSpeed
+      type: int
+      value: 25
+  - metadata:
+      entityId: 65dfd8dc-b6e1-486e-bf3c-83bd5acec4ee
+    rs:
+      key: pierogiSpeed
+      type: int
+      value: 10
+  - metadata:
+      entityId: 73d5d180-054a-4673-983c-5a30dbe91788
+    rs:
+      key: globalLight
+      type: int
+      value: 50
+  configId: f1ad224e-41d7-4044-a1ff-38cb24847553
+  currentEnvironmentId: ab81e94a-8b4a-4981-829f-be59087ea973
+  environments:
+  - id: ab81e94a-8b4a-4981-829f-be59087ea973
+    appId: 
+    name: Release (Default)
+    description: 
+    createdAt: 2020-07-09T15:22:08Z
+    updatedAt: 2020-07-09T15:24:43Z
+  - id: 0e3bb4fe-83cf-4472-98f4-3d39d8bee78e
+    appId: 
+    name: Development
+    description: 
+    createdAt: 2020-07-09T15:22:08Z
+    updatedAt: 2020-07-09T15:24:43Z
+  rulesList: []
+  lastCachedRulesList: []
+  addedRulesIDs: []
+  updatedRulesIDs: []
+  deletedRulesIDs: []

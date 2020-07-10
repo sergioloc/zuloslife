@@ -1,15 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.RemoteConfig;
 
 public class Pierogi : MonoBehaviour
 {
-    public float speed = 10f;
+    public int speed = 10;
     public GameObject explosion;
     private Rigidbody2D rb2d;
     public SpriteRenderer sprite;
     private Collider2D collider2d;
     private AudioSource audioSource;
+
+    void Awake(){
+        speed = ConfigManager.appConfig.GetInt("pierogiSpeed");
+        if (speed == 0) speed = 10;
+    }
 
     void Start()
     {

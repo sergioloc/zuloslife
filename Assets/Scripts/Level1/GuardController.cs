@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.RemoteConfig;
 
 public class GuardController : MonoBehaviour
 {
     public int health = 100;
-    public float speed;
+    public float speed = 9;
     public float timeFreeze = 5f;
     public GameObject deathEffect, bloodMask, eyesFreeze;
     private GameObject target;
@@ -38,6 +39,8 @@ public class GuardController : MonoBehaviour
         {
             limit = -limit;
         }
+        speed = ConfigManager.appConfig.GetInt("guardSpeed");
+        if (speed == 0) speed = 9;
     }
 
     void Update()

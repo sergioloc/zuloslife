@@ -756,10 +756,10 @@ PlayerSettings:
     m_VersionCode: 1
     m_VersionName: 
   apiCompatibilityLevel: 6
-  cloudProjectId: 
+  cloudProjectId: 15c363db-6100-4daf-bd20-33077ebba22e
   framebufferDepthMemorylessMode: 0
-  projectName: 
-  organizationId: 
+  projectName: zuloslife
+  organizationId: sergioloc
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0

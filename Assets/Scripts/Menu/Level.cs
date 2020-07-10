@@ -14,17 +14,22 @@ public class Level: MonoBehaviour
 
     void Start()
     {
+        //0 -> bloqueado
+        //1 -> desbloqueado
         //PlayerPrefs.SetInt("UnlockLevel2", 0);
         if (id == 1)
             unlocked = 1;
         else
             unlocked = PlayerPrefs.GetInt("UnlockLevel"+id.ToString());
         
+        /*
         if (unlocked == 0){
             unlockedImage.SetActive(false);
             lockedImage.SetActive(true);
         }
         else
             textTitle.text = title;
+        */
+        textTitle.text = title;
     }
 }

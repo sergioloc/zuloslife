@@ -20,6 +20,7 @@ public class ActionController : MonoBehaviour
     private int phase = 0;
     public TimeManager timeManager;
     public UnityEvent OnShake, OnShakeLoop, OnShakeLoopStop;
+    private bool godMode = false;
 
     void Awake()
     {
@@ -31,6 +32,10 @@ public class ActionController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && buttonAttack.activeSelf)
         {
             Attack();
+        }
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            godMode = !godMode;
         }
     }
 
@@ -47,7 +52,7 @@ public class ActionController : MonoBehaviour
                 StartCoroutine(EnableAttackButton(8f));
             }
             else if (phase == 6){
-                
+                colorSlider.color = red;
             }
             else if (phase == 7){
                 transform.position = new Vector2(transform.position.x, 0);
@@ -130,12 +135,15 @@ public class ActionController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("WeaponSoft") && !animator.GetBool("Attack"))
+        if (collision.gameObject.CompareTag("WeaponSoft"))
         {
-            //LevelTwoValues.health--;
-            healthSlider.value = LevelTwoValues.health;
-            if (LevelTwoValues.health <= 0){
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            if (isLeft  && !animator.GetBool("Attack") || !isLeft  && !animator.GetBool("Attack")){
+                if (!godMode)
+                    LevelTwoValues.health--;
+                healthSlider.value = LevelTwoValues.health;
+                if (LevelTwoValues.health <= 0){
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                }
             }
         }
     }

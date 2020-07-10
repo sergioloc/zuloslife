@@ -5,11 +5,17 @@ using UnityEngine;
 public class MusicController : MonoBehaviour
 {
     private AudioSource audioSource;
-     private void Awake()
-     {
-         DontDestroyOnLoad(transform.gameObject);
-         audioSource = GetComponent<AudioSource>();
-     }
+
+    private static GameObject instance;
+    void Awake() 
+    {
+        DontDestroyOnLoad(gameObject);
+        if (instance == null)
+            instance = gameObject;
+        else
+            Destroy(gameObject);
+        audioSource = GetComponent<AudioSource>();
+    }
 
      private void Start(){
          PlayMusic();

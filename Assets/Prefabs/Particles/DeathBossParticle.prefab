@@ -4826,7 +4826,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: b52cbf13c2d2a7a4dae9a32fc68b9001, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -4922,4 +4922,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c900325256059745aa7e8f9e8ae34d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 4
+  delay: 3

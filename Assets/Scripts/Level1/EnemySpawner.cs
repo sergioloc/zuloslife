@@ -8,10 +8,14 @@ public class EnemySpawner : MonoBehaviour
     public float frequency;
     public GameObject destroyParticle;
 
-    void Start()
+    void OnEnable()
     {
         if (enemy != null)
             StartCoroutine(Spawn());
+    }
+
+    void OnDisable(){
+        StopCoroutine(Spawn());
     }
 
     private IEnumerator Spawn()

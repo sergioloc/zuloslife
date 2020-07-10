@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class LevelTwoValues : MonoBehaviour
 {
@@ -33,6 +34,7 @@ public class LevelTwoValues : MonoBehaviour
 
     private void CheckPhase(){
         if (time >= 126.55f){
+            StartCoroutine(GoToMenu());
             phase = 11; // phase 10 = 12 seg
         }else if (time >= 114.55f){
             phase = 10; // phase 9 = 8 seg
@@ -54,6 +56,11 @@ public class LevelTwoValues : MonoBehaviour
             phase = 2; // phase 1 = 19.46 seg
         }
         PrintLastPhase();
+    }
+
+    private IEnumerator GoToMenu(){
+        yield return new WaitForSeconds(15f);
+        SceneManager.LoadScene("Index");
     }
 
     private void CheckLastPhase(){

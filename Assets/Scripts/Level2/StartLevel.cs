@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StartLevel : MonoBehaviour
 {
-    public GameObject spawner, buttons;
+    public GameObject spawner;
     public Animator animKekeo;
     public AudioSource music;
 
@@ -12,7 +12,7 @@ public class StartLevel : MonoBehaviour
     void Start()
     {
         animKekeo.SetTrigger("Intro");  
-        StartCoroutine(ActiveButtons());
+        StartCoroutine(ActiveSpawner());
         StartCoroutine(StartMusic());
     }
 
@@ -22,10 +22,9 @@ public class StartLevel : MonoBehaviour
         music.Play();
     }
 
-    IEnumerator ActiveButtons()
+    IEnumerator ActiveSpawner()
     {
         yield return new WaitForSeconds(3f);
-        buttons.SetActive(true);
         spawner.SetActive(true);
     }
 }

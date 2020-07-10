@@ -1,12 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.RemoteConfig;
 
 public class Scissor : MonoBehaviour
 {
     public float speed;
     public float lifeTime;
     public GameObject destroyEffect;
+
+    void Awake(){
+        speed = ConfigManager.appConfig.GetInt("scissorSpeed");
+        if (speed == 0) speed = 25;
+    }
 
     void Start()
     {

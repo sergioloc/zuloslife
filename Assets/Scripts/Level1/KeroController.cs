@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.RemoteConfig;
 
 public class KeroController : MonoBehaviour
 {
@@ -9,9 +10,9 @@ public class KeroController : MonoBehaviour
     public GameObject player;
 
     [Header("Values")]
-    public float speed = 0;
-    public float minDistance = 0;
-    public float minVelocity = 0;
+    private float speed = 0;
+    public float minDistance = 2.5f;
+    public float minVelocity = 7;
 
     [Header("Sounds")]
     private AudioSource audioSource;
@@ -28,9 +29,15 @@ public class KeroController : MonoBehaviour
     private Rigidbody2D rb2d;
 
     void Start(){
+        GetRemoteConfigValues();
         animator = GetComponent<Animator>();
         rb2d = player.GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
+    }
+
+    private void GetRemoteConfigValues(){
+        speed = ConfigManager.appConfig.GetInt("keroSpeed");
+        if (speed == 0) speed = 7;
     }
 
     void Update(){
@@ -38,8 +45,9 @@ public class KeroController : MonoBehaviour
             int indexTarget = NearestTarget();
             if (indexTarget != -1)
                 player.transform.position = Vector2.Lerp(player.transform.position, targets[indexTarget].position, speed * Time.deltaTime);
-                
-            if (Mathf.Abs(DistanceToNearest()) < minDistance){
+            
+            float nearest = Mathf.Abs(DistanceToNearest());
+            if (nearest < minDistance || nearest == 999f){
                 isMovingAttack = false;
                 animator.SetBool(currentAttack, false);
             }
@@ -77,7 +85,9 @@ public class KeroController : MonoBehaviour
     }
 
     private float DistanceToNearest(){
-        return targets[NearestTarget()].position.x - player.transform.position.x;
+        if (targets.Count > 0)
+            return targets[NearestTarget()].position.x - player.transform.position.x;
+        return 999f;
     }
 
     private IEnumerator CloseSmash()

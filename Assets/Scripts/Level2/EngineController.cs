@@ -4,23 +4,20 @@ using UnityEngine;
 
 public class EngineController : MonoBehaviour
 {
-    private Animator animEngine;
+    public Animator animEngine;
     public GameObject explosion, bullet, spikes, cagatio, cannons, feeder, wind, kekeo;
     public Transform bulletPoint, spikesPoint;
 
     private int lastAttack, phase;
     private bool wait;
     
-    void Start()
-    {
-        animEngine = GetComponent<Animator>();
-    }
 
     public void UpdateEngineState(){
         wait = false;
         phase = LevelTwoValues.phase;
+        if (phase != 10) animEngine.SetTrigger("Idle");
         if (phase == 2){
-            StartCoroutine(Attack());
+            StartCoroutine(Attack(0));
         }
         else if (phase == 4){
             animEngine.SetTrigger("Feed");
@@ -29,25 +26,30 @@ public class EngineController : MonoBehaviour
         }
         else if (phase == 6){
             Destroy(feeder);
-            StartCoroutine(Attack());
+            StartCoroutine(Attack(2));
         }
         else if (phase == 7){
             wait = true;
         }
+        else if (phase == 8){
+            wait = false;
+            StartCoroutine(Attack(0));
+        }
         else if (phase == 9){
+            wait = true;
             animEngine.SetTrigger("Weak");
         }
-        else if (phase == 11){
+        else if (phase == 10){
             StartCoroutine(Die());
-        } 
+        }
     }
 
     void OnDisable(){
-        animEngine.SetTrigger("Idle");
-        StopCoroutine(Attack());
+        StopCoroutine(Attack(0));
     }
 
-    IEnumerator Attack(){
+    IEnumerator Attack(float sec){
+        yield return new WaitForSeconds(sec);
         while (!wait) {
             yield return new WaitForSeconds(LevelTwoValues.timeBtwSpawn);
             ChooseAttack(Random.Range(1, 3));
@@ -88,6 +90,7 @@ public class EngineController : MonoBehaviour
     }
 
     private IEnumerator Die(){
+        yield return new WaitForSeconds(8f);
         Instantiate(explosion, transform.position, transform.rotation);
         yield return new WaitForSeconds(3f);
         kekeo.SetActive(false);

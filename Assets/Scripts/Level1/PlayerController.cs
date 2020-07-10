@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using Unity.RemoteConfig;
 
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
     public Joystick joystick;
-    public float speed = 0;
+    private float speed = 0;
     private int slide = 0;
     public bool facingRight = true;
     public float linearDrag = 4f;
@@ -68,15 +69,17 @@ public class PlayerController : MonoBehaviour
     public static PlayerController instance;
 
     //Values
-    private float sensitivity = 0.2f;
+    private float sensitivity = 0.2f, waterMultiplier = 0.5f;
     private bool wallAtRight = false, wallAtLeft = false, isInWater = false, isSwimming = false, isJumping = false, isTakingPhoto = false, isConfuse = false;
     public bool keyboard = false, godMode = false;
+    private int oxygenDecrease = 5, oxygenIncrease = 50, gravityDefault = 4;
     public Transform shootPoint;
     private Character panda, kero, cinamon, kutter, trisky, current;
     public UnityEvent OnKeroAttack, OnKutterAttack, OnPlayerAction;
 
     void Start()
     {
+        StartCoroutine(GetRemoteConfigValues());
         LevelOneValues.isPlayerAlive = true;
         instance = this;
         health = initialHealth;
@@ -93,6 +96,20 @@ public class PlayerController : MonoBehaviour
                 current = LevelOneValues.characters[i];
         }
         current.SetIconColor(new Color32(0, 80, 255, 255));
+    }
+
+    private IEnumerator GetRemoteConfigValues(){
+        yield return new WaitForSeconds(1f);
+        speed = ConfigManager.appConfig.GetInt("playerSpeed");
+        jumpForce = ConfigManager.appConfig.GetInt("playerJump");
+        sensitivity = ConfigManager.appConfig.GetInt("joystickSensitivity") / 100f;
+        gravityDefault = ConfigManager.appConfig.GetInt("playerGravity");
+        
+        if (speed == 0) speed = 18;
+        if (jumpForce == 0) jumpForce = 60;
+        if (sensitivity == 0) sensitivity = 0.2f;
+        if (gravityDefault == 0) gravityDefault = 4;
+        rb2d.gravityScale = gravityDefault;
     }
 
     void Update()
@@ -212,24 +229,24 @@ public class PlayerController : MonoBehaviour
         if (joystick.Horizontal >= (sensitivity * 5) && !wallAtRight)
             {
                 //Move Right
-                rb2d.transform.Translate(Vector2.right * speed * 0.75f * Time.deltaTime);
+                rb2d.transform.Translate(Vector2.right * speed * waterMultiplier * Time.deltaTime);
                 if (!facingRight) Flip();
             }
             else if (joystick.Horizontal <= -(sensitivity * 5) && !wallAtLeft)
             {
                 //Move Left
-                rb2d.transform.Translate(Vector2.left * speed * 0.75f * Time.deltaTime);
+                rb2d.transform.Translate(Vector2.left * speed * waterMultiplier * Time.deltaTime);
                 if (facingRight) Flip();
             }
             else if (joystick.Vertical >= sensitivity)
             {
                 //Move Up
-                rb2d.transform.Translate(Vector2.up * speed * 0.5f * Time.deltaTime);
+                rb2d.transform.Translate(Vector2.up * speed * waterMultiplier * Time.deltaTime);
             }
             else if (joystick.Vertical <= -sensitivity)
             {
                 //Move Down
-                rb2d.transform.Translate(Vector2.down * speed * 0.5f * Time.deltaTime);
+                rb2d.transform.Translate(Vector2.down * speed * waterMultiplier * Time.deltaTime);
             }
     }
 
@@ -410,12 +427,12 @@ public class PlayerController : MonoBehaviour
         {
             waterBar.SetActive(true);
             if (oxygen > 0)
-                oxygen -= Time.deltaTime * 5f;
+                oxygen -= Time.deltaTime * oxygenDecrease;
         }
         if (collision.gameObject.CompareTag("Air"))
         {
             if (oxygen < 100)
-                oxygen += Time.deltaTime * 50f;
+                oxygen += Time.deltaTime * oxygenIncrease;
         }
     }
 
@@ -423,7 +440,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Water")
         {
-            rb2d.gravityScale = 4;
+            rb2d.gravityScale = gravityDefault;
             isInWater = false;
         }
         else if (collision.gameObject.CompareTag("WallLeft"))
