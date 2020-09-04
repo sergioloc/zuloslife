@@ -38,6 +38,10 @@ which are inspired by elements from the real world.
 
 > Copyright 2020 ©
 
+## Available in:
+Android: https://play.google.com/store/apps/details?id=com.slc.zuloslife
+
+PC: https://sergioloc.itch.io/zulos-life
 
 ## Contact
 [![LinkedIn][linkedin-shield]][linkedin-url]
