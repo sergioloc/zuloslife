@@ -111,6 +111,8 @@ public class GuardController : MonoBehaviour
         }
         else if (col.gameObject.tag == "WeaponMedium")
         {
+            Debug.Log("WeaponMedium");
+            Debug.Log(col.gameObject.name);
             bloodParticle.Play();
             TakeDamage(100);
             Push();
