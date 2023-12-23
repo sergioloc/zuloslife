@@ -505,7 +505,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator HideDamage()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.5f);
         frame.SetActive(false);
         current.SetImpactFaceActive(false);
     }
