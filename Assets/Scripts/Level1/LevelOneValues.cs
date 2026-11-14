@@ -1,7 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.RemoteConfig;
+using Unity.Services.Authentication;
+using Unity.Services.Core;
+using Unity.Services.RemoteConfig;
 
 public class LevelOneValues: MonoBehaviour
 {
@@ -12,7 +15,22 @@ public class LevelOneValues: MonoBehaviour
     static public bool isPlayerAlive;
     static public int globalLight;
 
-    void Awake(){
-        ConfigManager.FetchConfigs<userAttributes, appAttributes>(new userAttributes(), new appAttributes());
+    async void Awake()
+    {
+        try
+        {
+            await UnityServices.InitializeAsync();
+
+            if (!AuthenticationService.Instance.IsSignedIn)
+                await AuthenticationService.Instance.SignInAnonymouslyAsync();
+
+            await RemoteConfigService.Instance.FetchConfigsAsync(
+                new userAttributes(),
+                new appAttributes());
+        }
+        catch (Exception exception)
+        {
+            Debug.LogWarning($"Remote Config could not be initialized: {exception.Message}");
+        }
     }
 }

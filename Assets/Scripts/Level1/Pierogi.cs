@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.RemoteConfig;
+using Unity.Services.RemoteConfig;
 
 public class Pierogi : MonoBehaviour
 {
@@ -13,7 +13,7 @@ public class Pierogi : MonoBehaviour
     private AudioSource audioSource;
 
     void Awake(){
-        speed = ConfigManager.appConfig.GetInt("pierogiSpeed");
+        speed = RemoteConfigService.Instance.appConfig.GetInt("pierogiSpeed");
         if (speed == 0) speed = 10;
     }
 
@@ -26,7 +26,7 @@ public class Pierogi : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb2d.velocity = transform.right * speed * 100 * Time.deltaTime;
+        rb2d.linearVelocity = transform.right * speed * 100 * Time.deltaTime;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.RemoteConfig;
+using Unity.Services.RemoteConfig;
 
 public class KeroController : MonoBehaviour
 {
@@ -36,7 +36,7 @@ public class KeroController : MonoBehaviour
     }
 
     private void GetRemoteConfigValues(){
-        speed = ConfigManager.appConfig.GetInt("keroSpeed");
+        speed = RemoteConfigService.Instance.appConfig.GetInt("keroSpeed");
         if (speed == 0) speed = 7;
     }
 
@@ -56,7 +56,7 @@ public class KeroController : MonoBehaviour
 
     public void Attack(){
         //Animation
-        if (Mathf.Abs(rb2d.velocity.x) > minVelocity){
+        if (Mathf.Abs(rb2d.linearVelocity.x) > minVelocity){
             currentAttack = "Dash";
             audioSource.PlayOneShot(swordSound);
         }
