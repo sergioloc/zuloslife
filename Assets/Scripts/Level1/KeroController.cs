@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.Services.RemoteConfig;
 
 public class KeroController : MonoBehaviour
 {
@@ -29,15 +28,10 @@ public class KeroController : MonoBehaviour
     private Rigidbody2D rb2d;
 
     void Start(){
-        GetRemoteConfigValues();
+        speed = GameBalance.KeroSpeed;
         animator = GetComponent<Animator>();
         rb2d = player.GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
-    }
-
-    private void GetRemoteConfigValues(){
-        speed = RemoteConfigService.Instance.appConfig.GetInt("keroSpeed");
-        if (speed == 0) speed = 7;
     }
 
     void Update(){

@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Unity.Services.RemoteConfig;
+﻿using UnityEngine;
 
 public class GlobalLight2D : MonoBehaviour
 {
@@ -10,13 +7,7 @@ public class GlobalLight2D : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(GetRemoteConfigValues());
-    }
-
-    private IEnumerator GetRemoteConfigValues(){
-        yield return new WaitForSeconds(0.5f);
-        globalLight2D.intensity = RemoteConfigService.Instance.appConfig.GetInt("globalLight") / 100;
-        if (globalLight2D.intensity == 0) globalLight2D.intensity = 0.5f;
+        globalLight2D.intensity = GameBalance.GlobalLightPercent / 100f;
     }
 
 }

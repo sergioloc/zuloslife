@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
-using Unity.Services.RemoteConfig;
 
 public class PlayerController : MonoBehaviour
 {
@@ -79,12 +78,16 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(GetRemoteConfigValues());
         LevelOneValues.isPlayerAlive = true;
         instance = this;
         health = initialHealth;
         oxygen = InitialOxygen;
         rb2d = GetComponent<Rigidbody2D>();
+        speed = GameBalance.PlayerSpeed;
+        jumpForce = GameBalance.PlayerJump;
+        sensitivity = GameBalance.JoystickSensitivityPercent / 100f;
+        gravityDefault = GameBalance.PlayerGravity;
+        rb2d.gravityScale = gravityDefault;
         waterSlider = waterBar.GetComponent<Slider>();
         panda = LevelOneValues.characters[0];
         kero = LevelOneValues.characters[1];
@@ -96,20 +99,6 @@ public class PlayerController : MonoBehaviour
                 current = LevelOneValues.characters[i];
         }
         current.SetIconColor(new Color32(0, 80, 255, 255));
-    }
-
-    private IEnumerator GetRemoteConfigValues(){
-        yield return new WaitForSeconds(1f);
-        speed = RemoteConfigService.Instance.appConfig.GetInt("playerSpeed");
-        jumpForce = RemoteConfigService.Instance.appConfig.GetInt("playerJump");
-        sensitivity = RemoteConfigService.Instance.appConfig.GetInt("joystickSensitivity") / 100f;
-        gravityDefault = RemoteConfigService.Instance.appConfig.GetInt("playerGravity");
-        
-        if (speed == 0) speed = 18;
-        if (jumpForce == 0) jumpForce = 60;
-        if (sensitivity == 0) sensitivity = 0.2f;
-        if (gravityDefault == 0) gravityDefault = 4;
-        rb2d.gravityScale = gravityDefault;
     }
 
     void Update()
