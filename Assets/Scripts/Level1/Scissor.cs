@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.Services.RemoteConfig;
 
 public class Scissor : MonoBehaviour
 {
@@ -10,8 +9,7 @@ public class Scissor : MonoBehaviour
     public GameObject destroyEffect;
 
     void Awake(){
-        speed = RemoteConfigService.Instance.appConfig.GetInt("scissorSpeed");
-        if (speed == 0) speed = 25;
+        speed = GameBalance.ScissorSpeed;
     }
 
     void Start()
