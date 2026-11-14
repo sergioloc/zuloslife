@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
-using Unity.RemoteConfig;
+using Unity.Services.RemoteConfig;
 
 public class PlayerController : MonoBehaviour
 {
@@ -100,10 +100,10 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator GetRemoteConfigValues(){
         yield return new WaitForSeconds(1f);
-        speed = ConfigManager.appConfig.GetInt("playerSpeed");
-        jumpForce = ConfigManager.appConfig.GetInt("playerJump");
-        sensitivity = ConfigManager.appConfig.GetInt("joystickSensitivity") / 100f;
-        gravityDefault = ConfigManager.appConfig.GetInt("playerGravity");
+        speed = RemoteConfigService.Instance.appConfig.GetInt("playerSpeed");
+        jumpForce = RemoteConfigService.Instance.appConfig.GetInt("playerJump");
+        sensitivity = RemoteConfigService.Instance.appConfig.GetInt("joystickSensitivity") / 100f;
+        gravityDefault = RemoteConfigService.Instance.appConfig.GetInt("playerGravity");
         
         if (speed == 0) speed = 18;
         if (jumpForce == 0) jumpForce = 60;
@@ -146,11 +146,11 @@ public class PlayerController : MonoBehaviour
         }
         else if (isGrounded) {
             current.SetBool("isJumping", false);
-            rb2d.drag = linearDrag;
+            rb2d.linearDamping = linearDrag;
         }
         else {
             current.SetBool("isJumping", true);
-            rb2d.drag = 0f;
+            rb2d.linearDamping = 0f;
         }
 
         //Set God Mode
@@ -286,9 +286,9 @@ public class PlayerController : MonoBehaviour
                 dustParticle.SetActive(true);
 
                 //Slide
-                if (direction == "Right" && rb2d.velocity.x < -slide ||
-                    direction == "Left" && rb2d.velocity.x > slide){
-                    rb2d.drag = 0f;
+                if (direction == "Right" && rb2d.linearVelocity.x < -slide ||
+                    direction == "Left" && rb2d.linearVelocity.x > slide){
+                    rb2d.linearDamping = 0f;
                     current.SetBool("Slide", true);
                     slideParticle.Play();
                     if (!slideAudio.isPlaying)
@@ -297,7 +297,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else{
                     current.SetBool("Run", true);
-                    rb2d.drag = linearDrag;
+                    rb2d.linearDamping = linearDrag;
                 }
             }
             if (direction == "Right"){
@@ -308,8 +308,8 @@ public class PlayerController : MonoBehaviour
                 rb2d.AddForce(Vector2.left * speed * 50);
                 if (facingRight) Flip();
             }
-            if (Mathf.Abs(rb2d.velocity.x) > speed){
-                rb2d.velocity = new Vector2(Mathf.Sign(rb2d.velocity.x) * speed * Time.deltaTime, rb2d.velocity.y);
+            if (Mathf.Abs(rb2d.linearVelocity.x) > speed){
+                rb2d.linearVelocity = new Vector2(Mathf.Sign(rb2d.linearVelocity.x) * speed * Time.deltaTime, rb2d.linearVelocity.y);
             }
         }  
     }

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.RemoteConfig;
+using Unity.Services.RemoteConfig;
 
 public class GuardController : MonoBehaviour
 {
@@ -39,7 +39,7 @@ public class GuardController : MonoBehaviour
         {
             limit = -limit;
         }
-        speed = ConfigManager.appConfig.GetInt("guardSpeed");
+        speed = RemoteConfigService.Instance.appConfig.GetInt("guardSpeed");
         if (speed == 0) speed = 9;
     }
 

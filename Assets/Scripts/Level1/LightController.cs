@@ -5,7 +5,7 @@ using UnityEngine;
 public class LightController : MonoBehaviour
 {
     [SerializeField]
-    public UnityEngine.Experimental.Rendering.Universal.Light2D light2D;
+    public UnityEngine.Rendering.Universal.Light2D light2D;
 
     public void ChangeBossColor(){
         Color32 red = new Color32(255, 45, 45, 255);

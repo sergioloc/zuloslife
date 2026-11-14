@@ -18,9 +18,9 @@ public class QuakeController : MonoBehaviour
     void Update()
     {
         if (!destroyed)
-            rb2d.velocity = transform.right * speed * 100 * Time.deltaTime;
+            rb2d.linearVelocity = transform.right * speed * 100 * Time.deltaTime;
         else
-            rb2d.velocity = new Vector2(0f, 0f);
+            rb2d.linearVelocity = new Vector2(0f, 0f);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
